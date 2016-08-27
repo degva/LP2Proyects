@@ -21,7 +21,7 @@ namespace ConsoleApplication1.Modelo
             bool f = true;
             while (f)
             {
-                Console.WriteLine("Whatcha guana du:");
+                Console.WriteLine("What you wanna do?:");
                 Console.WriteLine("1. Show me the events");
                 Console.WriteLine("2. Show me an specific event");
                 Console.WriteLine("3. Create a new event");
