@@ -70,9 +70,6 @@ namespace ConsoleApplication1.Modelo
             Console.Write(Nombre + ", ");
         }
 
-        public void Juas()
-        {
-            Console.WriteLine("Jhonny la gente esta muy loca");
-        }
+        /*diego pls, no crees tonterias*/
     }
 }
