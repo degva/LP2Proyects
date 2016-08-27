@@ -64,5 +64,10 @@ namespace ConsoleApplication1.Modelo
             get {return responsabilidades; }
             set {responsabilidades = value; }
         }
+
+        public void ImprimeNombre()
+        {
+            Console.Write(Nombre + ", ");
+        }
     }
 }
