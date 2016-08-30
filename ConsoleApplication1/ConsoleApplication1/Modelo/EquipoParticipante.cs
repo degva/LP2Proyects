@@ -12,6 +12,9 @@ namespace ConsoleApplication1.Modelo
         private string fechaParticipacion;
         private int horaParticipacion;
         private string nombreArchivo;
+
+
+
         public EquipoParticipante(string tema, string fechaParticipacion, int horaParticipacion, string nombreArchivo)
         {
             this.tema = tema;
@@ -19,6 +22,7 @@ namespace ConsoleApplication1.Modelo
             this.horaParticipacion = horaParticipacion;
             this.nombreArchivo = nombreArchivo;
         }
+
 
         public string Tema{
             get
@@ -30,6 +34,8 @@ namespace ConsoleApplication1.Modelo
                 tema = value;
             }
         }
+
+
         public string FechaParticipacion {
             get 
             {
@@ -40,6 +46,7 @@ namespace ConsoleApplication1.Modelo
                 fechaParticipacion = value;
             } 
         }
+
 
         public int HoraParticipacion { 
             get
@@ -52,6 +59,7 @@ namespace ConsoleApplication1.Modelo
             } 
         }
 
+
         public string NombreArchivo
         {
             get
@@ -62,9 +70,6 @@ namespace ConsoleApplication1.Modelo
             {
                 nombreArchivo = value;
             }
-        }
-
-        //public abstract void getNombresIntegrantes();
-
+        }     
     }
 }

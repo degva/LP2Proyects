@@ -20,9 +20,31 @@ namespace ConsoleApplication1.Modelo
             : base(tema, fechaParticipacion, horaParticipacion, nombreArchivo)
         {
             this.lugarProveniencia = lugarProveniencia;
-            this.listaPersonas = new List<Persona>();
-
+            listaPersonas = new List<Persona>();
         }
 
+
+        public void AgregarParticipanteExterno(Persona persona)
+        {
+            listaPersonas.Add(persona);
+        }
+
+
+        public void GetNombresIntegrantes()
+        {
+            Console.WriteLine("Integrantes:");
+            int counter = 1;
+            foreach (var item in listaPersonas)
+            {
+                if (counter == 1)
+                {
+                    Console.Write(item.Nombre);
+                }
+                else
+                {
+                    Console.WriteLine("," + item.Nombre);
+                }
+            }
+        }
     }
 }

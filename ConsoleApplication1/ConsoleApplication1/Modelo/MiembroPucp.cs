@@ -16,6 +16,7 @@ namespace ConsoleApplication1.Modelo
         private int tipoOrganizador; // 1 es organizador - 0 no es organizador
         private string cargo;
         private string responsabilidades;
+        private int rol;
 
         public string CodigoPucp
         {
@@ -63,6 +64,13 @@ namespace ConsoleApplication1.Modelo
         {
             get {return responsabilidades; }
             set {responsabilidades = value; }
+        }
+
+
+        public MiembroPucp(string codigo, int rol)
+        {
+            codigoPucp = codigo;
+            this.rol = rol;
         }
     }
 }

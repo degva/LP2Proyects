@@ -12,7 +12,7 @@ namespace ConsoleApplication1.Modelo
         GestorEventos gestor;
         public Infosoft()
         {
-            this.gestor = new GestorEventos();
+            gestor = new GestorEventos();
         }
         public void Start()
         {
@@ -28,28 +28,28 @@ namespace ConsoleApplication1.Modelo
                 Console.WriteLine("4. Agregar Equipo");
                 Console.WriteLine("5. Exit :v\n");
                 Console.Write("> ");
-                a = Convert.ToInt16(Console.ReadLine());
+                a = int.Parse(Console.ReadLine());
 
                 switch (a)
 	            {
                     case 1:
                         Console.WriteLine("You have chose #1");
-                        this.gestor.ImprimirCodigosEventos();
+                        gestor.ImprimirCodigosEventos();
                         break;
                     case 2:
                         Console.WriteLine("Write the code");
                         option_d = int.Parse(Console.ReadLine());
-                        this.gestor.ObtenerEvento(option_d);
+                        gestor.ObtenerEvento(option_d);
                         break;
                     case 3:
                         Console.WriteLine("You have chose #3");
-                        this.gestor.AgregarEvento();
+                        gestor.AgregarEvento();
                         break;
                     case 4:
                         Console.WriteLine("WARNING: The team code needs to exists");
                         Console.WriteLine("Write the code");
                         option_d = int.Parse(Console.ReadLine());
-                        this.gestor.AgregarEquipo(option_d);
+                        gestor.AgregarEquipo(option_d);
                         break;
                     case 5:
                         Console.WriteLine("Bai.\n");

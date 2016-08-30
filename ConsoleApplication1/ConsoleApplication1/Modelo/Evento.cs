@@ -95,9 +95,12 @@ namespace ConsoleApplication1.Modelo
 
         public void AgregarEquipo()
         {
-            EquipoParticipante equipo;
             string tema, fechaP, nomArch;
-            int hora;
+            int hora, option;
+                        
+            Console.WriteLine("Seleccione el tipo de equipo:");
+            Console.WriteLine("1) Participantes PUCP\n2)Participantes Externos");
+            option = int.Parse(Console.ReadLine());
 
             Console.Write("Ingrese el tema: ");
             tema = Console.ReadLine();
@@ -108,9 +111,22 @@ namespace ConsoleApplication1.Modelo
             Console.Write("Ingrese la hora de participacion: ");
             hora = int.Parse(Console.ReadLine());
 
-            equipo = new EquipoParticipante(tema,fechaP,hora,nomArch);
+            if (option == 1)
+            {
+                ParticipantePucp equipoPucp;
+                equipoPucp = new ParticipantePucp(tema, fechaP, hora, nomArch);
+                _equiposParticipantes.Add(equipoPucp);
+            }
+            else if (option == 2)
+            {
+                Console.WriteLine("Ingrese el lugar de proveniencia: ");
+                string lugarProv = Console.ReadLine();
+                ParticipanteExterno equipoExterno;
+                equipoExterno = new ParticipanteExterno(lugarProv, tema, fechaP, hora, nomArch);
+                _equiposParticipantes.Add(equipoExterno);
+            }
 
-            _equiposParticipantes.Add(equipo);
+            
         }
 
 
