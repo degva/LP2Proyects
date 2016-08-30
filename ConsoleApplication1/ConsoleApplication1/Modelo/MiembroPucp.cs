@@ -67,7 +67,7 @@ namespace ConsoleApplication1.Modelo
         }
 
 
-        public MiembroPucp(string codigo, int rol)
+        public MiembroPucp(string codigo, int rol) //rol = 1 para alumno y rol = 2 para trabajador
         {
             codigoPucp = codigo;
             this.rol = rol;
