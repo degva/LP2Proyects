@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab1;
+package main;
+import game.models.Juego;
 
 /**
  *
  * @author degva
  */
-public class Lab1 {
-
-    /**
-     * @param args the command line arguments
-     */
+class MainGame {
     public static void main(String[] args) {
-        // TODO code application logic here
+        Juego game = new Juego();
+        game.Start();
     }
-    
 }
