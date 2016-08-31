@@ -13,13 +13,33 @@ namespace ConsoleApplication1.Modelo
 
         public ParticipantePucp(string tema,
             string fechaParticipacion,
-            int horaParticipacion,
+            string horaParticipacion,
             string nombreArchivo)
             : base(tema, fechaParticipacion, horaParticipacion, nombreArchivo)
         {
             _equipoPucp = new List<MiembroPucp>();
         }
 
+        public void AgregarIntegrantes()
+        {
+            int a;
+            bool f = true;
+            while (f)
+            {
+                Console.WriteLine("\nDesea agregar un particpante? 1 - SI | 2 - SALIR DE ESTA OPCION");
+                a = int.Parse(Console.ReadLine());
+
+                if (a == 1)
+                {
+                    AgregarMiembroPucp();
+                }
+                else
+                {
+                    f = false;
+                }
+                  
+            }
+        }
 
         public void AgregarMiembroPucp()
         {
@@ -52,12 +72,23 @@ namespace ConsoleApplication1.Modelo
                 Console.Write("Ingrese responsabilidad: ");
                 respons = Console.ReadLine();
             }
-
+            else
+            {
+                cargo = " ";
+                respons = " ";
+            }
 
             Console.Write("Es Alumno (1) o Trabajador (0): ");
             rol = int.Parse(Console.ReadLine());
-
-           MiembroPucp miembroPucp = new MiembroPucp(codigoPucp, rol);
+           
+            MiembroPucp miembroPucp = new MiembroPucp(codigoPucp, rol);
+            miembroPucp.Dni = dni;
+            miembroPucp.Nombre = nombre;
+            miembroPucp.FechaNacimiento = fNac;
+            miembroPucp.Correo = correo;
+            miembroPucp.TipoOrganizador = tipoOrg;
+            miembroPucp.Cargo = cargo;
+            miembroPucp.Responsabilidades = respons;
 
             _equipoPucp.Add(miembroPucp);
         }

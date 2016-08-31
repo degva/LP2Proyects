@@ -10,12 +10,12 @@ namespace ConsoleApplication1.Modelo
     {
         private string tema;
         private string fechaParticipacion;
-        private int horaParticipacion;
+        private string horaParticipacion;
         private string nombreArchivo;
 
 
 
-        public EquipoParticipante(string tema, string fechaParticipacion, int horaParticipacion, string nombreArchivo)
+        public EquipoParticipante(string tema, string fechaParticipacion, string horaParticipacion, string nombreArchivo)
         {
             this.tema = tema;
             this.fechaParticipacion = fechaParticipacion;
@@ -48,7 +48,7 @@ namespace ConsoleApplication1.Modelo
         }
 
 
-        public int HoraParticipacion { 
+        public string HoraParticipacion { 
             get
             {
                 return horaParticipacion;

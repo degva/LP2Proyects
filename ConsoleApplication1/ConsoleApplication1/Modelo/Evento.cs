@@ -15,6 +15,7 @@ namespace ConsoleApplication1.Modelo
         private string _fechaFin;
 
         List<EquipoParticipante> _equiposParticipantes;
+        List<MiembroPucp> _organizadores;
 
 
         public Evento(int codigo, string nombre, string fInaguracion,string fInicio, string fFin)
@@ -25,8 +26,8 @@ namespace ConsoleApplication1.Modelo
             _fechaInicio = fInicio;
             _fechaFin = fFin;
             _equiposParticipantes = new List<EquipoParticipante>();
+            _organizadores = new List<MiembroPucp>();
         }
-
 
         public int Codigo
         {
@@ -95,26 +96,28 @@ namespace ConsoleApplication1.Modelo
 
         public void AgregarEquipo()
         {
-            string tema, fechaP, nomArch;
-            int hora, option;
+            string tema, fechaP, nomArch, hora;
+            int option;
                         
             Console.WriteLine("Seleccione el tipo de equipo:");
-            Console.WriteLine("1) Participantes PUCP\n2)Participantes Externos");
+            Console.WriteLine("1) Participantes PUCP\n2) Participantes Externos");
             option = int.Parse(Console.ReadLine());
 
             Console.Write("Ingrese el tema: ");
             tema = Console.ReadLine();
             Console.Write("Ingrese la fecha de participacion: ");
             fechaP = Console.ReadLine();
+            Console.Write("Ingrese la hora de participacion: ");
+            hora = Console.ReadLine();
             Console.Write("Ingrese el nombre del archivo: ");
             nomArch = Console.ReadLine();
-            Console.Write("Ingrese la hora de participacion: ");
-            hora = int.Parse(Console.ReadLine());
+            
 
             if (option == 1)
             {
                 ParticipantePucp equipoPucp;
                 equipoPucp = new ParticipantePucp(tema, fechaP, hora, nomArch);
+                equipoPucp.AgregarIntegrantes();
                 _equiposParticipantes.Add(equipoPucp);
             }
             else if (option == 2)
@@ -123,6 +126,7 @@ namespace ConsoleApplication1.Modelo
                 string lugarProv = Console.ReadLine();
                 ParticipanteExterno equipoExterno;
                 equipoExterno = new ParticipanteExterno(lugarProv, tema, fechaP, hora, nomArch);
+                equipoExterno.AgregarIntegrantes();
                 _equiposParticipantes.Add(equipoExterno);
             }
 
@@ -155,6 +159,62 @@ namespace ConsoleApplication1.Modelo
 
             Console.WriteLine("-------------------------------------------------------------");
 
+        }
+
+        public void AgregarOrganizadores()
+        {
+            bool deseoAgregarOrganizadores = true;
+            int a;
+            while (deseoAgregarOrganizadores)
+            {
+                string codigoPucp, dni, nombre, fNac, correo, cargo, respons;
+                int tipoOrg, rol;
+
+                Console.WriteLine("Desea agregar a un organizador? 1 - SI | 2 - SALIR DE ESTA OPCION");
+                a = int.Parse(Console.ReadLine());
+                if (a != 1)
+                {
+                    deseoAgregarOrganizadores = false;
+                    break;
+                }
+
+                Console.Write("Ingrese Nombre: ");
+                nombre = Console.ReadLine();
+
+                Console.Write("Ingrese codigo: ");
+                codigoPucp = Console.ReadLine();
+
+                Console.Write("Ingrese dni: ");
+                dni = Console.ReadLine();
+
+                Console.Write("Ingrese Fecha de nacimiento: ");
+                fNac = Console.ReadLine();
+
+                Console.Write("Ingrese correo: ");
+                correo = Console.ReadLine();
+
+                tipoOrg = 1;
+
+                Console.Write("Ingrese cargo: ");
+                cargo = Console.ReadLine();
+
+                Console.Write("Ingrese responsabilidad: ");
+                respons = Console.ReadLine();
+
+                Console.Write("Es Alumno (1) o Trabajador (0): ");
+                rol = int.Parse(Console.ReadLine());
+
+                MiembroPucp miembroPucp = new MiembroPucp(codigoPucp, rol);
+                miembroPucp.Dni = dni;
+                miembroPucp.Nombre = nombre;
+                miembroPucp.FechaNacimiento = fNac;
+                miembroPucp.Correo = correo;
+                miembroPucp.TipoOrganizador = tipoOrg;
+                miembroPucp.Cargo = cargo;
+                miembroPucp.Responsabilidades = respons;
+
+                _organizadores.Add(miembroPucp);
+            }
         }
     }
 }

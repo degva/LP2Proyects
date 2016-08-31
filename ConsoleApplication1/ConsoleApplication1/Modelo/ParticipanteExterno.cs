@@ -15,7 +15,7 @@ namespace ConsoleApplication1.Modelo
             string lugarProveniencia, 
             string tema,
             string fechaParticipacion,
-            int horaParticipacion,
+            string horaParticipacion,
             string nombreArchivo)
             : base(tema, fechaParticipacion, horaParticipacion, nombreArchivo)
         {
@@ -23,12 +23,30 @@ namespace ConsoleApplication1.Modelo
             listaPersonas = new List<Persona>();
         }
 
-
-        public void AgregarParticipanteExterno(Persona persona)
+        
+        public void AgregarIntegrantes()
         {
-            listaPersonas.Add(persona);
+           
         }
+        
 
+        public void AgregarPersonas()
+        {
+            string nombre, dni, lProveniencia;
+            
+            Console.Write("Ingrese Nombre: ");
+            nombre = Console.ReadLine();
+
+            Console.Write("Ingrese Dni: ");
+            dni = Console.ReadLine();
+
+            Console.Write("Ingrese lugar de Provaniencia: ");
+            lProveniencia = Console.ReadLine();
+
+            Persona persona = new Persona(dni, nombre);
+            listaPersonas.Add(persona);
+
+        }
 
         public void GetNombresIntegrantes()
         {
