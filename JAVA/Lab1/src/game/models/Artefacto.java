@@ -7,6 +7,7 @@ package game.models;
 
 /**
  * NOTA: ESTA CLASE NO SE USA PARA EL PRIMER LAB
+ * se supone que desde aqui puedes agregar el artefacto a el Saco?
  * @author degva
  */
 public class Artefacto {
