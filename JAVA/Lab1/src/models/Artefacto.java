@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.models;
+package models;
 
 /**
  * NOTA: ESTA CLASE NO SE USA PARA EL PRIMER LAB

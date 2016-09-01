@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.models;
+package models;
+
+import enums.TipoCelda;
 
 /**
  *
@@ -13,23 +15,23 @@ public class Celda {
     /*
      * Si tipo es 1: adentro, 2: Anterior, 3: Siguiente o 4: Pared
      **/
-    private int tipo;
+    private TipoCelda tipo;
 
-    public Celda (int tipo) {
+    public Celda (TipoCelda tipo) {
         this.tipo = tipo;
     }
-    
+
     /**
      * @return the tipo
      */
-    public int getTipo() {
+    public TipoCelda getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(int tipo) {
+    public void setTipo(TipoCelda tipo) {
         this.tipo = tipo;
     }
     
