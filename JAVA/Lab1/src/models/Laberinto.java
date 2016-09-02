@@ -20,18 +20,23 @@ public class Laberinto {
     
     // NOTA: podriamos usar un arreglo de listas
     // ArrayList<Celda> pero como hacerlo 2D?
-    private Celda[][] laberinto;
+    public Celda[][] laberinto;
     private final int[] niveles_enemigo;
     
     private GestorLaberinto gestor;
     
     public Laberinto(int max_size) {
+        
+        gestor = new GestorLaberinto();
+        
         Random rnd = new Random();
-        size_m = rnd.nextInt(max_size);
-        size_n = rnd.nextInt(max_size);
+        // max_size is the maximum and the 2 is our minimum 
+        size_m = rnd.nextInt(max_size) + 2;
+        size_n = rnd.nextInt(max_size) + 2;
         
         // creamos el arreglo de 2 dimensiones del laberinto
-        // this.laberinto = new Celda[2 * size_m + 1][2 * size_n + 1];
+        // esto esta siendo seteado en el gestor!!
+        laberinto = new Celda[2 * size_m + 2][2 * size_n + 2];
         
         pct_enemigo = rnd.nextFloat();
         
@@ -85,4 +90,7 @@ public class Laberinto {
         return niveles_enemigo;
     }
     
+    public Celda getCelda(int x, int y) {
+        return laberinto[x][y];
+    }
 }

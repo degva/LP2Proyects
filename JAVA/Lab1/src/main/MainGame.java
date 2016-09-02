@@ -4,15 +4,25 @@
  * and open the template in the editor.
  */
 package main;
-import models.Juego;
 
+import controllers.Juego;
+
+import java.util.Scanner;
 /**
  *
  * @author degva
  */
 class MainGame {
     public static void main(String[] args) {
-        Juego game = new Juego();
+               
+        System.out.print("Hello, this is the game\n");
+        System.out.print("Insert the size of the laberint:\n> ");
+        
+        Scanner input = new Scanner(System.in);
+        int x;
+        x = input.nextInt();
+        
+        Juego game = new Juego(x);
         game.Start();
     }
 }
