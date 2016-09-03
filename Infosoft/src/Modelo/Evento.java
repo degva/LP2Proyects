@@ -8,6 +8,7 @@ package Modelo;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Scanner;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Evento {
     private String fechaFin;
     private ArrayList<EquipoParticipante> participantes;
     private ArrayList<MiembroPUCP> organizadores;
+    Scanner sce = new Scanner(System.in);
 
     public Evento (int codigo, String nombre, String fechaInauguracion, String fechaInicio,
 		   String fechaFin)
@@ -152,6 +154,16 @@ public class Evento {
     public void VerParticipantes(){
         for (EquipoParticipante participante : participantes) {
             participante.Imprimir();
+        }
+    }
+    
+    public void PuntuarParticipantes(){
+        int puntaje;
+        for (EquipoParticipante participante : participantes) {
+            participante.Imprimir();
+            System.out.println("\tIngrese puntaje: ");
+            puntaje = sce.nextInt();
+            participante.setPuntaje(puntaje);
         }
     }
 }

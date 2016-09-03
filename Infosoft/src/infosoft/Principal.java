@@ -62,6 +62,7 @@ public class Principal {
                             objEvento.AgregarOrganizador(objDocente);
                         }
                     }
+                   
                     System.out.println("Ingrese datos de los participantes");
                     //System.out.print("Cantidad de participantes: ");
                     //cantidad = sc.nextInt();               
@@ -76,6 +77,7 @@ public class Principal {
                         }else if (tipo == 2){                        
                         }
                     //}
+                   
 
                     objGestorEventos.AgregarEvento(objEvento);
                     break;
@@ -89,16 +91,30 @@ public class Principal {
                     System.out.print("Ingrese el codigo del evento: ");
                     codigo = sc.nextInt();
 
-                    Evento objEvento = objGestorEventos.ObtenerEvento(codigo);
-                    ArrayList<EquipoParticipante> participantes = objEvento.getParticipantes();
-
-                    for (EquipoParticipante participante : participantes) {
-                        int puntaje;
-                        participante.Imprimir();
-                        System.out.println("\tIngrese puntaje: ");
-                        puntaje = sc.nextInt();
-                        participante.setPuntaje(puntaje);
+                    Evento objEvento = null;
+                    objEvento = objGestorEventos.ObtenerEvento(codigo);
+                    /*Varifica que el evento se encuentre*/
+                    if(objEvento!=null) System.out.println("Evento encontrado\n");
+                    else {
+                        System.out.println("Evento no encontrado, no s epuede puntuar participantes\n");
+                        break;
                     }
+                    objEvento.PuntuarParticipantes();
+                }
+                case 4: {
+                    System.out.print("Ingrese el codigo del evento: ");
+                    codigo = sc.nextInt();
+
+                    Evento objEvento = null;
+                    objEvento = objGestorEventos.ObtenerEvento(codigo);
+                    /*Varifica que el evento se encuentre*/
+                    if(objEvento!=null) System.out.println("Evento encontrado\n");
+                    else {
+                        System.out.println("Evento no encontrado, no s epuede puntuar participantes\n");
+                        break;
+                    }
+                    System.out.print("Los cinco primeros equipos con mayor puntaje son \n");  
+                    objEvento.ObtenerRanking();                    
                 }
             }
         }
