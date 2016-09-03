@@ -24,17 +24,10 @@ public class ParticipantePUCP extends EquipoParticipante{
     }
 
     /**
-     * @return the miembros
-     */
-    public ArrayList<MiembroPUCP> getMiembros() {
-        return miembros;
-    }
-
-    /**
      * @param miembros the miembros to set
      */
-    public void setMiembros(ArrayList<MiembroPUCP> miembros) {
-        this.miembros = miembros;
+    public void setMiembro(MiembroPUCP miembro) {
+        this.miembros.add(miembro);
     }
 
     /**
