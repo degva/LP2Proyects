@@ -78,7 +78,7 @@ public class Principal {
                             System.out.println("Creando participantes...");
                             Trabajador doc1 = new Trabajador(20010206,42225066,"David Allasi","09/08/1986","dallasi@pucp.edu.pe",0,"Docente","Dirigir","Informatica","Titulado",0,0,1);                            
                             equipo.setMiembro(doc1);
-                            Alumno alum1 = new Alumno(20131411,72365323,"Fabricio","fmonsalve@pucp.pe","21/11/1995",0,"Alumno","Exponer",56.26,1);         
+                            Alumno alum1 = new Alumno(20131411,172365323,"Fabricio","fmonsalve@pucp.pe","21/11/1995",0,"Alumno","Exponer",56.26,1);         
                             equipo.setMiembro(alum1);
                             Trabajador doc2 = new Trabajador(20010200,42225066,"David Allasi","09/08/1986","dallasi@pucp.edu.pe",0,"Docente","Dirigir","Informatica","Titulado",0,0,1);
                             equipo.setMiembro(doc2);
@@ -97,6 +97,7 @@ public class Principal {
                     System.out.print("Ingrese el codigo del evento: ");
                     codigo = sc.nextInt();
                     objGestorEventos.VizualizarEquiposParticipantes(codigo);
+                    break;
                 }
                 case 3:{
                     System.out.print("Ingrese el codigo del evento: ");
@@ -105,12 +106,15 @@ public class Principal {
                     Evento objEvento = null;
                     objEvento = objGestorEventos.ObtenerEvento(codigo);
                     /*Varifica que el evento se encuentre*/
-                    if(objEvento!=null) System.out.println("Evento encontrado\n");
-                    else {
-                        System.out.println("Evento no encontrado, no s epuede puntuar participantes\n");
+                    if(objEvento!=null) {
+                        System.out.println("Evento encontrado\n");
+                        System.out.println("El nombre del evento es " + objEvento.getNombre() + "\n");
+                    } else {
+                        System.out.println("Evento no encontrado, no sepuede puntuar participantes\n");
                         break;
                     }
                     objEvento.PuntuarParticipantes();
+                    break;
                 }
                 case 4: {
                     System.out.print("Ingrese el codigo del evento: ");
@@ -119,13 +123,18 @@ public class Principal {
                     Evento objEvento = null;
                     objEvento = objGestorEventos.ObtenerEvento(codigo);
                     /*Varifica que el evento se encuentre*/
-                    if(objEvento!=null) System.out.println("Evento encontrado\n");
+                    if(objEvento!=null) {
+                        System.out.println("Evento encontrado\n");
+                        System.out.println("El nombre del avento es %s");
+                        objEvento.getNombre();
+                    }
                     else {
                         System.out.println("Evento no encontrado, no s epuede puntuar participantes\n");
                         break;
                     }
                     System.out.print("Los cinco primeros equipos con mayor puntaje son \n");  
-                    objEvento.ObtenerRanking();                    
+                    objEvento.ObtenerRanking(); 
+                    break;
                 }
             }
         }
