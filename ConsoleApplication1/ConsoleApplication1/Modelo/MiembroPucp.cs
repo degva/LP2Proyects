@@ -66,11 +66,20 @@ namespace ConsoleApplication1.Modelo
             set {responsabilidades = value; }
         }
 
+<<<<<<< HEAD
 
         public MiembroPucp(string codigo, int rol) //rol = 1 para alumno y rol = 2 para trabajador
         {
             codigoPucp = codigo;
             this.rol = rol;
         }
+=======
+        public void ImprimeNombre()
+        {
+            Console.Write(Nombre + ", ");
+        }
+
+        /*diego pls, no crees tonterias*/
+>>>>>>> degva
     }
 }
