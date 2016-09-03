@@ -7,7 +7,6 @@ package infosoft;
 
 import Controlador.GestorEventos;
 import Modelo.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -59,15 +58,12 @@ public class Principal {
                     System.out.println("Ingrese datos de los Organizadores");
                     System.out.print("Cantidad de Organizadores: ");
                     cantidad = sc.nextInt();
-                    for (int i=0; i<cantidad; i++)
-                    {
+                    for (int i=0; i<cantidad; i++){
                         System.out.print("Tipo MiembroPucp (1-Docente, 2-Alumno, 3-Administrativo): ");
                         tipo = sc.nextInt();
-                        if (tipo==1)
-                        {
-                            Trabajador objDocente=new Trabajador(20010206,42225066,"David Allasi","09/08/1986","dallasi@pucp.edu.pe",1,"Coordinador Docente","Dirigir","Informatica","Titulado",0,0,1);
-                            objEvento.AgregarOrganizador(objDocente);
-                        }
+                        //Trabajador objDocente=new Trabajador(20010206,42225066,"David Allasi","09/08/1986","dallasi@pucp.edu.pe",1,"Coordinador Docente","Dirigir","Informatica","Titulado",0,0,1);
+                        System.out.println("Ingrese datos del organizador:");
+                        objEvento.AgregarOrganizador(tipo);
                     }
                     System.out.println("Ingrese datos del equipo");
                     //System.out.print("Cantidad de participantes: ");
@@ -115,6 +111,8 @@ public class Principal {
                         participante.setPuntaje(puntaje);
                     }
                 }
+                objGestorEventos.AgregarEvento(objEvento);
+                break;
             }
         }
     }    
