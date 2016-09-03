@@ -19,5 +19,33 @@ namespace ConsoleApplication1.Modelo
             this.dni = dni;
             this.nombre = nombre;
         }
+
+
+        public string Dni
+        {
+            get
+            {
+                return dni;
+            }
+
+            set
+            {
+                dni = value;
+            }
+        }
+
+
+        public string Nombre
+        {
+            get
+            {
+                return nombre;
+            }
+
+            set
+            {
+                nombre = value;
+            }
+        }
     }
 }

@@ -36,5 +36,11 @@ namespace ConsoleApplication1.Modelo
                 nivel = value;
             }
         }
+
+        public Alumno(int nivel, int craest, string codigo) : base(codigo, 1)
+        {
+            this.nivel = nivel;
+            this.craest = craest;
+        }
     }
 }
