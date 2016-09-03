@@ -1,4 +1,6 @@
 **/bin/*
 **/obj/*
 **/.vs
-/JAVA/Lab1/nbproject/private/
+**/nbproject/
+**/build/
+**/dist/
