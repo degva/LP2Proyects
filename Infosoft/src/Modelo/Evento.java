@@ -116,8 +116,8 @@ public class Evento {
     /**
      * @param participantes the participantes to set
      */
-    public void setParticipantes(ArrayList<EquipoParticipante> participantes) {
-        this.participantes = participantes;
+    public void setParticipantes(EquipoParticipante participante) {
+        this.participantes.add(participante);
     }
 
     /**
@@ -159,7 +159,10 @@ public class Evento {
     
     public void PuntuarParticipantes(){
         int puntaje;
+        System.out.println("ingreso correcto a equipoparticipante \n");///-----------------------------------------
+
         for (EquipoParticipante participante : participantes) {
+            System.out.println("ingreso correcto al participante");
             participante.Imprimir();
             System.out.println("\tIngrese puntaje: ");
             puntaje = sce.nextInt();

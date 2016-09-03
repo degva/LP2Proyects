@@ -75,6 +75,7 @@ public class Principal {
                         if (tipo == 1){
                             System.out.println("Equipo creado!");
                             ParticipantePUCP equipo = new ParticipantePUCP("Hora sad", "12/12/12", 1600,"Prros.txt");
+                            
                             System.out.println("Creando participantes...");
                             Trabajador doc1 = new Trabajador(20010206,42225066,"David Allasi","09/08/1986","dallasi@pucp.edu.pe",0,"Docente","Dirigir","Informatica","Titulado",0,0,1);                            
                             equipo.setMiembro(doc1);
@@ -84,7 +85,9 @@ public class Principal {
                             equipo.setMiembro(doc2);
                             Alumno alum2 = new Alumno(20131406,72365323,"Fabricio","fmonsalve@pucp.pe","21/11/1995",0,"Alumno","Exponer",56.26,1);
                             equipo.setMiembro(alum2);
-                            System.out.println("Agregando participantes...");                            
+                            System.out.println("Agregando participantes...");          
+                            
+                            objEvento.setParticipantes(equipo);
                         }else if (tipo == 2){                        
                         }
                     //}
