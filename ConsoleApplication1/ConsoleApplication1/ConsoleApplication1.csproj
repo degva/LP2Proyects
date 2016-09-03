@@ -48,6 +48,7 @@
     <Compile Include="Modelo\Infosoft.cs" />
     <Compile Include="Modelo\MiembroPucp.cs" />
     <Compile Include="Modelo\ParticipanteExterno.cs" />
+    <Compile Include="Modelo\ParticipantePucp.cs" />
     <Compile Include="Modelo\Persona.cs" />
     <Compile Include="Modelo\Trabajador.cs" />
     <Compile Include="Program.cs" />
