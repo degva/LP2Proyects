@@ -44,4 +44,8 @@ public class GestorEventos {
         Evento objEvento = ObtenerEvento(codigo);
         objEvento.VerParticipantes();
     }
+    
+    public int TotalDeEventos(){
+        return eventos.size();
+    }
 }
