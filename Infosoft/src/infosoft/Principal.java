@@ -25,15 +25,22 @@ public class Principal {
         int opcion, codigo, cantidad, tipo;
         String nombre, fechaInauguracion, fechaInicio, fechaFin;
         Scanner sc = new Scanner(System.in);
-
         while(true){
             System.out.println("Bienvenido al sistema INFOSOFT");
             System.out.println("1.- Agregar un Evento");
-            System.out.println("2.- Visualizar Participantes de un Evento");
-            System.out.println("3.- Asignar Puntajes a los equipos de un evento");
-            System.out.println("4.- Mostrar rankings de un evento");
-            System.out.print("Ingrese su opcion: ");
+            if (objGestorEventos.TotalDeEventos()!=0){
+                System.out.println("2.- Visualizar Participantes de un Evento");
+                System.out.println("3.- Asignar Puntajes a los equipos de un evento");
+                System.out.println("4.- Mostrar rankings de un evento");
+                System.out.print("Ingrese su opcion: ");
+            }            
             opcion = sc.nextInt();
+            if (objGestorEventos.TotalDeEventos()==0){
+                while(opcion != 1){
+                    System.out.println("Opcion no valida");
+                    opcion = sc.nextInt();
+                }
+            }
             switch (opcion)
             {
                 case 1: {
