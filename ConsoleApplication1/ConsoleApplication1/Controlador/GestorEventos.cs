@@ -37,6 +37,7 @@ namespace ConsoleApplication1.Controlador
             fFin = Console.ReadLine();
 
             Evento e = new Evento(codigo, nombre, fInaguracion, fInicio, fFin);
+            e.AgregarOrganizadores();
             eventos.Add(e);
         }
 
@@ -44,7 +45,7 @@ namespace ConsoleApplication1.Controlador
         {
             if (this.eventos.Count == 0)
             {
-                Console.WriteLine("There's nothing here...");
+                Console.WriteLine("No hay eventos registrados todavia... \n");
             }
             else
             {
@@ -71,7 +72,7 @@ namespace ConsoleApplication1.Controlador
                     return;
                 }
             }
-            Console.WriteLine("QUE CHUCHA DIJE! >:v \n");
+            Console.WriteLine("El evento ingrsado no existe\n");
         }
 
         public void ObtenerEvento(int codigo)
@@ -83,8 +84,10 @@ namespace ConsoleApplication1.Controlador
                 if (aux.Codigo == codigo)
                 {
                     aux.ImprimirEvento();
+                    return;
                 }
             }
+            Console.WriteLine("El evento ingrsado no existe\n");
         }
     }
 }
