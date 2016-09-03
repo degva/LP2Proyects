@@ -69,5 +69,7 @@ namespace ConsoleApplication1.Modelo
         {
             Console.Write(Nombre + ", ");
         }
+
+        /*diego pls, no crees tonterias*/
     }
 }
