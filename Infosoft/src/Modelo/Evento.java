@@ -6,9 +6,7 @@
 package Modelo;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
+import java.util.Scanner;
 /**
  *
  * @author David
@@ -132,26 +130,70 @@ public class Evento {
         this.organizadores = organizadores;
     }
     
-    public void AgregarOrganizador(MiembroPUCP objOrganizador)
+    public void AgregarOrganizador(int tipo)
     {
-        this.organizadores.add(objOrganizador);
-    }                       
-    
-    public void ObtenerRanking(){
+        Scanner sc = new Scanner(System.in);
         
-        Collections.sort(participantes);        
-        int counter = 1;
-        for (EquipoParticipante participante : participantes) {
-            if (counter > 5) break;
-            System.out.println(counter + ".- " + participante.getTema()
-                    + " " + participante.getPuntaje());
-            counter++;
+        long codigoPUCP,dni;
+        String correo,fechaN;
+        //int tipoOrganizador = 1;
+        String cargo, resp, nom;
+        System.out.print(" - Nombre: ");
+        nom = sc.next();
+        System.out.print(" - DNI: ");
+        dni = sc.nextLong();
+        System.out.print(" - Codigo PUCP: ");
+        codigoPUCP = sc.nextLong();
+        System.out.print(" - Correo: ");
+        correo = sc.next();
+        System.out.print(" - Fecha de Nacimiento: ");
+        fechaN = sc.next();
+        System.out.print(" - Cargo: ");
+        cargo = sc.next();
+        System.out.print(" - Responsabilidad: ");
+        resp = sc.next();
+        
+        switch (tipo){
+            case 1:
+            case 3:
+                String espec, grado;
+                int horaEnt, horaSal;
+                // tipo trabajador es 1 (docente), 2 (administrativo)
+                System.out.print(" - Especialidad: ");
+                espec = sc.next();
+                System.out.print(" - Grado: ");
+                grado = sc.next();
+                System.out.print(" - Hora de entrada: ");
+                horaEnt = sc.nextInt();
+                System.out.print(" - Hora de salida: ");
+                horaSal = sc.nextInt();
+                if (tipo == 1){
+                    Trabajador docente = new Trabajador (codigoPUCP,dni,nom,fechaN,correo,1,cargo,resp,espec,grado,horaEnt,horaSal,1);
+                    this.organizadores.add(docente);
+                }else{
+                    Trabajador administrador = new Trabajador (codigoPUCP,dni,nom,fechaN,correo,1,cargo,resp,espec,grado,horaEnt,horaSal,2);
+                    this.organizadores.add(administrador);
+                }
+                break;
+                
+            case 2:{
+                int nivel;
+                double craest;
+                System.out.print(" - Nivel: ");
+                nivel = sc.nextInt();
+                System.out.print(" - Craest: ");
+                craest = sc.nextDouble();
+                Alumno alumno = new Alumno (codigoPUCP,dni,nom,fechaN,correo,1,cargo,resp,craest,nivel);
+                this.organizadores.add(alumno);
+                break;}
+                
         }
-    }
-    
-    public void VerParticipantes(){
-        for (EquipoParticipante participante : participantes) {
-            participante.Imprimir();
-        }
-    }
+        
+        
+
+
+        //Trabajador objDocente=new Trabajador(20010206,42225066,"David Allasi","09/08/1986","dallasi@pucp.edu.pe",1,"Coordinador Docente","Dirigir","Informatica","Titulado",0,0,1);
+                    
+        //this.organizadores.add(objOrganizador);
+    }    
 }
