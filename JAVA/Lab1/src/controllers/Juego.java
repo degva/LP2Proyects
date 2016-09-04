@@ -30,6 +30,7 @@ public class Juego {
         lista_laberintos = new ArrayList<>();
         gestor = new GestorLaberinto();
         this.crearListaLaberintos(max_size);
+        
         renderer = new Dibujador();
     }
     
@@ -39,8 +40,7 @@ public class Juego {
         //renderer.Render(laberinto);
     }
 
-    private void crearListaLaberintos(int max_size){
-                
+    private void crearListaLaberintos(int max_size){                
         
         for (int i = 0; i < max_size; i++) {
             Laberinto objLab = new Laberinto();
@@ -48,7 +48,15 @@ public class Juego {
             objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, 
                     objLab.getSize_m(), objLab.getSize_n());
             
-            lista_laberintos.add(objLab.laberinto);
+            lista_laberintos.add(objLab.laberinto);                        
+        }
+    }
+    
+    private void agregarAnteriorySiguiente(){
+        
+        int counter = 1;
+        
+        for (Celda[][] lista : lista_laberintos) {
             
         }
     }
