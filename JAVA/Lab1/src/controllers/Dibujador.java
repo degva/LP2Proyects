@@ -13,6 +13,13 @@ import enums.TipoCelda;
  * @author degva
  */
 public class Dibujador {
+    /**
+     * 
+     * Muestra: nombre, vida, arma, armadura y elementos que tiene el saco (con
+     * indice diferenciado.
+     * Ademas: muestra en que laberinto esta.
+     * @param lab
+     */
     public void Render(Laberinto lab) {
         Celda aux;
         int sizex = 2*lab.getSize_m()+1;
@@ -26,7 +33,7 @@ public class Dibujador {
                         System.out.print(' ');
                         break;
                     case PARED:
-                        System.out.print((char) 128);
+                        System.out.print('#');
                         break;
                     default:
                         System.out.print("Khe? esto no deberia ejecutarse\n");
