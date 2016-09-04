@@ -62,20 +62,36 @@ public class Principal {
                             objEvento.AgregarOrganizador(objDocente);
                         }
                     }
-                    System.out.println("Ingrese datos de los participantes");
+
+
+
+                    System.out.println("Ingrese datos del equipo");
+
                     //System.out.print("Cantidad de participantes: ");
                     //cantidad = sc.nextInt();               
                     //for (int i = 0; i < cantidad; i++) {
-                        System.out.println("Tipo Miembro (1-MiembroPucp, 2-Miembro Externo)");
+                        System.out.println("Tipo Equipo (1-EquipoPucp, 2-Equipo Externo)");
                         tipo = sc.nextInt();
                         if (tipo == 1){
-                            Trabajador doc1 = new Trabajador(20010206,42225066,"David Allasi","09/08/1986","dallasi@pucp.edu.pe",0,"Docente","Dirigir","Informatica","Titulado",0,0,1);
-                            Alumno alum1 = new Alumno(20131411,72365323,"Fabricio","fmonsalve@pucp.pe","21/11/1995",0,"Alumno","Exponer",56.26,1);         
+                            System.out.println("Equipo creado!");
+                            ParticipantePUCP equipo = new ParticipantePUCP("Hora sad", "12/12/12", 1600,"Prros.txt");
+                            
+                            System.out.println("Creando participantes...");
+                            Trabajador doc1 = new Trabajador(20010206,42225066,"David Allasi","09/08/1986","dallasi@pucp.edu.pe",0,"Docente","Dirigir","Informatica","Titulado",0,0,1);                            
+                            equipo.setMiembro(doc1);
+                            Alumno alum1 = new Alumno(20131411,172365323,"Fabricio","fmonsalve@pucp.pe","21/11/1995",0,"Alumno","Exponer",56.26,1);         
+                            equipo.setMiembro(alum1);
                             Trabajador doc2 = new Trabajador(20010200,42225066,"David Allasi","09/08/1986","dallasi@pucp.edu.pe",0,"Docente","Dirigir","Informatica","Titulado",0,0,1);
+                            equipo.setMiembro(doc2);
                             Alumno alum2 = new Alumno(20131406,72365323,"Fabricio","fmonsalve@pucp.pe","21/11/1995",0,"Alumno","Exponer",56.26,1);
+                            equipo.setMiembro(alum2);
+                            System.out.println("Agregando participantes...");          
+                            
+                            objEvento.setParticipantes(equipo);
                         }else if (tipo == 2){                        
                         }
                     //}
+                   
 
                     objGestorEventos.AgregarEvento(objEvento);
                     break;
@@ -84,21 +100,44 @@ public class Principal {
                     System.out.print("Ingrese el codigo del evento: ");
                     codigo = sc.nextInt();
                     objGestorEventos.VizualizarEquiposParticipantes(codigo);
+                    break;
                 }
                 case 3:{
                     System.out.print("Ingrese el codigo del evento: ");
                     codigo = sc.nextInt();
 
-                    Evento objEvento = objGestorEventos.ObtenerEvento(codigo);
-                    ArrayList<EquipoParticipante> participantes = objEvento.getParticipantes();
-
-                    for (EquipoParticipante participante : participantes) {
-                        int puntaje;
-                        participante.Imprimir();
-                        System.out.println("\tIngrese puntaje: ");
-                        puntaje = sc.nextInt();
-                        participante.setPuntaje(puntaje);
+                    Evento objEvento = null;
+                    objEvento = objGestorEventos.ObtenerEvento(codigo);
+                    /*Varifica que el evento se encuentre*/
+                    if(objEvento!=null) {
+                        System.out.println("Evento encontrado\n");
+                        System.out.println("El nombre del evento es " + objEvento.getNombre() + "\n");
+                    } else {
+                        System.out.println("Evento no encontrado, no sepuede puntuar participantes\n");
+                        break;
                     }
+                    objEvento.PuntuarParticipantes();
+                    break;
+                }
+                case 4: {
+                    System.out.print("Ingrese el codigo del evento: ");
+                    codigo = sc.nextInt();
+
+                    Evento objEvento = null;
+                    objEvento = objGestorEventos.ObtenerEvento(codigo);
+                    /*Varifica que el evento se encuentre*/
+                    if(objEvento!=null) {
+                        System.out.println("Evento encontrado\n");
+                        System.out.println("El nombre del avento es %s");
+                        objEvento.getNombre();
+                    }
+                    else {
+                        System.out.println("Evento no encontrado, no s epuede puntuar participantes\n");
+                        break;
+                    }
+                    System.out.print("Los cinco primeros equipos con mayor puntaje son \n");  
+                    objEvento.ObtenerRanking(); 
+                    break;
                 }
             }
         }

@@ -41,7 +41,8 @@ public class GestorEventos {
     
     public void VizualizarEquiposParticipantes(int codigo){
         //Obtenemos el evento
-        Evento objEvento = ObtenerEvento(codigo);
+        Evento objEvento = null;
+        objEvento = ObtenerEvento(codigo);
         objEvento.VerParticipantes();
     }
 }

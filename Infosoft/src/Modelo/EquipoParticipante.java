@@ -21,7 +21,8 @@ public class EquipoParticipante implements Comparable<EquipoParticipante>{
         this.tema = tema;
         this.fechaParticipacion = fechaParticipacion;
         this.horaParticipacion = horaParticipacion;
-        this.nombreArchivo = nombreArchivo;       
+        this.nombreArchivo = nombreArchivo;      
+        this.puntaje = 0;
     }
 
     /**

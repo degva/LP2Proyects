@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Saco {
     List<Artefacto> afterfactos;
+    
     public Saco() {
         afterfactos = new ArrayList<Artefacto>();
     }
