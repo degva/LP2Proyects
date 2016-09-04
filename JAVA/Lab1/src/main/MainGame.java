@@ -16,7 +16,7 @@ class MainGame {
     public static void main(String[] args) {
                
         System.out.print("Hello, this is the game\n");
-        System.out.print("Insert the size of the laberint:\n> ");
+        System.out.print("Insert the maximum size of the laberint:\n> ");
         
         Scanner input = new Scanner(System.in);
         int x;
