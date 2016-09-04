@@ -6,7 +6,7 @@
 
 package controllers;
 
-import models.Laberinto;
+import models.*;
 /**
  *
  * @author degva
@@ -17,6 +17,7 @@ public class Juego {
     // hare un unico laberinto :v
     private Laberinto laberinto;
     private Dibujador renderer;
+    private Avatar avatar;
     /* NOTAS BY GINA
     SEGUN YO, ACA NE JUEGO FALTA LA LISTA DE LABERINTOS, QUE SON ACA Y EN EL START
     SE DEBE LLAMR VARIAS VECES A EL CREADOR DE LABERINTOS O A GESTOR DE LABERINTOS
