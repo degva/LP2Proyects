@@ -16,6 +16,7 @@ public class Laberinto {
     // que es final? :v
     private final int size_m;
     private final int size_n;
+    private final int max_size = 20;
     private final float pct_enemigo;
     // NOTA: podriamos usar un arreglo de listas
     // ArrayList<Celda> pero como hacerlo 2D?
@@ -23,7 +24,7 @@ public class Laberinto {
     private final int[] niveles_enemigo;
       
     
-    public Laberinto(int max_size) {
+    public Laberinto() {
                        
         Random rnd = new Random();
         // max_size is the maximum and the 2 is our minimum 
