@@ -27,12 +27,11 @@ class IntPair {
 
 public class GestorLaberinto {
     
-    private ArrayList<Celda[][]> lista_laberintos;
 
-    public GestorLaberinto(int total_laberintos) {
-        lista_laberintos = new ArrayList<>();
-    }        
-    
+    public GestorLaberinto() {
+        
+    }
+     
     public IntPair devuelveRandomAdjacente(Celda[][] lab, int x, int y, int max_x, int max_y) {
         Random rnd = new Random();
         
@@ -133,7 +132,7 @@ public class GestorLaberinto {
             // 3.1 tomamos la ultima apilada
             aux = pilaCeldas.peek();
             // 3.2 y 3.2.1 tomamos uno de los adjacentes aleatoriamente
-            ady = devuelveRandomAdjacente(lab, aux.x, aux.y, m, n);
+            ady = this.devuelveRandomAdjacente(lab, aux.x, aux.y, m, n);
             
             // 3.3 si bota -1 entonces significa que no hay adyacentes. Entonces,
             // hacemos pop :v
@@ -155,18 +154,6 @@ public class GestorLaberinto {
         }
         return lab;
     }
-       
     
-    public void crearListaLaberintos(int total_laberintos, int size){
-                
-        
-        for (int i = 0; i < total_laberintos; i++) {
-            Laberinto objLab = new Laberinto(size);
-            
-            objLab.laberinto = this.generarLaberinto(objLab.laberinto, 
-                    objLab.getSize_m(), objLab.getSize_n());
-            
-                        
-        }
-    }
+    
 }
