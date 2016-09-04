@@ -17,7 +17,6 @@ public class Laberinto {
     private final int size_m;
     private final int size_n;
     private final float pct_enemigo;
-    
     // NOTA: podriamos usar un arreglo de listas
     // ArrayList<Celda> pero como hacerlo 2D?
     public Celda[][] laberinto;
