@@ -21,13 +21,10 @@ public class Laberinto {
     // ArrayList<Celda> pero como hacerlo 2D?
     public Celda[][] laberinto;
     private final int[] niveles_enemigo;
-    
-    private GestorLaberinto gestor;
+      
     
     public Laberinto(int max_size) {
-        
-        gestor = new GestorLaberinto();
-        
+                       
         Random rnd = new Random();
         // max_size is the maximum and the 2 is our minimum 
         size_m = rnd.nextInt(max_size) + 2;
@@ -35,16 +32,11 @@ public class Laberinto {
         
         // creamos el arreglo de 2 dimensiones del laberinto
         // esto esta siendo seteado en el gestor!!
-        laberinto = new Celda[2 * size_m + 2][2 * size_n + 2];
-        
-        pct_enemigo = rnd.nextFloat();
-        
+        laberinto = new Celda[2 * size_m + 2][2 * size_n + 2];        
+        pct_enemigo = rnd.nextFloat();        
         // un arreglo con los niveles posibles de los enemigos que puedan
         // en el laberinto
-        niveles_enemigo = new int[size_m / 2];
-        
-        // llamar funcion que crea el laberinto usando el controlador GestorLaberinto
-        gestor.generarLaberinto(laberinto, size_m, size_n);
+        niveles_enemigo = new int[size_m / 2];       
     }
 
     /**

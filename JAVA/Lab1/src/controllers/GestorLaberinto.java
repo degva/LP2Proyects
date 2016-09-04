@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import java.util.ArrayList;
+import models.Laberinto;
 
 /**
  *
@@ -25,7 +26,13 @@ class IntPair {
 }
 
 public class GestorLaberinto {
+    
+    private ArrayList<Celda[][]> lista_laberintos;
 
+    public GestorLaberinto(int total_laberintos) {
+        lista_laberintos = new ArrayList<>();
+    }        
+    
     public IntPair devuelveRandomAdjacente(Celda[][] lab, int x, int y, int max_x, int max_y) {
         Random rnd = new Random();
         
@@ -77,7 +84,7 @@ public class GestorLaberinto {
         return pair;
     }
     
-    public void generarLaberinto(Celda[][] lab, int m, int n) {
+    public Celda[][] generarLaberinto(Celda[][] lab, int m, int n) {
         Random rnd = new Random();
         
         int real_m = 2*m+1;
@@ -142,11 +149,24 @@ public class GestorLaberinto {
                 lab[2*ady.x+1][2*ady.y+1].setTipo(TipoCelda.ADENTRO);
                 
                 // 3.2.4 apilamos v
-                pilaCeldas.push(ady);
-                
-            }
-                
+                pilaCeldas.push(ady);                
+            }                
             
+        }
+        return lab;
+    }
+       
+    
+    public void crearListaLaberintos(int total_laberintos, int size){
+                
+        
+        for (int i = 0; i < total_laberintos; i++) {
+            Laberinto objLab = new Laberinto(size);
+            
+            objLab.laberinto = this.generarLaberinto(objLab.laberinto, 
+                    objLab.getSize_m(), objLab.getSize_n());
+            
+                        
         }
     }
 }
