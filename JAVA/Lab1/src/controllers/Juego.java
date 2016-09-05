@@ -7,6 +7,7 @@
 package controllers;
 
 import models.*;
+
 import enums.TipoCelda;
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,6 +22,7 @@ public class Juego {
     private ArrayList<Laberinto> lista_laberintos;
     private Dibujador renderer;
     private GestorLaberinto gestor;
+    private Avatar avatar;
     /* NOTAS BY GINA
     SEGUN YO, ACA NE JUEGO FALTA LA LISTA DE LABERINTOS, QUE SON ACA Y EN EL START
     SE DEBE LLAMR VARIAS VECES A EL CREADOR DE LABERINTOS O A GESTOR DE LABERINTOS
