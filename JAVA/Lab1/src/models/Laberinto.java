@@ -18,7 +18,7 @@ public class Laberinto {
         - Lista de Artefactos
     */
     
-    public static final int MAX_SIZE_LAB = 100;
+    public static final int MAX_SIZE_LAB = 25;
     
     // que es final? :v
     private final int size_m;
@@ -34,7 +34,7 @@ public class Laberinto {
                        
         Random rnd = new Random();
         
-        int aux = rnd.nextInt(MAX_SIZE_LAB);
+        int aux = (int)(Math.random()*MAX_SIZE_LAB+10);;
         
         // now laberinth is a square
         size_m = 2*aux+1;

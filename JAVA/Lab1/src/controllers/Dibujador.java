@@ -69,7 +69,18 @@ public class Dibujador {
             aux = lab.getCelda(x, y);
             switch (aux.getTipo()) {
                 case ADENTRO:
-                    System.out.print(' ');
+                    
+                    switch (aux.getTipoContenido()) {
+                        case 0:
+                            System.out.print('+');
+                            break;
+                        case 1:
+                            System.out.print('-');
+                            break;
+                        default:
+                            System.out.print(' ');
+                            break;
+                    }
                     break;
                 case PARED:
                     System.out.print('#');
@@ -95,7 +106,7 @@ public class Dibujador {
         // List<Enemigo> listaEnemigos = lab.getEnemigos();
         
         // imprimimos el nivel del mapa
-        System.out.println("## NIVEL " + nivel);
+        System.out.println("## NIVEL " + nivel + " " + lab.getSize_m() + "-" + lab.getSize_n());
         
         // Imprimir
         for (int i = avatar.getPosicionY() - B; i <= avatar.getPosicionY() + B; i++) {
