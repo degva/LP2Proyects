@@ -6,13 +6,14 @@
 package models;
 import java.util.Random;
 
-import controllers.GestorLaberinto;
-
 /**
  *
  * @author degva
  */
 public class Laberinto {
+    
+    public static final int MAX_SIZE_LAB = 100;
+    
     // que es final? :v
     private final int size_m;
     private final int size_n;
@@ -27,14 +28,17 @@ public class Laberinto {
     public Laberinto() {
                        
         Random rnd = new Random();
-        // max_size is the maximum and the 2 is our minimum 
-        size_m = rnd.nextInt(max_size) + 2;
-        size_n = rnd.nextInt(max_size) + 2;
+        
+        int aux = rnd.nextInt(MAX_SIZE_LAB);
+        
+        // now laberinth is a square
+        size_m = 2*aux+1;
+        size_n = size_m;
         
         // creamos el arreglo de 2 dimensiones del laberinto
         // esto esta siendo seteado en el gestor!!
-        laberinto = new Celda[2 * size_m + 2][2 * size_n + 2];        
-        pct_enemigo = rnd.nextFloat();        
+        laberinto = new Celda[size_m + 1][size_n + 1];
+        pct_enemigo = rnd.nextFloat();
         // un arreglo con los niveles posibles de los enemigos que puedan
         // en el laberinto
         niveles_enemigo = new int[size_m / 2];       

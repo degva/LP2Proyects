@@ -16,14 +16,13 @@ import java.util.Scanner;
  * @author degva
  */
 public class Juego {
- 
+
     // estoy seguro que necesitamos una lista de laberintos, pero por prueba
     // hare un unico laberinto :v
     private ArrayList<Laberinto> lista_laberintos;
     private Dibujador renderer;
     private Avatar avatar;
     private GestorLaberinto gestor;
-    private Avatar avatar;
     private int laberintoActual;
 
     /* NOTAS BY GINA
@@ -33,13 +32,16 @@ public class Juego {
     */
     
     public Juego() {
+        Scanner input = new Scanner(System.in);
+        
         lista_laberintos = new ArrayList<>();
         gestor = new GestorLaberinto();
-        this.crearListaLaberintos();        
         renderer = new Dibujador();
         laberintoActual = 0;
+        
+        this.crearListaLaberintos();
         this.agregarAnteriorySiguiente();
-        Scanner input = new Scanner(System.in);
+        
         String nombre;
         System.out.print("Insert your name:\n> ");
         nombre = input.nextLine();
@@ -53,7 +55,6 @@ public class Juego {
         
         avatar = new Avatar(1,1); //, nombre);
         // estoy poniendo al avatar en la esquinita superior izquierda por mientras xd
-        
     }
     
     
@@ -66,14 +67,7 @@ public class Juego {
             //las coordenadas actuales de avatar y tambien las coordenadas
             //de los enemigos y los artefactos creo e.e
             String opcion;
-            renderer.Render(1,lista_laberintos.get(0),avatar); //avatar.getPosicionX(),avatar.getPosicionY(),...
-            System.out.print("Nombre: " ); // ,avatar.getNombre()
-            System.out.print("\nVida: [ " + avatar.getVidaActual() + " ]" );
-            
-            // ,aqui debemos imprimir un indice dependiendo del tipo de arma
-            System.out.print("\nArma: " ); 
-            // ,same que el arma xd
-            System.out.print("\nArmadura: " );
+            renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar); //avatar.getPosicionX(),avatar.getPosicionY(),...
             
             /*aqui en la impresion del saco se tiene un numero de artefactos
               desconocido, que dependera de lo que tenga saco en ese momento

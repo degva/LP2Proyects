@@ -20,15 +20,15 @@ public class Avatar {
     private int vidaActual;
     private Saco saco;
     /*
-    En el documento habla de el arma del avatar y de la armadura del avatar
-    pero no los he puesto como datos miembros porque creo que eso va dentro 
-    del saco
+    En el documento habla de el arma del avatar y de la armadura del avatar pero
+    no los he puesto como datos miembros porque creo que eso va dentro del saco
     */
     
     public Avatar(int posicionX, int poscionY){
         this.posicionX = posicionX;
         this.posicionY = poscionY;
-        //Asi aseguramos que cada vez que se cree un Avatar, empieze del primer laberinto
+        // Asi aseguramos que cada vez que se cree un Avatar, empieze del primer
+        // laberinto
         this.nivel = 1; 
     }
     
