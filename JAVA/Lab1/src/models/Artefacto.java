@@ -16,6 +16,7 @@ public class Artefacto {
      * Armor, Weapons or Potions.
      **/
     private int tipo;
+    private String nombre;
 
     public Artefacto (int tipo) {
         this.tipo = tipo;
@@ -33,5 +34,19 @@ public class Artefacto {
      */
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

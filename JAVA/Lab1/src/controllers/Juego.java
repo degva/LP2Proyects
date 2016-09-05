@@ -22,8 +22,9 @@ public class Juego {
     // hare un unico laberinto :v
     private ArrayList<Laberinto> lista_laberintos;
     private Dibujador renderer;
-    private GestorLaberinto gestor;
     private Avatar avatar;
+    private GestorLaberinto gestor;
+
     /* NOTAS BY GINA
     SEGUN YO, ACA NE JUEGO FALTA LA LISTA DE LABERINTOS, QUE SON ACA Y EN EL START
     SE DEBE LLAMR VARIAS VECES A EL CREADOR DE LABERINTOS O A GESTOR DE LABERINTOS
@@ -36,10 +37,8 @@ public class Juego {
         gestor = new GestorLaberinto();
         this.crearListaLaberintos(max_size);
         this.agregarAnteriorySiguiente();
-
         Scanner input = new Scanner(System.in);
         String nombre;
-
         renderer = new Dibujador();
         System.out.print("Insert your name:\n> ");
         nombre = input.nextLine();
