@@ -12,6 +12,12 @@ import java.util.Random;
  */
 public class Laberinto {
     
+    /*
+    TODO: 
+        - Lista de Enemigos (Se usa en Dibujador.java:69
+        - Lista de Artefactos
+    */
+    
     public static final int MAX_SIZE_LAB = 100;
     
     // que es final? :v

@@ -10,6 +10,12 @@ package models;
  * @author Gina
  */
 public class Avatar {
+    
+    /*
+    TODO: string <- getNombre(), Saco <- getSaco()
+    Agregar nombre al constructor
+    */
+    
     private int posicionX;
     private int posicionY;
     //Nivel indica el nuemro de laberinto en el que se encuentra
@@ -19,17 +25,19 @@ public class Avatar {
     private int vidaMaxima;
     private int vidaActual;
     private Saco saco;
+    private String nombre;
     /*
     En el documento habla de el arma del avatar y de la armadura del avatar pero
     no los he puesto como datos miembros porque creo que eso va dentro del saco
     */
     
-    public Avatar(int posicionX, int poscionY){
+    public Avatar(int posicionX, int poscionY, String nombre){
         this.posicionX = posicionX;
         this.posicionY = poscionY;
         // Asi aseguramos que cada vez que se cree un Avatar, empieze del primer
         // laberinto
         this.nivel = 1; 
+        this.nombre = nombre;
     }
     
     /**
@@ -162,7 +170,7 @@ public class Avatar {
         
     //Reocger Artefacto
     public void recogerArtefacto(Artefacto newArtefacto){
-        saco.agregarArtefacto(newArtefacto);
+        getSaco().agregarArtefacto(newArtefacto);
     }
     
     /*
@@ -177,6 +185,27 @@ public class Avatar {
     
     //Cambiar armadura
     //Cambiar arma
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the saco
+     */
+    public Saco getSaco() {
+        return saco;
+    }
 
 
     

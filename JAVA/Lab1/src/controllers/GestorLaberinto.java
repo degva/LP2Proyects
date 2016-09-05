@@ -38,28 +38,25 @@ public class GestorLaberinto {
         IntPair pair;
         List<IntPair> posibles = new ArrayList<>();
 
-        // int real_x = 2*x+1;
-        // int real_y = 2*y+1;
-        
-        // checkeamos a la derecha:
+        // checkeamos nodo a la derecha:
         if ((x > 0) && ((lab[x - 2][y]).getTipo() == TipoCelda.AFUERA)) {
             pair = new IntPair(x-1, y);
             posibles.add(pair);
         }
         
-        // checkeamos arriba
+        // checkeamos nodo arriba
         if ((y > 0) && ((lab[x][y - 2]).getTipo() == TipoCelda.AFUERA)) {
             pair = new IntPair(x, y-1);
             posibles.add(pair);
         }
         
-        // checkeamos izquierda
+        // checkeamos nodo izquierda
         if ((x < max_x) && ((lab[x + 2][y]).getTipo() == TipoCelda.AFUERA)) {
             pair = new IntPair(x+1, y);
             posibles.add(pair);
         }
         
-        // checkeamos derecha
+        // checkeamos nodo derecha
         if ((y < max_y) && ((lab[x][y + 2]).getTipo() == TipoCelda.AFUERA)) {
             pair = new IntPair(x, y+1);
             posibles.add(pair);

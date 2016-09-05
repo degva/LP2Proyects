@@ -41,19 +41,20 @@ public class Juego {
         
         this.crearListaLaberintos();
         this.agregarAnteriorySiguiente();
-        
+
+        /* aqui se crea un nuevo objeto Avatar, pero debe modificarse el constructor
+        y agregarle el atributo de nombre :' */        
         String nombre;
         System.out.print("Insert your name:\n> ");
         nombre = input.nextLine();
-        /* aqui se crea un nuevo objeto Avatar, pero debe modificarse el constructor
-        y agregarle el atributo de nombre :' */
         
         // el avatar inicia en la celda anterior del nivel 1,
         // por lo cual creo que en la clase laberinto deberiamos tener como atributo
         // las posiciones del ANTERIOR y SIGUIENTE, sino no sé como hariamos
         // para pasar de un nivel a otro tambien :'
+        // ^ this
         
-        avatar = new Avatar(1,1); //, nombre);
+        avatar = new Avatar(1, 1, nombre);
         // estoy poniendo al avatar en la esquinita superior izquierda por mientras xd
     }
     
@@ -62,53 +63,47 @@ public class Juego {
     public void Start() {
         //renderer.Render(laberinto);
         Scanner input = new Scanner(System.in);
-        while (true){
-            //Aqui en el render se debe pasar ademas de laberinto,
-            //las coordenadas actuales de avatar y tambien las coordenadas
-            //de los enemigos y los artefactos creo e.e
+        OUTER:
+        while (true) {
             String opcion;
-            renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar); //avatar.getPosicionX(),avatar.getPosicionY(),...
-            
-            /*aqui en la impresion del saco se tiene un numero de artefactos
-              desconocido, que dependera de lo que tenga saco en ese momento
-                falta codear esa parte :'
-            */
-
+            renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
             System.out.print("\n\n");
             System.out.print("Escriba una accion:\n" );
             System.out.print("> [mover 'x'] (siendo x: arriba, abajo, derecha, izquierda):\n" );
             System.out.print("> [interactuar]\n" );
             System.out.print("> [salir]\n\n - > " );
-
             opcion = input.nextLine();
-            // faltan las restricciones de los limites del mapa(en el dibujador?)
-            //por si se quiere salir o si hay una pared
-            if ("mover arriba".equals(opcion)) {
-                avatar.moveUp(); 
+
+            if (null != opcion) {
+                // faltan las restricciones de los limites del mapa(en el dibujador?)
+                //por si se quiere salir o si hay una pared
+                switch (opcion) {
+                    case "mover arriba":
+                        avatar.moveUp();
+                        break;
+                    case "mover abajo":
+                        avatar.moveDown();
+                        break;
+                    case "mover izquierda":
+                        avatar.moveLeft();
+                        break;
+                    case "mover derecha":
+                        avatar.moveRight();
+                        break;
+                    case "interactuar":
+                        //aqui se debe verificar si en las celdas adyacentes se
+                        //encuentra algun artefacto
+                        //if (alguna celda adyacente al avatar tiene un artefacto)
+                        // agregar artefacto al saco
+                        break;
+                    case "salir":
+                        System.out.print("\nGudbai\n");
+                        break OUTER;
+                    default:
+                        System.out.print("\nIngrese una accion correcta\n");
+                        break;
+                }
             }
-            else if ("mover abajo".equals(opcion)) {
-                avatar.moveDown();
-            }
-            else if ("mover izquierda".equals(opcion)) {
-                avatar.moveLeft();
-            }
-            else if ("mover derecha".equals(opcion)) {
-                avatar.moveRight();
-            }
-            else if ("interactuar".equals(opcion)) {
-                //aqui se debe verificar si en las celdas adyacentes se
-                //encuentra algun artefacto
-                //if (alguna celda adyacente al avatar tiene un artefacto)
-                    // agregar artefacto al saco
-            }
-            else if ("salir".equals(opcion)) {
-                System.out.print("\nGudbai\n");
-                break;
-            }else {
-                System.out.print("\nIngrese una accion correcta\n");
-            }
-        
-            
         }
     }
 

@@ -27,18 +27,17 @@ public class Dibujador {
     
     /*
     TODO: 
-        - Avatar: getNombre, getArma(), getArmadura(), getSaco()
-        - Arma, Armadura, Artefacto: toString()
+        - Avatar: getNombre, getSaco()
+        - Artefacto: toString() (?)
     */
     
     public List<String> ObtenerListaDatos(Avatar avatar) {
         List<String> datos = new ArrayList<>();
-        // falta hacer el getNombre() :v
         datos.add("Nombre: " + avatar.getNombre());
         String vida = Integer.toString(avatar.getVidaActual()) + "/" + Integer.toString(avatar.getVidaMaxima());
         datos.add("Vida: " + vida);
-        datos.add("Arma: " + avatar.getArma().toString());
-        datos.add("Armadura: " + avatar.getArmadura().toString());
+        datos.add("Arma: " + avatar.getArmaActual().toString());
+        datos.add("Armadura: " + avatar.getArmaduraActual().toString());
         datos.add("Cosillas: ");
         Saco saco_aux = avatar.getSaco();
         String aux = new String();
@@ -62,17 +61,17 @@ public class Dibujador {
      */
     public void Render(int nivel, Laberinto lab, Avatar avatar) {
         Celda aux;
-        int sizex = 2*lab.getSize_m()+1;
-        int sizey = 2*lab.getSize_n()+1;
         
         List<String> listaDatos = ObtenerListaDatos(avatar);
-        List<Enemigo> listaEnemigos = lab.getEnemigos();
+        // List<Enemigo> listaEnemigos = lab.getEnemigos();
         
         // imprimimos el nivel del mapa
         System.out.println("## NIVEL " + nivel);
         
-        for (int i = 0; i < sizex; i++) {
-            for (int j = 0; j < sizey; j++) {
+        // Imprimir 
+        for (int i = 0; i < lab.getSize_m() + 1; i++) {
+            
+            for (int j = 0; j < lab.getSize_n() + 1; j++) {
                 aux = lab.getCelda(i, j);
                 switch (aux.getTipo()) {
                     case ADENTRO:
@@ -86,6 +85,9 @@ public class Dibujador {
                         break;
                 }
             }
+            
+            System.out.print("    ");
+            System.out.print(listaDatos.get(i));
             System.out.print('\n');
         }
     }
