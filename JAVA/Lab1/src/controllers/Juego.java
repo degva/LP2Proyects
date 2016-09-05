@@ -54,7 +54,7 @@ public class Juego {
         // para pasar de un nivel a otro tambien :'
         // ^ this
         
-        avatar = new Avatar(1, 1, nombre);
+        avatar = new Avatar(1, 1, nombre, 1);
         // estoy poniendo al avatar en la esquinita superior izquierda por mientras xd
     }
     

@@ -9,79 +9,19 @@ package models;
  *
  * @author Gina
  */
-public class Avatar {
-    
-    /*
-    TODO: string <- getNombre(), Saco <- getSaco()
-    Agregar nombre al constructor
-    */
-    
-    private int posicionX;
-    private int posicionY;
-    //Nivel indica el nuemro de laberinto en el que se encuentra
-    private int nivel;
+public class Avatar extends Entidad{
+    private int vidaMaxima;
+    private Saco saco;
     private Armadura armaduraActual; 
     private Arma armaActual;
-    private int vidaMaxima;
-    private int vidaActual;
-    private Saco saco;
-    private String nombre;
-    /*
-    En el documento habla de el arma del avatar y de la armadura del avatar pero
-    no los he puesto como datos miembros porque creo que eso va dentro del saco
-    */
-    
-    public Avatar(int posicionX, int poscionY, String nombre){
-        this.posicionX = posicionX;
-        this.posicionY = poscionY;
-        // Asi aseguramos que cada vez que se cree un Avatar, empieze del primer
-        // laberinto
-        this.nivel = 1; 
-        this.nombre = nombre;
-    }
-    
-    /**
-     * @return the posicionX
-     */
-    public int getPosicionX() {
-        return posicionX;
-    }
 
-    /**
-     * @param posicionX the posicionX to set
-     */
-    public void setPosicionX(int posicionX) {
-        this.posicionX = posicionX;
+   
+    public Avatar(int posicionX, int poscionY, String nombre, int nivel){
+        super(posicionX,poscionY,nombre,nivel);
+        super.setVidaActual(100);
+        this.vidaMaxima = 100;
     }
-
-    /**
-     * @return the posicionY
-     */
-    public int getPosicionY() {
-        return posicionY;
-    }
-
-    /**
-     * @param posicionY the posicionY to set
-     */
-    public void setPosicionY(int posicionY) {
-        this.posicionY = posicionY;
-    }
-
-    /**
-     * @return the nivel
-     */
-    public int getNivel() {
-        return nivel;
-    }
-
-    /**
-     * @param nivel the nivel to set
-     */
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
+        
     /**
      * @return the vidaMaxima
      */
@@ -95,25 +35,21 @@ public class Avatar {
     public void setVidaMaxima(int vidaMaxima) {
         this.vidaMaxima = vidaMaxima;
     }
-
+    
     /**
-     * @return the vidaActual
+     * @return the saco
      */
-    public int getVidaActual() {
-        return vidaActual;
-    }
-
-    /**
-     * @param vidaActual the vidaActual to set
-     */
-    public void setVidaActual(int vidaActual) {
-        this.vidaActual = vidaActual;
+    public Saco getSaco() {
+        return saco;
     }
     
-    /* No estoy segura si los sets de los siguientes campos deberian ir 
-    de todos modos, ahi estan
-    */
-    
+    /**
+     * @param saco the saco to set
+     */
+    public void setSaco(Saco saco) {
+        this.saco = saco;
+    }
+
     /**
      * @return the armaduraActual
      */
@@ -142,31 +78,13 @@ public class Avatar {
         this.armaActual = armaActual;
     }
 
+
     /*
-    En estos metodos solo se hace la consulta, asumo que la autirizacion
-    de si se mueve o no se hace ene laberinto o en gestor de laberinto.
-    Si creen que esa confirmacion se debe hacer aca, diganme para implementarlo
-    */
-    public void moveUp(){
-        this.posicionY--;
-    }
-    
-    public void moveDown(){
-        this.posicionY++;
-    }
-    
-    public void moveRight(){
-        this.posicionX++;
-    }
-    
-    public void moveLeft(){
-        this.posicionX--;
-    }
-    
     //Aumentar nivel
     public void levelUp(){
         this.nivel++;
     }
+    */
         
     //Reocger Artefacto
     public void recogerArtefacto(Artefacto newArtefacto){
@@ -177,7 +95,6 @@ public class Avatar {
     Creo que avatar debe tener un metodo atacar enemigo, pero no tengo muy
     claro que debe hacer.
     */
-    
     //Atacar enemigo
     public void atacarEnemigo(){
         
@@ -186,27 +103,5 @@ public class Avatar {
     //Cambiar armadura
     //Cambiar arma
 
-    /**
-     * @return the nombre
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * @return the saco
-     */
-    public Saco getSaco() {
-        return saco;
-    }
-
-
-    
+  
 }
