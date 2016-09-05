@@ -7,21 +7,25 @@
 package controllers;
 
 import models.*;
-import java.util.Random;
+import enums.TipoCelda;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
-
 /**
  *
  * @author degva
  */
 public class Juego {
-
+ 
+    // estoy seguro que necesitamos una lista de laberintos, pero por prueba
+    // hare un unico laberinto :v
     private ArrayList<Laberinto> lista_laberintos;
     private Dibujador renderer;
+    private Avatar avatar;
     private GestorLaberinto gestor;
     private Avatar avatar;
     private int laberintoActual;
+
     /* NOTAS BY GINA
     SEGUN YO, ACA NE JUEGO FALTA LA LISTA DE LABERINTOS, QUE SON ACA Y EN EL START
     SE DEBE LLAMR VARIAS VECES A EL CREADOR DE LABERINTOS O A GESTOR DE LABERINTOS
@@ -34,15 +38,35 @@ public class Juego {
         this.crearListaLaberintos();        
         renderer = new Dibujador();
         laberintoActual = 0;
+        this.agregarAnteriorySiguiente();
+        Scanner input = new Scanner(System.in);
+        String nombre;
+        System.out.print("Insert your name:\n> ");
+        nombre = input.nextLine();
+        /* aqui se crea un nuevo objeto Avatar, pero debe modificarse el constructor
+        y agregarle el atributo de nombre :' */
+        
+        // el avatar inicia en la celda anterior del nivel 1,
+        // por lo cual creo que en la clase laberinto deberiamos tener como atributo
+        // las posiciones del ANTERIOR y SIGUIENTE, sino no sé como hariamos
+        // para pasar de un nivel a otro tambien :'
+        
+        avatar = new Avatar(1,1); //, nombre);
+        // estoy poniendo al avatar en la esquinita superior izquierda por mientras xd
+        
     }
     
+    
+    // papus aqui va el bucle xd pero falta definir la lista de los laberintos y otras cosas
     public void Start() {
-        String opcion;
+        //renderer.Render(laberinto);
         Scanner input = new Scanner(System.in);
         while (true){
             //Aqui en el render se debe pasar ademas de laberinto,
-            //las coordenadas actuales de avatar
-            renderer.Render(laberintoActual); //avatar.getPosicionX(),avatar.getPosicionY(),...
+            //las coordenadas actuales de avatar y tambien las coordenadas
+            //de los enemigos y los artefactos creo e.e
+            String opcion;
+            renderer.Render(1,lista_laberintos.get(0),avatar); //avatar.getPosicionX(),avatar.getPosicionY(),...
             System.out.print("Nombre: " ); // ,avatar.getNombre()
             System.out.print("\nVida: [ " + avatar.getVidaActual() + " ]" );
             
@@ -80,7 +104,6 @@ public class Juego {
             else if ("interactuar".equals(opcion)) {
                 //aqui se debe verificar si en las celdas adyacentes se
                 //encuentra algun artefacto
-
                 //if (alguna celda adyacente al avatar tiene un artefacto)
                     // agregar artefacto al saco
             }
@@ -102,15 +125,44 @@ public class Juego {
         for (int i = 0; i < numeroDeLaberintos; i++) {
             Laberinto objLab = new Laberinto();            
             objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, 
-                    objLab.getSize_m(), objLab.getSize_n());            
-            lista_laberintos.add(objLab.laberinto);                        
+                    objLab.getSize_m(), objLab.getSize_n());
+            
+            lista_laberintos.add(objLab);                        
         }
     }
     
-    private void agregarAnteriorySiguiente(){        
-        int counter = 1;        
-        for (Celda[][] lista : lista_laberintos) {
+    private void agregarAnteriorySiguiente(){
+        
+        int anterior,siguiente, cont = 0;
+        int x,y;
+        Random rnd = new Random();
+                
+        /*
+        Metodo de asignacion de la celda anterior y siguiente:
+        Se recorrera el laberinto, guardando las coordenadas de todas las celdas que esten
+        marcadas como ADENTRO, luego generando un numero aleatorio se elegira uno de esos pares
+        para anterior y otro para siguiente
+        */
+        
+        for (Laberinto lab : lista_laberintos) {
+            IntPair[] coords = new IntPair[lab.getSize_m()*lab.getSize_n()/2];
+            for (int i = 1; i < lab.getSize_m(); i++) 
+                for (int j = 1; j < lab.getSize_n(); j++) {
+                    if (lab.getCelda(i, j).getTipo() == TipoCelda.ADENTRO){
+                        coords[cont++] = new IntPair(i,j);                      
+                    }
+                }
+
+            anterior = rnd.nextInt(cont);
+            siguiente = rnd.nextInt(cont);            
             
+            x = coords[anterior].x;
+            y = coords[anterior].y;            
+            lab.getCelda(x, y).setTipoContenido(0);
+            
+            x = coords[siguiente].x;
+            y = coords[siguiente].y;
+            lab.getCelda(x, y).setTipoContenido(1);
         }
     }
     

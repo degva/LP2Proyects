@@ -16,11 +16,12 @@ public class Celda {
      * Si tipo es 1: adentro, 2: Anterior, 3: Siguiente o 4: Pared
      **/
     private TipoCelda tipo;
-    //0 = anterior, 1 = siguiente, 2 = avatar, 3 = artefacto, 4 = enemigo
+    //0 = anterior, 1 = siguiente
     private int tipoContenido;
 
     public Celda (TipoCelda tipo) {
         this.tipo = tipo;
+        this.tipoContenido = -1; //valor default
     }
 
     /**
