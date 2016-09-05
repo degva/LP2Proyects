@@ -9,6 +9,7 @@ package controllers;
 import models.*;
 import enums.TipoCelda;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 /**
@@ -122,7 +123,7 @@ public class Juego {
     
     private void agregarAnteriorySiguiente(){
         
-        int anterior,siguiente, cont = 0;
+        int anterior,siguiente;//, cont = 0;
         int x,y;
         Random rnd = new Random();
                 
@@ -134,23 +135,31 @@ public class Juego {
         */
         
         for (Laberinto lab : lista_laberintos) {
-            IntPair[] coords = new IntPair[lab.getSize_m()*lab.getSize_n()/2];
-            for (int i = 1; i < lab.getSize_m(); i++) 
+            List<IntPair> coords = new ArrayList<>();
+            // IntPair[] coords = new IntPair[ lab.getSize_m() * lab.getSize_n() / 2];
+            for (int i = 1; i < lab.getSize_m(); i++) {
                 for (int j = 1; j < lab.getSize_n(); j++) {
-                    if (lab.getCelda(i, j).getTipo() == TipoCelda.ADENTRO){
-                        coords[cont++] = new IntPair(i,j);                      
+                    if (lab.getCelda(i, j).getTipo() == TipoCelda.ADENTRO) {
+                        // coords[cont++] = new IntPair(i,j);
+                        coords.add(new IntPair(i,j));
+                        //cont++;
                     }
                 }
+            }
 
-            anterior = rnd.nextInt(cont);
-            siguiente = rnd.nextInt(cont);            
+            anterior = rnd.nextInt(coords.size());
+            siguiente = rnd.nextInt(coords.size());            
             
-            x = coords[anterior].x;
-            y = coords[anterior].y;            
+            //x = coords[anterior].x;
+            //y = coords[anterior].y;            
+            x = coords.get(anterior).x;
+            y = coords.get(anterior).y;
             lab.getCelda(x, y).setTipoContenido(0);
             
-            x = coords[siguiente].x;
-            y = coords[siguiente].y;
+            //x = coords[siguiente].x;
+            //y = coords[siguiente].y;
+            x = coords.get(siguiente).x;
+            y = coords.get(siguiente).y;
             lab.getCelda(x, y).setTipoContenido(1);
         }
     }

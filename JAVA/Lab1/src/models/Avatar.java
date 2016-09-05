@@ -12,8 +12,7 @@ package models;
 public class Avatar {
     
     /*
-    TODO: string <- getNombre(), Saco <- getSaco()
-    Agregar nombre al constructor
+    TODO: inicializar saco, armadura y arma
     */
     
     private int posicionX;
@@ -38,6 +37,8 @@ public class Avatar {
         // laberinto
         this.nivel = 1; 
         this.nombre = nombre;
+        
+        this.saco = new Saco();
     }
     
     /**
@@ -148,19 +149,19 @@ public class Avatar {
     Si creen que esa confirmacion se debe hacer aca, diganme para implementarlo
     */
     public void moveUp(){
-        this.posicionY--;
+        this.posicionX--;
     }
     
     public void moveDown(){
-        this.posicionY++;
-    }
-    
-    public void moveRight(){
         this.posicionX++;
     }
     
+    public void moveRight(){
+        this.posicionY++;
+    }
+    
     public void moveLeft(){
-        this.posicionX--;
+        this.posicionY--;
     }
     
     //Aumentar nivel

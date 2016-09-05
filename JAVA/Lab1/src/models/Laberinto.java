@@ -23,7 +23,6 @@ public class Laberinto {
     // que es final? :v
     private final int size_m;
     private final int size_n;
-    private final int max_size = 20;
     private final float pct_enemigo;
     // NOTA: podriamos usar un arreglo de listas
     // ArrayList<Celda> pero como hacerlo 2D?

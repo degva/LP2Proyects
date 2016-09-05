@@ -39,26 +39,26 @@ public class GestorLaberinto {
         List<IntPair> posibles = new ArrayList<>();
 
         // checkeamos nodo a la derecha:
-        if ((x > 0) && ((lab[x - 2][y]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x-1, y);
+        if ((x > 2) && ((lab[x - 2][y]).getTipo() == TipoCelda.AFUERA)) {
+            pair = new IntPair(x-2, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo arriba
-        if ((y > 0) && ((lab[x][y - 2]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x, y-1);
+        if ((y > 2) && ((lab[x][y - 2]).getTipo() == TipoCelda.AFUERA)) {
+            pair = new IntPair(x, y-2);
             posibles.add(pair);
         }
         
         // checkeamos nodo izquierda
-        if ((x < max_x) && ((lab[x + 2][y]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x+1, y);
+        if ((x < max_x - 2) && ((lab[x + 2][y]).getTipo() == TipoCelda.AFUERA)) {
+            pair = new IntPair(x+2, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo derecha
-        if ((y < max_y) && ((lab[x][y + 2]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x, y+1);
+        if ((y < max_y - 2) && ((lab[x][y + 2]).getTipo() == TipoCelda.AFUERA)) {
+            pair = new IntPair(x, y+2);
             posibles.add(pair);
         }
         
@@ -80,29 +80,52 @@ public class GestorLaberinto {
         return pair;
     }
     
+    
+    public void printLaberinto(Celda[][] lab, int m, int n) {
+        Celda aux;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                aux = lab[i][j];
+                switch (aux.getTipo()) {
+                    case PARED:
+                        System.out.print('#');
+                        break;
+                    case ADENTRO:
+                        System.out.print(' ');
+                        break;
+                    default:
+                        System.out.print('?');
+                        break;
+                }
+            }
+            System.out.print('\n');
+        }
+    }
+    
     public Celda[][] generarLaberinto(Celda[][] lab, int m, int n) {
         Random rnd = new Random();
-        
-        // int real_m = 2*m+1;
-        // int real_n = 2*n+1;
         
         // it doesn't work here
         // lab = new Celda[real_m+1][real_n+1];
         
         // iniciamos todas las celdas como PARED
-        for (int i = 0; i < m + 1; i++) {
-            for (int j = 0; j < n + 1; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 lab[i][j] = new Celda(TipoCelda.PARED);
             }
         }
         
-        // creamos los nodos
-        // m o m+1 ?
-        for (int i = 1; i < m + 1; i += 2) {
-            for (int j = 1; j < n + 1; j += 2) {
+        //System.out.print("Sin nodos\n");
+        //printLaberinto(lab, m, n);
+
+        for (int i = 1; i < m; i += 2) {
+            for (int j = 1; j < n; j += 2) {
                 lab[i][j].setTipo(TipoCelda.AFUERA);
             }
         }
+        
+        //System.out.print("Con nodos\n");
+        //printLaberinto(lab, m, n);
         
         // ******************
         // inicia el DFS AQUI
@@ -144,9 +167,9 @@ public class GestorLaberinto {
                 
                 // 3.2.4 apilamos v
                 pilaCeldas.push(ady);                
-            }                
-            
+            }
         }
+        // printLaberinto(lab, m, n);
         return lab;
     }
     

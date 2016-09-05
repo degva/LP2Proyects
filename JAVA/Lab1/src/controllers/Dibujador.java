@@ -17,8 +17,8 @@ import java.util.List;
 public class Dibujador {
     
     // Algunas constantes
-    private static final int A = 5;
-    private static final int B = 3;
+    private static final int A = 6;
+    private static final int B = 6;
     private int map_width = 0;
     
     public Dibujador() {
@@ -36,16 +36,21 @@ public class Dibujador {
         datos.add("Nombre: " + avatar.getNombre());
         String vida = Integer.toString(avatar.getVidaActual()) + "/" + Integer.toString(avatar.getVidaMaxima());
         datos.add("Vida: " + vida);
-        datos.add("Arma: " + avatar.getArmaActual().toString());
-        datos.add("Armadura: " + avatar.getArmaduraActual().toString());
+        //datos.add("Arma: " + avatar.getArmaActual().toString());
+        //datos.add("Armadura: " + avatar.getArmaduraActual().toString());
         datos.add("Cosillas: ");
+        
         Saco saco_aux = avatar.getSaco();
         String aux = new String();
         Artefacto item;
-        for (int i = 0; i < saco_aux.getSize(); i++) {
-            aux = Integer.toString(i) + ". ";
-            item = saco_aux.getItem(i);
-            aux.concat(item.toString());
+        if (saco_aux.getSize() != 0) {
+            for (int i = 0; i < saco_aux.getSize(); i++) {
+                aux = Integer.toString(i) + ". ";
+                item = saco_aux.getItem(i);
+                aux.concat(item.toString());
+            }
+        } else {
+            datos.add("No tienes cosillas\t");
         }
         return datos;
     }
@@ -101,8 +106,10 @@ public class Dibujador {
                     RenderCell(lab, i, j);
                 }
             }
-            System.out.print("    ");
-            System.out.print(listaDatos.get(i));
+            if (listaDatos.size() > (i + A + avatar.getPosicionX())) {
+                System.out.print("    ");
+                System.out.print(listaDatos.get(i + A + avatar.getPosicionX()));
+            }
             System.out.print('\n');
         }
     }
