@@ -14,6 +14,8 @@ public class Avatar {
     private int posicionY;
     //Nivel indica el nuemro de laberinto en el que se encuentra
     private int nivel;
+    private Armadura armaduraActual; 
+    private Arma armaActual;
     private int vidaMaxima;
     private int vidaActual;
     private Saco saco;
@@ -99,6 +101,38 @@ public class Avatar {
     public void setVidaActual(int vidaActual) {
         this.vidaActual = vidaActual;
     }
+    
+    /* No estoy segura si los sets de los siguientes campos deberian ir 
+    de todos modos, ahi estan
+    */
+    
+    /**
+     * @return the armaduraActual
+     */
+    public Armadura getArmaduraActual() {
+        return armaduraActual;
+    }
+
+    /**
+     * @param armaduraActual the armaduraActual to set
+     */
+    public void setArmaduraActual(Armadura armaduraActual) {
+        this.armaduraActual = armaduraActual;
+    }
+
+    /**
+     * @return the armaActual
+     */
+    public Arma getArmaActual() {
+        return armaActual;
+    }
+
+    /**
+     * @param armaActual the armaActual to set
+     */
+    public void setArmaActual(Arma armaActual) {
+        this.armaActual = armaActual;
+    }
 
     /*
     En estos metodos solo se hace la consulta, asumo que la autirizacion
@@ -140,5 +174,10 @@ public class Avatar {
     public void atacarEnemigo(){
         
     }
+    
+    //Cambiar armadura
+    //Cambiar arma
+
+
     
 }
