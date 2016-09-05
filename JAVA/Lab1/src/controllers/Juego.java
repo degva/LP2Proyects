@@ -31,7 +31,7 @@ public class Juego {
         lista_laberintos = new ArrayList<>();
         gestor = new GestorLaberinto();
         this.crearListaLaberintos(max_size);
-        
+        this.agregarAnteriorySiguiente();
         renderer = new Dibujador();
     }
     
@@ -55,7 +55,7 @@ public class Juego {
     
     private void agregarAnteriorySiguiente(){
         
-        int counter = 1, anterior,siguiente, cont = 0;
+        int anterior,siguiente, cont = 0;
         int x,y;
         Random rnd = new Random();
                 
@@ -86,5 +86,5 @@ public class Juego {
             y = coords[anterior].y;
             lab.getCelda(x, y).setTipoContenido(1);
         }
-    }
+    }      
 }
