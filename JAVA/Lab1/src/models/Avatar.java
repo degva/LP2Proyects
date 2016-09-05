@@ -21,6 +21,7 @@ public class Avatar extends Entidad{
         this.vidaMaxima = 100;
         this.saco = new Saco();
         // INICIALIZAR ARMADURA Y ARMA!
+        
     }
         
     /**

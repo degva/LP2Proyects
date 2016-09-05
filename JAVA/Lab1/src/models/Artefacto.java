@@ -15,27 +15,12 @@ public class Artefacto {
      * The artifact can be:
      * Armor, Weapons or Potions.
      **/
-    private int tipo;
     private String nombre;
 
     public Artefacto (int tipo) {
         this.tipo = tipo;
     }
     
-    /**
-     * @return the tipo
-     */
-    public int getTipo() {
-        return tipo;
-    }
-
-    /**
-     * @param tipo the tipo to set
-     */
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-
     /**
      * @return the nombre
      */
