@@ -51,6 +51,32 @@ public class Dibujador {
     }
     
     /**
+     * Renderiza solo una celda
+     * @param lab
+     * @param x
+     * @param y 
+     */
+    public void RenderCell(Laberinto lab, int x, int y) {
+        Celda aux;
+        if (x<0 || y<0 || x>lab.getSize_m() || y>lab.getSize_n()) {
+            System.out.print(' ');
+        } else {
+            aux = lab.getCelda(x, y);
+            switch (aux.getTipo()) {
+                case ADENTRO:
+                    System.out.print(' ');
+                    break;
+                case PARED:
+                    System.out.print('#');
+                    break;
+                default:
+                    System.out.print("Khe? esto no deberia ejecutarse\n");
+                    break;
+            }
+        }
+    }
+    
+    /**
      * 
      * Muestra: nombre, vida, arma, armadura y elementos que tiene el saco (con
      * indice diferenciado.
@@ -59,33 +85,22 @@ public class Dibujador {
      * @param lab
      * @param avatar
      */
-    public void Render(int nivel, Laberinto lab, Avatar avatar) {
-        Celda aux;
-        
+    public void Render(int nivel, Laberinto lab, Avatar avatar) {        
         List<String> listaDatos = ObtenerListaDatos(avatar);
         // List<Enemigo> listaEnemigos = lab.getEnemigos();
         
         // imprimimos el nivel del mapa
         System.out.println("## NIVEL " + nivel);
         
-        // Imprimir 
-        for (int i = 0; i < lab.getSize_m() + 1; i++) {
-            
-            for (int j = 0; j < lab.getSize_n() + 1; j++) {
-                aux = lab.getCelda(i, j);
-                switch (aux.getTipo()) {
-                    case ADENTRO:
-                        System.out.print(' ');
-                        break;
-                    case PARED:
-                        System.out.print('#');
-                        break;
-                    default:
-                        System.out.print("Khe? esto no deberia ejecutarse\n");
-                        break;
+        // Imprimir
+        for (int i = avatar.getPosicionX() - A; i <= avatar.getPosicionX() + A; i++) {
+            for (int j = avatar.getPosicionY() - B; j <= avatar.getPosicionY() + B; j++) {
+                if (i == avatar.getPosicionX() && j == avatar.getPosicionY()) {
+                    System.out.print('A');
+                } else {
+                    RenderCell(lab, i, j);
                 }
             }
-            
             System.out.print("    ");
             System.out.print(listaDatos.get(i));
             System.out.print('\n');
