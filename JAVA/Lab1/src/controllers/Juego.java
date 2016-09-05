@@ -148,7 +148,7 @@ public class Juego {
         for (Laberinto lab : lista_laberintos) {
             IntPair[] coords = new IntPair[lab.getSize_m()*lab.getSize_n()/2];
             for (int i = 1; i < lab.getSize_m(); i++) 
-                for (int j = 1; j < lab.getSize_n(); j++) {                    
+                for (int j = 1; j < lab.getSize_n(); j++) {
                     if (lab.getCelda(i, j).getTipo() == TipoCelda.ADENTRO){
                         coords[cont++] = new IntPair(i,j);                      
                     }
@@ -162,7 +162,7 @@ public class Juego {
             lab.getCelda(x, y).setTipoContenido(0);
             
             x = coords[siguiente].x;
-            y = coords[anterior].y;
+            y = coords[siguiente].y;
             lab.getCelda(x, y).setTipoContenido(1);
         }
     }      
