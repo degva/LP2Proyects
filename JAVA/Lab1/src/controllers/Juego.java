@@ -67,7 +67,7 @@ public class Juego {
             //las coordenadas actuales de avatar y tambien las coordenadas
             //de los enemigos y los artefactos creo e.e
             String opcion;
-            renderer.Render(laberinto); //avatar.getPosicionX(),avatar.getPosicionY(),...
+            renderer.Render(1,lista_laberintos.get(0),avatar); //avatar.getPosicionX(),avatar.getPosicionY(),...
             System.out.print("Nombre: " ); // ,avatar.getNombre()
             System.out.print("\nVida: [ " + avatar.getVidaActual() + " ]" );
             
