@@ -110,11 +110,11 @@ public class Juego {
     private void crearListaLaberintos(){                
         Random rnd = new Random(0);
         int MAX_LABERINTOS = 10; // un numero maximo de laberintos en el juego
-        int numeroDeLaberintos = rnd.nextInt(MAX_LABERINTOS);
+        int MIN_LABERINTOS = 5; // un numero maximo de laberintos en el juego
+        int numeroDeLaberintos = rnd.nextInt(MAX_LABERINTOS) + MIN_LABERINTOS;
         for (int i = 0; i < numeroDeLaberintos; i++) {
             Laberinto objLab = new Laberinto();            
-            objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, 
-                    objLab.getSize_m(), objLab.getSize_n());
+            objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, objLab.getSize_m(), objLab.getSize_n());
             
             lista_laberintos.add(objLab);                        
         }

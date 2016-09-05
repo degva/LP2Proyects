@@ -98,9 +98,9 @@ public class GestorLaberinto {
         
         // creamos los nodos
         // m o m+1 ?
-        for (int i = 0; i < m + 1; i++) {
-            for (int j = 0; j < n + 1; j++) {
-                lab[2*i+1][2*j+1].setTipo(TipoCelda.AFUERA);
+        for (int i = 1; i < m + 1; i += 2) {
+            for (int j = 1; j < n + 1; j += 2) {
+                lab[i][j].setTipo(TipoCelda.AFUERA);
             }
         }
         
