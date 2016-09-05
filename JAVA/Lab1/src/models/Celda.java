@@ -21,6 +21,7 @@ public class Celda {
 
     public Celda (TipoCelda tipo) {
         this.tipo = tipo;
+        this.tipoContenido = -1; //valor default
     }
 
     /**

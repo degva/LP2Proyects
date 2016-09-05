@@ -7,8 +7,9 @@
 package controllers;
 
 import models.*;
-import controllers.*;
+import enums.TipoCelda;
 import java.util.ArrayList;
+import java.util.Random;
 /**
  *
  * @author degva
@@ -17,7 +18,7 @@ public class Juego {
  
     // estoy seguro que necesitamos una lista de laberintos, pero por prueba
     // hare un unico laberinto :v
-    private ArrayList<Celda[][]> lista_laberintos;
+    private ArrayList<Laberinto> lista_laberintos;
     private Dibujador renderer;
     private GestorLaberinto gestor;
     /* NOTAS BY GINA
@@ -48,16 +49,42 @@ public class Juego {
             objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, 
                     objLab.getSize_m(), objLab.getSize_n());
             
-            lista_laberintos.add(objLab.laberinto);                        
+            lista_laberintos.add(objLab);                        
         }
     }
     
     private void agregarAnteriorySiguiente(){
         
-        int counter = 1;
+        int counter = 1, anterior,siguiente, cont = 0;
+        int x,y;
+        Random rnd = new Random();
+                
+        /*
+        Metodo de asignacion de la celda anterior y siguiente:
+        Se recorrera el laberinto, guardando las coordenadas de todas las celdas que esten
+        marcadas como ADENTRO, luego generando un numero aleatorio se elegira uno de esos pares
+        para anterior y otro para siguiente
+        */
         
-        for (Celda[][] lista : lista_laberintos) {
+        for (Laberinto lab : lista_laberintos) {
+            IntPair[] coords = new IntPair[lab.getSize_m()*lab.getSize_n()/2];
+            for (int i = 1; i < lab.getSize_m(); i++) 
+                for (int j = 1; j < lab.getSize_n(); j++) {                    
+                    if (lab.getCelda(i, j).getTipo() == TipoCelda.ADENTRO){
+                        coords[cont++] = new IntPair(i,j);                      
+                    }
+                }
+
+            anterior = rnd.nextInt(cont);
+            siguiente = rnd.nextInt(cont);            
             
+            x = coords[anterior].x;
+            y = coords[anterior].y;            
+            lab.getCelda(x, y).setTipoContenido(0);
+            
+            x = coords[siguiente].x;
+            y = coords[anterior].y;
+            lab.getCelda(x, y).setTipoContenido(1);
         }
     }
 }

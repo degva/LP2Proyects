@@ -12,7 +12,5 @@ package enums;
 public enum TipoCelda {
     AFUERA, // afuera solo se usa para la creacion del laberinto solamente
     ADENTRO,
-    ANTERIOR,
-    SIGUIENTE,
     PARED 
 }
