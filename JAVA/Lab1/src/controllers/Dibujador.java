@@ -98,17 +98,17 @@ public class Dibujador {
         System.out.println("## NIVEL " + nivel);
         
         // Imprimir
-        for (int i = avatar.getPosicionX() - A; i <= avatar.getPosicionX() + A; i++) {
-            for (int j = avatar.getPosicionY() - B; j <= avatar.getPosicionY() + B; j++) {
-                if (i == avatar.getPosicionX() && j == avatar.getPosicionY()) {
+        for (int i = avatar.getPosicionY() - B; i <= avatar.getPosicionY() + B; i++) {
+            for (int j = avatar.getPosicionX() - A; j <= avatar.getPosicionX() + A; j++) {
+                if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) {
                     System.out.print('A');
                 } else {
                     RenderCell(lab, i, j);
                 }
             }
-            if (listaDatos.size() > (i + A + avatar.getPosicionX())) {
+            if (listaDatos.size() > (i + B - avatar.getPosicionY())) {
                 System.out.print("    ");
-                System.out.print(listaDatos.get(i + A + avatar.getPosicionX()));
+                System.out.print(listaDatos.get(i + B - avatar.getPosicionY()));
             }
             System.out.print('\n');
         }

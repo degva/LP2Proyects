@@ -23,7 +23,7 @@ public class Saco {
         
     }
     public int getSize() {
-        return size;
+        return artefactos.size();
     }
     public Artefacto getItem(int i) {
         return artefactos.get(i);
