@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import static controllers.Juego.NRO_ARTEFACTOS;
 import models.Celda;
 import enums.TipoCelda;
 
@@ -12,6 +13,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import java.util.ArrayList;
+import models.Artefacto;
+import models.Enemigo;
 import models.Laberinto;
 
 /**
@@ -102,7 +105,9 @@ public class GestorLaberinto {
         }
     }
     
-    public Celda[][] generarLaberinto(Celda[][] lab, int m, int n) {
+    public void generarLaberinto(Laberinto lab_origin, int m, int n) {
+        Celda[][] lab = lab_origin.laberinto;
+        
         Random rnd = new Random();
         
         // it doesn't work here
@@ -170,8 +175,50 @@ public class GestorLaberinto {
             }
         }
         // printLaberinto(lab, m, n);
-        return lab;
+        
+        crearListaEnemigos(lab_origin);
+        crearListaArtefactos(lab_origin);
+        
+        // return lab_origin;
     }
     
+    private void crearListaEnemigos(Laberinto l){
+        Random rnd = new Random();
+        int max_i = l.getSize_m();
+        int max_j = l.getSize_n();
+        // hallar el nro de enemigos por mapa segun la probabilidad de que aparezca
+        // le puse entre 20 porque sino salen demasiados creo :'v 
+        //la formula puede ir cambiando
+        int nroEnemigos = Math.round((l.getPct_enemigo()* max_i * max_j)/20);
+        int ene_i, ene_j;
+        int niveles_Enemigo[] = l.getNiveles_enemigo();
+        for(int i=0; i< nroEnemigos; i++){
+            //voy a considerar que los enemigos aparezcan en los nodos (impares)xd
+            //porque sino tendria que estar probando para cada celda que no 
+            //sea una pared
+            ene_i = (rnd.nextInt(max_i/2)*2 +1);
+            ene_j = (rnd.nextInt(max_j/2)*2 +1);
+            Enemigo e = new Enemigo (ene_i,ene_j, "Enemigo",niveles_Enemigo[rnd.nextInt(max_i)]);
+            l.agregarEnemigo(e);
+            l.getCelda(ene_i, ene_j).setTipoContenido(2);
+        }
+        
+    }
+    
+    private void crearListaArtefactos(Laberinto l){
+        //Random rnd = new Random();
+        //int art_i, art_j;
+        for(int i=0; i< NRO_ARTEFACTOS; i++){
+            //nodos impares pls :'
+            //art_i = (rnd.nextInt(max_i/2)*2 +1);
+            //art_j = (rnd.nextInt(max_j/2)*2 +1);
+            Artefacto a = new Artefacto ("Artefacto");
+            l.agregarArtefacto(a);
+            //l.getCelda(ene_i, ene_j).setTipoContenido(3);
+            // -> aqui faltaria asociar la clase artefacto con su posicion en el
+            // -> mapa
+        }
+        
+    }
     
 }

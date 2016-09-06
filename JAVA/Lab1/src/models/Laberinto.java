@@ -22,7 +22,9 @@ public class Laberinto {
     private final float pct_enemigo;
     public Celda[][] laberinto;
     private final int[] niveles_enemigo;
-      
+    
+    private ArrayList<Enemigo> lista_enemigos;
+    private ArrayList<Artefacto> lista_artefactos;
     
     public Laberinto() {
                        
@@ -46,7 +48,9 @@ public class Laberinto {
         //estamos usando el ancho como total de niveles posibles xdxd
         for(int i =0; i < size_m; i++) 
             niveles_enemigo[i]= rnd.nextInt(10) +1; //arreglo de posible niveles            
-        //lista_enemigos = new ArrayList<>();
+        
+        lista_enemigos = new ArrayList<>();
+        lista_artefactos = new ArrayList<>();
         
         
     }
@@ -97,6 +101,20 @@ public class Laberinto {
         return laberinto[x][y];
     }
 
+    public void agregarEnemigo(Enemigo e){
+        this.getLista_enemigos().add(e);
+    }
+    
+    public void agregarArtefacto(Artefacto a){
+        this.lista_artefactos.add(a);
+    }
+
+    /**
+     * @return the lista_enemigos
+     */
+    public ArrayList<Enemigo> getLista_enemigos() {
+        return lista_enemigos;
+    }
     
     
 }
