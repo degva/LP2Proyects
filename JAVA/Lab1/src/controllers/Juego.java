@@ -17,6 +17,8 @@ import java.util.Scanner;
  * @author degva
  */
 public class Juego {
+    //public static final int MAX_ENEMIES = 5;
+    
     private ArrayList<Laberinto> lista_laberintos;
     private Dibujador renderer;
     private Avatar avatar;
@@ -34,7 +36,7 @@ public class Juego {
         
         this.crearListaLaberintos();
         this.agregarAnteriorySiguiente();
-
+        
         /* aqui se crea un nuevo objeto Avatar, pero debe modificarse el constructor
         y agregarle el atributo de nombre :' */        
         String nombre;
@@ -65,6 +67,9 @@ public class Juego {
             System.out.print("Escriba una accion:\n" );
             System.out.print("> [mover 'x'] (siendo x: arriba, abajo, derecha, izquierda):\n" );
             System.out.print("> [interactuar]\n" );
+            /*para implementar estos 2, nececito que se cree la lista de artefactos*/
+            System.out.println("> [cambiar arma]");
+            System.out.println("> [cambiar armadura]");
             System.out.print("> [salir]\n\n - > " );
             opcion = input.nextLine();
 
@@ -100,6 +105,12 @@ public class Juego {
                         //if (alguna celda adyacente al avatar tiene un artefacto)
                         // agregar artefacto al saco
                         break;
+                    case "cambiar arma":
+                        
+                        break;
+                    case "cambiar armadura":
+                        
+                        break;
                     case "salir":
                         System.out.print("\nGudbai\n");
                         break OUTER;
@@ -119,9 +130,37 @@ public class Juego {
         for (int i = 0; i < numeroDeLaberintos; i++) {
             Laberinto objLab = new Laberinto();            
             objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, objLab.getSize_m(), objLab.getSize_n());
+            crearListaEnemigos(objLab);
             lista_laberintos.add(objLab);                        
         }
+        
+      
     }
+    
+    private void crearListaEnemigos(Laberinto l){
+        Random rnd = new Random();
+        int max_i = l.getSize_m();
+        int max_j = l.getSize_n();
+        // hallar el nro de enemigos por mapa segun la probabilidad de que aparezca
+        // le puse entre 20 porque sino salen demasiados creo :'v 
+        //la formula puede ir cambiando
+        int nroEnemigos = Math.round((l.getPct_enemigo()* max_i * max_j)/20);
+        int ene_i, ene_j;
+        int niveles_Enemigo[] = l.getNiveles_enemigo();
+        for(int i=0; i< nroEnemigos; i++){
+            //voy a considerar que los enemigos aparezcan en los nodos (impares)xd
+            //porque sino tendria que estar probando para cada celda que no 
+            //sea una pared
+            ene_i = (rnd.nextInt(max_i/2)*2 +1);
+            ene_j = (rnd.nextInt(max_j/2)*2 +1);
+            Enemigo e = new Enemigo (ene_i,ene_j, "Enemigo",niveles_Enemigo[rnd.nextInt(max_i)]);
+            l.agregarEnemigo(e);
+            l.getCelda(ene_i, ene_j).setTipoContenido(2);
+        }
+        
+    }
+    
+    
     
     private void agregarAnteriorySiguiente(){
         

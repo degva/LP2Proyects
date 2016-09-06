@@ -63,9 +63,11 @@ public class Dibujador {
      */
     public void RenderCell(Laberinto lab, int x, int y) {
         Celda aux;
+
         if (x<0 || y<0 || x>lab.getSize_m() || y>lab.getSize_n()) {
             System.out.print('.');
         } else if (x<=lab.getSize_m() && y <= lab.getSize_n()){
+
             aux = lab.getCelda(x, y);
             switch (aux.getTipo()) {
                 case ADENTRO:                    
@@ -75,6 +77,9 @@ public class Dibujador {
                             break;
                         case 1:
                             System.out.print('-');
+                            break;
+                        case 2:
+                            System.out.print('E');
                             break;
                         default:
                             System.out.print(' ');
@@ -114,13 +119,16 @@ public class Dibujador {
                 if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) {
                     System.out.print('A');
                 } else {
-                    RenderCell(lab, i, j);
+                    RenderCell(lab, j, i);
                 }
             }
             if (listaDatos.size() > (i + B - avatar.getPosicionY())) {
+
                 System.out.print(' ');
+
                 System.out.print(listaDatos.get(i + B - avatar.getPosicionY()));
             }
+            
             System.out.print('\n');
         }
     }

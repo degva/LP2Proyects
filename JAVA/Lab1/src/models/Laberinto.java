@@ -5,7 +5,7 @@
  */
 package models;
 import java.util.Random;
-
+import java.util.ArrayList;
 /**
  *
  * @author degva
@@ -17,13 +17,15 @@ public class Laberinto {
         - Lista de Enemigos (Se usa en Dibujador.java:69
         - Lista de Artefactos
     */
-    
+    //public static final int MAX_ENEMIES = 5;
     public static final int MAX_SIZE_LAB = 10;
     
-    // que es final? :v
+    // que es final? :v -> funciona como constante para la clase, creo :'v
     private final int size_m;
     private final int size_n;
     private final float pct_enemigo;
+    
+    private ArrayList<Enemigo> lista_enemigos;
     // NOTA: podriamos usar un arreglo de listas
     // ArrayList<Celda> pero como hacerlo 2D?
     public Celda[][] laberinto;
@@ -34,11 +36,17 @@ public class Laberinto {
                        
         Random rnd = new Random();
         
+
         int aux = (int)(Math.random()*MAX_SIZE_LAB+10);
+
+        //int aux = rnd.nextInt(MAX_SIZE_LAB);
+
         
         // now laberinth is a square
-        size_m = 2*aux+1;
-        size_n = size_m;
+        //size_m = 2*aux+1;
+        //size_n = size_m;
+        size_m = 20; // hey que fue aqui :( no more random?
+        size_n = 20;
         
         // creamos el arreglo de 2 dimensiones del laberinto
         // esto esta siendo seteado en el gestor!!
@@ -46,7 +54,13 @@ public class Laberinto {
         pct_enemigo = rnd.nextFloat();
         // un arreglo con los niveles posibles de los enemigos que puedan
         // en el laberinto
-        niveles_enemigo = new int[size_m / 2];       
+        niveles_enemigo = new int[size_m];
+        //estamos usando el ancho como total de niveles posibles xdxd
+        for(int i =0; i < size_m; i++) 
+            niveles_enemigo[i]= rnd.nextInt(10) +1; //arreglo de posible niveles            
+        lista_enemigos = new ArrayList<>();
+        
+        
     }
 
     /**
@@ -94,4 +108,23 @@ public class Laberinto {
     public Celda getCelda(int x, int y) {
         return laberinto[x][y];
     }
+
+    /**
+     * @return the lista_enemigos
+     */
+    public ArrayList<Enemigo> getLista_enemigos() {
+        return lista_enemigos;
+    }
+
+    /**
+     * @param lista_enemigos the lista_enemigos to set
+     */
+    public void setLista_enemigos(ArrayList<Enemigo> lista_enemigos) {
+        this.lista_enemigos = lista_enemigos;
+    }
+    
+    public void agregarEnemigo(Enemigo e){
+        this.lista_enemigos.add(e);
+    }
 }
+
