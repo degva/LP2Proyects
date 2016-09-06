@@ -117,7 +117,7 @@ public class Dibujador {
         for (int i = avatar.getPosicionY() - B; i <= avatar.getPosicionY() + B; i++) {
             for (int j = avatar.getPosicionX() - A; j <= avatar.getPosicionX() + A; j++) {
                 if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) {
-                    System.out.print('A');
+                    System.out.print('o');
                 } else {
                     RenderCell(lab, j, i);
                 }

@@ -16,7 +16,7 @@ public class Celda {
      * Si tipo es 1: adentro, 2: Anterior, 3: Siguiente o 4: Pared
      **/
     private TipoCelda tipo;
-    //0 = anterior, 1 = siguiente,  2 = enemigo
+    //0 = anterior, 1 = siguiente,  2 = enemigo, 3= artefacto
     private int tipoContenido;
 
     public Celda (TipoCelda tipo) {

@@ -17,9 +17,13 @@ import java.util.Scanner;
  * @author degva
  */
 public class Juego {
-    //public static final int MAX_ENEMIES = 5;
+    public static final int NRO_ARTEFACTOS= 10;
     
     private ArrayList<Laberinto> lista_laberintos;
+    private ArrayList<Enemigo> lista_enemigos; // para el laberinto actual
+    private ArrayList<Artefacto> lista_artefactos; // para el laberinto actual
+    
+    
     private Dibujador renderer;
     private Avatar avatar;
     private GestorLaberinto gestor;
@@ -30,27 +34,37 @@ public class Juego {
         Scanner input = new Scanner(System.in);
         
         lista_laberintos = new ArrayList<>();
+        lista_enemigos = new ArrayList<>();
+        lista_artefactos = new ArrayList<>();
+        //hey, aqui hay que tener cuidado, porque la lista de enemigos y artefactos creada es
+        //para cada laberinto, asi que a la hora de pasar de un laberinto a otro
+        //se deberian eliminar los elementos de la lista anterior y generar nuevas
+        //lista
+        
+        
         gestor = new GestorLaberinto();
         renderer = new Dibujador();
         laberintoActual = 0;
         
         this.crearListaLaberintos();
         this.agregarAnteriorySiguiente();
+        //para poder colocar el avatar en el mapa en la casilla anterior :p
+        //this.agregarAnteriorySiguienteyColocarAvatar();
         
         /* aqui se crea un nuevo objeto Avatar, pero debe modificarse el constructor
         y agregarle el atributo de nombre :' */        
         String nombre;
         System.out.print("Insert your name:\n> ");
         nombre = input.nextLine();
-        
+        avatar = new Avatar(1,1,nombre,1);
         // el avatar inicia en la celda anterior del nivel 1,
         // por lo cual creo que en la clase laberinto deberiamos tener como atributo
         // las posiciones del ANTERIOR y SIGUIENTE, sino no sé como hariamos
         // para pasar de un nivel a otro tambien :'
         // ^ this
         
-        avatar = new Avatar(1, 1, nombre, 1);
-        // estoy poniendo al avatar en la esquinita superior izquierda por mientras xd
+        
+        // aqui el avatar deberia estar en la casilla anterior xdxd
     }
     
     
@@ -131,6 +145,7 @@ public class Juego {
             Laberinto objLab = new Laberinto();            
             objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, objLab.getSize_m(), objLab.getSize_n());
             crearListaEnemigos(objLab);
+            crearListaArtefactos(objLab);
             lista_laberintos.add(objLab);                        
         }
         
@@ -154,8 +169,24 @@ public class Juego {
             ene_i = (rnd.nextInt(max_i/2)*2 +1);
             ene_j = (rnd.nextInt(max_j/2)*2 +1);
             Enemigo e = new Enemigo (ene_i,ene_j, "Enemigo",niveles_Enemigo[rnd.nextInt(max_i)]);
-            l.agregarEnemigo(e);
+            this.agregarEnemigo(e);
             l.getCelda(ene_i, ene_j).setTipoContenido(2);
+        }
+        
+    }
+    
+    private void crearListaArtefactos(Laberinto l){
+        //Random rnd = new Random();
+        //int art_i, art_j;
+        for(int i=0; i< NRO_ARTEFACTOS; i++){
+            //nodos impares pls :'
+            //art_i = (rnd.nextInt(max_i/2)*2 +1);
+            //art_j = (rnd.nextInt(max_j/2)*2 +1);
+            Artefacto a = new Artefacto ("Artefacto");
+            this.agregarArtefacto(a);
+            //l.getCelda(ene_i, ene_j).setTipoContenido(3);
+            // -> aqui faltaria asociar la clase artefacto con su posicion en el
+            // -> mapa
         }
         
     }
@@ -196,6 +227,8 @@ public class Juego {
             x = coords.get(anterior).x;
             y = coords.get(anterior).y;
             lab.getCelda(x, y).setTipoContenido(0);
+ 
+            
             
             //x = coords[siguiente].x;
             //y = coords[siguiente].y;
@@ -208,4 +241,12 @@ public class Juego {
     public int getLaberintoActual(){
         return this.laberintoActual;
     }
+    private void agregarEnemigo(Enemigo e){
+        this.lista_enemigos.add(e);
+    }
+    
+    private void agregarArtefacto(Artefacto a){
+        this.lista_artefactos.add(a);
+    }
+    
 }

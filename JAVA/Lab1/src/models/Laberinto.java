@@ -12,11 +12,7 @@ import java.util.ArrayList;
  */
 public class Laberinto {
     
-    /*
-    TODO: 
-        - Lista de Enemigos (Se usa en Dibujador.java:69
-        - Lista de Artefactos
-    */
+    
     //public static final int MAX_ENEMIES = 5;
     public static final int MAX_SIZE_LAB = 10;
     
@@ -25,7 +21,7 @@ public class Laberinto {
     private final int size_n;
     private final float pct_enemigo;
     
-    private ArrayList<Enemigo> lista_enemigos;
+    
     // NOTA: podriamos usar un arreglo de listas
     // ArrayList<Celda> pero como hacerlo 2D?
     public Celda[][] laberinto;
@@ -58,7 +54,7 @@ public class Laberinto {
         //estamos usando el ancho como total de niveles posibles xdxd
         for(int i =0; i < size_m; i++) 
             niveles_enemigo[i]= rnd.nextInt(10) +1; //arreglo de posible niveles            
-        lista_enemigos = new ArrayList<>();
+        //lista_enemigos = new ArrayList<>();
         
         
     }
@@ -109,22 +105,7 @@ public class Laberinto {
         return laberinto[x][y];
     }
 
-    /**
-     * @return the lista_enemigos
-     */
-    public ArrayList<Enemigo> getLista_enemigos() {
-        return lista_enemigos;
-    }
-
-    /**
-     * @param lista_enemigos the lista_enemigos to set
-     */
-    public void setLista_enemigos(ArrayList<Enemigo> lista_enemigos) {
-        this.lista_enemigos = lista_enemigos;
-    }
     
-    public void agregarEnemigo(Enemigo e){
-        this.lista_enemigos.add(e);
-    }
+    
 }
 
