@@ -76,22 +76,22 @@ public class Juego {
                     case "mover arriba":
                         if(actualLaberinto.laberinto[posicionActualX][posicionActualY-1].getTipo() != TipoCelda.PARED)
                             avatar.moveUp();
-                        //else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover abajo":
                         if(actualLaberinto.laberinto[posicionActualX][posicionActualY+1].getTipo() != TipoCelda.PARED)
                             avatar.moveDown();
-                        //else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover izquierda":
                         if(actualLaberinto.laberinto[posicionActualX-1][posicionActualY].getTipo() != TipoCelda.PARED)
                             avatar.moveLeft();
-                        //else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover derecha":
                         if(actualLaberinto.laberinto[posicionActualX+1][posicionActualY].getTipo() != TipoCelda.PARED)
                             avatar.moveRight();
-                        //else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "interactuar":
                         //aqui se debe verificar si en las celdas adyacentes se
