@@ -61,11 +61,13 @@ public class Juego {
         Scanner input = new Scanner(System.in);
         int sigAnt;
         String opcion;
+        int laberintoAnterior = 0;
         OUTER:
         while (true) {
             clearScreen();    
 
-            if (laberintoActual != 0){
+            if (laberintoActual != laberintoAnterior){
+                laberintoAnterior = laberintoActual;
                 avatar.setPosicionX(lista_anteriores.get(laberintoActual).x);
                 avatar.setPosicionY(lista_anteriores.get(laberintoActual).y + 1);
             }
