@@ -23,12 +23,14 @@ public class Juego {
     private GestorLaberinto gestor;
     private int laberintoActual;
     private int totalLaberintos=0;
+    private ArrayList<IntPair> lista_anteriores; 
 
  
     public Juego() {
         Scanner input = new Scanner(System.in);
         
         lista_laberintos = new ArrayList<>();
+        lista_anteriores = new ArrayList<>();
         gestor = new GestorLaberinto();
         renderer = new Dibujador();
         laberintoActual = 0;
@@ -48,7 +50,7 @@ public class Juego {
         // para pasar de un nivel a otro tambien :'
         // ^ this
         
-        avatar = new Avatar(1, 1, nombre, 1);
+        avatar = new Avatar(lista_anteriores.get(laberintoActual).x, lista_anteriores.get(laberintoActual).y , nombre, 1);
         // estoy poniendo al avatar en la esquinita superior izquierda por mientras xd
     }
     
@@ -61,7 +63,13 @@ public class Juego {
         String opcion;
         OUTER:
         while (true) {
-            clearScreen();            
+            clearScreen();    
+
+            if (laberintoActual != 0){
+                avatar.setPosicionX(lista_anteriores.get(laberintoActual).x);
+                avatar.setPosicionY(lista_anteriores.get(laberintoActual).y + 1);
+            }
+            System.out.println("LaberintoActual = " + laberintoActual);
             sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
             
             if (sigAnt == 1){
@@ -69,11 +77,13 @@ public class Juego {
                     System.out.println("FELICIDADES HAS GANADO EL JUEGO!!!!");
                     break;
                 }else{
+                    System.out.println("Pasando a siguiente nivel");
                     laberintoActual++;
                     continue;
                 }                
             }
-            else if (sigAnt == -1 && laberintoActual != 0){
+            else if (sigAnt == -1 && laberintoActual != 0 ){
+                System.out.println("Pasando a nivel anterior");
                 laberintoActual--;
                 continue;
             }
@@ -159,7 +169,7 @@ public class Juego {
         */
         
         for (Laberinto lab : lista_laberintos) {
-            List<IntPair> coords = new ArrayList<>();
+            ArrayList<IntPair> coords = new ArrayList<>();
             // IntPair[] coords = new IntPair[ lab.getSize_m() * lab.getSize_n() / 2];
             for (int i = 1; i < lab.getSize_m(); i++) {
                 for (int j = 1; j < lab.getSize_n(); j++) {
@@ -178,8 +188,9 @@ public class Juego {
             //y = coords[anterior].y;            
             x = coords.get(anterior).x;
             y = coords.get(anterior).y;
-            lab.getCelda(x, y).setTipoContenido(0);
             
+            lab.getCelda(x, y).setTipoContenido(0);
+            lista_anteriores.add(coords.get(siguiente));
             //x = coords[siguiente].x;
             //y = coords[siguiente].y;
             x = coords.get(siguiente).x;
