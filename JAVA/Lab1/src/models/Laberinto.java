@@ -34,7 +34,7 @@ public class Laberinto {
                        
         Random rnd = new Random();
         
-        int aux = (int)(Math.random()*MAX_SIZE_LAB+10);
+        int aux = (int)(Math.random()*MAX_SIZE_LAB+5);
         
         // now laberinth is a square
         size_m = 2*aux+1;
