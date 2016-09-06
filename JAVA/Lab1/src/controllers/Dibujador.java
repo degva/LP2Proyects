@@ -65,7 +65,7 @@ public class Dibujador {
         Celda aux;
         if (x<0 || y<0 || x>lab.getSize_m() || y>lab.getSize_n()) {
             System.out.print('.');
-        } else if (x<lab.getSize_m() && y < lab.getSize_n()){
+        } else if (x<=lab.getSize_m() && y <= lab.getSize_n()){
             aux = lab.getCelda(x, y);
             switch (aux.getTipo()) {
                 case ADENTRO:                    
@@ -82,6 +82,7 @@ public class Dibujador {
                     }
                     break;
                 case PARED:
+                case AFUERA:
                     System.out.print('#');
                     break;
                 default:
@@ -105,7 +106,7 @@ public class Dibujador {
         // List<Enemigo> listaEnemigos = lab.getEnemigos();
         
         // imprimimos el nivel del mapa
-        System.out.println("## NIVEL " + nivel + " " + lab.getSize_m() + "-" + lab.getSize_n());
+        System.out.println("## NIVEL " + (nivel+1) + " " + lab.getSize_m() + "-" + lab.getSize_n());
         
         // Imprimir
         for (int i = avatar.getPosicionY() - B; i <= avatar.getPosicionY() + B; i++) {
@@ -117,7 +118,7 @@ public class Dibujador {
                 }
             }
             if (listaDatos.size() > (i + B - avatar.getPosicionY())) {
-                System.out.print("    ");
+                System.out.print(' ');
                 System.out.print(listaDatos.get(i + B - avatar.getPosicionY()));
             }
             System.out.print('\n');

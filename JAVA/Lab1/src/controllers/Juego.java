@@ -56,6 +56,7 @@ public class Juego {
     public void Start() {
         //renderer.Render(laberinto);
         Scanner input = new Scanner(System.in);
+        int sigAnt;
         OUTER:
         while (true) {
             String opcion;
