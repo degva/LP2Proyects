@@ -63,9 +63,11 @@ public class Dibujador {
      */
     public void RenderCell(Laberinto lab, int x, int y) {
         Celda aux;
-        if (x<0 || y<0 || x>lab.getSize_m() || y>lab.getSize_n()) {
+        if (x<0 || y<0) {
             System.out.print('.');
-        } else if (y<=lab.getSize_m() && x <= lab.getSize_n()){
+        }else if ((x > lab.getSize_m()-1) || (y > lab.getSize_n()-1)){
+            System.out.print('.');
+        } else {
             aux = lab.getCelda(x, y);
             switch (aux.getTipo()) {
                 case ADENTRO:                    
