@@ -64,6 +64,9 @@ public class Juego {
             System.out.print("Escriba una accion:\n" );
             System.out.print("> [mover 'x'] (siendo x: arriba, abajo, derecha, izquierda):\n" );
             System.out.print("> [interactuar]\n" );
+            /*para implementar estos 2, nececito que se cree la lista de artefactos*/
+            System.out.println("> [cambiar arma]");
+            System.out.println("> [cambiar armadura]");
             System.out.print("> [salir]\n\n - > " );
             opcion = input.nextLine();
 
@@ -98,6 +101,12 @@ public class Juego {
                         //encuentra algun artefacto
                         //if (alguna celda adyacente al avatar tiene un artefacto)
                         // agregar artefacto al saco
+                        break;
+                    case "cambiar arma":
+                        
+                        break;
+                    case "cambiar armadura":
+                        
                         break;
                     case "salir":
                         System.out.print("\nGudbai\n");

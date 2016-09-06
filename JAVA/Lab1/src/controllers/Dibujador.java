@@ -107,9 +107,10 @@ public class Dibujador {
                 }
             }
             if (listaDatos.size() > (i + B - avatar.getPosicionY())) {
-                System.out.print("    ");
+                System.out.print(" ");
                 System.out.print(listaDatos.get(i + B - avatar.getPosicionY()));
             }
+            
             System.out.print('\n');
         }
     }
