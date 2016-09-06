@@ -34,11 +34,13 @@ public class Laberinto {
                        
         Random rnd = new Random();
         
-        int aux = rnd.nextInt(MAX_SIZE_LAB);
+        //int aux = rnd.nextInt(MAX_SIZE_LAB);
         
         // now laberinth is a square
-        size_m = 2*aux+1;
-        size_n = size_m;
+        //size_m = 2*aux+1;
+        //size_n = size_m;
+        size_m = 20;
+        size_n = 20;
         
         // creamos el arreglo de 2 dimensiones del laberinto
         // esto esta siendo seteado en el gestor!!

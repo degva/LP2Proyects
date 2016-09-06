@@ -63,8 +63,8 @@ public class Dibujador {
      */
     public void RenderCell(Laberinto lab, int x, int y) {
         Celda aux;
-        if (x<0 || y<0 || x>lab.getSize_m() || y>lab.getSize_n()) {
-            System.out.print(' ');
+        if (x<0 || y<0 || x>=lab.getSize_m() || y>=lab.getSize_n()) {
+            System.out.print('.');
         } else {
             aux = lab.getCelda(x, y);
             switch (aux.getTipo()) {
