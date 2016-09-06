@@ -68,20 +68,30 @@ public class Juego {
             opcion = input.nextLine();
 
             if (null != opcion) {
-                // faltan las restricciones de los limites del mapa(en el dibujador?)
-                //por si se quiere salir o si hay una pared
+                /*Los else son solo para porbar que la funcionalidad trabaja bien*/
+                int posicionActualX = avatar.getPosicionX();
+                int posicionActualY = avatar.getPosicionY();
+                Laberinto actualLaberinto = lista_laberintos.get(laberintoActual);
                 switch (opcion) {
                     case "mover arriba":
-                        avatar.moveUp();
+                        if(actualLaberinto.laberinto[posicionActualX][posicionActualY-1].getTipo() != TipoCelda.PARED)
+                            avatar.moveUp();
+                        //else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover abajo":
-                        avatar.moveDown();
+                        if(actualLaberinto.laberinto[posicionActualX][posicionActualY+1].getTipo() != TipoCelda.PARED)
+                            avatar.moveDown();
+                        //else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover izquierda":
-                        avatar.moveLeft();
+                        if(actualLaberinto.laberinto[posicionActualX-1][posicionActualY].getTipo() != TipoCelda.PARED)
+                            avatar.moveLeft();
+                        //else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover derecha":
-                        avatar.moveRight();
+                        if(actualLaberinto.laberinto[posicionActualX+1][posicionActualY].getTipo() != TipoCelda.PARED)
+                            avatar.moveRight();
+                        //else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "interactuar":
                         //aqui se debe verificar si en las celdas adyacentes se

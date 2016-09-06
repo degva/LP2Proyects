@@ -12,8 +12,8 @@ package models;
 public class PosionCuracion extends Artefacto {
     private int puntosVida;
     
-    public PosionCuracion(int tipo, int puntosVida){
-        super(tipo);
+    public PosionCuracion(String nombre, int puntosVida){
+        super(nombre);
         this.puntosVida = puntosVida;
     }
 

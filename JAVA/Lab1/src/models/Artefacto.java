@@ -17,8 +17,8 @@ public class Artefacto {
      **/
     private String nombre;
 
-    public Artefacto (int tipo) {
-        this.tipo = tipo;
+    public Artefacto (String nombre) {
+        this.nombre  = nombre;
     }
     
     /**
