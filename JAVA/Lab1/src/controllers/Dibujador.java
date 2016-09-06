@@ -65,7 +65,7 @@ public class Dibujador {
         Celda aux;
         if (x<0 || y<0 || x>lab.getSize_m() || y>lab.getSize_n()) {
             System.out.print('.');
-        } else if (x<=lab.getSize_m() && y <= lab.getSize_n()){
+        } else if (y<=lab.getSize_m() && x <= lab.getSize_n()){
             aux = lab.getCelda(x, y);
             switch (aux.getTipo()) {
                 case ADENTRO:                    

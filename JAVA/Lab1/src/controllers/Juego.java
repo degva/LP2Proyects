@@ -22,6 +22,7 @@ public class Juego {
     private Avatar avatar;
     private GestorLaberinto gestor;
     private int laberintoActual;
+    private int totalLaberintos=0;
 
  
     public Juego() {
@@ -57,17 +58,22 @@ public class Juego {
         //renderer.Render(laberinto);
         Scanner input = new Scanner(System.in);
         int sigAnt;
+        String opcion;
         OUTER:
         while (true) {
-            
-            String opcion;
+            clearScreen();            
             sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
             
             if (sigAnt == 1){
-                laberintoActual++;
-                continue;
+                if (laberintoActual == totalLaberintos){
+                    System.out.println("FELICIDADES HAS GANADO EL JUEGO!!!!");
+                    break;
+                }else{
+                    laberintoActual++;
+                    continue;
+                }                
             }
-            else if (sigAnt == -1){
+            else if (sigAnt == -1 && laberintoActual != 0){
                 laberintoActual--;
                 continue;
             }
@@ -121,13 +127,18 @@ public class Juego {
             }
         }
     }
+    
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    }  
 
     private void crearListaLaberintos(){                
         Random rnd = new Random(0);
         int MAX_LABERINTOS = 10; // un numero maximo de laberintos en el juego
         int MIN_LABERINTOS = 5; // un numero minimo de laberintos en el juego
-        int numeroDeLaberintos = rnd.nextInt(MAX_LABERINTOS) + MIN_LABERINTOS;
-        for (int i = 0; i < numeroDeLaberintos; i++) {
+        totalLaberintos = (int)(Math.random()*MAX_LABERINTOS + MIN_LABERINTOS);
+        for (int i = 0; i < totalLaberintos; i++) {
             Laberinto objLab = new Laberinto();            
             objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, objLab.getSize_m(), objLab.getSize_n());
             lista_laberintos.add(objLab);                        
