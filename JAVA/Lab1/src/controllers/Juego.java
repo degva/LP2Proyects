@@ -17,21 +17,13 @@ import java.util.Scanner;
  * @author degva
  */
 public class Juego {
-
-    // estoy seguro que necesitamos una lista de laberintos, pero por prueba
-    // hare un unico laberinto :v
     private ArrayList<Laberinto> lista_laberintos;
     private Dibujador renderer;
     private Avatar avatar;
     private GestorLaberinto gestor;
     private int laberintoActual;
 
-    /* NOTAS BY GINA
-    SEGUN YO, ACA NE JUEGO FALTA LA LISTA DE LABERINTOS, QUE SON ACA Y EN EL START
-    SE DEBE LLAMR VARIAS VECES A EL CREADOR DE LABERINTOS O A GESTOR DE LABERINTOS
-    NO SE, QUE ES EL ENCARGADO D EVER ESO
-    */
-    
+ 
     public Juego() {
         Scanner input = new Scanner(System.in);
         
@@ -76,20 +68,30 @@ public class Juego {
             opcion = input.nextLine();
 
             if (null != opcion) {
-                // faltan las restricciones de los limites del mapa(en el dibujador?)
-                //por si se quiere salir o si hay una pared
+                /*Los else son solo para porbar que la funcionalidad trabaja bien*/
+                int posicionActualX = avatar.getPosicionX();
+                int posicionActualY = avatar.getPosicionY();
+                Laberinto actualLaberinto = lista_laberintos.get(laberintoActual);
                 switch (opcion) {
                     case "mover arriba":
-                        avatar.moveUp();
+                        if(actualLaberinto.laberinto[posicionActualX][posicionActualY-1].getTipo() != TipoCelda.PARED)
+                            avatar.moveUp();
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover abajo":
-                        avatar.moveDown();
+                        if(actualLaberinto.laberinto[posicionActualX][posicionActualY+1].getTipo() != TipoCelda.PARED)
+                            avatar.moveDown();
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover izquierda":
-                        avatar.moveLeft();
+                        if(actualLaberinto.laberinto[posicionActualX-1][posicionActualY].getTipo() != TipoCelda.PARED)
+                            avatar.moveLeft();
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover derecha":
-                        avatar.moveRight();
+                        if(actualLaberinto.laberinto[posicionActualX+1][posicionActualY].getTipo() != TipoCelda.PARED)
+                            avatar.moveRight();
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "interactuar":
                         //aqui se debe verificar si en las celdas adyacentes se
@@ -111,12 +113,11 @@ public class Juego {
     private void crearListaLaberintos(){                
         Random rnd = new Random(0);
         int MAX_LABERINTOS = 10; // un numero maximo de laberintos en el juego
-        int MIN_LABERINTOS = 5; // un numero maximo de laberintos en el juego
+        int MIN_LABERINTOS = 5; // un numero minimo de laberintos en el juego
         int numeroDeLaberintos = rnd.nextInt(MAX_LABERINTOS) + MIN_LABERINTOS;
         for (int i = 0; i < numeroDeLaberintos; i++) {
             Laberinto objLab = new Laberinto();            
             objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, objLab.getSize_m(), objLab.getSize_n());
-            
             lista_laberintos.add(objLab);                        
         }
     }

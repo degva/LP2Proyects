@@ -18,8 +18,8 @@ public class Arma extends Artefacto {
      * @param dmin
      * @param dmax
      */
-    public Arma(int dmin, int dmax, int tipo) {
-        super(tipo);
+    public Arma(String nombre, int dmin, int dmax) {
+        super(nombre);
         this._dano_max = dmax;
         this._dano_min = dmin;
     }

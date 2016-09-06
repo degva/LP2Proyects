@@ -12,8 +12,8 @@ package models;
 public class Armadura extends Artefacto {
     private int defensa;
     
-    public Armadura (int tipo, int defensa){
-        super(tipo);
+    public Armadura (String nombre, int defensa){
+        super(nombre);
         this.defensa = defensa;
     }
 

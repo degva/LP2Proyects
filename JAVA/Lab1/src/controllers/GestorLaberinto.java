@@ -80,7 +80,7 @@ public class GestorLaberinto {
         return pair;
     }
     
-    
+    //Sirve para verificar que el laberinto se esta creando correctamente
     public void printLaberinto(Celda[][] lab, int m, int n) {
         Celda aux;
         for (int i = 0; i < m; i++) {
