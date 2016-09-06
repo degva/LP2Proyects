@@ -70,11 +70,17 @@ public class Juego {
                     break;
                 }else{
                     laberintoActual++;
+                    // cuando se va a otro laberinto usualmente se loquea y se pone sobre un muro :v
+                    avatar.setPosicionX(1);
+                    avatar.setPosicionY(1);
                     continue;
                 }                
             }
             else if (sigAnt == -1 && laberintoActual != 0){
                 laberintoActual--;
+                // cuando se va a otro laberinto usualmente se loquea y se pone sobre un muro :v
+                avatar.setPosicionX(1);
+                avatar.setPosicionY(1);
                 continue;
             }
             

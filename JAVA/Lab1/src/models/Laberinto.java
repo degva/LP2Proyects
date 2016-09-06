@@ -24,8 +24,6 @@ public class Laberinto {
     private final int size_m;
     private final int size_n;
     private final float pct_enemigo;
-    // NOTA: podriamos usar un arreglo de listas
-    // ArrayList<Celda> pero como hacerlo 2D?
     public Celda[][] laberinto;
     private final int[] niveles_enemigo;
       
@@ -39,8 +37,8 @@ public class Laberinto {
         // now laberinth is a square
         //size_m = 2*aux+1;
         //size_n = size_m;
-        size_m = 20;
-        size_n = 20;
+        size_m = 21;
+        size_n = 21;
         
         // creamos el arreglo de 2 dimensiones del laberinto
         // esto esta siendo seteado en el gestor!!
