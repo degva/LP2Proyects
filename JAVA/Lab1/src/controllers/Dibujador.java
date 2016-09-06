@@ -63,16 +63,29 @@ public class Dibujador {
      */
     public void RenderCell(Laberinto lab, int x, int y) {
         Celda aux;
-        if (x<0 || y<0 || x>=lab.getSize_m() || y>=lab.getSize_n()) {
+        if (x<0 || y<0) {
+            System.out.print('.');
+        }else if ((x > lab.getSize_m()-1) || (y > lab.getSize_n()-1)){
             System.out.print('.');
         } else {
             aux = lab.getCelda(x, y);
             switch (aux.getTipo()) {
-                case ADENTRO:
-                    System.out.print(' ');
+                case ADENTRO:                    
+                    switch (aux.getTipoContenido()) {
+                        case 0:
+                            System.out.print('+');
+                            break;
+                        case 1:
+                            System.out.print('-');
+                            break;
+                        default:
+                            System.out.print(' ');
+                            break;
+                    }
                     break;
                 case PARED:
-                    System.out.print('#');
+                case AFUERA:
+                    System.out.print('x');
                     break;
                 default:
                     System.out.print("Khe? esto no deberia ejecutarse\n");
@@ -89,29 +102,33 @@ public class Dibujador {
      * @param nivel
      * @param lab
      * @param avatar
+     * @return -1 si avatar esta en ANTERIOR, 1 si avatar esta en SIGUIENTE, si no return = 0
      */
-    public void Render(int nivel, Laberinto lab, Avatar avatar) {        
+    public int Render(int nivel, Laberinto lab, Avatar avatar) {        
         List<String> listaDatos = ObtenerListaDatos(avatar);
         // List<Enemigo> listaEnemigos = lab.getEnemigos();
-        
+        int state = 0;
         // imprimimos el nivel del mapa
-        System.out.println("## NIVEL " + nivel);
+        System.out.println("## NIVEL " + (nivel+1) + " " + lab.getSize_m() + "-" + lab.getSize_n());
         
         // Imprimir
         for (int i = avatar.getPosicionY() - B; i <= avatar.getPosicionY() + B; i++) {
             for (int j = avatar.getPosicionX() - A; j <= avatar.getPosicionX() + A; j++) {
                 if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) {
+                    if (lab.getCelda(j, i).getTipoContenido() == 0) state = 1;
+                    else if (lab.getCelda(j, i).getTipoContenido() == 1) state = -1;
                     System.out.print('A');
                 } else {
                     RenderCell(lab, j, i);
                 }
             }
             if (listaDatos.size() > (i + B - avatar.getPosicionY())) {
-                System.out.print(" ");
+                System.out.print(' ');
                 System.out.print(listaDatos.get(i + B - avatar.getPosicionY()));
             }
             
             System.out.print('\n');
         }
+        return state;
     }
 }

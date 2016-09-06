@@ -22,6 +22,7 @@ public class Juego {
     private Avatar avatar;
     private GestorLaberinto gestor;
     private int laberintoActual;
+    private int totalLaberintos=0;
 
  
     public Juego() {
@@ -56,10 +57,27 @@ public class Juego {
     public void Start() {
         //renderer.Render(laberinto);
         Scanner input = new Scanner(System.in);
+        int sigAnt;
+        String opcion;
         OUTER:
         while (true) {
-            String opcion;
-            renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
+            clearScreen();            
+            sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
+            
+            if (sigAnt == 1){
+                if (laberintoActual == totalLaberintos){
+                    System.out.println("FELICIDADES HAS GANADO EL JUEGO!!!!");
+                    break;
+                }else{
+                    laberintoActual++;
+                    continue;
+                }                
+            }
+            else if (sigAnt == -1 && laberintoActual != 0){
+                laberintoActual--;
+                continue;
+            }
+            
             System.out.print("\n\n");
             System.out.print("Escriba una accion:\n" );
             System.out.print("> [mover 'x'] (siendo x: arriba, abajo, derecha, izquierda):\n" );
@@ -76,25 +94,25 @@ public class Juego {
                 int posicionActualY = avatar.getPosicionY();
                 Laberinto actualLaberinto = lista_laberintos.get(laberintoActual);
                 switch (opcion) {
-                    case "mover arriba":
+                    case "w"://"mover arriba":
                         if(actualLaberinto.laberinto[posicionActualX][posicionActualY-1].getTipo() != TipoCelda.PARED)
                             avatar.moveUp();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
                         break;
-                    case "mover abajo":
+                    case "s"://"mover abajo":
                         if(actualLaberinto.laberinto[posicionActualX][posicionActualY+1].getTipo() != TipoCelda.PARED)
                             avatar.moveDown();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
                         break;
-                    case "mover izquierda":
+                    case "a"://"mover izquierda":
                         if(actualLaberinto.laberinto[posicionActualX-1][posicionActualY].getTipo() != TipoCelda.PARED)
                             avatar.moveLeft();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
                         break;
-                    case "mover derecha":
+                    case "d"://"mover derecha":
                         if(actualLaberinto.laberinto[posicionActualX+1][posicionActualY].getTipo() != TipoCelda.PARED)
                             avatar.moveRight();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
                         break;
                     case "interactuar":
                         //aqui se debe verificar si en las celdas adyacentes se
@@ -118,13 +136,18 @@ public class Juego {
             }
         }
     }
+    
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    }  
 
     private void crearListaLaberintos(){                
         Random rnd = new Random(0);
         int MAX_LABERINTOS = 10; // un numero maximo de laberintos en el juego
         int MIN_LABERINTOS = 5; // un numero minimo de laberintos en el juego
-        int numeroDeLaberintos = rnd.nextInt(MAX_LABERINTOS) + MIN_LABERINTOS;
-        for (int i = 0; i < numeroDeLaberintos; i++) {
+        totalLaberintos = (int)(Math.random()*MAX_LABERINTOS + MIN_LABERINTOS);
+        for (int i = 0; i < totalLaberintos; i++) {
             Laberinto objLab = new Laberinto();            
             objLab.laberinto = gestor.generarLaberinto(objLab.laberinto, objLab.getSize_m(), objLab.getSize_n());
             lista_laberintos.add(objLab);                        
