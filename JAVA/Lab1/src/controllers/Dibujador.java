@@ -63,6 +63,7 @@ public class Dibujador {
      */
     public void RenderCell(Laberinto lab, int x, int y) {
         Celda aux;
+
         if (x<0 || y<0) {
             System.out.print('.');
         }else if ((x > lab.getSize_m()-1) || (y > lab.getSize_n()-1)){
@@ -77,6 +78,9 @@ public class Dibujador {
                             break;
                         case 1:
                             System.out.print('-');
+                            break;
+                        case 2:
+                            System.out.print('E');
                             break;
                         default:
                             System.out.print(' ');
@@ -118,6 +122,7 @@ public class Dibujador {
                     if (lab.getCelda(j, i).getTipoContenido() == 0) state = 1;
                     else if (lab.getCelda(j, i).getTipoContenido() == 1) state = -1;
                     System.out.print('A');
+                    //System.out.print('o');
                 } else {
                     RenderCell(lab, j, i);
                 }
