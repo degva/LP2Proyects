@@ -100,11 +100,12 @@ public class Dibujador {
      * @param nivel
      * @param lab
      * @param avatar
+     * @return -1 si avatar esta en ANTERIOR, 1 si avatar esta en SIGUIENTE, si no return = 0
      */
-    public void Render(int nivel, Laberinto lab, Avatar avatar) {        
+    public int Render(int nivel, Laberinto lab, Avatar avatar) {        
         List<String> listaDatos = ObtenerListaDatos(avatar);
         // List<Enemigo> listaEnemigos = lab.getEnemigos();
-        
+        int state = 0;
         // imprimimos el nivel del mapa
         System.out.println("## NIVEL " + (nivel+1) + " " + lab.getSize_m() + "-" + lab.getSize_n());
         
@@ -112,6 +113,8 @@ public class Dibujador {
         for (int i = avatar.getPosicionY() - B; i <= avatar.getPosicionY() + B; i++) {
             for (int j = avatar.getPosicionX() - A; j <= avatar.getPosicionX() + A; j++) {
                 if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) {
+                    if (lab.getCelda(j, i).getTipoContenido() == 0) state = 1;
+                    else if (lab.getCelda(j, i).getTipoContenido() == 1) state = -1;
                     System.out.print('A');
                 } else {
                     RenderCell(lab, j, i);
@@ -123,5 +126,6 @@ public class Dibujador {
             }
             System.out.print('\n');
         }
+        return state;
     }
 }

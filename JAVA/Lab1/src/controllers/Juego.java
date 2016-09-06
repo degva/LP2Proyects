@@ -59,8 +59,19 @@ public class Juego {
         int sigAnt;
         OUTER:
         while (true) {
+            
             String opcion;
-            renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
+            sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
+            
+            if (sigAnt == 1){
+                laberintoActual++;
+                continue;
+            }
+            else if (sigAnt == -1){
+                laberintoActual--;
+                continue;
+            }
+            
             System.out.print("\n\n");
             System.out.print("Escriba una accion:\n" );
             System.out.print("> [mover 'x'] (siendo x: arriba, abajo, derecha, izquierda):\n" );
@@ -74,25 +85,25 @@ public class Juego {
                 int posicionActualY = avatar.getPosicionY();
                 Laberinto actualLaberinto = lista_laberintos.get(laberintoActual);
                 switch (opcion) {
-                    case "mover arriba":
+                    case "w"://"mover arriba":
                         if(actualLaberinto.laberinto[posicionActualX][posicionActualY-1].getTipo() != TipoCelda.PARED)
                             avatar.moveUp();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
                         break;
-                    case "mover abajo":
+                    case "s"://"mover abajo":
                         if(actualLaberinto.laberinto[posicionActualX][posicionActualY+1].getTipo() != TipoCelda.PARED)
                             avatar.moveDown();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
                         break;
-                    case "mover izquierda":
+                    case "a"://"mover izquierda":
                         if(actualLaberinto.laberinto[posicionActualX-1][posicionActualY].getTipo() != TipoCelda.PARED)
                             avatar.moveLeft();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
                         break;
-                    case "mover derecha":
+                    case "d"://"mover derecha":
                         if(actualLaberinto.laberinto[posicionActualX+1][posicionActualY].getTipo() != TipoCelda.PARED)
                             avatar.moveRight();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
                         break;
                     case "interactuar":
                         //aqui se debe verificar si en las celdas adyacentes se
