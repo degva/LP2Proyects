@@ -46,7 +46,7 @@ public class Juego {
         renderer = new Dibujador();
         laberintoActual = 0;
         
-        this.crearListaLaberintos();
+        this.crearListaLaberintos(); // dentro de esto esta el crear listas
         this.agregarAnteriorySiguiente();
         //para poder colocar el avatar en el mapa en la casilla anterior :p
         //this.agregarAnteriorySiguienteyColocarAvatar();
@@ -94,22 +94,22 @@ public class Juego {
                 Laberinto actualLaberinto = lista_laberintos.get(laberintoActual);
                 switch (opcion) {
                     case "mover arriba":
-                        if(actualLaberinto.laberinto[posicionActualX][posicionActualY-1].getTipo() != TipoCelda.PARED)
+                        if(validarMovimiento(actualLaberinto,posicionActualX,(posicionActualY-1)))
                             avatar.moveUp();
                         else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover abajo":
-                        if(actualLaberinto.laberinto[posicionActualX][posicionActualY+1].getTipo() != TipoCelda.PARED)
+                        if(validarMovimiento(actualLaberinto,posicionActualX,(posicionActualY+1)))
                             avatar.moveDown();
                         else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover izquierda":
-                        if(actualLaberinto.laberinto[posicionActualX-1][posicionActualY].getTipo() != TipoCelda.PARED)
+                        if(validarMovimiento(actualLaberinto,(posicionActualX-1),posicionActualY))
                             avatar.moveLeft();
                         else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
                     case "mover derecha":
-                        if(actualLaberinto.laberinto[posicionActualX+1][posicionActualY].getTipo() != TipoCelda.PARED)
+                        if(validarMovimiento(actualLaberinto,(posicionActualX+1),posicionActualY))
                             avatar.moveRight();
                         else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA \n");
                         break;
@@ -247,6 +247,10 @@ public class Juego {
     
     private void agregarArtefacto(Artefacto a){
         this.lista_artefactos.add(a);
+    }
+    
+    private boolean validarMovimiento (Laberinto l,int x, int y){
+        return (l.laberinto[x][y].getTipo() != TipoCelda.PARED && l.laberinto[x][y].getTipoContenido() != 2);            
     }
     
 }
