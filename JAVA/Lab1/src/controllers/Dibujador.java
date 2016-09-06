@@ -103,7 +103,7 @@ public class Dibujador {
                 if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) {
                     System.out.print('A');
                 } else {
-                    RenderCell(lab, i, j);
+                    RenderCell(lab, j, i);
                 }
             }
             if (listaDatos.size() > (i + B - avatar.getPosicionY())) {
