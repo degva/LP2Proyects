@@ -83,7 +83,7 @@ public class Dibujador {
                     break;
                 case PARED:
                 case AFUERA:
-                    System.out.print('#');
+                    System.out.print('x');
                     break;
                 default:
                     System.out.print("Khe? esto no deberia ejecutarse\n");
@@ -114,7 +114,7 @@ public class Dibujador {
                 if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) {
                     System.out.print('A');
                 } else {
-                    RenderCell(lab, i, j);
+                    RenderCell(lab, j, i);
                 }
             }
             if (listaDatos.size() > (i + B - avatar.getPosicionY())) {
