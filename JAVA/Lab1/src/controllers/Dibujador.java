@@ -91,7 +91,7 @@ public class Dibujador {
                     break;
                 case PARED:
                 case AFUERA:
-                    System.out.print('x');
+                    System.out.print('X');
                     break;
                 default:
                     System.out.print("Khe? esto no deberia ejecutarse\n");
@@ -130,7 +130,7 @@ public class Dibujador {
                 break;
         }
         
-        System.out.print("Estas sobre un enemigo\n");
+        System.out.print("\nEstas sobre un enemigo\n");
         System.out.print(e.toString() + "\n");
         
         System.out.print("Dime que dice > ");
@@ -178,7 +178,7 @@ public class Dibujador {
                     if (lab.getCelda(j, i).getTipoContenido() == 0) state = 1;
                     else if (lab.getCelda(j, i).getTipoContenido() == 1) state = -1;
                     System.out.print('A');
-                    if (RevisarInteraccion(avatar, lab, j, i)) break OUTER;
+                    if (RevisarInteraccion(avatar, lab, j, i)) break OUTER;//||||||||||||||||||||||||||||||||||||| INTERACCION ||||||||||||||||||||||||||||||||||||||
                 } else {
                     RenderCell(avatar, lab, j, i);
                 }

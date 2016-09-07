@@ -102,25 +102,25 @@ public class Juego {
                     case "mover arriba":
                         if(validarMovimiento(actualLaberinto,posicionActualX,(posicionActualY-1)))
                             avatar.moveUp();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
                     case "s"://"mover abajo":
                     case "mover abajo":
                         if(validarMovimiento(actualLaberinto,posicionActualX,(posicionActualY+1)))
                             avatar.moveDown();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
                     case "a"://"mover izquierda":
                     case "mover izquierda":
                         if(validarMovimiento(actualLaberinto,(posicionActualX-1),posicionActualY))
                             avatar.moveLeft();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
                     case "d"://"mover derecha":
                     case "mover derecha":
                         if(validarMovimiento(actualLaberinto,(posicionActualX+1),posicionActualY))
                             avatar.moveRight();
-                        else System.out.println("\n NO TE PUEDES MOVER AHI, QUE TE PASA\n");
+                        else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
                     case "interactuar":
                         //aqui se debe verificar si en las celdas adyacentes se

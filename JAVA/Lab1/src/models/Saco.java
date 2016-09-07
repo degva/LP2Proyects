@@ -28,4 +28,7 @@ public class Saco {
     public Artefacto getItem(int i) {
         return artefactos.get(i);
     }
+    public void removeItem(int i){
+        this.artefactos.remove(i);
+    }
 }
