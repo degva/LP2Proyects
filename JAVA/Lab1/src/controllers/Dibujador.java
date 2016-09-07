@@ -48,7 +48,8 @@ public class Dibujador {
             for (int i = 0; i < saco_aux.getSize(); i++) {
                 aux = Integer.toString(i) + ". ";
                 item = saco_aux.getItem(i);
-                aux.concat(item.toString());
+                aux.concat(item.getNombre());
+                datos.add(aux);
             }
         } else {
             datos.add("No tienes cosillas\t");
