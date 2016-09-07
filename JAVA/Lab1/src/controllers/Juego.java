@@ -78,7 +78,7 @@ public class Juego {
             sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
             
             if (sigAnt == 1){
-                if (laberintoActual == totalLaberintos){
+                if ((laberintoActual + 1) == totalLaberintos){
                     System.out.println("FELICIDADES HAS GANADO EL JUEGO!!!!");
                     break;
                 }else{

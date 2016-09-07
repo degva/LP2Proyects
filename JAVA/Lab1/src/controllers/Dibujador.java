@@ -91,7 +91,7 @@ public class Dibujador {
                     break;
                 case PARED:
                 case AFUERA:
-                    System.out.print('X');
+                    System.out.print('#');
                     break;
                 default:
                     System.out.print("Khe? esto no deberia ejecutarse\n");
