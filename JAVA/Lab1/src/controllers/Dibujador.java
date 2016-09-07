@@ -42,13 +42,15 @@ public class Dibujador {
         datos.add("Cosillas: ");
         
         Saco saco_aux = avatar.getSaco();
-        String aux = new String();
+        String aux;
         Artefacto item;
         if (saco_aux.getSize() != 0) {
             for (int i = 0; i < saco_aux.getSize(); i++) {
                 aux = Integer.toString(i) + ". ";
                 item = saco_aux.getItem(i);
-                aux.concat(item.toString());
+                String aux2 = item.toString();
+                String aux3 = aux.concat(aux2);
+                datos.add(aux3);
             }
         } else {
             datos.add("No tienes cosillas\t");
@@ -85,7 +87,7 @@ public class Dibujador {
                             System.out.print('E');
                             break;
                         case 3:
-                            System.out.print("A");
+                            System.out.print('A');
                             break;
                         default:
                             System.out.print(' ');
@@ -148,6 +150,7 @@ public class Dibujador {
         switch (opcion) {
             case "recoger": 
                 aux.setTipoContenido(-1);
+                avatar.recogerArtefacto(a);
                 break;
             default:
                 aux.setTipoContenido(-1);
