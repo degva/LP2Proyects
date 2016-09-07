@@ -18,10 +18,12 @@ public class Celda {
     private TipoCelda tipo;
     //0 = anterior, 1 = siguiente,  2 = enemigo, 3= artefacto
     private int tipoContenido;
+    private int activarAnterior;
 
     public Celda (TipoCelda tipo) {
         this.tipo = tipo;
         this.tipoContenido = -1; //valor default
+        activarAnterior = 0;
     }
 
     /**
@@ -45,4 +47,14 @@ public class Celda {
     public void setTipoContenido(int tipoContenido) {
         this.tipoContenido = tipoContenido;
     }        
+
+    public int getActivarAnterior() {
+        return activarAnterior;
+    }
+
+    public void setActivarAnterior(int activarAnterior) {
+        this.activarAnterior = activarAnterior;
+    }
+    
+    
 }
