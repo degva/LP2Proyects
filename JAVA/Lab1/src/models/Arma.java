@@ -13,6 +13,7 @@ public class Arma extends Artefacto {
     private int _dano_min;
     private int _dano_max;
 
+
     /**
      *
      * @param dmin

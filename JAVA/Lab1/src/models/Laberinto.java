@@ -116,6 +116,9 @@ public class Laberinto {
         return lista_enemigos;
     }
     
-    
+    public ArrayList<Artefacto> getLista_artefactos() {
+        return lista_artefactos;
+    }
+      
 }
 

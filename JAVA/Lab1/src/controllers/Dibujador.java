@@ -84,6 +84,9 @@ public class Dibujador {
                         case 2:
                             System.out.print('E');
                             break;
+                        case 3:
+                            System.out.print("A");
+                            break;
                         default:
                             System.out.print(' ');
                             break;
@@ -91,10 +94,10 @@ public class Dibujador {
                     break;
                 case PARED:
                 case AFUERA:
-                    System.out.print('X');
+                    System.out.print('#');
                     break;
                 default:
-                    System.out.print("Khe? esto no deberia ejecutarse\n");
+                    System.out.print("Que? esto no deberia ejecutarse\n");
                     break;
             }
         }
@@ -105,14 +108,52 @@ public class Dibujador {
         aux = lab.getCelda(x, y);
         Boolean flag = false;
         switch (aux.getTipoContenido()) {
-            case 2:
+            case 2: //es un enemigo
                 if (x == avatar.getPosicionX() && y == avatar.getPosicionY())
                     flag = true;
                     RenderInteraccionEnemigo(avatar, lab, x, y);
                 break;
+            case 3: //es un artefacto
+                if (x == avatar.getPosicionX() && y == avatar.getPosicionY())
+                    flag = true;
+                    RenderInteraccionArtefacto(avatar, lab, x, y);
+                break;
         }
         return flag;
 
+    }
+    
+    public void RenderInteraccionArtefacto (Avatar avatar, Laberinto lab, int x, int y) {
+        clearScreen();
+        Celda aux;
+        aux = lab.getCelda(x, y);
+        
+        // buscamos al artefacto
+        ArrayList<Artefacto> lista_artefactos = lab.getLista_artefactos();
+        Artefacto a = lista_artefactos.get(0); 
+        for (int i = 0; i < lista_artefactos.size(); i++) {
+            a = lista_artefactos.get(i);
+            if (a.getPosicionX() == x && a.getPosicionY() == y)
+                break;
+        }
+        
+        //Cuando sale del for, es porque a ya tiene como valor el artefacto en el que vamos a interactuar
+        System.out.print("\nEstas sobre un artefacto\n");
+        System.out.print(a.toString() + "\n");
+        
+        System.out.print("Dime que dice > ");
+        
+        Scanner input = new Scanner(System.in);
+        String opcion = input.nextLine();
+        switch (opcion) {
+            case "recoger": 
+                aux.setTipoContenido(-1);
+                break;
+            default:
+                aux.setTipoContenido(-1);
+                break;
+        }
+    
     }
     
     public void RenderInteraccionEnemigo (Avatar avatar, Laberinto lab, int x, int y) {
@@ -174,10 +215,10 @@ public class Dibujador {
         OUTER:
         for (int i = avatar.getPosicionY() - B; i <= avatar.getPosicionY() + B; i++) {
             for (int j = avatar.getPosicionX() - A; j <= avatar.getPosicionX() + A; j++) {
-                if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) {
+                if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) { //si es la posicion en la que esta el avatar
                     if (lab.getCelda(j, i).getTipoContenido() == 0) state = 1;
                     else if (lab.getCelda(j, i).getTipoContenido() == 1) state = -1;
-                    System.out.print('A');
+                    System.out.print('O');
                     if (RevisarInteraccion(avatar, lab, j, i)) break OUTER;//||||||||||||||||||||||||||||||||||||| INTERACCION ||||||||||||||||||||||||||||||||||||||
                 } else {
                     RenderCell(avatar, lab, j, i);
