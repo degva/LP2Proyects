@@ -85,7 +85,7 @@ public class Dibujador {
                             System.out.print('E');
                             break;
                         case 3:
-                            System.out.print("A");
+                            System.out.print('A');
                             break;
                         default:
                             System.out.print(' ');

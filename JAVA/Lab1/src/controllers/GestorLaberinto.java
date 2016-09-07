@@ -206,15 +206,18 @@ public class GestorLaberinto {
     }
     
     private void crearListaArtefactos(Laberinto l){
+        Random rnd = new Random();
+        int max_i = l.getSize_m();
+        int max_j = l.getSize_n();
         //Random rnd = new Random();
-        //int art_i, art_j;
+        int art_i, art_j;
         for(int i=0; i< NRO_ARTEFACTOS; i++){
             //nodos impares pls :'
-            //art_i = (rnd.nextInt(max_i/2)*2 +1);
-            //art_j = (rnd.nextInt(max_j/2)*2 +1);
+            art_i = (rnd.nextInt(max_i/2)*2 +1);
+            art_j = (rnd.nextInt(max_j/2)*2 +1);
             Artefacto a = new Artefacto ("Artefacto");
             l.agregarArtefacto(a);
-            //l.getCelda(ene_i, ene_j).setTipoContenido(3);
+            l.getCelda(art_i, art_j).setTipoContenido(3);
             // -> aqui faltaria asociar la clase artefacto con su posicion en el
             // -> mapa
         }
