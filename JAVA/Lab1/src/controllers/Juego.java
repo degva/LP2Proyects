@@ -75,6 +75,7 @@ public class Juego {
                 avatar.setPosicionY(lista_anteriores.get(laberintoActual).y);
             }
             System.out.println("LaberintoActual = " + laberintoActual);
+            /*AQUI SE IMPRIME EL LABERINTO*/
             sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
             
             if (sigAnt == 1){

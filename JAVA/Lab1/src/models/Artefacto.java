@@ -16,6 +16,8 @@ public class Artefacto {
      * Armor, Weapons or Potions.
      **/
     private String nombre;
+    private int posicionX;
+    private int posicionY;
 
     public Artefacto (String nombre) {
         this.nombre  = nombre;
@@ -33,5 +35,33 @@ public class Artefacto {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the posicionX
+     */
+    public int getPosicionX() {
+        return posicionX;
+    }
+
+    /**
+     * @param posicionX the posicionX to set
+     */
+    public void setPosicionX(int posicionX) {
+        this.posicionX = posicionX;
+    }
+
+    /**
+     * @return the posicionY
+     */
+    public int getPosicionY() {
+        return posicionY;
+    }
+
+    /**
+     * @param posicionY the posicionY to set
+     */
+    public void setPosicionY(int posicionY) {
+        this.posicionY = posicionY;
     }
 }
