@@ -20,8 +20,8 @@ public class Avatar extends Entidad{
         super.setVidaActual(100);
         this.vidaMaxima = 100;
         this.saco = new Saco();
-        // INICIALIZAR ARMADURA Y ARMA!
-        
+        this.armaduraActual = null;
+        this.armaActual = null;
     }
         
     /**
@@ -102,8 +102,32 @@ public class Avatar extends Entidad{
         
     }
     
-    //Cambiar armadura
-    //Cambiar arma
-
+    /*
+    Metodo para cambiar armaduraActual
+    recive como parametro el inidce de la nueva armadura que se quiere utilizar
+    */
+    public void cambiarArmaduraActual(int indiceArmadura){
+        //Obtenemos la nueva armadura del saco
+        /* NOTA: se debe hacer la operacion cast porque el metodo getItem 
+           devuelve un artefacto(asi tambien se puede utilizar en cambair arma)*/
+        Armadura nuevaArmadura = (Armadura)this.saco.getItem(indiceArmadura);
+        //Removemos la nueva armadura del saco para que ya no este disponible
+        this.saco.removeItem(indiceArmadura);
+        //En caso el heroe este usando ya una armadura, colocamos la armadura actual en el saco
+        if(this.armaActual!=null) this.saco.agregarArtefacto(this.getArmaduraActual());
+        //Asignamos la nueva armadura actual
+        this.setArmaduraActual(nuevaArmadura);                                                 
+    }
+    
+    /*
+    Metodo para cambiar el armaActual
+    recive como parametro el inidce de la nueva arma que se quiere utilizar
+    */
+    public void cambiarArmaActual(int indiceArma){
+        Arma nuevaArma = (Arma)this.saco.getItem(indiceArma);
+        this.saco.removeItem(indiceArma);
+        if(this.armaActual!=null)this.saco.agregarArtefacto(this.getArmaActual());
+        this.setArmaActual(nuevaArma);
+    }
   
 }

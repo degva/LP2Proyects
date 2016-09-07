@@ -117,4 +117,9 @@ public class Entidad {
         this.posicionX--;
     }
     
+    @Override
+    public String toString(){
+        return getNombre() + " " + getNivel();
+    }
+    
 }
