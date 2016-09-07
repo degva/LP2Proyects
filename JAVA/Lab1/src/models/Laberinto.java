@@ -33,10 +33,10 @@ public class Laberinto {
         int aux = (int)(Math.random()*MAX_SIZE_LAB+5);
         
         // now laberinth is a square
-        size_m = 2*aux+1;
-        size_n = size_m;
-        //size_m = 20; // hey que fue aqui :( no more random?
-        //size_n = 20; // jajajaja lo hice para testear algo, y me olvide de borrarlo xd sorry (8)
+        //size_m = 2*aux+1;
+        //size_n = size_m;
+        size_m = 20; // hey que fue aqui :( no more random?
+        size_n = 20; // jajajaja lo hice para testear algo, y me olvide de borrarlo xd sorry (8)
         
         // creamos el arreglo de 2 dimensiones del laberinto
         // esto esta siendo seteado en el gestor!!
@@ -51,8 +51,6 @@ public class Laberinto {
         
         lista_enemigos = new ArrayList<>();
         lista_artefactos = new ArrayList<>();
-        
-        
     }
 
     /**

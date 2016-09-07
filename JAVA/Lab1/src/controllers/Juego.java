@@ -177,8 +177,8 @@ public class Juego {
             Laberinto objLab = new Laberinto();            
             //objLab = gestor.generarLaberinto(objLab, objLab.getSize_m(), objLab.getSize_n());
             gestor.generarLaberinto(objLab, objLab.getSize_m(), objLab.getSize_n());
-            // crearListaEnemigos(objLab);
-            // crearListaArtefactos(objLab);
+            //crearListaEnemigos(objLab);
+            //crearListaArtefactos(objLab);
             lista_laberintos.add(objLab);                        
         }
         
