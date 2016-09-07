@@ -30,16 +30,8 @@ public class Juego {
 
     public Juego() {
         Scanner input = new Scanner(System.in);
-<<<<<<< HEAD
-        
         lista_laberintos = new ArrayList<>();
         lista_anteriores = new ArrayList<>();
-
-=======
-
-        lista_laberintos = new ArrayList<>();
-        lista_anteriores = new ArrayList<>();
->>>>>>> 3717fabfed1cf29a60987be43f2d8e9fb397a91d
         gestor = new GestorLaberinto();
         renderer = new Dibujador();
         laberintoActual = 0;
