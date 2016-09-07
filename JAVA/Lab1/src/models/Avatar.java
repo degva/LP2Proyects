@@ -22,6 +22,8 @@ public class Avatar extends Entidad{
         this.saco = new Saco();
         this.armaduraActual = null;
         this.armaActual = null;
+        
+        this.saco.agregarArtefacto(new Arma("Excalibur", 10, 10));
     }
         
     /**

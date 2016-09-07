@@ -75,6 +75,7 @@ public class Juego {
                 avatar.setPosicionY(lista_anteriores.get(laberintoActual).y);
             }
             System.out.println("LaberintoActual = " + laberintoActual);
+            /*AQUI SE IMPRIME EL LABERINTO*/
             sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
             
             if (sigAnt == 1){
@@ -176,8 +177,8 @@ public class Juego {
             Laberinto objLab = new Laberinto();            
             //objLab = gestor.generarLaberinto(objLab, objLab.getSize_m(), objLab.getSize_n());
             gestor.generarLaberinto(objLab, objLab.getSize_m(), objLab.getSize_n());
-            // crearListaEnemigos(objLab);
-            // crearListaArtefactos(objLab);
+            //crearListaEnemigos(objLab);
+            //crearListaArtefactos(objLab);
             lista_laberintos.add(objLab);                        
         }
         
