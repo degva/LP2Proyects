@@ -35,8 +35,8 @@ public class Laberinto {
         // now laberinth is a square
         //size_m = 2*aux+1;
         //size_n = size_m;
-        size_m = 20; // hey que fue aqui :( no more random?
-        size_n = 20; // jajajaja lo hice para testear algo, y me olvide de borrarlo xd sorry (8)
+        size_m = 15; // hey que fue aqui :( no more random?
+        size_n = 15; // jajajaja lo hice para testear algo, y me olvide de borrarlo xd sorry (8)
         
         // creamos el arreglo de 2 dimensiones del laberinto
         // esto esta siendo seteado en el gestor!!
