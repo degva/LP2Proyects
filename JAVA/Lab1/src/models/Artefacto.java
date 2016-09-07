@@ -15,23 +15,53 @@ public class Artefacto {
      * The artifact can be:
      * Armor, Weapons or Potions.
      **/
-    private int tipo;
+    private String nombre;
+    private int posicionX;
+    private int posicionY;
 
-    public Artefacto (int tipo) {
-        this.tipo = tipo;
+    public Artefacto (String nombre) {
+        this.nombre  = nombre;
     }
     
     /**
-     * @return the tipo
+     * @return the nombre
      */
-    public int getTipo() {
-        return tipo;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
-     * @param tipo the tipo to set
+     * @param nombre the nombre to set
      */
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the posicionX
+     */
+    public int getPosicionX() {
+        return posicionX;
+    }
+
+    /**
+     * @param posicionX the posicionX to set
+     */
+    public void setPosicionX(int posicionX) {
+        this.posicionX = posicionX;
+    }
+
+    /**
+     * @return the posicionY
+     */
+    public int getPosicionY() {
+        return posicionY;
+    }
+
+    /**
+     * @param posicionY the posicionY to set
+     */
+    public void setPosicionY(int posicionY) {
+        this.posicionY = posicionY;
     }
 }

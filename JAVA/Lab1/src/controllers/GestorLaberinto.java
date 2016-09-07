@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import static controllers.Juego.NRO_ARTEFACTOS;
 import models.Celda;
 import enums.TipoCelda;
 
@@ -12,6 +13,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import java.util.ArrayList;
+import models.Artefacto;
+import models.Enemigo;
+import models.Laberinto;
 
 /**
  *
@@ -25,37 +29,39 @@ class IntPair {
 }
 
 public class GestorLaberinto {
+    
 
+    public GestorLaberinto() {
+        
+    }
+     
     public IntPair devuelveRandomAdjacente(Celda[][] lab, int x, int y, int max_x, int max_y) {
         Random rnd = new Random();
         
         IntPair pair;
         List<IntPair> posibles = new ArrayList<>();
 
-        int real_x = 2*x+1;
-        int real_y = 2*y+1;
-        
-        // checkeamos a la derecha:
-        if ((x > 0) && ((lab[real_x - 2][real_y]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x-1, y);
+        // checkeamos nodo a la derecha:
+        if ((x > 2) && ((lab[x - 2][y]).getTipo() == TipoCelda.AFUERA)) {
+            pair = new IntPair(x-2, y);
             posibles.add(pair);
         }
         
-        // checkeamos arriba
-        if ((y > 0) && ((lab[real_x][real_y - 2]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x, y-1);
+        // checkeamos nodo arriba
+        if ((y > 2) && ((lab[x][y - 2]).getTipo() == TipoCelda.AFUERA)) {
+            pair = new IntPair(x, y-2);
             posibles.add(pair);
         }
         
-        // checkeamos izquierda
-        if ((x < max_x) && ((lab[real_x + 2][real_y]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x+1, y);
+        // checkeamos nodo izquierda
+        if ((x < max_x - 2) && ((lab[x + 2][y]).getTipo() == TipoCelda.AFUERA)) {
+            pair = new IntPair(x+2, y);
             posibles.add(pair);
         }
         
-        // checkeamos derecha
-        if ((y < max_y) && ((lab[real_x][real_y + 2]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x, y+1);
+        // checkeamos nodo derecha
+        if ((y < max_y - 2) && ((lab[x][y + 2]).getTipo() == TipoCelda.AFUERA)) {
+            pair = new IntPair(x, y+2);
             posibles.add(pair);
         }
         
@@ -77,33 +83,54 @@ public class GestorLaberinto {
         return pair;
     }
     
-    public void generarLaberinto(Celda[][] lab, int m, int n) {
-        Random rnd = new Random();
+    //Sirve para verificar que el laberinto se esta creando correctamente
+    public void printLaberinto(Celda[][] lab, int m, int n) {
+        Celda aux;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                aux = lab[i][j];
+                switch (aux.getTipo()) {
+                    case PARED:
+                        System.out.print('#');
+                        break;
+                    case ADENTRO:
+                        System.out.print(' ');
+                        break;
+                    default:
+                        System.out.print('?');
+                        break;
+                }
+            }
+            System.out.print('\n');
+        }
+    }
+    
+    public void generarLaberinto(Laberinto lab_origin, int m, int n) {
+        Celda[][] lab = lab_origin.laberinto;
         
-        int real_m = 2*m+1;
-        int real_n = 2*n+1;
+        Random rnd = new Random();
         
         // it doesn't work here
         // lab = new Celda[real_m+1][real_n+1];
         
         // iniciamos todas las celdas como PARED
-        for (int i = 0; i < real_m+1; i++) {
-            for (int j = 0; j < real_n+1; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 lab[i][j] = new Celda(TipoCelda.PARED);
             }
         }
         
-        // creamos los nodos
-        // x -> 2 * x + 1
-        // 0 -> 1
-        // 1 -> 3
-        // 2 -> 5
-        // 3 -> 7
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                lab[2*i+1][2*j+1].setTipo(TipoCelda.AFUERA);
+        //System.out.print("Sin nodos\n");
+        //printLaberinto(lab, m, n);
+
+        for (int i = 1; i < m; i += 2) {
+            for (int j = 1; j < n; j += 2) {
+                lab[i][j].setTipo(TipoCelda.AFUERA);
             }
         }
+        
+        //System.out.print("Con nodos\n");
+        //printLaberinto(lab, m, n);
         
         // ******************
         // inicia el DFS AQUI
@@ -112,11 +139,13 @@ public class GestorLaberinto {
         // creamos una pila
         Stack<IntPair> pilaCeldas = new Stack<>();
         // tomamos un valor random
-        int rx = rnd.nextInt(m);
-        int ry = rnd.nextInt(n);
+        int x = rnd.nextInt(m/4);
+        // x y y son iguales siempre y "random"
+        int rx = 2*x+1;
+        int ry = rx;
 
         // marcamos celda como ADENTRO y la ponemos en la pila
-        lab[2*rx+1][2*ry+1].setTipo(TipoCelda.ADENTRO);
+        lab[rx][ry].setTipo(TipoCelda.ADENTRO);
         pilaCeldas.push(new IntPair(rx,ry));
         
         // algunos auxiliares para el while...
@@ -126,7 +155,7 @@ public class GestorLaberinto {
             // 3.1 tomamos la ultima apilada
             aux = pilaCeldas.peek();
             // 3.2 y 3.2.1 tomamos uno de los adjacentes aleatoriamente
-            ady = devuelveRandomAdjacente(lab, aux.x, aux.y, m, n);
+            ady = this.devuelveRandomAdjacente(lab, aux.x, aux.y, m, n);
             
             // 3.3 si bota -1 entonces significa que no hay adyacentes. Entonces,
             // hacemos pop :v
@@ -134,19 +163,65 @@ public class GestorLaberinto {
                 pilaCeldas.pop();
             } else {
                 // 3.2.2 hacemos caminito
-                int puente_x = aux.x + ady.x + 1;
-                int puente_y = aux.y + ady.y + 1;
+                int puente_x = ( aux.x + ady.x )/2;
+                int puente_y = ( aux.y + ady.y )/2;
                 lab[puente_x][puente_y].setTipo(TipoCelda.ADENTRO);
                 
                 // 3.2.3 marcamos el adyacente como adentro tambien
-                lab[2*ady.x+1][2*ady.y+1].setTipo(TipoCelda.ADENTRO);
+                lab[ady.x][ady.y].setTipo(TipoCelda.ADENTRO);
                 
                 // 3.2.4 apilamos v
-                pilaCeldas.push(ady);
-                
+                pilaCeldas.push(ady);                
             }
-                
-            
         }
+        // printLaberinto(lab, m, n);
+        
+        crearListaEnemigos(lab_origin);
+        crearListaArtefactos(lab_origin);
+        
+        // return lab_origin;
     }
+    
+    private void crearListaEnemigos(Laberinto l){
+        Random rnd = new Random();
+        int max_i = l.getSize_m();
+        int max_j = l.getSize_n();
+        // hallar el nro de enemigos por mapa segun la probabilidad de que aparezca
+        // le puse entre 20 porque sino salen demasiados creo :'v 
+        //la formula puede ir cambiando
+        int nroEnemigos = Math.round((l.getPct_enemigo()* max_i * max_j)/20);
+        int ene_i, ene_j;
+        int niveles_Enemigo[] = l.getNiveles_enemigo();
+        for(int i=0; i< nroEnemigos; i++){
+            //voy a considerar que los enemigos aparezcan en los nodos (impares)xd
+            //porque sino tendria que estar probando para cada celda que no 
+            //sea una pared
+            ene_i = (rnd.nextInt(max_i/2)*2 +1);
+            ene_j = (rnd.nextInt(max_j/2)*2 +1);
+            Enemigo e = new Enemigo (ene_i,ene_j, "Enemigo",niveles_Enemigo[rnd.nextInt(max_i)]);
+            l.agregarEnemigo(e);
+            l.getCelda(ene_i, ene_j).setTipoContenido(2);
+        }
+        
+    }
+    
+    private void crearListaArtefactos(Laberinto l){
+        Random rnd = new Random();
+        int max_i = l.getSize_m();
+        int max_j = l.getSize_n();
+        //Random rnd = new Random();
+        int art_i, art_j;
+        for(int i=0; i< NRO_ARTEFACTOS; i++){
+            //nodos impares pls :'
+            art_i = (rnd.nextInt(max_i/2)*2 +1);
+            art_j = (rnd.nextInt(max_j/2)*2 +1);
+            Artefacto a = new Artefacto ("Artefacto");
+            l.agregarArtefacto(a);
+            l.getCelda(art_i, art_j).setTipoContenido(3);
+            // -> aqui faltaria asociar la clase artefacto con su posicion en el
+            // -> mapa
+        }
+        
+    }
+    
 }

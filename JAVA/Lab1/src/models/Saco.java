@@ -13,11 +13,22 @@ import java.util.List;
  * @author alulab14
  */
 public class Saco {
-    List<Artefacto> afterfactos;
+    private int size;
+    List<Artefacto> artefactos;
+    
     public Saco() {
-        afterfactos = new ArrayList<Artefacto>();
+        artefactos = new ArrayList<>();
     }
     public void agregarArtefacto (Artefacto item) {
         
+    }
+    public int getSize() {
+        return artefactos.size();
+    }
+    public Artefacto getItem(int i) {
+        return artefactos.get(i);
+    }
+    public void removeItem(int i){
+        this.artefactos.remove(i);
     }
 }

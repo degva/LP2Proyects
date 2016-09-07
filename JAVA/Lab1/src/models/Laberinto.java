@@ -5,47 +5,54 @@
  */
 package models;
 import java.util.Random;
-
-import controllers.GestorLaberinto;
-
+import java.util.ArrayList;
 /**
  *
  * @author degva
  */
 public class Laberinto {
-    // que es final? :v
+    
+    
+    //public static final int MAX_ENEMIES = 5;
+    public static final int MAX_SIZE_LAB = 10;
+    
+    // que es final? :v -> funciona como constante para la clase, creo :'v
     private final int size_m;
     private final int size_n;
     private final float pct_enemigo;
-    
-    // NOTA: podriamos usar un arreglo de listas
-    // ArrayList<Celda> pero como hacerlo 2D?
     public Celda[][] laberinto;
     private final int[] niveles_enemigo;
     
-    private GestorLaberinto gestor;
+    private ArrayList<Enemigo> lista_enemigos;
+    private ArrayList<Artefacto> lista_artefactos;
     
-    public Laberinto(int max_size) {
-        
-        gestor = new GestorLaberinto();
-        
+    public Laberinto() {
+                       
         Random rnd = new Random();
-        // max_size is the maximum and the 2 is our minimum 
-        size_m = rnd.nextInt(max_size) + 2;
-        size_n = rnd.nextInt(max_size) + 2;
+        
+        int aux = (int)(Math.random()*MAX_SIZE_LAB+5);
+        
+        // now laberinth is a square
+        size_m = 2*aux+1;
+        size_n = size_m;
+        //size_m = 20; // hey que fue aqui :( no more random?
+        //size_n = 20; // jajajaja lo hice para testear algo, y me olvide de borrarlo xd sorry (8)
         
         // creamos el arreglo de 2 dimensiones del laberinto
         // esto esta siendo seteado en el gestor!!
-        laberinto = new Celda[2 * size_m + 2][2 * size_n + 2];
-        
+        laberinto = new Celda[size_m + 1][size_n + 1];
         pct_enemigo = rnd.nextFloat();
-        
         // un arreglo con los niveles posibles de los enemigos que puedan
         // en el laberinto
-        niveles_enemigo = new int[size_m / 2];
+        niveles_enemigo = new int[size_m];
+        //estamos usando el ancho como total de niveles posibles xdxd
+        for(int i =0; i < size_m; i++) 
+            niveles_enemigo[i]= rnd.nextInt(10) +1; //arreglo de posible niveles            
         
-        // llamar funcion que crea el laberinto usando el controlador GestorLaberinto
-        gestor.generarLaberinto(laberinto, size_m, size_n);
+        lista_enemigos = new ArrayList<>();
+        lista_artefactos = new ArrayList<>();
+        
+        
     }
 
     /**
@@ -93,4 +100,25 @@ public class Laberinto {
     public Celda getCelda(int x, int y) {
         return laberinto[x][y];
     }
+
+    public void agregarEnemigo(Enemigo e){
+        this.getLista_enemigos().add(e);
+    }
+    
+    public void agregarArtefacto(Artefacto a){
+        this.lista_artefactos.add(a);
+    }
+
+    /**
+     * @return the lista_enemigos
+     */
+    public ArrayList<Enemigo> getLista_enemigos() {
+        return lista_enemigos;
+    }
+    
+    public ArrayList<Artefacto> getLista_artefactos() {
+        return lista_artefactos;
+    }
+      
 }
+
