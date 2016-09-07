@@ -93,7 +93,7 @@ public class Juego {
                     continue;
                 }                
             }
-            else if (sigAnt == -1 && laberintoActual != 0 ){
+            else if (sigAnt == -1 && laberintoActual != laberintoAnterior){
                 System.out.println("Pasando a nivel anterior");
                 laberintoActual--;
                 // cuando se va a otro laberinto usualmente se loquea y se pone sobre un muro :v
