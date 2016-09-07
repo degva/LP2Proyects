@@ -45,7 +45,7 @@ public class Dibujador {
         Artefacto item;
         if (saco_aux.getSize() != 0) {
             for (int i = 0; i < saco_aux.getSize(); i++) {
-                aux = Integer.toString(i) + ". ";
+                aux = Integer.toString(i + 1) + ". ";
                 item = saco_aux.getItem(i);
                 // aux.concat(item.getNombre());
                 String aux2 = item.toString();
@@ -125,6 +125,10 @@ public class Dibujador {
 
     }
     
+    // PREG_2:
+    // Se imprime una lista de opciones cuando el avatar esta sobre un artefacto
+    // o sobre un Enemigo. Luego se llaman a las funciones correspondientes.
+    
     public void RenderInteraccionArtefacto (Avatar avatar, Laberinto lab, int x, int y) {
         clearScreen();
         Celda aux;
@@ -140,8 +144,10 @@ public class Dibujador {
         }
         
         //Cuando sale del for, es porque a ya tiene como valor el artefacto en el que vamos a interactuar
-        System.out.print("\nEstas sobre un artefacto\n");
-        System.out.print(a.toString() + "\n");
+        System.out.println("\nEstas sobre un artefacto");
+        System.out.println("Puedes:");
+        System.out.println("[recoger]");
+        System.out.println("[obviar]");
         
         System.out.print("Dime que dice > ");
         
@@ -173,17 +179,43 @@ public class Dibujador {
             if (e.getPosicionX() == x && e.getPosicionY() == y)
                 break;
         }
-        
-        System.out.print("\nEstas sobre un enemigo\n");
-        System.out.print(e.toString() + "\n");
+        System.out.print("\n\n\n\n\n\n");
+        System.out.println("---------------------------");
+        System.out.println("\nEstas sobre un enemigo:");
+        System.out.println("Se llama: " + e.getNombre());
+        System.out.println("Ataque: " + e.getNivel() * 2);
+        System.out.println("Vida: " + e.getVidaActual() + "/" + e.getVidaMaxima());
+        System.out.println("Puedes:");
+        System.out.println("[atacar]");
+        System.out.println("[pirar]");
+        // System.out.print(e.toString() + "\n");
         
         System.out.print("Dime que dice > ");
         
         Scanner input = new Scanner(System.in);
         String opcion = input.nextLine();
         switch (opcion) {
-            case "muere": 
-                aux.setTipoContenido(-1);
+            case "atacar": 
+                
+                avatar.atacarEnemigo(e);
+                System.out.println("Te quedaste con " + avatar.getVidaActual() + " de vida");
+                System.out.println("El enemigo quedo con " + e.getVidaActual() + " de vida");
+                // PREG_2
+                // Al atacar vemos si la vida es menor/igual que 0. Entonces se
+                // procede a eliminar a el Enemigo.
+                if (e.getVidaActual() <= 0) {
+                    aux.setTipoContenido(-1);
+                } else {
+                    // movemos al avatar a la derecha (esperemos que no toque pared)
+                    avatar.moveRight();
+                    avatar.moveRight();
+                }
+                break;
+            case "pirar": 
+                // aux.setTipoContenido(-1);
+                // avatar.atacarEnemigo(e);
+                avatar.moveRight();
+                avatar.moveRight();
                 break;
             default:
                 aux.setTipoContenido(-1);

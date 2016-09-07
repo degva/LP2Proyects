@@ -198,7 +198,7 @@ public class GestorLaberinto {
             //sea una pared
             ene_i = (rnd.nextInt(max_i/2)*2 +1);
             ene_j = (rnd.nextInt(max_j/2)*2 +1);
-            Enemigo e = new Enemigo (ene_i,ene_j, "Enemigo",niveles_Enemigo[rnd.nextInt(max_i)]);
+            Enemigo e = new Enemigo (ene_i,ene_j, "Enemigo", niveles_Enemigo[rnd.nextInt(max_i)]);
             l.agregarEnemigo(e);
             l.getCelda(ene_i, ene_j).setTipoContenido(2);
         }
@@ -206,19 +206,61 @@ public class GestorLaberinto {
     }
     
     private void crearListaArtefactos(Laberinto l){
-        //Random rnd = new Random();
-        //int art_i, art_j;
+        Random rnd = new Random();
+        int max_i = l.getSize_m();
+        int max_j = l.getSize_n();
+        int art_i, art_j;
         for(int i=0; i< NRO_ARTEFACTOS; i++){
             //nodos impares pls :'
-            //art_i = (rnd.nextInt(max_i/2)*2 +1);
-            //art_j = (rnd.nextInt(max_j/2)*2 +1);
-            Artefacto a = new Artefacto ("Artefacto");
+            art_i = (rnd.nextInt(max_i/2)*2 +1);
+            art_j = (rnd.nextInt(max_j/2)*2 +1);
+            Artefacto a = new Artefacto ("Artefacto " + i);
             l.agregarArtefacto(a);
-            //l.getCelda(ene_i, ene_j).setTipoContenido(3);
+            l.getCelda(art_i, art_j).setTipoContenido(3);
             // -> aqui faltaria asociar la clase artefacto con su posicion en el
             // -> mapa
         }
         
     }
     
+    // PREG_1
+    // Agregamos la funcion que mueve a todos los enemigos
+    public void moverEnemigos(Laberinto l) {
+        ArrayList<Enemigo> lista_enemigos = l.getLista_enemigos();
+        ArrayList<IntPair> lista_posiciones_enemigos = new ArrayList<>(); 
+        Celda aux;
+        
+        Enemigo e = null; 
+
+        IntPair nuevaPos;
+        
+        for (int i = 0; i < l.getSize_m(); i++) {
+            for (int j = 0; j < l.getSize_n(); j++) {
+                aux = l.getCelda(i, j);
+                if (aux.getTipoContenido() == 2) {
+                    
+                    nuevaPos = getNuevaPos(l, i, j);
+                    
+                    lista_posiciones_enemigos.add(new IntPair(i,j));
+                    
+                    for (int k = 0; k < lista_enemigos.size(); k++) {
+                        e = lista_enemigos.get(k);
+                        if (e.getPosicionX() == i && e.getPosicionY() == j)
+                            break;
+                    }
+                    
+                    l.getCelda(i, j).setTipoContenido(-1);
+                    e.setPosicionX(i + 1);
+                    e.setPosicionY(j + 1);
+                    
+                }
+            }
+        }
+    }
+    
+    public IntPair getNuevaPos(Laberinto l, int i, int j) {
+        // falto tiempooooo
+        IntPair par = new IntPair(1,1);
+        return par;
+    }
 }

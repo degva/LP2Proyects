@@ -1,0 +1,13 @@
+PREGUNTA 1:
+En el archivo Juego.java:82
+Se llama a una funcion del GestorLaberinto que mueve a cada uno de los enemigos.	
+En el archivo Gestorlaberinto:228 se agrega la funcion que mueve a los enemigos.
+
+como falto tiempo ahora los enemigos desaparecen por que olvide poner el celda.setTipoContenido(2) para la nueva posicion :(
+
+PREGUNTA 2:
+
+En el archivo Dibujador.java:128
+se agregaron dos funciones para cuando el avatar cae sobre un enemigo o sobre un artefacto
+Se define en la linea 203 qué sucede luego de atacar a el enemigo.
+El acaque se define como el nivel del avatar/enemigo multiplicado por 2 o por 5 respectivamente.

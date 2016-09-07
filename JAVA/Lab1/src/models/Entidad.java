@@ -15,14 +15,31 @@ public class Entidad {
     private int posicionY;
     private int nivel;
     private int vidaActual;
+    private int vidaMaxima;
     
-    public Entidad(int posicionX, int poscionY, String nombre, int nivel){
+    public Entidad(int posicionX, int poscionY, String nombre, int nivel, int vidaMaxima){
         this.nombre = nombre;
         this.posicionX = posicionX;
         this.posicionY = poscionY;
         this.nivel = nivel;
+        this.vidaMaxima = vidaMaxima;
     }
 
+        
+    /**
+     * @return the vidaMaxima
+     */
+    public int getVidaMaxima() {
+        return vidaMaxima;
+    }
+
+    /**
+     * @param vidaMaxima the vidaMaxima to set
+     */
+    public void setVidaMaxima(int vidaMaxima) {
+        this.vidaMaxima = vidaMaxima;
+    }
+    
     /**
      * @return the nombre
      */

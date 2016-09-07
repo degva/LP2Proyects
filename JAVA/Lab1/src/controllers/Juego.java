@@ -19,12 +19,12 @@ import java.util.Scanner;
 public class Juego {
     public static final int NRO_ARTEFACTOS= 10;
     
-    private ArrayList<Laberinto> lista_laberintos;
-    private ArrayList<IntPair> lista_anteriores; 
+    private final ArrayList<Laberinto> lista_laberintos;
+    private final ArrayList<IntPair> lista_anteriores; 
     
-    private Dibujador renderer;
-    private Avatar avatar;
-    private GestorLaberinto gestor;
+    private final Dibujador renderer;
+    private final Avatar avatar;
+    private final GestorLaberinto gestor;
     private int laberintoActual;
     private int totalLaberintos=0;
 
@@ -74,10 +74,12 @@ public class Juego {
                 avatar.setPosicionX(lista_anteriores.get(laberintoActual).x);
                 avatar.setPosicionY(lista_anteriores.get(laberintoActual).y);
             }
-            System.out.println("LaberintoActual = " + laberintoActual);
+            // System.out.println("LaberintoActual = " + laberintoActual);
             /*AQUI SE IMPRIME EL LABERINTO*/
             sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
-            
+            // PREG_1
+            // llamamos a la funcion que mueve a todos los enemigos
+            gestor.moverEnemigos(lista_laberintos.get(laberintoActual));
             if (sigAnt == 1){
                 if ((laberintoActual + 1) == totalLaberintos){
                     System.out.println("FELICIDADES HAS GANADO EL JUEGO!!!!");
