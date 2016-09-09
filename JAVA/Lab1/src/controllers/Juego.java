@@ -30,7 +30,6 @@ public class Juego {
 
     public Juego() {
         Scanner input = new Scanner(System.in);
-
         lista_laberintos = new ArrayList<>();
         lista_anteriores = new ArrayList<>();
         gestor = new GestorLaberinto();
@@ -69,12 +68,15 @@ public class Juego {
         OUTER:
         while (true) {
             clearScreen();    
-            if (laberintoActual != laberintoAnterior){
-                laberintoAnterior = laberintoActual;
+            if (laberintoActual != laberintoAnterior){ //significa que acabamos de cambiar de nivel
+                laberintoAnterior = laberintoActual;                
                 avatar.setPosicionX(lista_anteriores.get(laberintoActual).x);
-                avatar.setPosicionY(lista_anteriores.get(laberintoActual).y);
+                avatar.setPosicionY(lista_anteriores.get(laberintoActual).y);                
+            }else{
+                lista_laberintos.get(laberintoActual).getCelda(lista_anteriores.get(laberintoActual).x, 
+                        lista_anteriores.get(laberintoActual).y).setActivarAnterior(1);
             }
-            // System.out.println("LaberintoActual = " + laberintoActual);
+            System.out.println("LaberintoActual = " + laberintoActual);
             /*AQUI SE IMPRIME EL LABERINTO*/
             sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
             // PREG_1
@@ -86,6 +88,8 @@ public class Juego {
                     break;
                 }else{
                     System.out.println("Pasando a siguiente nivel");
+                    lista_laberintos.get(laberintoActual).getCelda(lista_anteriores.get(laberintoActual).x, 
+                            lista_anteriores.get(laberintoActual).y).setActivarAnterior(0);
                     laberintoActual++;
                     // cuando se va a otro laberinto usualmente se loquea y se pone sobre un muro :v
                     avatar.setPosicionX(1);
@@ -93,12 +97,12 @@ public class Juego {
                     continue;
                 }                
             }
-            else if (sigAnt == -1 && laberintoActual != laberintoAnterior ){
+            if (sigAnt == -1 && laberintoActual != 0 &&
+                    lista_laberintos.get(laberintoActual).getCelda(lista_anteriores.get(laberintoActual).x, lista_anteriores.get(laberintoActual).y).getActivarAnterior() == 1){
                 System.out.println("Pasando a nivel anterior");
+                lista_laberintos.get(laberintoActual).getCelda(lista_anteriores.get(laberintoActual).x, lista_anteriores.get(laberintoActual).y).setActivarAnterior(0);
                 laberintoActual--;
                 // cuando se va a otro laberinto usualmente se loquea y se pone sobre un muro :v
-                avatar.setPosicionX(1);
-                avatar.setPosicionY(1);
                 continue;
             }
             

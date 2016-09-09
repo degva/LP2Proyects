@@ -209,6 +209,7 @@ public class GestorLaberinto {
         Random rnd = new Random();
         int max_i = l.getSize_m();
         int max_j = l.getSize_n();
+
         int art_i, art_j;
         for(int i=0; i< NRO_ARTEFACTOS; i++){
             //nodos impares pls :'
