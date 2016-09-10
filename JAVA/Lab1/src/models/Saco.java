@@ -20,7 +20,8 @@ public class Saco {
         artefactos = new ArrayList<>();
     }
     public void agregarArtefacto (Artefacto item) {
-        
+        artefactos.add(item);
+        this.size++;
     }
     public int getSize() {
         return artefactos.size();
