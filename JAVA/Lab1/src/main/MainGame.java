@@ -6,8 +6,6 @@
 package main;
 
 import controllers.Juego;
-
-import java.util.Scanner;
 /**
  *
  * @author degva

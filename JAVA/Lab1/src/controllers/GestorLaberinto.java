@@ -127,8 +127,9 @@ public class GestorLaberinto {
         // inicia el DFS AQUI
         // ******************
         
-        // creamos una pila
+        // Creando dos pilas: para el DFS y para elegir anterior y siguiente
         Stack<IntPair> pilaCeldas = new Stack<>();
+        Stack<IntPair> pilaAdentro = new Stack<>();
         // tomamos un valor random
         int x = rnd.nextInt(m/4);
         // x y y son iguales siempre y "random"
@@ -138,6 +139,7 @@ public class GestorLaberinto {
         // marcamos celda como ADENTRO y la ponemos en la pila
         lab[rx][ry].setTipo(TipoCelda.ADENTRO);
         pilaCeldas.push(new IntPair(rx,ry));
+        pilaAdentro.push(new IntPair(rx,ry));
         
         // algunos auxiliares para el while...
         IntPair aux, ady;
@@ -157,18 +159,24 @@ public class GestorLaberinto {
                 int puente_x = ( aux.x + ady.x )/2;
                 int puente_y = ( aux.y + ady.y )/2;
                 lab[puente_x][puente_y].setTipo(TipoCelda.ADENTRO);
+                pilaAdentro.push(new IntPair(puente_x, puente_y));
                 
                 // 3.2.3 marcamos el adyacente como adentro tambien
                 lab[ady.x][ady.y].setTipo(TipoCelda.ADENTRO);
+                pilaAdentro.push(new IntPair(ady.x,ady.y));
                 
                 // 3.2.4 apilamos v
                 pilaCeldas.push(ady);                
             }
         }
+        IntPair celdaAnterior = pilaAdentro.get(rnd.nextInt(pilaAdentro.size()));
+        lab[celdaAnterior.x][celdaAnterior.y].setTipoContenido(0);
+        
+        IntPair celdaSiguiente = pilaAdentro.get(rnd.nextInt(pilaAdentro.size()));
+        lab[celdaSiguiente.x][celdaSiguiente.y].setTipoContenido(1);
         
         crearListaEnemigos(lab_origin);
         crearListaArtefactos(lab_origin);
-
     }
     
     private void crearListaEnemigos(Laberinto l){

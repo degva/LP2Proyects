@@ -46,11 +46,9 @@ public class Juego {
         totalLaberintos = (int)(Math.random()*MAX_LABERINTOS + MIN_LABERINTOS);
         
         this.crearListaLaberintos();
-        this.agregarAnteriorySiguiente();
+        this.agregarAnteriorySiguiente();        
+        this.mostrarHistoria();
         
-        // Aqui debería haber una función que muestre la historia
-        
-        // aqui se crea un nuevo objeto Avatar      
         String nombre;
         System.out.print("Ingresa tu nombre:\n> ");
         nombre = input.nextLine();
@@ -210,7 +208,7 @@ public class Juego {
      * Creamos las posiciones de SIGUIENTE y ANTERIOR dentro de algunas casillas
      * random.
      */
-    private void agregarAnteriorySiguiente(){
+    private void agregarAnterior(){
         
         int anterior,siguiente;//, cont = 0;
         int x,y;
@@ -263,6 +261,10 @@ public class Juego {
      */
     private boolean validarMovimiento (Laberinto l,int x, int y){
         return (l.laberinto[x][y].getTipo() != TipoCelda.PARED);
+    }
+    
+    private void mostrarHistoria(){
+        
     }
     
 }
