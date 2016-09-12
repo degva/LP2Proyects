@@ -16,11 +16,12 @@ public class Laberinto {
     //public static final int MAX_ENEMIES = 5;
     public static final int MAX_SIZE_LAB = 10;
     
-    // que es final? :v -> funciona como constante para la clase, creo :'v
     private final int size_m;
-    private final int size_n;
-    private final float pct_enemigo;
+    private final int size_n;    
     public Celda[][] laberinto;
+    public Celda celdaAnterior;
+    public Celda celdaSiguiente;
+    private final float pct_enemigo;
     private final int[] niveles_enemigo;
     
     private ArrayList<Enemigo> lista_enemigos;

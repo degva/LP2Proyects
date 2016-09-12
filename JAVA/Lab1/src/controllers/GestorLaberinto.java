@@ -113,7 +113,7 @@ public class GestorLaberinto {
         // iniciamos todas las celdas como PARED
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                lab[i][j] = new Celda(TipoCelda.PARED);
+                lab[i][j] = new Celda(i,j,TipoCelda.PARED);
             }
         }
 
@@ -127,7 +127,7 @@ public class GestorLaberinto {
         // inicia el DFS AQUI
         // ******************
         
-        // Creando dos pilas: para el DFS y para elegir anterior y siguiente
+        // Creando dos pilas: una para el DFS y una para elegir anterior y siguiente
         Stack<IntPair> pilaCeldas = new Stack<>();
         Stack<IntPair> pilaAdentro = new Stack<>();
         // tomamos un valor random
@@ -169,11 +169,15 @@ public class GestorLaberinto {
                 pilaCeldas.push(ady);                
             }
         }
-        IntPair celdaAnterior = pilaAdentro.get(rnd.nextInt(pilaAdentro.size()));
-        lab[celdaAnterior.x][celdaAnterior.y].setTipoContenido(0);
+
+        //Añadimos las celdas anteriores y siguientes
+        IntPair ant = pilaAdentro.get(rnd.nextInt(pilaAdentro.size()));
+        lab_origin.laberinto[ant.x][ant.y].setTipoContenido(0);
+        lab_origin.celdaAnterior = lab_origin.laberinto[ant.x][ant.y];
         
-        IntPair celdaSiguiente = pilaAdentro.get(rnd.nextInt(pilaAdentro.size()));
-        lab[celdaSiguiente.x][celdaSiguiente.y].setTipoContenido(1);
+        IntPair sig = pilaAdentro.get(rnd.nextInt(pilaAdentro.size()));
+        lab_origin.laberinto[sig.x][sig.y].setTipoContenido(1);
+        lab_origin.celdaSiguiente = lab_origin.laberinto[sig.x][sig.y];
         
         crearListaEnemigos(lab_origin);
         crearListaArtefactos(lab_origin);

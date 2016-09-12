@@ -15,12 +15,15 @@ public class Celda {
     /*
      * Si tipo es 1: adentro, 2: Anterior, 3: Siguiente o 4: Pared
      **/
-    private TipoCelda tipo;
-    //0 = anterior, 1 = siguiente,  2 = enemigo, 3= artefacto
-    private int tipoContenido;
+    private int x;
+    private int y;
+    private TipoCelda tipo;    
+    private int tipoContenido; //0 = anterior, 1 = siguiente,  2 = enemigo, 3= artefacto
     private int activarAnterior;
 
-    public Celda (TipoCelda tipo) {
+    public Celda (int x, int y, TipoCelda tipo) {
+        this.x = x;
+        this.y = y;
         this.tipo = tipo;
         this.tipoContenido = -1; //valor default
         activarAnterior = 0;
@@ -54,6 +57,20 @@ public class Celda {
 
     public void setActivarAnterior(int activarAnterior) {
         this.activarAnterior = activarAnterior;
+    }
+
+    /**
+     * @return the x
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * @return the y
+     */
+    public int getY() {
+        return y;
     }
     
     
