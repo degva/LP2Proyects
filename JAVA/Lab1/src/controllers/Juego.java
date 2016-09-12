@@ -207,8 +207,9 @@ public class Juego {
     }
 
     /**
+     * @param index
      */
-    public void setLaberintoActual(int index) {
+    private void setLaberintoActual(int index) {
         this.laberintoActual = laberintos.get(index);
     }
     
