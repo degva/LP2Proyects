@@ -69,34 +69,34 @@ public class Dibujador {
         Celda aux;
 
         if (x<0 || y<0) {
-            System.out.print('.');
+            System.out.print(". ");
         }else if ((x > lab.getSize_m()-1) || (y > lab.getSize_n()-1)){
-            System.out.print('.');
+            System.out.print(". ");
         } else {
             aux = lab.getCelda(x, y);
             switch (aux.getTipo()) {
                 case ADENTRO:                    
                     switch (aux.getTipoContenido()) {
                         case 0:
-                            System.out.print('+');
+                            System.out.print("+ ");
                             break;
                         case 1:
-                            System.out.print('-');
+                            System.out.print("- ");
                             break;
                         case 2:
-                            System.out.print('E');
+                            System.out.print("E ");
                             break;
                         case 3:
-                            System.out.print('A');
+                            System.out.print("A ");
                             break;
                         default:
-                            System.out.print(' ');
+                            System.out.print("  ");
                             break;
                     }
                     break;
                 case PARED:
                 case AFUERA:
-                    System.out.print('#');
+                    System.out.print("# ");
                     break;
                 default:
                     System.out.print("Que? esto no deberia ejecutarse\n");
@@ -251,16 +251,16 @@ public class Dibujador {
         for (int i = avatar.getPosicionY() - B; i <= avatar.getPosicionY() + B; i++) {
             for (int j = avatar.getPosicionX() - A; j <= avatar.getPosicionX() + A; j++) {
                 if (i == avatar.getPosicionY() && j == avatar.getPosicionX()) { //si es la posicion en la que esta el avatar
-                    if (lab.getCelda(j, i).getTipoContenido() == 0) state = 1;
-                    else if (lab.getCelda(j, i).getTipoContenido() == 1) state = -1;
-                    System.out.print('O');
+                    if (lab.getCelda(j, i).getTipoContenido() == 0) state = -1;
+                    else if (lab.getCelda(j, i).getTipoContenido() == 1) state = 1;
+                    System.out.print("O ");
                     if (RevisarInteraccion(avatar, lab, j, i)) break OUTER;//||||||||||||||||||||||||||||||||||||| INTERACCION ||||||||||||||||||||||||||||||||||||||
                 } else {
                     RenderCell(avatar, lab, j, i);
                 }
             }
             if (listaDatos.size() > (i + B - avatar.getPosicionY())) {
-                System.out.print(' ');
+                System.out.print(" ");
                 System.out.print(listaDatos.get(i + B - avatar.getPosicionY()));
             }
             

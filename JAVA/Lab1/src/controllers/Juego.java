@@ -44,9 +44,8 @@ public class Juego {
         totalLaberintos = (int)(Math.random()*MAX_LABERINTOS + MIN_LABERINTOS);
         
         this.crearListaLaberintos();
-        this.setLaberintoActual(indexLaberintoActual);        
-        this.mostrarHistoria();
-        
+        this.setLaberintoActual(indexLaberintoActual);
+
         String nombre;        
         System.out.print("Ingresa tu nombre:\n> ");
         Scanner input = new Scanner(System.in);
@@ -63,9 +62,10 @@ public class Juego {
      */
     public void Start() {
         Scanner input = new Scanner(System.in);
-        String opcion;
-        
+        String opcion;        
         int sigAnt;
+
+        mostrarHistoria();
         
         OUTER:
         while (true) {
@@ -93,6 +93,7 @@ public class Juego {
                     System.out.println("Pasando a siguiente nivel");
                     laberintoActual.celdaAnterior.setActivarAnterior(0);
                     indexLaberintoActual++;
+                    setLaberintoActual(indexLaberintoActual);
                     continue;
                 }                
             }
@@ -104,6 +105,7 @@ public class Juego {
                 System.out.println("Pasando a nivel anterior");
                 laberintoActual.celdaAnterior.setActivarAnterior(0);
                 indexLaberintoActual--;
+                setLaberintoActual(indexLaberintoActual);
                 continue;
             }
             
@@ -124,29 +126,28 @@ public class Juego {
                 // Los else son solo para probar que la funcionalidad trabaja bien
                 int posicionActualX = avatar.getPosicionX();
                 int posicionActualY = avatar.getPosicionY();
-                Laberinto actualLaberinto = laberintos.get(indexLaberintoActual);
                 switch (opcion) {
                     case "w":
                     case "mover arriba":
-                        if(validarMovimiento(actualLaberinto,posicionActualX,(posicionActualY-1)))
+                        if(validarMovimiento(laberintoActual,posicionActualX,(posicionActualY-1)))
                             avatar.moveUp();
                         else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
                     case "s":
                     case "mover abajo":
-                        if(validarMovimiento(actualLaberinto,posicionActualX,(posicionActualY+1)))
+                        if(validarMovimiento(laberintoActual,posicionActualX,(posicionActualY+1)))
                             avatar.moveDown();
                         else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
                     case "a":
                     case "mover izquierda":
-                        if(validarMovimiento(actualLaberinto,(posicionActualX-1),posicionActualY))
+                        if(validarMovimiento(laberintoActual,(posicionActualX-1),posicionActualY))
                             avatar.moveLeft();
                         else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
                     case "d":
                     case "mover derecha":
-                        if(validarMovimiento(actualLaberinto,(posicionActualX+1),posicionActualY))
+                        if(validarMovimiento(laberintoActual,(posicionActualX+1),posicionActualY))
                             avatar.moveRight();
                         else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
@@ -156,7 +157,7 @@ public class Juego {
                         //if (alguna celda adyacente al avatar tiene un artefacto)
                         // agregar artefacto al saco
                         break;
-                    case "cambiar arma":
+                    case "cambiar arma":    
                         // Por implementar
                         break;
                     case "cambiar armadura":
