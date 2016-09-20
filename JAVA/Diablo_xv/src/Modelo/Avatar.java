@@ -15,6 +15,13 @@ public class Avatar implements Entidad {
     private final char _elementoGrafico;
     private String _nombre;
     
+    public Avatar(IntPair coord, String nombre) {
+        _posX = coord.x;
+        _posY = coord.y;
+        _elementoGrafico = 'A';
+        _nombre = nombre;
+    }
+    
     public Avatar(int posX, int posY, String nombre) {
         _posX = posX;
         _posY = posY;
@@ -59,5 +66,10 @@ public class Avatar implements Entidad {
      */
     public void setPosY(int _posY) {
         this._posY = _posY;
+    }
+    
+    public void setPosXY(IntPair coord) {
+        this._posX = coord.x;
+        this._posY = coord.y;
     }
 }

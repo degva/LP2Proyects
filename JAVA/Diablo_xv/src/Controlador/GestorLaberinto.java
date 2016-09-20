@@ -112,4 +112,12 @@ public class GestorLaberinto {
     public void MoverEnemigos() {
         
     }
+    
+    public IntPair DevolverAnterior(Laberinto lab) {
+        
+    }
+    
+    public IntPair DevolverSiguiente(Laberinto lab) {
+        
+    } 
 }

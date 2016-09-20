@@ -38,11 +38,8 @@ public class GestorJuego {
         System.out.print("Ingresa tu nombre:\n");
         nombre = input.nextLine();
         
-        // Deberia haber una funcion que ponga el avatar en la celda anterior
-        // a un nivel X. Asi tambien cuando se pone en el siguiente laberinto
-        // this.ColocaAvatarAnterior(1);
-        // this.ColocaAvatarSiguiente(idx);
-        // _avatar = new Avatar(username);
+        
+        _avatar = new Avatar(_gestorLab.DevolverAnterior(GetLaberintoActual()), username);
     }
     
     public void CrearListaLaberintos() {
@@ -52,11 +49,15 @@ public class GestorJuego {
         }
     }
     
-    public int GetLaberintoActual() {
+    public Laberinto GetLaberintoActual() {
+        return _laberintos.get(GetIdxLaberintoActual());
+    }
+    
+    public int GetIdxLaberintoActual() {
         return _idxLaberinto;
     }
     
-    public int GetLaberintoAnterior() {
+    public int GetIdxLaberintoAnterior() {
         return _idxLaberintoAnterior;
     }
     
@@ -69,32 +70,13 @@ public class GestorJuego {
     }
     
     public void Jugar() {
-        Scanner input = new Scanner(System.in);
-        
         Renderizador renderizador = new Renderizador();
         InterpreteComandos interprete = new InterpreteComandos();
         
-        boolean finJuego = false;
-        String opcion;
-        
-        while (!finJuego) {
-            System.out.println("Aqui la historia: ");
-            System.out.println("Habia una vez, trus. Fin.");
-            System.out.println("Iniciar? Salir?");
-            opcion = input.nextLine();
-            switch (opcion) {
-                case "Iniciar": case "iniciar":
-                    boolean finPartida = false;
-                    while (!finPartida) {
-                        renderizador.Render(ObtenerLaberinto(_idxLaberinto));
-                        finPartida = interprete.ProcesarComando(ObtenerLaberinto(_idxLaberinto));
-                    }
-                    break;
-                case "Salir": case "salir":
-                    finJuego = true;
-                    break;
-            }
-            
+        while (interprete.GetGameOn()) {
+            renderizador.Render(_avatar, ObtenerLaberinto(_idxLaberinto));
+            // TODO implementar un switch aqui
+            interprete.ProcesarComando(_avatar, ObtenerLaberinto(_idxLaberinto));
         }
     }
 }
