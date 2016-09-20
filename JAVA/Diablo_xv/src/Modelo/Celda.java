@@ -14,25 +14,32 @@ public class Celda {
     // Esto debe tener tambien un tipo de Celda
     // private TipoCelda tipo;
     
-    private ObjetoGrafico objGrafico;
+    private ObjetoGrafico _tipo; //Pared o Pasadizo
+    private ObjetoGrafico _contenido; //Enemigo, Artefacto, Avatar, Anterior, Siguiente
 
-    public Celda(ObjetoGrafico objGrafico) {
-        this.objGrafico = objGrafico;
-    }
-    
-    /**
-     * @return the objGrafico
-     */
-    public ObjetoGrafico getObjGrafico() {
-        return objGrafico;
+    public Celda(ObjetoGrafico tipo) {
+        if (tipo instanceof Pared || tipo instanceof Pasadizo){
+            this._tipo = tipo;
+            this._contenido = null; //null significa que la celda no tiene contenido
+        }else{
+            this._tipo = null;
+            this._contenido = null;
+        }
     }
 
-    /**
-     * @param objGrafico the objGrafico to set
-     */
-    public void setObjGrafico(ObjetoGrafico objGrafico) {
-        this.objGrafico = objGrafico;
+    public ObjetoGrafico getTipo() {
+        return _tipo;
     }
-    
-    
+
+    public void setTipo(ObjetoGrafico _tipo) {
+        this._tipo = _tipo;
+    }
+
+    public ObjetoGrafico getContenido() {
+        return _contenido;
+    }
+
+    public void setContenido(ObjetoGrafico _contenido) {
+        this._contenido = _contenido;
+    }        
 }
