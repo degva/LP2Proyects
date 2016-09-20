@@ -11,6 +11,7 @@ package models;
  */
 public class Enemigo extends Entidad{
     
+        
     public Enemigo(int posicionX, int poscionY, String nombre, int nivel){
         super(posicionX,poscionY,nombre,nivel, nivel * 2);
         super.setVidaActual(nivel * 2);

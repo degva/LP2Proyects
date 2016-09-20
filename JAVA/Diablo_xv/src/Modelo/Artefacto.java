@@ -46,11 +46,17 @@ public class Artefacto implements ObjetoGrafico {
         return getNombre();
     }
 
+    /**
+     * @return the _posX
+     */
     public int getPosX() {
         return _posX;
     }
 
+    /**
+     * @return the _posY
+     */
     public int getPosY() {
         return _posY;
-    }       
+    }
 }
