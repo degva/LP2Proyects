@@ -10,14 +10,14 @@ import java.util.Scanner;
  *
  * @author fabricioandres
  */
-public class Renderizador {
+public class Render {
     
     // Algunas constantes
     private static final int ANCHO = 6;
     private static final int ALTO = 6;
     private int map_width = 0;
     
-    public Renderizador() {
+    public Render() {
         map_width = ANCHO*2 + 2;
     }
     
@@ -85,23 +85,6 @@ public class Renderizador {
             
         }
     }
-
-    public Boolean RevisarInteraccion(Avatar avatar, Laberinto lab, int x, int y) {
-        Celda aux;
-        aux = lab.getCelda(x, y);
-        Boolean flag = false;
-        if (aux.getContenido() instanceof Enemigo) {            
-                if (x == avatar.getPosX() && y == avatar.getPosY())
-                    flag = true;
-                    //RenderInteraccionEnemigo(avatar, lab, x, y);
-        }else if(aux.getContenido() instanceof Artefacto){
-                if (x == avatar.getPosX() && y == avatar.getPosY())
-                    flag = true;
-                    //RenderInteraccionArtefacto(avatar, lab, x, y);
-        }
-        return flag;
-
-    }
     
     
     public static void clearScreen() {  
@@ -119,7 +102,7 @@ public class Renderizador {
      * @param avatar
      * @return -1 si avatar esta en ANTERIOR, 1 si avatar esta en SIGUIENTE, si no return = 0
      */
-    public int Render(int nivel, Laberinto lab, Avatar avatar) {        
+    public void Render(int nivel, Laberinto lab, Avatar avatar) {        
         List<String> listaDatos = ObtenerListaDatos(avatar);
         // List<Enemigo> listaEnemigos = lab.getEnemigos();
         int state = 0;
@@ -131,10 +114,7 @@ public class Renderizador {
         for (int i = avatar.getPosY() - ALTO; i <= avatar.getPosY() + ALTO; i++) {
             for (int j = avatar.getPosX() - ANCHO; j <= avatar.getPosX() + ANCHO; j++) {
                 if (i == avatar.getPosY() && j == avatar.getPosX()) { //si es la posicion en la que esta el avatar
-                    if (lab.getCelda(j, i).getContenido() instanceof Anterior) state = 1;
-                    else if (lab.getCelda(j, i).getContenido() instanceof Siguiente) state = -1;
-                    avatar.Dibujar();
-                    if (RevisarInteraccion(avatar, lab, j, i)) break OUTER;//||||||||||||||||||||||||||||||||||||| INTERACCION ||||||||||||||||||||||||||||||||||||||
+                    avatar.Dibujar();                    
                 } else {
                     RenderCell(avatar, lab, j, i);
                 }
@@ -146,7 +126,6 @@ public class Renderizador {
             
             System.out.print('\n');
         }
-        return state;
     }
     
 }
