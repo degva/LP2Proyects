@@ -80,10 +80,12 @@ public class Juego {
         // InterpreteComandos interprete = new InterpreteComandos();
 
         // Otra vista: Consola
-        String opcion;
+        int di;
         while (_gestorJuego.GetGameOn()) {
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto));
-            _gestorJuego.procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
+            di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
+            _idxLaberintoAnterior = _idxLaberinto;
+            _idxLaberinto += di;
             _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
         }
     }
