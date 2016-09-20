@@ -69,10 +69,9 @@ public class Render {
             System.out.print('.');
         } else {
             aux = lab.getCelda(x, y);
-            tipo = aux.getTipo();
-            contenido = aux.getContenido();
-            if (tipo instanceof Pasadizo){                
-                    contenido.Dibujar();
+            tipo = aux.getTipo();            
+            if (tipo instanceof Pasadizo){   
+                    aux.getContenido().Dibujar();                    
             }else if(tipo instanceof Pared)
                 tipo.Dibujar();
             
