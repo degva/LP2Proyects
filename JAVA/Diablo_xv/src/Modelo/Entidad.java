@@ -111,6 +111,12 @@ public class Entidad implements ObjetoGrafico {
         this.vidaActual = vidaActual;
     }
     
+    
+    public void setPosXY(IntPair pair){
+        setPosicionX(pair.x);
+        setPosicionY(pair.y);
+    }
+    
     /*
     En estos metodos solo se hace la consulta, asumo que la autirizacion
     de si se mueve o no se hace ene laberinto o en gestor de laberinto.
