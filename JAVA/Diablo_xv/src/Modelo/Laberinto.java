@@ -19,7 +19,7 @@ public class Laberinto {
     private int _sizeM;
     private int _sizeN;
     private float _pctEnemigo;
-    private Celda[][] _laberinto;
+    public Celda[][] _laberinto;
     private int[] _nivelesEnemigo;
     
     private ArrayList<Enemigo> _listaEnemigos;
@@ -27,7 +27,7 @@ public class Laberinto {
     
     public Laberinto(int sizeM, int sizeN) {
         Random rnd = new Random();
-        
+
         this._sizeM = sizeM;
         this._sizeN = sizeN;
         
@@ -89,6 +89,15 @@ public class Laberinto {
     
     public void agregarArtefacto(Artefacto a){
         _listaArtefactos.add(a);
+    }
+    
+    /*
+    public Celda getCelda(int x, int y){
+        return _laberinto[x][y];
+    }
+*/
+    public void setTipoCelda(int x, int y, Celda nuevaCelda){
+        _laberinto[x][y] = nuevaCelda;
     }
 
 }
