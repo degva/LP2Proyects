@@ -155,7 +155,7 @@ public class Laberinto {
             if (e.getPosX() == posX && e.getPosY() == posY)
                 break;
         }
-        if (eNew.vida <= 0) _listaEnemigos.remove(i); // eliminar de la lista si muere
+        if (eNew.getVidaActual() <= 0) _listaEnemigos.remove(i); // eliminar de la lista si muere
         else _listaEnemigos.set(i, eNew);
          
         
