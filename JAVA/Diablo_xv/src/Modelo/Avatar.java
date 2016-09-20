@@ -24,7 +24,7 @@ public class Avatar extends Entidad {
         this.saco = new Saco();
         this.armaduraActual = null;
         this.armaActual = null;
-        this._elementoGrafico = 'A';
+        this._elementoGrafico = 'O';
     }
      
     public Avatar(IntPair coord, String nombre, int nivel){
@@ -33,7 +33,7 @@ public class Avatar extends Entidad {
         this.saco = new Saco();
         this.armaduraActual = null;
         this.armaActual = null;
-        this._elementoGrafico = 'A';
+        this._elementoGrafico = 'O';
     }
     
 
