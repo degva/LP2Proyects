@@ -39,38 +39,12 @@ public class GestorEnemigo {
         Random rnd = new Random();
         int numeroEnemigo = rnd.nextInt(NRO_ENEMIGOS);//Devuelve el numero de nombre del enemigo
         
-        
-        
-        
+        //Datos
+        String nombre = _enemigosDisponibles.get(numeroEnemigo);
+        Enemigo nuevoEnemigo = new Enemigo(nombre, x, y, numeroLaberinto);
+        return nuevoEnemigo;
     }
     
-/*    
-    public Artefacto CrearArtefacto(int x, int y, int numeroLaberinto){
-        Random rnd = new Random();
-        
-        int tipoArtefacto = rnd.nextInt(2);//0=ARMA | 1=ARMADURA
-        int numeroArtefcato = rnd.nextInt(NRO_ARTEFACTOS);//Devuelve el numero dle nombre dle artefacto
-        
-        //declaramos los atributos comunes a ambos
-        String nombre;     
-        switch(tipoArtefacto){
-            case 0: //creamos un arma
-                int danoMin = rnd.nextInt(numeroLaberinto)+numeroLaberinto;
-                int danoMax = rnd.nextInt(2*numeroLaberinto)+numeroLaberinto;
-                nombre =  _armasDisponibles.get(numeroArtefcato);
-                
-                Arma nuevaArma = new Arma(nombre, x, y, danoMin, danoMax);
-                return nuevaArma;
-            case 1: //creamos un armadura
-                int defensa = rnd.nextInt(2*numeroLaberinto)+numeroLaberinto;
-                nombre = _armadurasDisponibles.get(numeroArtefcato);
-                
-                Armadura nuevaArmadura = new Armadura(nombre, x, y, defensa);
-                return nuevaArmadura;
-        }
-        
-        return null; 
-    }
-*/
+
     
 }
