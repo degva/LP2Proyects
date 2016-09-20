@@ -45,7 +45,7 @@ public class Juego {
         nombre = input.nextLine();
         
         
-        _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), username);
+        _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), username, _idxLaberinto);
     }
     
     public void CrearListaLaberintos() {

@@ -10,8 +10,8 @@ package Modelo;
  * @author degva
  */
 public class IntPair {
-  final int x;
-  final int y;
+  public final int x;
+  public final int y;
   public IntPair(int x, int y) {this.x=x;this.y=y;}
 }
 

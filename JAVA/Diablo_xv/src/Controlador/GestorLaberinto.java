@@ -108,10 +108,7 @@ public class GestorLaberinto {
     }
     
     public void MoverEnemigos(Laberinto l) {
-        // REHACER
-        // ArrayList<Enemigo> lista_enemigos = l.getLista_enemigos();
-        // Celda aux;
-        Enemigo e = null; 
+        Enemigo e; 
         IntPair nuevaPos;
         
         for (int i = 0; i < l.getSizeM(); i++) {
@@ -120,63 +117,42 @@ public class GestorLaberinto {
                     e = (Enemigo) l.getCelda(i, j).getContenido();
                     l.getCelda(i, j).setContenido(null);
                     
-                    nuevaPos = devuelveRandomAdjacente(l.getLaberinto(), i, j, l.getSizeM(), l.getSizeN(), 1);
-                    
+                    nuevaPos = devuelveRandomAdjacente(l, i, j, 1);
                     e.Mover(nuevaPos.x - i, nuevaPos.y - j);
-                    
-                    l.setCelda(i, j, e);
+                    l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
                 }
-                /*
-                if (aux.getTipoContenido() == 2) {
-                    
-                    for (int k = 0; k < lista_enemigos.size(); k++) {
-                        e = lista_enemigos.get(k);
-                        if (e.getPosicionX() == i && e.getPosicionY() == j)
-                            break;
-                    }
-                    
-                    l.getCelda(i, j).setTipoContenido(-1);
-                    
-                    nuevaPos = devuelveRandomAdjacente(l.getLaberinto(), i, j, l.getSize_m(), l.getSize_n(), 1, TipoCelda.ADENTRO);
-                    
-                    e.setPosicionX(nuevaPos.x);
-                    e.setPosicionY(nuevaPos.y);
-                    
-                    l.getCelda(nuevaPos.x, nuevaPos.y).setTipoContenido(2);
-                }
-                */
             }
         }
     }
     
-    public IntPair devuelveRandomAdjacente(Celda[][] lab, int x, int y, int max_x, int max_y, int i) {
-        // REHACER
+    public IntPair devuelveRandomAdjacente(Laberinto lab, int x, int y, int i) {
+
         Random rnd = new Random();
         
         IntPair pair;
         List<IntPair> posibles = new ArrayList<>();
 
         // checkeamos nodo a la derecha:
-        if ((x > i) && ((lab[x - i][y]).getTipo() == tipo)) {
+        if (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo) {
             pair = new IntPair(x-i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo arriba
-        if ((y > i) && ((lab[x][y - i]).getTipo() == tipo)) {
+        if (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo) {
             pair = new IntPair(x, y-i);
             posibles.add(pair);
         }
         
         // checkeamos nodo izquierda
-        if ((x < max_x - i) && ((lab[x + i][y]).getTipo() == tipo)) {
+        if (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo) {
             pair = new IntPair(x+i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo derecha
-        if ((y < max_y - i) && ((lab[x][y + i]).getTipo() == tipo)) {
-            pair = new IntPair(x, y+i);
+        if (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo) {
+            pair = new IntPair(x, y + i);
             posibles.add(pair);
         }
         
