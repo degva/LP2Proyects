@@ -95,7 +95,7 @@ public class Render {
      * @param avatar
      * @return -1 si avatar esta en ANTERIOR, 1 si avatar esta en SIGUIENTE, si no return = 0
      */
-    public void Render(int nivel, Laberinto lab, Avatar avatar) {        
+    public void Render(Avatar avatar,Laberinto lab, int nivel) {        
         List<String> listaDatos = ObtenerListaDatos(avatar);
         // List<Enemigo> listaEnemigos = lab.getEnemigos();
         int state = 0;
