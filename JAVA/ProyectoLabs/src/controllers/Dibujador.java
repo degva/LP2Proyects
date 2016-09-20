@@ -47,7 +47,10 @@ public class Dibujador {
             for (int i = 0; i < saco_aux.getSize(); i++) {
                 aux = Integer.toString(i + 1) + ". ";
                 item = saco_aux.getItem(i);
+<<<<<<< HEAD:JAVA/Lab1/src/controllers/Dibujador.java
+=======
                 // aux.concat(item.getNombre());
+>>>>>>> dev:JAVA/ProyectoLabs/src/controllers/Dibujador.java
                 String aux2 = item.toString();
                 String aux3 = aux.concat(aux2);
                 datos.add(aux3);

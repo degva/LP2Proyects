@@ -13,11 +13,13 @@ public class Avatar implements Entidad {
     private int _posX;
     private int _posY;
     private final char _elementoGrafico;
+    private String _nombre;
     
-    public Avatar(int posX, int posY, char elemGraf) {
+    public Avatar(int posX, int posY, String nombre) {
         _posX = posX;
         _posY = posY;
-        _elementoGrafico = elemGraf;
+        _elementoGrafico = 'A';
+        _nombre = nombre;
     }
     
     @Override
