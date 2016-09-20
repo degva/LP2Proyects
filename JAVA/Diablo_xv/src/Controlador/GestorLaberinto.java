@@ -56,13 +56,18 @@ public class GestorLaberinto {
             art_i = (rnd.nextInt(max_i/2)*2 +1);
             art_j = (rnd.nextInt(max_j/2)*2 +1);
             //Modificar el constructor de artefacto
+            // **D* Gina, creo que necesitamos un nuevo gestor. Ya qe no podemos crear
+            // un artefacto ya que es una clase general. Deberiamos crear un
+            // arma/armadura esas cosas :v
             /*
-            Artefacto a = new Artefacto("Artefacto " + i);
+            Artefacto a = GestorArtefacto()
+            // Artefacto a = new Artefacto("Artefacto " + i);
             */
     
             //l.agregarArtefacto(a); SI NO NO COMPILA
             
             //Aqui tambien hay algo que modificar---------------------------------------------------------------------------
+            // **D* Gina, esto lo iba a hacer Fabricio
             /*
             l.getCelda(art_i, art_j).setTipoContenido(3);
             */
@@ -83,6 +88,9 @@ public class GestorLaberinto {
             //voy a considerar que los enemigos aparezcan en los nodos (impares)xd
             //porque sino tendria que estar probando para cada celda que no 
             //sea una pared
+            // **D* Gina, realmente necesitamos una funcion que devuelve una celda
+            // totalmente vacia. Si no, podrias estar sobreescribiendo un artefacto
+            // con un enemigo :v
             ene_i = (rnd.nextInt(max_i/2)*2 +1);
             ene_j = (rnd.nextInt(max_j/2)*2 +1);
             //Creamos el enemigo
@@ -94,6 +102,7 @@ public class GestorLaberinto {
             //l.agregarEnemigo(e); ESTO SI SE QUEDA, PERO ASI PORQUE SINO NO COMPILA
             
             //Aqui tambien hay algo que modificar---------------------------------------------------------------------------
+            // **D* Gina, esto lo iba a hacer Fabricio x2
             /*
             l.getCelda(ene_i, ene_j).setTipoContenido(2);
             */

@@ -48,7 +48,7 @@ public class GestorJuego {
     public void CrearListaLaberintos() {
         int _numLaberintos = (int)(Math.random()*10+5);
         for (int i = 0; i < _numLaberintos; i++) {
-            _laberintos.add(GestorLaberinto.CrearLaberinto());
+            _laberintos.add(_gestorLab.CrearLaberinto());
         }
     }
     
