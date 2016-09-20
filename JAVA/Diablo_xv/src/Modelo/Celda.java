@@ -15,7 +15,7 @@ public class Celda {
     // private TipoCelda tipo;
     
     private ObjetoGrafico _tipo; //Pared o Pasadizo
-    private ObjetoGrafico _contenido; //Enemigo, Artefacto, Avatar, Anterior, Siguiente
+    private ObjetoGrafico _contenido; //Enemigo, Artefacto, Avatar, Anterior, Siguiente, NULL
 
     public Celda(ObjetoGrafico tipo) {
         if (tipo instanceof Pared || tipo instanceof Pasadizo){

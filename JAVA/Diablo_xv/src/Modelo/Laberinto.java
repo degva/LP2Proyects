@@ -8,6 +8,8 @@ package Modelo;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+
 /**
  *
  * @author degva
@@ -19,15 +21,18 @@ public class Laberinto {
     private final int _sizeM;
     private final int _sizeN;
     private float _pctEnemigo;
-    private Celda[][] _laberinto;
+    public Celda[][] _laberinto;
     private int[] _nivelesEnemigo;
     
-    private final ArrayList<Enemigo> _listaEnemigos;
-    private final ArrayList<Artefacto> _listaArtefactos;
+    private IntPair _anterior;
+    private IntPair _siguiente;
+   
+    private ArrayList<Enemigo> _listaEnemigos;
+    private ArrayList<Artefacto> _listaArtefactos;
     
     public Laberinto(int sizeM, int sizeN) {
         Random rnd = new Random();
-        
+
         this._sizeM = sizeM;
         this._sizeN = sizeN;
         
@@ -68,27 +73,31 @@ public class Laberinto {
         this._pctEnemigo = _pctEnemigo;
     }
 
-    /**
-     * @return the _laberinto
-     */
-   
-    public Celda[][] getLaberinto() {
-        return _laberinto;
-    }
-
-    /**
-     * @return the _nivelesEnemigo
-     */
-    public int[] getNivelesEnemigo() {
-        return _nivelesEnemigo;
+    public void agregarArtefacto(Artefacto a){
+        _laberinto[a.getPosX()][a.getPosY()].setContenido(a);
+        _listaArtefactos.add(a);
     }
     
     public void agregarEnemigo(Enemigo e){
+        _laberinto[e.getPosX()][e.getPosY()].setContenido(e);
         _listaEnemigos.add(e);
     }
     
-    public void agregarArtefacto(Artefacto a){
-        _listaArtefactos.add(a);
+    public void setTipoCelda(int x, int y, Celda nuevaCelda){
+        _laberinto[x][y] = nuevaCelda;
+    }
+    
+    public ObjetoGrafico getTipoCelda(int x, int y){
+        return _laberinto[x][y].getTipo();
+    }
+    
+    public ObjetoGrafico getContenidoCelda(int x, int y){
+        return _laberinto[x][y].getContenido();
+    }
+    
+    //verifica que la celda este vacia
+    public Boolean celdaVacia(int x, int y){
+        return ((_laberinto[x][y].getTipo() instanceof Pasadizo) && (_laberinto[x][y].getContenido() == null));
     }
     
     public Celda getCelda(int x, int y) {
