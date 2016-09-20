@@ -82,10 +82,15 @@ public class Juego {
         // Otra vista: Consola
         int di;
         while (_gestorJuego.GetGameOn()) {
-            _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto));
+            _render.Render(_idxLaberinto, _avatar, ObtenerLaberinto(_idxLaberinto));
             di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
             _idxLaberintoAnterior = _idxLaberinto;
             _idxLaberinto += di;
+            if (di == -1) {
+                _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverSiguiente());
+            } else if (di == 1) {
+                _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverAnterior());
+            }
             _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
         }
     }
