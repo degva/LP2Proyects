@@ -18,8 +18,8 @@ public class Laberinto {
     
     //public static final int MAX_SIZE_LAB = 10;
     
-    private int _sizeM;
-    private int _sizeN;
+    private final int _sizeM;
+    private final int _sizeN;
     private float _pctEnemigo;
     public Celda[][] _laberinto;
     private int[] _nivelesEnemigo;
@@ -99,5 +99,79 @@ public class Laberinto {
     public Boolean celdaVacia(int x, int y){
         return ((_laberinto[x][y].getTipo() instanceof Pasadizo) && (_laberinto[x][y].getContenido() == null));
     }
-
+    
+    public Celda getCelda(int x, int y) {
+        return _laberinto[x][y];
+    }
+    
+    public IntPair DevolverAnterior() {
+        IntPair aux = null;
+        for (int i = 0; i < this.getSizeM(); i++) {
+            for (int j = 0; j < this.getSizeN(); j++) {
+                if ( this.getCelda(i, j).getTipo() instanceof Anterior) {
+                    aux = new IntPair(i,j);
+                }
+            }
+        }
+        return aux;
+    }
+    
+    public IntPair DevolverSiguiente() {
+        IntPair aux = null;
+        for (int i = 0; i < this.getSizeM(); i++) {
+            for (int j = 0; j < this.getSizeN(); j++) {
+                if ( this.getCelda(i, j).getTipo() instanceof Siguiente) {
+                    aux = new IntPair(i,j);
+                }
+            }
+        }
+        return aux;
+    }
+    
+    public Enemigo obtenerEnemigoActual(int x, int y){
+        // a esta funcion se le va a pasar la ubicacion del avatar
+        // para asi poder detectar a que enemigo de la lista se refiere
+        Enemigo e = _listaEnemigos.get(0); 
+        for (int i = 0; i < _listaEnemigos.size(); i++) {
+            e = _listaEnemigos.get(i);
+            if (e.getPosX() == x && e.getPosY() == y)
+                break;
+        }
+        return e;
+    }
+    
+    public void retornarEnemigoActual(Enemigo eNew){
+        Enemigo e;
+        int i;
+        int posX = eNew.getPosX();
+        int posY = eNew.getPosY();
+        
+        for (i = 0; i < _listaEnemigos.size(); i++) {
+            e = _listaEnemigos.get(i);
+            if (e.getPosX() == posX && e.getPosY() == posY)
+                break;
+        }
+        if (eNew.vida <= 0) _listaEnemigos.remove(i); // eliminar de la lista si muere
+        else _listaEnemigos.set(i, eNew);
+         
+        
+    }
+    public Artefacto obtenerArtefactoActual(int x, int y){
+        // a esta funcion se le va a pasar la ubicacion del avatar
+        // para asi poder detectar a que enemigo de la lista se refiere
+        int i;
+        Artefacto a = _listaArtefactos.get(0); 
+        for (i = 0; i < _listaArtefactos.size(); i++) {
+            a = _listaArtefactos.get(i);
+            if (a.getPosX() == x && a.getPosY() == y)
+                break;
+        }
+        //se quita el artefacto de la lista, 
+        //para que luego el render no lo imprima
+        _listaArtefactos.remove(i);
+        return a;
+    }
+    
+    
+    
 }

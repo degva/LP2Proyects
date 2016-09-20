@@ -5,11 +5,10 @@
  */
 package Controlador;
 
+import Modelo.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Stack;
-import java.util.ArrayList;
-import Modelo.*;
 
 /**
  *
@@ -158,7 +157,70 @@ public class GestorLaberinto {
         } 
     }
     
-    public void MoverEnemigos() {
+    public void MoverEnemigos(Laberinto l) {
+        Enemigo e; 
+        IntPair nuevaPos;
         
+        for (int i = 0; i < l.getSizeM(); i++) {
+            for (int j = 0; j < l.getSizeN(); j++) {
+                if (l.getCelda(i, j).getContenido() instanceof Enemigo) {
+                    e = (Enemigo) l.getCelda(i, j).getContenido();
+                    l.getCelda(i, j).setContenido(null);
+                    
+                    nuevaPos = devuelveRandomAdjacente(l, i, j, 1);
+                    e.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                    l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                }
+            }
+        }
+    }
+    
+    public IntPair devuelveRandomAdjacente(Laberinto lab, int x, int y, int i) {
+
+        Random rnd = new Random();
+        
+        IntPair pair;
+        List<IntPair> posibles = new ArrayList<>();
+
+        // checkeamos nodo a la derecha:
+        if (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo) {
+            pair = new IntPair(x-i, y);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo arriba
+        if (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo) {
+            pair = new IntPair(x, y-i);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo izquierda
+        if (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo) {
+            pair = new IntPair(x+i, y);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo derecha
+        if (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo) {
+            pair = new IntPair(x, y + i);
+            posibles.add(pair);
+        }
+        
+        // si no tiene, devolvemos (-1,-1)
+        if (posibles.isEmpty()) {
+            pair = new IntPair(-1,-1);
+        } else {
+            // Hey, aqui creo que podria haber error. 
+            // mi cerebro no me da para saber si en el caso hipotetico que me de
+            // el tamano de la lista, me bote error por overflow() :v
+            // Ej:
+            // Digamos que posibles.size() me de 1. Entonces, el random sera o 0
+            // o 1. Entonces, si sale 1, posibles.get es por las. O en todo caso
+            // si sale 0, puede que posibles.get tambien sea por las... 
+            // TODO: revisar documentación java :v
+            pair = posibles.get(rnd.nextInt(posibles.size()));
+        }
+        
+        return pair;
     }
 }

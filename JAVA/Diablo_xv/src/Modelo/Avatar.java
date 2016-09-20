@@ -9,55 +9,95 @@ package Modelo;
  *
  * @author degva
  */
-public class Avatar implements Entidad {
-    private int _posX;
-    private int _posY;
+public class Avatar extends Entidad {
+    private Saco saco;
+    private Armadura armaduraActual; 
+    private Arma armaActual;
     private final char _elementoGrafico;
-    private String _nombre;
+
     
-    public Avatar(int posX, int posY, String nombre) {
-        _posX = posX;
-        _posY = posY;
-        _elementoGrafico = 'A';
-        _nombre = nombre;
+
+    
+     public Avatar(int posicionX, int poscionY, String nombre, int nivel){
+        super(posicionX,poscionY,nombre,nivel, 100);
+        super.setVidaActual(100);
+        this.saco = new Saco();
+        this.armaduraActual = null;
+        this.armaActual = null;
+        this._elementoGrafico = 'A';
     }
+     
+    public Avatar(IntPair coord, String nombre, int nivel){
+        super(coord.x, coord.y,nombre,nivel, 100);
+        super.setVidaActual(100);
+        this.saco = new Saco();
+        this.armaduraActual = null;
+        this.armaActual = null;
+        this._elementoGrafico = 'A';
+    }
+    
+
+     /**
+     * @return the saco
+     */
+    public Saco getSaco() {
+        return this.saco;
+    }
+    
+    /**
+     * @param saco the saco to set
+     */
+    public void setSaco(Saco saco) {
+        this.saco = saco;
+    }
+
+    /**
+     * @return the armaduraActual
+     */
+    public Armadura getArmaduraActual() {
+        return armaduraActual;
+    }
+
+    /**
+     * @param armaduraActual the armaduraActual to set
+     */
+    public void setArmaduraActual(Armadura armaduraActual) {
+        this.armaduraActual = armaduraActual;
+    }
+
+    /**
+     * @return the armaActual
+     */
+    public Arma getArmaActual() {
+        return armaActual;
+    }
+
+    /**
+     * @param armaActual the armaActual to set
+     */
+    public void setArmaActual(Arma armaActual) {
+        this.armaActual = armaActual;
+    }
+
+
+    /*
+    //Aumentar nivel
+    public void levelUp(){
+        this.nivel++;
+    }
+    */
+        
+    //Reocger Artefacto
+    public void recogerArtefacto(Artefacto newArtefacto){
+        getSaco().agregarArtefacto(newArtefacto);
+    }
+    
     
     @Override
     public void Dibujar() {
         System.out.print(_elementoGrafico);
     }
     
-    @Override
-    public void Mover(int dx, int dy) {
-        setPosX(getPosX() + dx);
-        setPosY(getPosY() + dy);
-    }
     
-    /**
-     * @return the _posX
-     */
-    public int getPosX() {
-        return _posX;
-    }
 
-    /**
-     * @param _posX the _posX to set
-     */
-    public void setPosX(int _posX) {
-        this._posX = _posX;
-    }
-
-    /**
-     * @return the _posY
-     */
-    public int getPosY() {
-        return _posY;
-    }
-
-    /**
-     * @param _posY the _posY to set
-     */
-    public void setPosY(int _posY) {
-        this._posY = _posY;
-    }
 }

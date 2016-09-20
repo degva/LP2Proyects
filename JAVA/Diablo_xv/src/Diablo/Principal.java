@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package Diablo;
+import Controlador.*;
 /**
  *
  * @author degva
  */
 public class Principal {
     public static void main(String[] args) {
-        // 
+        Juego juego = new Juego("test");
+        juego.Jugar();
     }
 }

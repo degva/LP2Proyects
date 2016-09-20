@@ -4,11 +4,20 @@
  * and open the template in the editor.
  */
 package Controlador;
+import Modelo.*;
 
 /**
  *
- * @author degva
+ * @author fabricioandres
  */
-public class GestorJuego {
+public class GestorAvatar {
+    
+    private Avatar _avatar;
+    
+    public GestorAvatar(Avatar avatar) {
+        this._avatar = avatar;
+    }
+    
+    
     
 }
