@@ -73,11 +73,13 @@ public class Avatar extends Entidad {
         this.armaActual = arma;
     }
     
+    public void setPosXY(IntPair pair){
+        this.setPosX(pair.x);
+        this.setPosY(pair.y);
+    }
+    
     @Override
     public void Dibujar() {
         System.out.print(_elementoGrafico);
-    }
-    
-    
-
+    }        
 }
