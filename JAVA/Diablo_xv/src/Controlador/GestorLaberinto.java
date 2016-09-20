@@ -9,21 +9,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import java.util.ArrayList;
-import Modelo.Artefacto;
-import Modelo.Celda;
-import Modelo.Enemigo;
-import Modelo.Laberinto;
+import Modelo.*;
 
 /**
  *
  * @author Gina
  */
-
-class IntPair {
-  final int x;
-  final int y;
-  IntPair(int x, int y) {this.x=x;this.y=y;}
-}
 
 public class GestorLaberinto {
     
@@ -34,7 +25,7 @@ public class GestorLaberinto {
         
     }
     
-    public Laberinto CrearLaberinto(){
+    public Laberinto CrearLaberinto(int numeroLaberinto){
         Random rnd = new Random();
         
         /*  Inicializamos el laberinto  */
@@ -109,91 +100,61 @@ public class GestorLaberinto {
             }
         }
         */
+        
+        /*AGREGRA LO QUE DIJO WILLIAM*/
     
-        CrearListaEnemigos(nuevoLaberinto);
-        CrearListaArtefactos(nuevoLaberinto);
+        CrearListaEnemigos(nuevoLaberinto, numeroLaberinto);
+        CrearListaArtefactos(nuevoLaberinto, numeroLaberinto);
         
         return nuevoLaberinto;
     }
     
     //NO SE QUE HACER CON EL DEVUELVE RANDOM ADYACENTE, LO HAGO DEPSUES C: --------------------------------------------------------------
+    /*Agregra anterio y siguiente*/
     
-    public void CrearListaArtefactos(Laberinto l) {
+    public void CrearListaArtefactos(Laberinto l, int numeroLaberitno) {
         Random rnd = new Random();
-        int max_i = l.getSizeM();
-        int max_j = l.getSizeN();
+        int maxX = l.getSizeM();
+        int maxY = l.getSizeN();
 
-        int art_i, art_j, opcion;
+        int artX, artY;
+        GestorArtefacto gestorArt = new GestorArtefacto();
+        
         for(int i=0; i< NRO_ARTEFACTOS; i++){
             //nodos impares
             //definimos las coordenadas donde van a estar los artefactos
-            art_i = (rnd.nextInt(max_i/2)*2 +1);
-            art_j = (rnd.nextInt(max_j/2)*2 +1);
+            artX = (rnd.nextInt(maxX/2)*2 +1);
+            artY = (rnd.nextInt(maxY/2)*2 +1);
             
+            //verificamos que las cordenadas no esten ocupadas
+            Celda auxCelda = new Celda(l.getTipoCelda(artX, artY));
+            auxCelda.setContenido(l.getContenidoCelda(artX, artY));
             
-            /*
-            //Definimos si lo que vamos a crear es un arma o una armadura
-            opcion = rnd.nextInt(1);
-            
-            if(opcion == 0){
-                //codigo para crear un arma
-            } else if (opcion == 1){
-                //creamos una armadura
-            }
-            */
-            
-            
-            //Modificar el constructor de artefacto
-            // **D* Gina, creo que necesitamos un nuevo gestor. Ya qe no podemos crear
-            // un artefacto ya que es una clase general. Deberiamos crear un
-            // arma/armadura esas cosas :v
-            /*
-            Artefacto a = GestorArtefacto()
-            // Artefacto a = new Artefacto("Artefacto " + i);
-            */
-    
-            //l.agregarArtefacto(a); SI NO NO COMPILA
-            
-            //Aqui tambien hay algo que modificar---------------------------------------------------------------------------
-            // **D* Gina, esto lo iba a hacer Fabricio
-            /*
-            l.getCelda(art_i, art_j).setTipoContenido(3);
-            */
+            if(l.celdaVacia(artX, artY)){ //si la celda es del tipo pasadizo y esta vacia
+                //agregamos un nuevo artefacto
+                l.agregarArtefacto(gestorArt.CrearArtefacto(artX, artY, numeroLaberitno));
+            } else i--;
         }
-        
     }
     
-    public void CrearListaEnemigos(Laberinto l) {
+    public void CrearListaEnemigos(Laberinto l, int numeroLaberitno) {
         Random rnd = new Random();
-        int max_i = l.getSizeM();
-        int max_j = l.getSizeN();
-        // hallar el nro de enemigos por mapa segun la probabilidad de que aparezca
-        //la formula puede ir cambiando
-        int nroEnemigos = Math.round((l.getPctEnemigo()* max_i * max_j)/20);
-        int ene_i, ene_j;
-        int niveles_Enemigo[] = l.getNivelesEnemigo();
+        int maxX = l.getSizeM();
+        int maxY = l.getSizeN();
+        
+        //Hallar el nro de enemigos por mapa segun la probabilidad de que aparezca
+        //La formula puede ir cambiando
+        int nroEnemigos = Math.round((l.getPctEnemigo()* maxX * maxY)/20);
+        int eneX, eneY;
+        GestorEnemigo gestorEne = new GestorEnemigo();
+        
         for(int i=0; i< nroEnemigos; i++){
-            //voy a considerar que los enemigos aparezcan en los nodos (impares)xd
-            //porque sino tendria que estar probando para cada celda que no 
-            //sea una pared
-            // **D* Gina, realmente necesitamos una funcion que devuelve una celda
-            // totalmente vacia. Si no, podrias estar sobreescribiendo un artefacto
-            // con un enemigo :v
-            ene_i = (rnd.nextInt(max_i/2)*2 +1);
-            ene_j = (rnd.nextInt(max_j/2)*2 +1);
-            //Creamos el enemigo
-            //Aqui hay que modificar el constructor de enemigo--------------------------------------------------------------
-            /*
-            Enemigo e = new Enemigo (ene_i,ene_j, "Enemigo", niveles_Enemigo[rnd.nextInt(max_i)]);
-            */
+            eneX = (rnd.nextInt(maxX/2)*2 +1);
+            eneY = (rnd.nextInt(maxY/2)*2 +1);
             
-            //l.agregarEnemigo(e); ESTO SI SE QUEDA, PERO ASI PORQUE SINO NO COMPILA
-            
-            //Aqui tambien hay algo que modificar---------------------------------------------------------------------------
-            // **D* Gina, esto lo iba a hacer Fabricio x2
-            /*
-            l.getCelda(ene_i, ene_j).setTipoContenido(2);
-            */
+            if(l.celdaVacia(eneX, eneY)){ //si la celda es del tipo pasadizo y esta vacia
+                l.agregarEnemigo(gestorEne.CrearEnemigo(eneX, eneY, numeroLaberitno));
+            } else i--;
         } 
     }
     

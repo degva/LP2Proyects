@@ -5,18 +5,19 @@
  */
 package Controlador;
 
-import Modelo.Enemigo;
 import java.util.ArrayList;
+import java.util.Random;
 import Modelo.*;
-import Modelo.Celda;
-import Modelo.Enemigo;
-import Modelo.Laberinto;
+
 
 /**
  *
  * @author Gina
  */
 public class GestorArtefacto {
+    private static final int NRO_ARTEFACTOS = 15; //por ahora
+    
+    
     private ArrayList<String> _armasDisponibles; //arreglo con las armas que se pueden agregar al laberinto
     private ArrayList<String> _armadurasDisponibles; //arreglo con las armaduras que se pueden agregar al laberinto 
     
@@ -54,6 +55,33 @@ public class GestorArtefacto {
         _armadurasDisponibles.add("Armadura tipo 13");
         _armadurasDisponibles.add("Armadura tipo 14");
         _armadurasDisponibles.add("Armadura tipo 15"); 
+    }
+    
+    public Artefacto CrearArtefacto(int x, int y, int numeroLaberinto){
+        Random rnd = new Random();
+        
+        int tipoArtefacto = rnd.nextInt(2);//0=ARMA | 1=ARMADURA
+        int numeroArtefcato = rnd.nextInt(NRO_ARTEFACTOS);//Devuelve el numero dle nombre dle artefacto
+        
+        //declaramos los atributos comunes a ambos
+        String nombre;     
+        switch(tipoArtefacto){
+            case 0: //creamos un arma
+                int danoMin = rnd.nextInt(numeroLaberinto)+numeroLaberinto;
+                int danoMax = rnd.nextInt(2*numeroLaberinto)+numeroLaberinto;
+                nombre =  _armasDisponibles.get(numeroArtefcato);
+                
+                Arma nuevaArma = new Arma(nombre, x, y, danoMin, danoMax);
+                return nuevaArma;
+            case 1: //creamos un armadura
+                int defensa = rnd.nextInt(2*numeroLaberinto)+numeroLaberinto;
+                nombre = _armadurasDisponibles.get(numeroArtefcato);
+                
+                Armadura nuevaArmadura = new Armadura(nombre, x, y, defensa);
+                return nuevaArmadura;
+        }
+        
+        return null; 
     }
     
 }
