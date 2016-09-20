@@ -9,6 +9,11 @@ package Modelo;
  *
  * @author degva
  */
-public class Pasadizo {
+public class Pasadizo implements ObjetoGrafico{
+
+    @Override
+    public void Dibujar() {
+        System.out.print(" ");
+    }
     
 }

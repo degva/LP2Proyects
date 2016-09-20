@@ -9,6 +9,9 @@ package Modelo;
  *
  * @author degva
  */
-public class Pared {
-    
+public class Pared implements ObjetoGrafico{
+    @Override
+    public void Dibujar(){
+        System.out.print("#");
+    }
 }

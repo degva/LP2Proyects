@@ -10,5 +10,5 @@ package Modelo;
  * @author degva
  */
 public interface ObjetoGrafico {
-    void Dibujar();
+    public void Dibujar();
 }
