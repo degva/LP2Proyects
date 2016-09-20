@@ -18,6 +18,8 @@ public class GestorAvatar {
         this._avatar = avatar;
     }
     
-    
+    public void RecogerArtefacto(Artefacto artefacto){
+        
+    }
     
 }
