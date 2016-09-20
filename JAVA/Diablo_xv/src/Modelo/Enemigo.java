@@ -9,53 +9,24 @@ package Modelo;
  *
  * @author degva
  */
-public class Enemigo implements Entidad {
-    private int _posX;
-    private int _posY;
-    private final char _elementoGrafico;
+public class Enemigo extends Entidad {
     
-    public Enemigo(int posX, int posY, char elemGraf) {
-        _posX = posX;
-        _posY = posY;
-        _elementoGrafico = elemGraf;
+    private final char _elementoGrafico;
+    int ataque;
+    
+    public Enemigo(int posicionX, int poscionY, String nombre, int nivel){
+        super(posicionX,poscionY,nombre,nivel, nivel * 2);
+        super.setVidaActual(nivel * 2);
+        ataque = this.getNivel() * 2; 
+        _elementoGrafico = 'E';
     }
+    
+
     
     @Override
     public void Dibujar() {
         System.out.print(_elementoGrafico);
     }
     
-    @Override
-    public void Mover(int dx, int dy) {
-        setPosX(getPosX() + dx);
-        setPosY(getPosY() + dy);
-    }
-    
-    /**
-     * @return the _posX
-     */
-    public int getPosX() {
-        return _posX;
-    }
 
-    /**
-     * @param _posX the _posX to set
-     */
-    public void setPosX(int _posX) {
-        this._posX = _posX;
-    }
-
-    /**
-     * @return the _posY
-     */
-    public int getPosY() {
-        return _posY;
-    }
-
-    /**
-     * @param _posY the _posY to set
-     */
-    public void setPosY(int _posY) {
-        this._posY = _posY;
-    }
 }
