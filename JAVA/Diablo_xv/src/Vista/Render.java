@@ -71,14 +71,7 @@ public class Render {
             aux = lab.getCelda(x, y);
             tipo = aux.getTipo();
             contenido = aux.getContenido();
-            if (tipo instanceof Pasadizo){
-                if(contenido instanceof Enemigo)
-                    contenido.Dibujar();
-                else if (contenido instanceof Artefacto)
-                    contenido.Dibujar();
-                else if (contenido instanceof Anterior)
-                    contenido.Dibujar();
-                else if (contenido instanceof Siguiente)
+            if (tipo instanceof Pasadizo){                
                     contenido.Dibujar();
             }else if(tipo instanceof Pared)
                 tipo.Dibujar();
