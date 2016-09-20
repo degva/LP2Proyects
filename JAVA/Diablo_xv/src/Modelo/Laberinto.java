@@ -94,7 +94,7 @@ public class Laberinto {
     public Celda getCelda(int x, int y) {
         return _laberinto[x][y];
     }
-
+    
     public IntPair DevolverAnterior() {
         IntPair aux = null;
         for (int i = 0; i < this.getSizeM(); i++) {
