@@ -21,12 +21,8 @@ public class Enemigo extends Entidad {
         _elementoGrafico = 'E';
     }
     
-
-    
     @Override
     public void Dibujar() {
         System.out.print(_elementoGrafico);
-    }
-    
-
+    }        
 }
