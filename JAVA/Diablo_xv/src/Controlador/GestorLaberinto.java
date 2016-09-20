@@ -5,13 +5,9 @@
  */
 package Controlador;
 
-import java.util.List;
+import Modelo.*;
+
 import java.util.Random;
-import java.util.ArrayList;
-import Modelo.Artefacto;
-import Modelo.Celda;
-import Modelo.Enemigo;
-import Modelo.Laberinto;
 
 /**
  *
@@ -109,15 +105,7 @@ public class GestorLaberinto {
         } 
     }
     
-    public void MoverEnemigos() {
+    public void MoverEnemigos(Laberinto lab) {
         
     }
-    
-    public IntPair DevolverAnterior(Laberinto lab) {
-        
-    }
-    
-    public IntPair DevolverSiguiente(Laberinto lab) {
-        
-    } 
 }

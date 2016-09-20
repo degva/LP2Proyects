@@ -45,7 +45,7 @@ public class Juego {
         nombre = input.nextLine();
         
         
-        _avatar = new Avatar(_gestorLab.DevolverAnterior(GetLaberintoActual()), username);
+        _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), username);
     }
     
     public void CrearListaLaberintos() {
@@ -83,11 +83,8 @@ public class Juego {
         String opcion;
         while (_gestorJuego.GetGameOn()) {
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto));
-            // Llamar al gestorJuego (o "Controlador Principal")
-            
-            // DEPRECATED
-            // Consola.MostrarMenu(_avatar, ObtenerLaberinto(_idxLaberinto));
-            //interprete.ProcesarComando(opcion, _avatar, ObtenerLaberinto(_idxLaberinto));
+            _gestorJuego.procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
+            _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
         }
     }
     

@@ -16,14 +16,14 @@ public class Laberinto {
     
     //public static final int MAX_SIZE_LAB = 10;
     
-    private int _sizeM;
-    private int _sizeN;
+    private final int _sizeM;
+    private final int _sizeN;
     private float _pctEnemigo;
     private Celda[][] _laberinto;
     private int[] _nivelesEnemigo;
     
-    private ArrayList<Enemigo> _listaEnemigos;
-    private ArrayList<Artefacto> _listaArtefactos;
+    private final ArrayList<Enemigo> _listaEnemigos;
+    private final ArrayList<Artefacto> _listaArtefactos;
     
     public Laberinto(int sizeM, int sizeN) {
         Random rnd = new Random();
@@ -90,5 +90,33 @@ public class Laberinto {
     public void agregarArtefacto(Artefacto a){
         _listaArtefactos.add(a);
     }
+    
+    public Celda getCelda(int x, int y) {
+        return _laberinto[x][y];
+    }
 
+    public IntPair DevolverAnterior() {
+        IntPair aux = null;
+        for (int i = 0; i < this.getSizeM(); i++) {
+            for (int j = 0; j < this.getSizeN(); j++) {
+                if ( this.getCelda(i, j).getTipo() instanceof Anterior) {
+                    aux = new IntPair(i,j);
+                }
+            }
+        }
+        return aux;
+    }
+    
+    public IntPair DevolverSiguiente() {
+        IntPair aux = null;
+        for (int i = 0; i < this.getSizeM(); i++) {
+            for (int j = 0; j < this.getSizeN(); j++) {
+                if ( this.getCelda(i, j).getTipo() instanceof Siguiente) {
+                    aux = new IntPair(i,j);
+                }
+            }
+        }
+        return aux;
+    }
+    
 }
