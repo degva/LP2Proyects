@@ -117,6 +117,6 @@ public class Laberinto {
     public ArrayList<Artefacto> getLista_artefactos() {
         return lista_artefactos;
     }
-      
+ 
 }
 

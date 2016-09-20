@@ -9,25 +9,31 @@ package controllers;
 import models.*;
 import enums.TipoCelda;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
 /**
  *
  * @author degva
  */
-public class Juego {
-    public static final int NRO_ARTEFACTOS= 10;
-    
-    private ArrayList<Laberinto> lista_laberintos;
-    private ArrayList<IntPair> lista_anteriores; 
-    
-    private Dibujador renderer;
-    private Avatar avatar;
-    private GestorLaberinto gestor;
-    private int laberintoActual;
-    private int totalLaberintos=0;
 
+public class Juego {
+    // Creacion de constantes
+    public static final int NRO_ARTEFACTOS = 10;
+    public static final int MAX_LABERINTOS = 10;
+    public static final int MIN_LABERINTOS = 5;
+    
+    private final ArrayList<Laberinto> lista_laberintos;
+    private final ArrayList<IntPair> lista_anteriores; 
+    
+    private final Dibujador renderer;
+    private final Avatar avatar;
+    private final GestorLaberinto gestor;
+    private final int totalLaberintos;
+    
+    private int laberintoActual;
+    private int laberintoAnterior;
+    
     public Juego() {
         Scanner input = new Scanner(System.in);
 
@@ -35,106 +41,132 @@ public class Juego {
         lista_anteriores = new ArrayList<>();
         gestor = new GestorLaberinto();
         renderer = new Dibujador();
-        laberintoActual = 0;
+        laberintoAnterior = laberintoActual = 0;
         
-        this.crearListaLaberintos(); // dentro de esto esta el crear listas
+        totalLaberintos = (int)(Math.random()*MAX_LABERINTOS + MIN_LABERINTOS);
+        
+        this.crearListaLaberintos();
         this.agregarAnteriorySiguiente();
-        //para poder colocar el avatar en el mapa en la casilla anterior :p
-        //this.agregarAnteriorySiguienteyColocarAvatar();
         
-        /* aqui se crea un nuevo objeto Avatar, pero debe modificarse el constructor
-        y agregarle el atributo de nombre :' */        
+        // Aqui debería haber una función que muestre la historia
+        
+        // aqui se crea un nuevo objeto Avatar      
         String nombre;
-        System.out.print("Insert your name:\n> ");
+        System.out.print("Ingresa tu nombre:\n> ");
         nombre = input.nextLine();
         
-        // el avatar inicia en la celda anterior del nivel 1,
-        // por lo cual creo que en la clase laberinto deberiamos tener como atributo
-        // las posiciones del ANTERIOR y SIGUIENTE, sino no sé como hariamos
-        // para pasar de un nivel a otro tambien :'
-        // ^ this
-        
+        // se coloca el avatar en la celda anterior del nivel 1.
         avatar = new Avatar(lista_anteriores.get(laberintoActual).x, lista_anteriores.get(laberintoActual).y , nombre, 1);
-        // estoy poniendo al avatar en la esquinita superior izquierda por mientras xd
     }
     
-    
-    // papus aqui va el bucle xd pero falta definir la lista de los laberintos y otras cosas
+    /**
+     * Bucle principal del juego
+     */
     public void Start() {
-        //renderer.Render(laberinto);
         Scanner input = new Scanner(System.in);
-        int sigAnt;
         String opcion;
-        int laberintoAnterior = 0;
+        
+        int sigAnt;
+        
         OUTER:
         while (true) {
-            clearScreen();    
-            if (laberintoActual != laberintoAnterior){
-                laberintoAnterior = laberintoActual;
+            CLS.clearConsole();
+            if (laberintoActual != laberintoAnterior){ //significa que acabamos de cambiar de nivel
+                laberintoAnterior = laberintoActual;                
                 avatar.setPosicionX(lista_anteriores.get(laberintoActual).x);
-                avatar.setPosicionY(lista_anteriores.get(laberintoActual).y);
+                avatar.setPosicionY(lista_anteriores.get(laberintoActual).y);                
+            } else {
+                lista_laberintos
+                    .get(laberintoActual)
+                    .getCelda(
+                        lista_anteriores.get(laberintoActual).x, 
+                        lista_anteriores.get(laberintoActual).y)
+                    .setActivarAnterior(1);
             }
-            System.out.println("LaberintoActual = " + laberintoActual);
-            /*AQUI SE IMPRIME EL LABERINTO*/
+
             sigAnt = renderer.Render(laberintoActual, lista_laberintos.get(laberintoActual), avatar);
+
+            // Movemos a los enemigos de forma random
+            gestor.moverEnemigos(lista_laberintos.get(laberintoActual));
             
+            // en el caso que suba de nivel (al siguiente laberinto)
             if (sigAnt == 1){
-                if (laberintoActual == totalLaberintos){
+                if ((laberintoActual + 1) == totalLaberintos){
                     System.out.println("FELICIDADES HAS GANADO EL JUEGO!!!!");
                     break;
                 }else{
                     System.out.println("Pasando a siguiente nivel");
+
+                    lista_laberintos
+                        .get(laberintoActual)
+                        .getCelda(
+                            lista_anteriores.get(laberintoActual).x, 
+                            lista_anteriores.get(laberintoActual).y)
+                        .setActivarAnterior(0);
+
                     laberintoActual++;
-                    // cuando se va a otro laberinto usualmente se loquea y se pone sobre un muro :v
-                    avatar.setPosicionX(1);
-                    avatar.setPosicionY(1);
                     continue;
                 }                
             }
-            else if (sigAnt == -1 && laberintoActual != laberintoAnterior ){
+            
+            // en el caso que baje de nivel (al laberinto anterior)
+            if (sigAnt == -1 && laberintoActual != 0 &&
+                    lista_laberintos
+                        .get(laberintoActual)
+                        .getCelda(
+                                lista_anteriores.get(laberintoActual).x, 
+                                lista_anteriores.get(laberintoActual).y)
+                        .getActivarAnterior() == 1)
+            {
                 System.out.println("Pasando a nivel anterior");
+                lista_laberintos
+                    .get(laberintoActual)
+                    .getCelda(
+                            lista_anteriores.get(laberintoActual).x, 
+                            lista_anteriores.get(laberintoActual).y)
+                    .setActivarAnterior(0);
                 laberintoActual--;
-                // cuando se va a otro laberinto usualmente se loquea y se pone sobre un muro :v
-                avatar.setPosicionX(1);
-                avatar.setPosicionY(1);
                 continue;
             }
             
-            System.out.print("\n\n");
-            System.out.print("Escriba una accion:\n" );
-            System.out.print("> [mover 'x'] (siendo x: arriba, abajo, derecha, izquierda):\n" );
-            System.out.print("> [interactuar]\n" );
+            System.out.println("\n");
+            System.out.println("Escriba una accion:");
+            System.out.println("> [mover 'x'] (siendo x: arriba, abajo, derecha, izquierda):" );
+            System.out.println("> [interactuar]");
+
             /*para implementar estos 2, nececito que se cree la lista de artefactos*/
             System.out.println("> [cambiar arma]");
             System.out.println("> [cambiar armadura]");
+
             System.out.print("> [salir]\n\n - > " );
+            
             opcion = input.nextLine();
 
             if (null != opcion) {
-                /*Los else son solo para porbar que la funcionalidad trabaja bien*/
+                // Los else son solo para probar que la funcionalidad trabaja bien
                 int posicionActualX = avatar.getPosicionX();
                 int posicionActualY = avatar.getPosicionY();
                 Laberinto actualLaberinto = lista_laberintos.get(laberintoActual);
                 switch (opcion) {
-                    case "w"://"mover arriba":
+                    case "w":
                     case "mover arriba":
                         if(validarMovimiento(actualLaberinto,posicionActualX,(posicionActualY-1)))
                             avatar.moveUp();
                         else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
-                    case "s"://"mover abajo":
+                    case "s":
                     case "mover abajo":
                         if(validarMovimiento(actualLaberinto,posicionActualX,(posicionActualY+1)))
                             avatar.moveDown();
                         else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
-                    case "a"://"mover izquierda":
+                    case "a":
                     case "mover izquierda":
                         if(validarMovimiento(actualLaberinto,(posicionActualX-1),posicionActualY))
                             avatar.moveLeft();
                         else System.out.println("\n NO TE PUEDES MOVER AHI \n");
                         break;
-                    case "d"://"mover derecha":
+                    case "d":
                     case "mover derecha":
                         if(validarMovimiento(actualLaberinto,(posicionActualX+1),posicionActualY))
                             avatar.moveRight();
@@ -147,10 +179,10 @@ public class Juego {
                         // agregar artefacto al saco
                         break;
                     case "cambiar arma":
-                        
+                        // Por implementar
                         break;
                     case "cambiar armadura":
-                        
+                        // Por implementar
                         break;
                     case "salir":
                         System.out.print("\nGudbai\n");
@@ -162,30 +194,22 @@ public class Juego {
             }
         }
     }
-    
-    public static void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
-    }  
 
+    /**
+     * Crea la lista de laberintos para el Juego
+     */
     private void crearListaLaberintos(){                
-        Random rnd = new Random(0);
-        int MAX_LABERINTOS = 10; // un numero maximo de laberintos en el juego
-        int MIN_LABERINTOS = 5; // un numero minimo de laberintos en el juego
-        totalLaberintos = (int)(Math.random()*MAX_LABERINTOS + MIN_LABERINTOS);
         for (int i = 0; i < totalLaberintos; i++) {
             Laberinto objLab = new Laberinto();            
-            //objLab = gestor.generarLaberinto(objLab, objLab.getSize_m(), objLab.getSize_n());
             gestor.generarLaberinto(objLab, objLab.getSize_m(), objLab.getSize_n());
-            //crearListaEnemigos(objLab);
-            //crearListaArtefactos(objLab);
             lista_laberintos.add(objLab);                        
         }
-        
-      
     }
     
-    
+    /**
+     * Creamos las posiciones de SIGUIENTE y ANTERIOR dentro de algunas casillas
+     * random.
+     */
     private void agregarAnteriorySiguiente(){
         
         int anterior,siguiente;//, cont = 0;
@@ -201,41 +225,43 @@ public class Juego {
         
         for (Laberinto lab : lista_laberintos) {
             ArrayList<IntPair> coords = new ArrayList<>();
-            // IntPair[] coords = new IntPair[ lab.getSize_m() * lab.getSize_n() / 2];
             for (int i = 1; i < lab.getSize_m(); i++) {
                 for (int j = 1; j < lab.getSize_n(); j++) {
                     if (lab.getCelda(i, j).getTipo() == TipoCelda.ADENTRO) {
-                        // coords[cont++] = new IntPair(i,j);
                         coords.add(new IntPair(i,j));
-                        //cont++;
                     }
                 }
             }
 
             anterior = rnd.nextInt(coords.size());
             siguiente = rnd.nextInt(coords.size());            
-            
-            //x = coords[anterior].x;
-            //y = coords[anterior].y;            
+
             x = coords.get(anterior).x;
             y = coords.get(anterior).y;
-            
             lab.getCelda(x, y).setTipoContenido(0);
             lista_anteriores.add(coords.get(siguiente));
-            //x = coords[siguiente].x;
-            //y = coords[siguiente].y;
+
             x = coords.get(siguiente).x;
             y = coords.get(siguiente).y;
             lab.getCelda(x, y).setTipoContenido(1);
         }
     }
     
+    /**
+     * @return laberintoActual
+     */
     public int getLaberintoActual(){
         return this.laberintoActual;
     }
     
+    /**
+     * Valida si el avatar puede o no moverse entre paredes.
+     * @param l
+     * @param x
+     * @param y
+     * @return  boolean
+     */
     private boolean validarMovimiento (Laberinto l,int x, int y){
-        // return (l.laberinto[x][y].getTipo() != TipoCelda.PARED && l.laberinto[x][y].getTipoContenido() != 2);
         return (l.laberinto[x][y].getTipo() != TipoCelda.PARED);
     }
     

@@ -10,15 +10,14 @@ package models;
  * @author Gina
  */
 public class Avatar extends Entidad{
-    private int vidaMaxima;
+
     private Saco saco;
     private Armadura armaduraActual; 
     private Arma armaActual;
    
     public Avatar(int posicionX, int poscionY, String nombre, int nivel){
-        super(posicionX,poscionY,nombre,nivel);
+        super(posicionX,poscionY,nombre,nivel, 100);
         super.setVidaActual(100);
-        this.vidaMaxima = 100;
         this.saco = new Saco();
         this.armaduraActual = null;
         this.armaActual = null;
@@ -32,20 +31,7 @@ public class Avatar extends Entidad{
         this.saco.agregarArtefacto(arma3);
         this.saco.agregarArtefacto(arma4);
     }
-        
-    /**
-     * @return the vidaMaxima
-     */
-    public int getVidaMaxima() {
-        return vidaMaxima;
-    }
 
-    /**
-     * @param vidaMaxima the vidaMaxima to set
-     */
-    public void setVidaMaxima(int vidaMaxima) {
-        this.vidaMaxima = vidaMaxima;
-    }
     
     /**
      * @return the saco
@@ -107,8 +93,12 @@ public class Avatar extends Entidad{
     claro que debe hacer.
     */
     //Atacar enemigo
-    public void atacarEnemigo(){
+    public void atacarEnemigo(Enemigo e){
+        int vidaActualAvatar = super.getVidaActual();
+        super.setVidaActual(vidaActualAvatar - e.getNivel() * 2);
         
+        int vidaActualEnemigo = e.getVidaActual();
+        e.setVidaActual(vidaActualEnemigo - super.getNivel() * 5);
     }
     
     /*

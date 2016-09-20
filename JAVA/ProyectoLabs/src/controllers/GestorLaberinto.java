@@ -35,33 +35,33 @@ public class GestorLaberinto {
         
     }
      
-    public IntPair devuelveRandomAdjacente(Celda[][] lab, int x, int y, int max_x, int max_y) {
+    public IntPair devuelveRandomAdjacente(Celda[][] lab, int x, int y, int max_x, int max_y, int i, TipoCelda tipo) {
         Random rnd = new Random();
         
         IntPair pair;
         List<IntPair> posibles = new ArrayList<>();
 
         // checkeamos nodo a la derecha:
-        if ((x > 2) && ((lab[x - 2][y]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x-2, y);
+        if ((x > i) && ((lab[x - i][y]).getTipo() == tipo)) {
+            pair = new IntPair(x-i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo arriba
-        if ((y > 2) && ((lab[x][y - 2]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x, y-2);
+        if ((y > i) && ((lab[x][y - i]).getTipo() == tipo)) {
+            pair = new IntPair(x, y-i);
             posibles.add(pair);
         }
         
         // checkeamos nodo izquierda
-        if ((x < max_x - 2) && ((lab[x + 2][y]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x+2, y);
+        if ((x < max_x - i) && ((lab[x + i][y]).getTipo() == tipo)) {
+            pair = new IntPair(x+i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo derecha
-        if ((y < max_y - 2) && ((lab[x][y + 2]).getTipo() == TipoCelda.AFUERA)) {
-            pair = new IntPair(x, y+2);
+        if ((y < max_y - i) && ((lab[x][y + i]).getTipo() == tipo)) {
+            pair = new IntPair(x, y+i);
             posibles.add(pair);
         }
         
@@ -110,27 +110,18 @@ public class GestorLaberinto {
         
         Random rnd = new Random();
         
-        // it doesn't work here
-        // lab = new Celda[real_m+1][real_n+1];
-        
         // iniciamos todas las celdas como PARED
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 lab[i][j] = new Celda(TipoCelda.PARED);
             }
         }
-        
-        //System.out.print("Sin nodos\n");
-        //printLaberinto(lab, m, n);
 
         for (int i = 1; i < m; i += 2) {
             for (int j = 1; j < n; j += 2) {
                 lab[i][j].setTipo(TipoCelda.AFUERA);
             }
         }
-        
-        //System.out.print("Con nodos\n");
-        //printLaberinto(lab, m, n);
         
         // ******************
         // inicia el DFS AQUI
@@ -155,7 +146,7 @@ public class GestorLaberinto {
             // 3.1 tomamos la ultima apilada
             aux = pilaCeldas.peek();
             // 3.2 y 3.2.1 tomamos uno de los adjacentes aleatoriamente
-            ady = this.devuelveRandomAdjacente(lab, aux.x, aux.y, m, n);
+            ady = this.devuelveRandomAdjacente(lab, aux.x, aux.y, m, n, 2, TipoCelda.AFUERA);
             
             // 3.3 si bota -1 entonces significa que no hay adyacentes. Entonces,
             // hacemos pop :v
@@ -174,12 +165,10 @@ public class GestorLaberinto {
                 pilaCeldas.push(ady);                
             }
         }
-        // printLaberinto(lab, m, n);
         
         crearListaEnemigos(lab_origin);
         crearListaArtefactos(lab_origin);
-        
-        // return lab_origin;
+
     }
     
     private void crearListaEnemigos(Laberinto l){
@@ -198,27 +187,55 @@ public class GestorLaberinto {
             //sea una pared
             ene_i = (rnd.nextInt(max_i/2)*2 +1);
             ene_j = (rnd.nextInt(max_j/2)*2 +1);
-            Enemigo e = new Enemigo (ene_i,ene_j, "Enemigo",niveles_Enemigo[rnd.nextInt(max_i)]);
+            Enemigo e = new Enemigo (ene_i,ene_j, "Enemigo", niveles_Enemigo[rnd.nextInt(max_i)]);
             l.agregarEnemigo(e);
             l.getCelda(ene_i, ene_j).setTipoContenido(2);
         }
-        
     }
     
     private void crearListaArtefactos(Laberinto l){
-        //Random rnd = new Random();
-        //int art_i, art_j;
+        Random rnd = new Random();
+        int max_i = l.getSize_m();
+        int max_j = l.getSize_n();
+
+        int art_i, art_j;
         for(int i=0; i< NRO_ARTEFACTOS; i++){
             //nodos impares pls :'
-            //art_i = (rnd.nextInt(max_i/2)*2 +1);
-            //art_j = (rnd.nextInt(max_j/2)*2 +1);
-            Artefacto a = new Artefacto ("Artefacto");
+            art_i = (rnd.nextInt(max_i/2)*2 +1);
+            art_j = (rnd.nextInt(max_j/2)*2 +1);
+            Artefacto a = new Artefacto("Artefacto " + i);
             l.agregarArtefacto(a);
-            //l.getCelda(ene_i, ene_j).setTipoContenido(3);
-            // -> aqui faltaria asociar la clase artefacto con su posicion en el
-            // -> mapa
+            l.getCelda(art_i, art_j).setTipoContenido(3);
         }
-        
     }
-    
+
+    public void moverEnemigos(Laberinto l) {
+        ArrayList<Enemigo> lista_enemigos = l.getLista_enemigos();
+        Celda aux;
+        Enemigo e = null; 
+        IntPair nuevaPos;
+        
+        for (int i = 0; i < l.getSize_m(); i++) {
+            for (int j = 0; j < l.getSize_n(); j++) {
+                aux = l.getCelda(i, j);
+                if (aux.getTipoContenido() == 2) {
+                    
+                    for (int k = 0; k < lista_enemigos.size(); k++) {
+                        e = lista_enemigos.get(k);
+                        if (e.getPosicionX() == i && e.getPosicionY() == j)
+                            break;
+                    }
+                    
+                    l.getCelda(i, j).setTipoContenido(-1);
+                    
+                    nuevaPos = devuelveRandomAdjacente(l.getLaberinto(), i, j, l.getSize_m(), l.getSize_n(), 1, TipoCelda.ADENTRO);
+                    
+                    e.setPosicionX(nuevaPos.x);
+                    e.setPosicionY(nuevaPos.y);
+                    
+                    l.getCelda(nuevaPos.x, nuevaPos.y).setTipoContenido(2);
+                }
+            }
+        }
+    }
 }
