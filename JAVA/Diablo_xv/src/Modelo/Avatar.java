@@ -14,10 +14,7 @@ public class Avatar extends Entidad {
     private Armadura armaduraActual; 
     private Arma armaActual;
     private final char _elementoGrafico;
-
-    
-
-    
+     
      public Avatar(int posicionX, int poscionY, String nombre, int nivel){
         super(posicionX,poscionY,nombre,nivel, 100);
         super.setVidaActual(100);

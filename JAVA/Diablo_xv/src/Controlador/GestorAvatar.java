@@ -29,4 +29,5 @@ public class GestorAvatar {
         avatar.setArmaduraActual(newArmadura);
         return avatar;
     }        
+    
 }
