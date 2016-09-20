@@ -45,4 +45,12 @@ public class Artefacto implements ObjetoGrafico {
     public String toString(){
         return getNombre();
     }
+
+    public int getPosX() {
+        return _posX;
+    }
+
+    public int getPosY() {
+        return _posY;
+    }       
 }
