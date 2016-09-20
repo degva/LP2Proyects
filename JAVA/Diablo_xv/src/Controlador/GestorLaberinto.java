@@ -6,6 +6,8 @@
 package Controlador;
 
 import Modelo.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.Random;
 
@@ -105,7 +107,94 @@ public class GestorLaberinto {
         } 
     }
     
-    public void MoverEnemigos(Laberinto lab) {
+    public void MoverEnemigos(Laberinto l) {
+        // REHACER
+        // ArrayList<Enemigo> lista_enemigos = l.getLista_enemigos();
+        // Celda aux;
+        Enemigo e = null; 
+        IntPair nuevaPos;
         
+        for (int i = 0; i < l.getSizeM(); i++) {
+            for (int j = 0; j < l.getSizeN(); j++) {
+                if (l.getCelda(i, j).getContenido() instanceof Enemigo) {
+                    e = (Enemigo) l.getCelda(i, j).getContenido();
+                    l.getCelda(i, j).setContenido(null);
+                    
+                    nuevaPos = devuelveRandomAdjacente(l.getLaberinto(), i, j, l.getSizeM(), l.getSizeN(), 1);
+                    
+                    e.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                    
+                    l.setCelda(i, j, e);
+                }
+                /*
+                if (aux.getTipoContenido() == 2) {
+                    
+                    for (int k = 0; k < lista_enemigos.size(); k++) {
+                        e = lista_enemigos.get(k);
+                        if (e.getPosicionX() == i && e.getPosicionY() == j)
+                            break;
+                    }
+                    
+                    l.getCelda(i, j).setTipoContenido(-1);
+                    
+                    nuevaPos = devuelveRandomAdjacente(l.getLaberinto(), i, j, l.getSize_m(), l.getSize_n(), 1, TipoCelda.ADENTRO);
+                    
+                    e.setPosicionX(nuevaPos.x);
+                    e.setPosicionY(nuevaPos.y);
+                    
+                    l.getCelda(nuevaPos.x, nuevaPos.y).setTipoContenido(2);
+                }
+                */
+            }
+        }
+    }
+    
+    public IntPair devuelveRandomAdjacente(Celda[][] lab, int x, int y, int max_x, int max_y, int i) {
+        // REHACER
+        Random rnd = new Random();
+        
+        IntPair pair;
+        List<IntPair> posibles = new ArrayList<>();
+
+        // checkeamos nodo a la derecha:
+        if ((x > i) && ((lab[x - i][y]).getTipo() == tipo)) {
+            pair = new IntPair(x-i, y);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo arriba
+        if ((y > i) && ((lab[x][y - i]).getTipo() == tipo)) {
+            pair = new IntPair(x, y-i);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo izquierda
+        if ((x < max_x - i) && ((lab[x + i][y]).getTipo() == tipo)) {
+            pair = new IntPair(x+i, y);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo derecha
+        if ((y < max_y - i) && ((lab[x][y + i]).getTipo() == tipo)) {
+            pair = new IntPair(x, y+i);
+            posibles.add(pair);
+        }
+        
+        // si no tiene, devolvemos (-1,-1)
+        if (posibles.isEmpty()) {
+            pair = new IntPair(-1,-1);
+        } else {
+            // Hey, aqui creo que podria haber error. 
+            // mi cerebro no me da para saber si en el caso hipotetico que me de
+            // el tamano de la lista, me bote error por overflow() :v
+            // Ej:
+            // Digamos que posibles.size() me de 1. Entonces, el random sera o 0
+            // o 1. Entonces, si sale 1, posibles.get es por las. O en todo caso
+            // si sale 0, puede que posibles.get tambien sea por las... 
+            // TODO: revisar documentación java :v
+            pair = posibles.get(rnd.nextInt(posibles.size()));
+        }
+        
+        return pair;
     }
 }
