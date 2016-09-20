@@ -83,12 +83,16 @@ public class Laberinto {
         _listaEnemigos.add(e);
     }
     
-    public void setTipoCelda(int x, int y, Celda nuevaCelda){
-        _laberinto[x][y] = nuevaCelda;
+    public void setTipoCelda(int x, int y, ObjetoGrafico tipoCelda){
+        _laberinto[x][y].setTipo(tipoCelda);
     }
     
     public ObjetoGrafico getTipoCelda(int x, int y){
         return _laberinto[x][y].getTipo();
+    }
+    
+    public void setTipoContenido(int x, int y, ObjetoGrafico tipoContenido){
+        _laberinto[x][y].setContenido(tipoContenido);
     }
     
     public ObjetoGrafico getContenidoCelda(int x, int y){

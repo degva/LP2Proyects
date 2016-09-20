@@ -39,17 +39,20 @@ public class GestorLaberinto {
         /*Ahora generamos el laberinto*/
         
         //inicializamos todas las celdas como PARED
-        for (int i = 0; i < nuevoLaberinto.getSizeM(); i++) {
-            for (int j = 0; j < nuevoLaberinto.getSizeN(); j++) {
-                //FALTA EL TIPO CELDA, CUANDO SE DESCOMENTE VERIFICAR LA FUNCION SET CELDA
-                //nuevoLaberinto.setCelda(i, j, nuevaCelda);
-            }
-        }
         
         for (int i = 0; i < nuevoLaberinto.getSizeM(); i++) {
             for (int j = 0; j < nuevoLaberinto.getSizeN(); j++) {
-                //FALTA EL TIPO CELDA
-                //nuevoLaberinto.setCelda(i, j, nuevaCelda);
+                Pared auxPared = new Pared();
+                nuevoLaberinto.setTipoCelda(i, j, auxPared);
+                nuevoLaberinto.setTipoContenido(i, j, null);
+            }
+        }
+        
+        
+        for (int i = 1; i < nuevoLaberinto.getSizeM(); i+= 2) {
+            for (int j = 1; j < nuevoLaberinto.getSizeN(); j+= 2) {
+                Pasadizo auxPasadizo = new Pasadizo();
+                nuevoLaberinto.setTipoCelda(i, j, auxPasadizo);
             } 
         }
         
@@ -107,9 +110,6 @@ public class GestorLaberinto {
         
         return nuevoLaberinto;
     }
-    
-    //NO SE QUE HACER CON EL DEVUELVE RANDOM ADYACENTE, LO HAGO DEPSUES C: --------------------------------------------------------------
-    /*Agregra anterio y siguiente*/
     
     public void CrearListaArtefactos(Laberinto l, int numeroLaberitno) {
         Random rnd = new Random();
