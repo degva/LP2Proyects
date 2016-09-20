@@ -17,10 +17,10 @@ public class Entidad {
     private int vidaActual;
     private int vidaMaxima;
     
-    public Entidad(int posicionX, int poscionY, String nombre, int nivel, int vidaMaxima){
+    public Entidad(int posicionX, int posicionY, String nombre, int nivel, int vidaMaxima){
         this.nombre = nombre;
         this.posicionX = posicionX;
-        this.posicionY = poscionY;
+        this.posicionY = posicionY;
         this.nivel = nivel;
         this.vidaMaxima = vidaMaxima;
     }

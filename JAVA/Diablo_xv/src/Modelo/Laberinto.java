@@ -119,4 +119,50 @@ public class Laberinto {
         return aux;
     }
     
+    public Enemigo obtenerEnemigoActual(int x, int y){
+        // a esta funcion se le va a pasar la ubicacion del avatar
+        // para asi poder detectar a que enemigo de la lista se refiere
+        Enemigo e = _listaEnemigos.get(0); 
+        for (int i = 0; i < _listaEnemigos.size(); i++) {
+            e = _listaEnemigos.get(i);
+            if (e.getPosX() == x && e.getPosY() == y)
+                break;
+        }
+        return e;
+    }
+    
+    public void retornarEnemigoActual(Enemigo eNew){
+        Enemigo e;
+        int i;
+        int posX = eNew.getPosX();
+        int posY = eNew.getPosY();
+        
+        for (i = 0; i < _listaEnemigos.size(); i++) {
+            e = _listaEnemigos.get(i);
+            if (e.getPosX() == posX && e.getPosY() == posY)
+                break;
+        }
+        if (eNew.vida <= 0) _listaEnemigos.remove(i); // eliminar de la lista si muere
+        else _listaEnemigos.set(i, eNew);
+         
+        
+    }
+    public Artefacto obtenerArtefactoActual(int x, int y){
+        // a esta funcion se le va a pasar la ubicacion del avatar
+        // para asi poder detectar a que enemigo de la lista se refiere
+        int i;
+        Artefacto a = _listaArtefactos.get(0); 
+        for (i = 0; i < _listaArtefactos.size(); i++) {
+            a = _listaArtefactos.get(i);
+            if (a.getPosX() == x && a.getPosY() == y)
+                break;
+        }
+        //se quita el artefacto de la lista, 
+        //para que luego el render no lo imprima
+        _listaArtefactos.remove(i);
+        return a;
+    }
+    
+    
+    
 }
