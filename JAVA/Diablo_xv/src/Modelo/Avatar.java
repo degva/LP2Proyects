@@ -70,28 +70,11 @@ public class Avatar extends Entidad {
      */
     public Arma getArmaActual() {
         return armaActual;
-    }
-
-    /**
-     * @param armaActual the armaActual to set
-     */
-    public void setArmaActual(Arma armaActual) {
-        this.armaActual = armaActual;
-    }
-
-
-    /*
-    //Aumentar nivel
-    public void levelUp(){
-        this.nivel++;
-    }
-    */
-        
-    //Reocger Artefacto
-    public void recogerArtefacto(Artefacto newArtefacto){
-        getSaco().agregarArtefacto(newArtefacto);
-    }
+    } 
     
+    public void setArmaActual(Arma arma){
+        this.armaActual = arma;
+    }
     
     @Override
     public void Dibujar() {

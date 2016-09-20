@@ -18,8 +18,11 @@ public class GestorAvatar {
         this._avatar = avatar;
     }
     
-    public void RecogerArtefacto(Artefacto artefacto){
-        
+    public void RecogerArtefacto(Artefacto newArtefacto){
+        _avatar.getSaco().agregarArtefacto(newArtefacto);
     }
     
+    public void AsignarArma(Arma newArma){
+        _avatar.setArmaActual(newArma);
+    }   
 }
