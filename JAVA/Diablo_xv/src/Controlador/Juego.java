@@ -76,18 +76,11 @@ public class Juego {
     }
     
     public void Jugar() {
-        
-        // InterpreteComandos interprete = new InterpreteComandos();
-
-        // Otra vista: Consola
-        String opcion;
-        while (_gestorJuego.GetGameOn()) {
-            _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto));
-            // Llamar al gestorJuego (o "Controlador Principal")
-            
-            // DEPRECATED
-            // Consola.MostrarMenu(_avatar, ObtenerLaberinto(_idxLaberinto));
-            //interprete.ProcesarComando(opcion, _avatar, ObtenerLaberinto(_idxLaberinto));
+        int d1;
+        while (_gestorJuego.GameON) {
+            //_render.Render(_avatar, ObtenerLaberinto(_idxLaberinto));
+            d1 = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
+            _idxLaberinto += d1;
         }
     }
     
