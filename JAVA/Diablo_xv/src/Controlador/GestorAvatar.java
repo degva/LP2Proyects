@@ -15,19 +15,16 @@ public class GestorAvatar {
     public GestorAvatar() {
     }
     
-    public Avatar RecogerArtefacto(Avatar avatar, Artefacto newArtefacto){
+    public void RecogerArtefacto(Avatar avatar, Artefacto newArtefacto){
         avatar.getSaco().agregarArtefacto(newArtefacto);
-        return avatar;
     }
     
-    public Avatar AsignarArma(Avatar avatar, Arma newArma){
+    public void AsignarArma(Avatar avatar, Arma newArma){
         avatar.setArmaActual(newArma);
-        return avatar;
     }
     
-    public Avatar ModificarArmadura(Avatar avatar, Armadura newArmadura){
+    public void ModificarArmadura(Avatar avatar, Armadura newArmadura){
         avatar.setArmaduraActual(newArmadura);
-        return avatar;
     }        
     
 }
