@@ -24,47 +24,38 @@ public class GestorJuego {
         // controladorLaberinto = new GestorLaberinto();
     }
     
-    public int Procesar(Avatar avatar, Laberinto laberinto){
+    public int Procesar(Avatar avatar, Laberinto laberinto){        
         consola.MostrarMenu();
-        
-        if(PosicionDisparaInteraccion(avatar, laberinto)){
-            Celda celda = laberinto.getCelda(avatar.getPosX(), avatar.getPosY());
-            if(celda.getContenido() instanceof Enemigo){
-                consola.MostrarEnemigo(laberinto.obtenerEnemigoActual(avatar.getPosX(), avatar.getPosY()));
-                gestorInteraccion.interactuarEnemigo(avatar, laberinto);
-            } else if (celda.getContenido() instanceof Artefacto) {
-                consola.MostrarArtefacto(laberinto.obtenerArtefactoActual(avatar.getPosX(), avatar.getPosY()));
-                gestorInteraccion.interactuarArtefacto(avatar, laberinto);
-            }
-            return 0;
-        }
-        
-        String opcion = consola.consoleScanner.nextLine();        
-        String[] split = opcion.split(" ");
-        switch (split[0]) {
+        String[] opcion = consola.ObtenerComando();
+        switch (opcion[0]) {
             case "w":
             case "a":
             case "s":
             case "d":
-                IntPair desplazamiento = consola.ObtenerDesplazamiento(split[0]);
+                IntPair desplazamiento = DesplazamientoByComando(opcion[0]);
                 if(DesplazamientoEsValido(avatar, laberinto, desplazamiento)){
                     int nuevoX = avatar.getPosX() + desplazamiento.x;
                     int nuevoY = avatar.getPosY() + desplazamiento.y;
                     Celda nuevaCeldaAvatar = laberinto.getCelda(nuevoX, nuevoY);
                     avatar.Mover(desplazamiento.x, desplazamiento.y);
+                    consola.ClearLog();
                     if(nuevaCeldaAvatar.getContenido() instanceof Anterior)
                         return -1;
                     else if (nuevaCeldaAvatar.getContenido() instanceof Siguiente)
                         return 1;
+                } else{
+                    consola.SetLog("¡Movimiento invalido!");
+                    return 0;
                 }
                 break;
-            case "cambiar":
+            case "interactuar":
+                Interactuar(opcion[1], avatar, laberinto);
                 break;
             case "salir":
                 this.GameOff();
                 break;
             default:
-                return 2;
+                return 0;
         }
         return 0;
     }
@@ -73,10 +64,36 @@ public class GestorJuego {
         GameON = false;
     }
     
-    private boolean PosicionDisparaInteraccion(Avatar avatar, Laberinto laberinto){
-        IntPair coordenadasAvatar = new IntPair(avatar.getPosX(), avatar.getPosY());
-        Celda celdaAvatar = laberinto.getCelda(coordenadasAvatar.x, coordenadasAvatar.y);
-        return (celdaAvatar.getContenido() instanceof Enemigo || celdaAvatar.getContenido() instanceof Artefacto);
+//    private boolean PosicionDisparaInteraccion(Avatar avatar, Laberinto laberinto){
+//        IntPair coordenadasAvatar = new IntPair(avatar.getPosX(), avatar.getPosY());
+//        Celda celdaAvatar = laberinto.getCelda(coordenadasAvatar.x, coordenadasAvatar.y);
+//        return (celdaAvatar.getContenido() instanceof Enemigo || celdaAvatar.getContenido() instanceof Artefacto);
+//    }
+    
+    // Funcion para obtener un par ordenado de desplazamiento en base a una dirección especificada
+    private IntPair DesplazamientoByComando(String direccion){
+        IntPair desplazamiento;
+        switch(direccion){
+            case "w":
+            case "arriba":
+                desplazamiento = new IntPair(0, -1);
+                break;
+            case "a":
+            case "izquierda":
+                desplazamiento = new IntPair(-1, 0);
+                break;
+            case "s":
+            case "abajo":
+                desplazamiento = new IntPair(0, 1);
+                break;
+            case "d":
+            case "derecha":
+                desplazamiento = new IntPair(1, 0);
+                break;
+            default:
+                desplazamiento = new IntPair(0, 0);
+        }
+        return desplazamiento;
     }
     
     private boolean DesplazamientoEsValido(Avatar avatar, Laberinto laberinto, IntPair desplazamiento){
@@ -84,6 +101,24 @@ public class GestorJuego {
         int nuevoY = avatar.getPosY() + desplazamiento.y;
         Celda celdaADesplazarse = laberinto.getCelda(nuevoX, nuevoY);
         ObjetoGrafico aux = celdaADesplazarse.getTipo();
-        return aux instanceof Pasadizo;
+        return ((aux instanceof Pasadizo) && !(celdaADesplazarse.getContenido() instanceof Enemigo));
     }
+    
+    // Metodo para efectuar la interacción con el objeto en la dirección especificada
+    // Si dirección = "", se hace la interacción con el objeto que está en la misma celda que el avatar. (DEPRECATED)
+    private void Interactuar(String direccion, Avatar avatar, Laberinto laberinto){        
+        IntPair desplazamiento = DesplazamientoByComando(direccion);
+        IntPair coordenadaInteraccion = new IntPair(avatar.getPosX()+desplazamiento.x, avatar.getPosY()+desplazamiento.y);
+        ObjetoGrafico objetoInteraccion = laberinto.getContenidoCelda(coordenadaInteraccion.x, coordenadaInteraccion.y);        
+        // Revisamos el tipo de interaccion que corresponde
+        if(objetoInteraccion instanceof Enemigo){
+            //Se inicia una batalla
+            gestorInteraccion.interactuarEnemigo(avatar, laberinto, coordenadaInteraccion);
+        } else if (objetoInteraccion instanceof Artefacto){
+            gestorInteraccion.interactuarArtefacto(avatar, laberinto, coordenadaInteraccion);
+        } else {
+            consola.SetLog("Aqui no hay nada para interactuar");
+        }
+    }
+    
 }
