@@ -53,7 +53,7 @@ public class Juego {
     public void CrearListaLaberintos() {
         int _numLaberintos = (int)(Math.random()*10+5);
         for (int i = 0; i < _numLaberintos; i++) {
-            _laberintos.add(_gestorLab.CrearLaberinto(i));
+            _laberintos.add(_gestorLab.CrearLaberinto(i+1));
         }
     }
     
