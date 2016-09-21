@@ -14,17 +14,14 @@ public class Avatar extends Entidad {
     private Armadura armaduraActual; 
     private Arma armaActual;
     private final char _elementoGrafico;
-
-    
-
-    
+     
      public Avatar(int posicionX, int poscionY, String nombre, int nivel){
         super(posicionX,poscionY,nombre,nivel, 100);
         super.setVidaActual(100);
         this.saco = new Saco();
         this.armaduraActual = null;
         this.armaActual = null;
-        this._elementoGrafico = 'A';
+        this._elementoGrafico = 'O';
     }
      
     public Avatar(IntPair coord, String nombre, int nivel){
@@ -33,7 +30,7 @@ public class Avatar extends Entidad {
         this.saco = new Saco();
         this.armaduraActual = null;
         this.armaActual = null;
-        this._elementoGrafico = 'A';
+        this._elementoGrafico = 'O';
     }
     
 
@@ -70,34 +67,19 @@ public class Avatar extends Entidad {
      */
     public Arma getArmaActual() {
         return armaActual;
-    }
-
-    /**
-     * @param armaActual the armaActual to set
-     */
-    public void setArmaActual(Arma armaActual) {
-        this.armaActual = armaActual;
-    }
-
-
-    /*
-    //Aumentar nivel
-    public void levelUp(){
-        this.nivel++;
-    }
-    */
-        
-    //Reocger Artefacto
-    public void recogerArtefacto(Artefacto newArtefacto){
-        getSaco().agregarArtefacto(newArtefacto);
+    } 
+    
+    public void setArmaActual(Arma arma){
+        this.armaActual = arma;
     }
     
+    public void setPosXY(IntPair pair){
+        this.setPosX(pair.x);
+        this.setPosY(pair.y);
+    }
     
     @Override
     public void Dibujar() {
         System.out.print(_elementoGrafico);
-    }
-    
-    
-
+    }        
 }

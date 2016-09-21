@@ -83,12 +83,16 @@ public class Laberinto {
         _listaEnemigos.add(e);
     }
     
-    public void setTipoCelda(int x, int y, Celda nuevaCelda){
-        _laberinto[x][y] = nuevaCelda;
+    public void setTipoCelda(int x, int y, ObjetoGrafico tipoCelda){
+        _laberinto[x][y].setTipo(tipoCelda);
     }
     
     public ObjetoGrafico getTipoCelda(int x, int y){
         return _laberinto[x][y].getTipo();
+    }
+    
+    public void setTipoContenido(int x, int y, ObjetoGrafico tipoContenido){
+        _laberinto[x][y].setContenido(tipoContenido);
     }
     
     public ObjetoGrafico getContenidoCelda(int x, int y){
@@ -151,7 +155,7 @@ public class Laberinto {
             if (e.getPosX() == posX && e.getPosY() == posY)
                 break;
         }
-        if (eNew.vida <= 0) _listaEnemigos.remove(i); // eliminar de la lista si muere
+        if (eNew.getVidaActual() <= 0) _listaEnemigos.remove(i); // eliminar de la lista si muere
         else _listaEnemigos.set(i, eNew);
          
         

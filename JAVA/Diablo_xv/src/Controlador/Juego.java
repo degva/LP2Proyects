@@ -26,6 +26,7 @@ public class Juego {
     private Render _render;
     private int _idxLaberinto;
     private int _idxLaberintoAnterior;
+    //private GestorAvatar _gestorAvatar;
     private final ArrayList<Laberinto> _laberintos;
     
     
@@ -37,6 +38,7 @@ public class Juego {
         _render = new Render();
         _laberintos = new ArrayList<>();
         _idxLaberinto = _idxLaberintoAnterior = 0;
+        //_gestorAvatar = new GestorAvatar();
         
         this.CrearListaLaberintos();
         
@@ -81,7 +83,7 @@ public class Juego {
 
         // Otra vista: Consola
         int di;
-        while (_gestorJuego.GetGameOn()) {
+        while (_gestorJuego.GameON) {
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto),_idxLaberinto);
             di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
             _idxLaberintoAnterior = _idxLaberinto;

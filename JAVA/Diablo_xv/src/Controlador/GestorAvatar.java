@@ -12,12 +12,22 @@ import Modelo.*;
  */
 public class GestorAvatar {
     
-    private Avatar _avatar;
-    
-    public GestorAvatar(Avatar avatar) {
-        this._avatar = avatar;
+    public GestorAvatar() {
     }
     
+    public Avatar RecogerArtefacto(Avatar avatar, Artefacto newArtefacto){
+        avatar.getSaco().agregarArtefacto(newArtefacto);
+        return avatar;
+    }
     
+    public Avatar AsignarArma(Avatar avatar, Arma newArma){
+        avatar.setArmaActual(newArma);
+        return avatar;
+    }
+    
+    public Avatar ModificarArmadura(Avatar avatar, Armadura newArmadura){
+        avatar.setArmaduraActual(newArmadura);
+        return avatar;
+    }        
     
 }

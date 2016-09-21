@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.Random;
 import java.util.Stack;
 
@@ -40,20 +41,24 @@ public class GestorLaberinto {
         /*Ahora generamos el laberinto*/
         
         //inicializamos todas las celdas como PARED
+        
         for (int i = 0; i < nuevoLaberinto.getSizeM(); i++) {
             for (int j = 0; j < nuevoLaberinto.getSizeN(); j++) {
-                //FALTA EL TIPO CELDA, CUANDO SE DESCOMENTE VERIFICAR LA FUNCION SET CELDA
-                //nuevoLaberinto.setCelda(i, j, nuevaCelda);
+                Pared auxPared = new Pared();
+                nuevoLaberinto.setTipoCelda(i, j, auxPared);
+                nuevoLaberinto.setTipoContenido(i, j, null);
             }
         }
         
-        for (int i = 0; i < nuevoLaberinto.getSizeM(); i++) {
-            for (int j = 0; j < nuevoLaberinto.getSizeN(); j++) {
-                //FALTA EL TIPO CELDA
-                //nuevoLaberinto.setCelda(i, j, nuevaCelda);
+        
+        for (int i = 1; i < nuevoLaberinto.getSizeM(); i+= 2) {
+            for (int j = 1; j < nuevoLaberinto.getSizeN(); j+= 2) {
+                Pasadizo auxPasadizo = new Pasadizo();
+                nuevoLaberinto.setTipoCelda(i, j, auxPasadizo);
             } 
         }
         
+        /*
         //****************
         //Inicia el DFS 
         //****************
@@ -67,20 +72,20 @@ public class GestorLaberinto {
         int ry = rx;
         
         // marcamos celda como ADENTRO y la ponemos en la pila
-        //lab[rx][ry].setTipo(TipoCelda.ADENTRO); --------------------------------------------
+        Pasadizo auxPasadizo = new Pasadizo();
+        nuevoLaberinto.setTipoCelda(rx, ry, auxPasadizo);
         pilaCeldas.push(new IntPair(rx,ry));
         
         // algunos auxiliares para el while...
         IntPair aux1, aux2;
         
-        //ESTO ESTA EN TRUE GG
-        /*
         while(!pilaCeldas.empty()) {
             // 3.1 tomamos la ultima apilada
             aux1 = pilaCeldas.peek();
             // 3.2 y 3.2.1 tomamos uno de los adjacentes aleatoriamente
-            //-----------------------------------------------------------------------
-            //aux2 = this.devuelveRandomAdjacente(lab, aux1.x, aux1.y, nuevoLaberinto.getSizeM(), nuevoLaberinto.getSizeN(), 2, TipoCelda.AFUERA);
+            
+            aux2 = this.devuelveRandomAdjacente(nuevoLaberinto, aux1.x, aux1.y, 
+                    nuevoLaberinto.getSizeM(), nuevoLaberinto.getSizeN(), 2, TipoCelda.AFUERA);
             
             // 3.3 si bota -1 entonces significa que no hay adyacentes. Entonces,
             // hacemos pop 
@@ -99,18 +104,14 @@ public class GestorLaberinto {
                 pilaCeldas.push(aux2);                
             }
         }
+        
         */
         
-        /*AGREGRA LO QUE DIJO WILLIAM*/
-    
         CrearListaEnemigos(nuevoLaberinto, numeroLaberinto);
         CrearListaArtefactos(nuevoLaberinto, numeroLaberinto);
         
         return nuevoLaberinto;
     }
-    
-    //NO SE QUE HACER CON EL DEVUELVE RANDOM ADYACENTE, LO HAGO DEPSUES C: --------------------------------------------------------------
-    /*Agregra anterio y siguiente*/
     
     public void CrearListaArtefactos(Laberinto l, int numeroLaberitno) {
         Random rnd = new Random();

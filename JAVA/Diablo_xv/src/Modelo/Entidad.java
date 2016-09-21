@@ -12,35 +12,47 @@ package Modelo;
 public class Entidad implements ObjetoGrafico {
     
     private String nombre;
-    private int posicionX;
-    private int posicionY;
+    private int posX;
+    private int posY;
     private int nivel;
     private int vidaActual;
     private int vidaMaxima;
     
     public Entidad(int posicionX, int posicionY, String nombre, int nivel, int vidaMaxima){
         this.nombre = nombre;
-        this.posicionX = posicionX;
-        this.posicionY = posicionY;
+        this.posX = posicionX;
+        this.posY = posicionY;
         this.nivel = nivel;
         this.vidaMaxima = vidaMaxima;
     }
 
-        
-    /**
-     * @return the vidaMaxima
-     */
-    public int getVidaMaxima() {
-        return vidaMaxima;
-    }
-
-    /**
-     * @param vidaMaxima the vidaMaxima to set
-     */
-    public void setVidaMaxima(int vidaMaxima) {
-        this.vidaMaxima = vidaMaxima;
+            
+    /*
+    En estos metodos solo se hace la consulta, asumo que la autirizacion
+    de si se mueve o no se hace ene laberinto o en gestor de laberinto.
+    Si creen que esa confirmacion se debe hacer aca, diganme para implementarlo
+    
+    Antes estos metodos solo estaban en Avatar, ahora estan en entidad porque segun el texto
+    va a haber un momento en el que los enemigos se muevan
+    */
+    
+    
+    
+    public void Mover(int dx, int dy) {
+        setPosX(getPosX() + dx);
+        setPosY(getPosY() + dy);
     }
     
+    @Override
+    public void Dibujar() {
+        //
+    }
+    
+    @Override
+    public String toString(){
+        return getNombre() + " " + getNivel();
+    }
+
     /**
      * @return the nombre
      */
@@ -56,31 +68,31 @@ public class Entidad implements ObjetoGrafico {
     }
 
     /**
-     * @return the posicionX
+     * @return the posX
      */
     public int getPosX() {
-        return posicionX;
+        return posX;
     }
 
     /**
-     * @param posicionX the posicionX to set
+     * @param posX the posX to set
      */
-    public void setPosicionX(int posicionX) {
-        this.posicionX = posicionX;
+    public void setPosX(int posX) {
+        this.posX = posX;
     }
 
     /**
-     * @return the posicionY
+     * @return the posY
      */
     public int getPosY() {
-        return posicionY;
+        return posY;
     }
 
     /**
-     * @param posicionY the posicionY to set
+     * @param posY the posY to set
      */
-    public void setPosicionY(int posicionY) {
-        this.posicionY = posicionY;
+    public void setPosY(int posY) {
+        this.posY = posY;
     }
 
     /**
@@ -116,31 +128,20 @@ public class Entidad implements ObjetoGrafico {
         setPosicionX(pair.x);
         setPosicionY(pair.y);
     }
-    
-    /*
-    En estos metodos solo se hace la consulta, asumo que la autirizacion
-    de si se mueve o no se hace ene laberinto o en gestor de laberinto.
-    Si creen que esa confirmacion se debe hacer aca, diganme para implementarlo
-    
-    Antes estos metodos solo estaban en Avatar, ahora estan en entidad porque segun el texto
-    va a haber un momento en el que los enemigos se muevan
-    */
-    
-    
-    
-    public void Mover(int dx, int dy) {
-        setPosicionX(getPosX() + dx);
-        setPosicionY(getPosY() + dy);
+
+    /**
+     * @return the vidaMaxima
+     */
+    public int getVidaMaxima() {
+        return vidaMaxima;
     }
-    
-    @Override
-    public void Dibujar() {
-        //
+
+    /**
+     * @param vidaMaxima the vidaMaxima to set
+     */
+    public void setVidaMaxima(int vidaMaxima) {
+        this.vidaMaxima = vidaMaxima;
     }
-    
-    @Override
-    public String toString(){
-        return getNombre() + " " + getNivel();
-    }
+
     
 }

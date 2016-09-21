@@ -12,20 +12,25 @@ package Modelo;
 public class Enemigo extends Entidad {
     
     private final char _elementoGrafico;
-    int ataque;
+    private int ataque;
     
-    public Enemigo(int posicionX, int poscionY, String nombre, int nivel){
+    public Enemigo(String nombre, int posicionX, int poscionY, int nivel){
         super(posicionX,poscionY,nombre,nivel, nivel * 2);
         super.setVidaActual(nivel * 2);
         ataque = this.getNivel() * 2; 
         _elementoGrafico = 'E';
     }
     
-
-    
     @Override
     public void Dibujar() {
         System.out.print(_elementoGrafico);
+    }
+
+    /**
+     * @return the ataque
+     */
+    public int getAtaque() {
+        return ataque;
     }
     
 

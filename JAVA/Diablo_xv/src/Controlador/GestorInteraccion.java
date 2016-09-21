@@ -1,0 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Controlador;
+import Modelo.*;
+import java.util.ArrayList;
+import java.util.List;
+/**
+ *
+ * @author DAVID
+ */
+public class GestorInteraccion {
+    
+    private GestorAvatar _gestorAvatar;
+    public GestorInteraccion(){
+        
+    }
+    
+    public void interactuarEnemigo(Avatar a, Laberinto l){
+        //gg wp
+        int vidaA, vidaE;
+        Enemigo e = l.obtenerEnemigoActual(a.getPosicionX(), a.getPosicionY());
+        vidaA = a.getVidaActual() - e.getAtaque();
+        vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
+        a.setVidaActual(vidaA);
+        e.setVidaActual(vidaE);
+        l.retornarEnemigoActual(e);
+        
+    }
+    
+    public void interactuarArtefacto(Avatar a, Laberinto l){
+        Artefacto ar = l.obtenerArtefactoActual(a.getPosicionX(), a.getPosicionY());
+        _gestorAvatar.RecogerArtefacto(a, ar);
+    }
+    
+}
