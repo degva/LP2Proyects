@@ -85,6 +85,7 @@ public class Juego {
         // Otra vista: Consola
         int di;
         while (_gestorJuego.GameON) {
+            _render.clearScreen();
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto),_idxLaberinto);
             di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
             _idxLaberintoAnterior = _idxLaberinto;
@@ -98,12 +99,12 @@ public class Juego {
                     }
                 }            
                 if (_idxLaberinto == _numLaberintos) {
+                    System.out.println("GANASTE EL JUEGO, FELICIDADES!!!!");
                     break;
                 }
                 _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
             }
-        }
-        System.out.println("GANASTE");
+        }        
     }
     
 }
