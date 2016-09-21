@@ -163,8 +163,8 @@ public class GestorLaberinto {
         
         for (int i = 0; i < l.getSizeM(); i++) {
             for (int j = 0; j < l.getSizeN(); j++) {
-                if (l.getCelda(i, j).getContenido() instanceof Enemigo) {
-                    e = (Enemigo) l.getCelda(i, j).getContenido();
+                if (l.getContenidoCelda(i, j) instanceof Enemigo) {
+                    e = (Enemigo) l.getContenidoCelda(i, j);
                     l.getCelda(i, j).setContenido(null);
                     
                     nuevaPos = devuelveRandomAdjacente(l, i, j, 1);
