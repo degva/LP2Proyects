@@ -88,18 +88,20 @@ public class Juego {
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto),_idxLaberinto);
             di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
             _idxLaberintoAnterior = _idxLaberinto;
-            if (!(_idxLaberinto == 0 && di == -1)) {
-                _idxLaberinto += di;
-                if (di == -1) {
-                    _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverSiguiente());
-                } else if (di == 1) {
-                    _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverAnterior());
+            if (di != 2) {
+                if (!(_idxLaberinto == 0 && di == -1)) {
+                    _idxLaberinto += di;
+                    if (di == -1) {
+                        _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverSiguiente());
+                    } else if (di == 1) {
+                        _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverAnterior());
+                    }
+                }            
+                if (_idxLaberinto == _numLaberintos) {
+                    break;
                 }
-            }            
-            if (_idxLaberinto == _numLaberintos) {
-                break;
+                _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
             }
-            _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
         }
         System.out.println("GANASTE");
     }
