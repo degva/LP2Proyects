@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: lab1gamecontrol.Lab1GameControl
+Class-Path: artefactos.jar mundo.jar interfaz.jar entidad.jar
+
+

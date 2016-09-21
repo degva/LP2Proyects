@@ -1,0 +1,17 @@
+set PATH=C:\Program Files\Java\jdk1.8.0_72\bin;%PATH%
+
+javac lab1gamecontrol\*.java
+
+javac lab1gamecontrol\Lab1GameControl.java
+
+C:\Users\alulab14.INF.011\Downloads\lab1GameControl\scr>jar cvf artefactos.jar lab1gamecontrol\Artefactos.class lab1gamecontrol\Arma.class lab1gamecontrol\Armadura.class lab1gamecontrol\PocionCuracion.class lab1gamecontrol\Saco.class
+
+C:\Users\alulab14.INF.011\Downloads\lab1GameControl\scr>jar cvf mundo.jar lab1gamecontrol\Celda.class lab1gamecontrol\Laberinto.class lab1gamecontrol\GestorLaberinto.class
+
+C:\Users\alulab14.INF.011\Downloads\lab1GameControl\scr>jar cvf interfaz.jar lab1gamecontrol\Dibujador.class
+
+C:\Users\alulab14.INF.011\Downloads\lab1GameControl\scr>jar cvf entidad.jar lab1gamecontrol\Avatar.class lab1gamecontrol\Color.class lab1gamecontrol\Enemigo.class lab1gamecontrol\Entidad.class lab1gamecontrol\Juego.class
+
+C:\Users\alulab14.INF.011\Downloads\lab1GameControl\scr>jar cvfm balanar.jar Manifest.txt lab1gamecontrol\Lab1GameControl.class
+
+C:\Users\alulab14.INF.011\Downloads\lab1GameControl\scr>java -jar balanar.jar
