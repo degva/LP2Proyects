@@ -8,7 +8,6 @@ package Controlador;
 import Modelo.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 import java.util.Random;
 import java.util.Stack;
 
@@ -51,7 +50,7 @@ public class GestorLaberinto {
         
         for (int i = 1; i < nuevoLaberinto.getSizeM(); i+= 2) {
             for (int j = 1; j < nuevoLaberinto.getSizeN(); j+= 2) {
-                nuevoLaberinto.setTipoCelda(i, j, new Pasadizo());
+                nuevoLaberinto.setTipoCelda(i, j, null);
             } 
         }
         
@@ -178,25 +177,25 @@ public class GestorLaberinto {
         List<IntPair> posibles = new ArrayList<>();
 
         // checkeamos nodo a la derecha:
-        if ((x > i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)) {
+        if ((x > i) && (lab.getCelda(x - i, y).getTipo() == null)) {
             pair = new IntPair(x-i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo arriba
-        if ((y > i) && (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo)) {
+        if ((y > i) && (lab.getCelda(x, y - i).getTipo() == null)) {
             pair = new IntPair(x, y-i);
             posibles.add(pair);
         }
         
         // checkeamos nodo izquierda
-        if ((x < lab.getSizeN() - i) && (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo)) {
+        if ((x < lab.getSizeM() - i) && (lab.getCelda(x + i, y).getTipo() == null)) {
             pair = new IntPair(x+i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo derecha
-        if ((y < lab.getSizeM() - i) && (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo)) {
+        if ((y < lab.getSizeN() - i) && (lab.getCelda(x, y + i).getTipo() == null)) {
             pair = new IntPair(x, y + i);
             posibles.add(pair);
         }

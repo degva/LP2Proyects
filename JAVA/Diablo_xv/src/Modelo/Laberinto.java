@@ -119,7 +119,7 @@ public class Laberinto {
         IntPair aux = null;
         for (int i = 0; i < this.getSizeM(); i++) {
             for (int j = 0; j < this.getSizeN(); j++) {
-                if ( this.getCelda(i, j).getTipo() instanceof Anterior) {
+                if ( this.getCelda(i, j).getContenido() instanceof Anterior) {
                     aux = new IntPair(i,j);
                 }
             }
@@ -131,7 +131,7 @@ public class Laberinto {
         IntPair aux = null;
         for (int i = 0; i < this.getSizeM(); i++) {
             for (int j = 0; j < this.getSizeN(); j++) {
-                if ( this.getCelda(i, j).getTipo() instanceof Siguiente) {
+                if ( this.getCelda(i, j).getContenido() instanceof Siguiente) {
                     aux = new IntPair(i,j);
                 }
             }
