@@ -83,7 +83,7 @@ public class Juego {
 
         // Otra vista: Consola
         int di;
-        while (_gestorJuego.GetGameOn()) {
+        while (_gestorJuego.GameON) {
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto),_idxLaberinto);
             di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
             _idxLaberintoAnterior = _idxLaberinto;
