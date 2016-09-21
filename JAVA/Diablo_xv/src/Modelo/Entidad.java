@@ -58,7 +58,7 @@ public class Entidad implements ObjetoGrafico {
     /**
      * @return the posicionX
      */
-    public int getPosicionX() {
+    public int getPosX() {
         return posicionX;
     }
 
@@ -72,7 +72,7 @@ public class Entidad implements ObjetoGrafico {
     /**
      * @return the posicionY
      */
-    public int getPosicionY() {
+    public int getPosY() {
         return posicionY;
     }
 
@@ -129,8 +129,8 @@ public class Entidad implements ObjetoGrafico {
     
     
     public void Mover(int dx, int dy) {
-        setPosicionX(getPosicionX() + dx);
-        setPosicionY(getPosicionY() + dy);
+        setPosicionX(getPosX() + dx);
+        setPosicionY(getPosY() + dy);
     }
     
     @Override
