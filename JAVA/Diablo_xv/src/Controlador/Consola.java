@@ -13,7 +13,7 @@ import Modelo.IntPair;
  */
 public class Consola {
     
-    private final Scanner consoleScanner;   
+    public final Scanner consoleScanner;   
     
     public Consola(){
         consoleScanner = new Scanner(System.in);
@@ -29,35 +29,27 @@ public class Consola {
         System.out.print("> [salir]\n\n - > " );
     }
     
-    public IntPair ObtenerDesplazamiento(){
-        String comando;
+    public IntPair ObtenerDesplazamiento(String x){
         IntPair desplazamiento = null;
-        boolean comandoEsValido = false;
-        while(!comandoEsValido){
-            comando = consoleScanner.nextLine();
-            switch(comando){
-                case "w":
-                case "mover arriba":
-                    desplazamiento = new IntPair(0, -1);
-                    break;
-                case "a":
-                case "mover izquierda":
-                    desplazamiento = new IntPair(-1, 0);
-                    break;
-                case "s":
-                case "mover abajo":
-                    desplazamiento = new IntPair(0, 1);
-                    break;
-                case "d":
-                case "mover derecha":
-                    desplazamiento = new IntPair(1, 0);
-                    break;
-                default:                    
-                    System.out.print("\n> ");
-                    continue;
-            }
-            comandoEsValido = true;
+        switch(x){
+            case "w":
+            case "mover arriba":
+                desplazamiento = new IntPair(0, -1);
+                break;
+            case "a":
+            case "mover izquierda":
+                desplazamiento = new IntPair(-1, 0);
+                break;
+            case "s":
+            case "mover abajo":
+                desplazamiento = new IntPair(0, 1);
+                break;
+            case "d":
+            case "mover derecha":
+                desplazamiento = new IntPair(1, 0);
+                break;
         }
+
         return desplazamiento;
     }
     

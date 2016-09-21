@@ -4,14 +4,7 @@
  * and open the template in the editor.
  */
 package Controlador;
-import Modelo.Anterior;
-import Modelo.Avatar;
-import Modelo.Laberinto;
-import Modelo.IntPair;
-import Modelo.Celda;
-import Modelo.Enemigo;
-import Modelo.Pasadizo;
-import Modelo.Siguiente;
+import Modelo.*;
 
 /**
  *
@@ -20,31 +13,40 @@ import Modelo.Siguiente;
 public class GestorJuego {
     
     private final Consola consola;
-    private final GestorLaberinto controladorLaberinto;
+    // private final GestorLaberinto controladorLaberinto;
     public boolean GameON;
     
     public GestorJuego(){
         consola = new Consola();
         GameON = true;
-        controladorLaberinto = new GestorLaberinto();
+        // controladorLaberinto = new GestorLaberinto();
     }
     
     public int Procesar(Avatar avatar, Laberinto laberinto){
         consola.MostrarMenu();
+        String opcion = consola.consoleScanner.nextLine();
+        
+        String[] split = opcion.split(" ");
+        switch (split[0]) {
+            case "mover":
+                IntPair desplazamiento = consola.ObtenerDesplazamiento(split[1]);
+                if(DesplazamientoEsValido(avatar, laberinto, desplazamiento)){
+                    avatar.Mover(desplazamiento.x, desplazamiento.y);
+                    int nuevoX = avatar.getPosX() + desplazamiento.x;
+                    int nuevoY = avatar.getPosY() + desplazamiento.y;
+                    Celda nuevaCeldaAvatar = laberinto.getCelda(nuevoX, nuevoY);
+                    if(nuevaCeldaAvatar.getTipo() instanceof Anterior)
+                        return -1;
+                    else if (nuevaCeldaAvatar.getTipo() instanceof Siguiente)
+                        return 1;
+                }
+                break;
+            case "cambiar":
+                break;
+        }
         if(PosicionDisparaInteraccion(avatar, laberinto)){
             //interaccion
             return 0;
-        }
-        IntPair desplazamiento = consola.ObtenerDesplazamiento();
-        if(DesplazamientoEsValido(avatar, laberinto, desplazamiento)){
-            avatar.Mover(desplazamiento.x, desplazamiento.y);
-            int nuevoX = avatar.getPosX() + desplazamiento.x;
-            int nuevoY = avatar.getPosY() + desplazamiento.y;
-            Celda nuevaCeldaAvatar = laberinto.getCelda(nuevoX, nuevoY);
-            if(nuevaCeldaAvatar.getTipo() instanceof Anterior)
-                return -1;
-            else if (nuevaCeldaAvatar.getTipo() instanceof Siguiente)
-                return 1;
         }
         return 0;
     }
