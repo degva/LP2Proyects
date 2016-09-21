@@ -15,7 +15,7 @@ public class GestorInteraccion {
     
     private GestorAvatar _gestorAvatar;
     public GestorInteraccion(){
-        
+        this._gestorAvatar = new GestorAvatar();
     }
     
     public void interactuarEnemigo(Avatar a, Laberinto l){
@@ -23,7 +23,7 @@ public class GestorInteraccion {
         int vidaA, vidaE;
         Enemigo e = l.obtenerEnemigoActual(a.getPosX(), a.getPosY());
         vidaA = a.getVidaActual() - e.getAtaque();
-        vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
+        vidaE = e.getVidaActual() -  5; //a.getArmaActual().getDano_max();
         a.setVidaActual(vidaA);
         e.setVidaActual(vidaE);
         l.retornarEnemigoActual(e);
