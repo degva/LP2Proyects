@@ -70,11 +70,12 @@ public class Render {
         } else {
             aux = lab.getCelda(x, y);
             tipo = aux.getTipo();            
-            if (tipo instanceof Pasadizo){   
-                aux.getContenido().Dibujar();                    
+            if (tipo instanceof Pasadizo){ 
+                if (aux.getContenido()!= null)
+                    aux.getContenido().Dibujar();
+                else System.out.print(" ");
             }else if(tipo instanceof Pared)
-                tipo.Dibujar();
-            
+                tipo.Dibujar();            
         }
     }
     
@@ -99,7 +100,7 @@ public class Render {
         // List<Enemigo> listaEnemigos = lab.getEnemigos();
         int state = 0;
         // imprimimos el nivel del mapa
-        System.out.println("## NIVEL " + (nivel+1) + " " + lab.getSizeM() + "-" + lab.getSizeN());
+        System.out.println(">> NIVEL " + (nivel+1) + " " + lab.getSizeM() + "-" + lab.getSizeN());
         
         // Imprimir
         OUTER:
