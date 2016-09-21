@@ -52,7 +52,7 @@ public class Consola {
                 case "mover derecha":
                     desplazamiento = new IntPair(1, 0);
                     break;
-                default:
+                default:                    
                     System.out.print("\n> ");
                     continue;
             }
