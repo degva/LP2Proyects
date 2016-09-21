@@ -28,20 +28,24 @@ public class GestorJuego {
         
         String[] split = opcion.split(" ");
         switch (split[0]) {
+            case "m":
             case "mover":
                 IntPair desplazamiento = consola.ObtenerDesplazamiento(split[1]);
                 if(DesplazamientoEsValido(avatar, laberinto, desplazamiento)){
-                    avatar.Mover(desplazamiento.x, desplazamiento.y);
                     int nuevoX = avatar.getPosX() + desplazamiento.x;
                     int nuevoY = avatar.getPosY() + desplazamiento.y;
                     Celda nuevaCeldaAvatar = laberinto.getCelda(nuevoX, nuevoY);
-                    if(nuevaCeldaAvatar.getTipo() instanceof Anterior)
+                    if(nuevaCeldaAvatar.getContenido() instanceof Anterior)
                         return -1;
-                    else if (nuevaCeldaAvatar.getTipo() instanceof Siguiente)
+                    else if (nuevaCeldaAvatar.getContenido() instanceof Siguiente)
                         return 1;
+                    avatar.Mover(desplazamiento.x, desplazamiento.y);
                 }
                 break;
             case "cambiar":
+                break;
+            case "salir":
+                this.GameOff();
                 break;
         }
         if(PosicionDisparaInteraccion(avatar, laberinto)){
@@ -65,6 +69,7 @@ public class GestorJuego {
         int nuevoX = avatar.getPosX() + desplazamiento.x;
         int nuevoY = avatar.getPosY() + desplazamiento.y;
         Celda celdaADesplazarse = laberinto.getCelda(nuevoX, nuevoY);
-        return celdaADesplazarse.getTipo() instanceof Pasadizo;
+        ObjetoGrafico aux = celdaADesplazarse.getTipo();
+        return (aux instanceof Pasadizo) || (aux instanceof Anterior) || (aux instanceof Siguiente);
     }
 }
