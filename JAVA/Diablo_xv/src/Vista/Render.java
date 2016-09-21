@@ -71,7 +71,7 @@ public class Render {
             aux = lab.getCelda(x, y);
             tipo = aux.getTipo();            
             if (tipo instanceof Pasadizo){   
-                    aux.getContenido().Dibujar();                    
+                aux.getContenido().Dibujar();                    
             }else if(tipo instanceof Pared)
                 tipo.Dibujar();
             
