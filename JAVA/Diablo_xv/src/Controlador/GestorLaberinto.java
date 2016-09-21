@@ -19,10 +19,9 @@ import java.util.Random;
 public class GestorLaberinto {
     
     public static final int MAX_SIZE_LAB = 10;
-    public static final int NRO_ARTEFACTOS = 10; // LUEGO SE VA A QUITAR, MIENTRAS TANTO... -----------------------------------------------------
+    public static final int NRO_ARTEFACTOS = 10; // LUEGO SE VA A QUITAR, MIENTRAS TANTO... -----------------------------------------------------    
     
     public GestorLaberinto() {
-        
     }
     
     public Laberinto CrearLaberinto(int numeroLaberinto){
@@ -108,7 +107,7 @@ public class GestorLaberinto {
         
         CrearListaEnemigos(nuevoLaberinto, numeroLaberinto);
         CrearListaArtefactos(nuevoLaberinto, numeroLaberinto);
-        
+        AgregarAnteriorSiguiente(nuevoLaberinto);
         return nuevoLaberinto;
     }
     
@@ -223,5 +222,41 @@ public class GestorLaberinto {
         }
         
         return pair;
+    }
+    
+    
+    public void AgregarAnteriorSiguiente(Laberinto laberinto){
+        int anterior,siguiente;
+        int x,y;
+        Random rnd = new Random();
+                
+        /*
+        Metodo de asignacion de la celda anterior y siguiente:
+        Se recorrera el laberinto, guardando las coordenadas de todas las celdas que esten
+        marcadas como ADENTRO, luego generando un numero aleatorio se elegira uno de esos pares
+        para anterior y otro para siguiente
+        */
+                
+            ArrayList<IntPair> coords = new ArrayList<>();
+            for (int i = 1; i < laberinto.getSizeM(); i++) {
+                for (int j = 1; j < laberinto.getSizeN(); j++) {
+                    if (laberinto.getCelda(i, j).getTipo() instanceof Pasadizo) {
+                        coords.add(new IntPair(i,j));
+                    }
+                }
+            }
+
+            do{
+                anterior = rnd.nextInt(coords.size());
+                siguiente = rnd.nextInt(coords.size()); 
+            }while (anterior == siguiente); //evitando que se vaya al gg (con 0.0000001% de probabilidad)                 
+
+            x = coords.get(anterior).x;
+            y = coords.get(anterior).y;
+            laberinto.getCelda(x, y).setContenido(new Anterior());
+
+            x = coords.get(siguiente).x;
+            y = coords.get(siguiente).y;
+            laberinto.getCelda(x, y).setContenido(new Siguiente());            
     }
 }
