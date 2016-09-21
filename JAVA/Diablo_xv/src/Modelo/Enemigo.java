@@ -12,7 +12,7 @@ package Modelo;
 public class Enemigo extends Entidad {
     
     private final char _elementoGrafico;
-    int ataque;
+    private int ataque;
     
     public Enemigo(String nombre, int posicionX, int poscionY, int nivel){
         super(posicionX,poscionY,nombre,nivel, nivel * 2);
@@ -24,5 +24,14 @@ public class Enemigo extends Entidad {
     @Override
     public void Dibujar() {
         System.out.print(_elementoGrafico);
-    }        
+    }
+
+    /**
+     * @return the ataque
+     */
+    public int getAtaque() {
+        return ataque;
+    }
+    
+
 }
