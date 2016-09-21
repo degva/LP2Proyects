@@ -161,12 +161,61 @@ public class GestorLaberinto {
                     e = (Enemigo) l.getContenidoCelda(i, j);
                     l.getCelda(i, j).setContenido(null);
                     
-                    nuevaPos = devuelveRandomAdjacente(l, i, j, 1);
+                    nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
                     e.Mover(nuevaPos.x - i, nuevaPos.y - j);
                     l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
                 }
             }
         }
+    }
+    
+    public IntPair devuelveRandomAdjacentePasadizo(Laberinto lab, int x, int y, int i) {
+
+        Random rnd = new Random();
+        
+        IntPair pair;
+        List<IntPair> posibles = new ArrayList<>();
+
+        // checkeamos nodo a la derecha:
+        if ((x > i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)) {
+            pair = new IntPair(x-i, y);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo arriba
+        if ((y > i) && (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo)) {
+            pair = new IntPair(x, y-i);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo izquierda
+        if ((x < lab.getSizeM() - i) && (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo)) {
+            pair = new IntPair(x+i, y);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo derecha
+        if ((y < lab.getSizeN() - i) && (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo)) {
+            pair = new IntPair(x, y + i);
+            posibles.add(pair);
+        }
+        
+        // si no tiene, devolvemos (-1,-1)
+        if (posibles.isEmpty()) {
+            pair = new IntPair(-1,-1);
+        } else {
+            // Hey, aqui creo que podria haber error. 
+            // mi cerebro no me da para saber si en el caso hipotetico que me de
+            // el tamano de la lista, me bote error por overflow() :v
+            // Ej:
+            // Digamos que posibles.size() me de 1. Entonces, el random sera o 0
+            // o 1. Entonces, si sale 1, posibles.get es por las. O en todo caso
+            // si sale 0, puede que posibles.get tambien sea por las... 
+            // TODO: revisar documentación java :v
+            pair = posibles.get(rnd.nextInt(posibles.size()));
+        }
+        
+        return pair;
     }
     
     public IntPair devuelveRandomAdjacente(Laberinto lab, int x, int y, int i) {
