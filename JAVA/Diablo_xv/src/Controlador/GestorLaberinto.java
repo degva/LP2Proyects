@@ -29,8 +29,8 @@ public class GestorLaberinto {
         Random rnd = new Random();
         
         /*  Inicializamos el laberinto  */
-        int aux = (int)(Math.random()*MAX_SIZE_LAB+5);
-        int sizeM = 2*aux+1;
+        int aux_lololo = (int)(Math.random()*MAX_SIZE_LAB+5);
+        int sizeM = 2*aux_lololo+1;
         int sizeN = sizeM;
         
         // creamos el arreglo de 2 dimensiones del laberinto
@@ -43,8 +43,7 @@ public class GestorLaberinto {
         
         for (int i = 0; i < nuevoLaberinto.getSizeM(); i++) {
             for (int j = 0; j < nuevoLaberinto.getSizeN(); j++) {
-                Pared auxPared = new Pared();
-                nuevoLaberinto.setTipoCelda(i, j, auxPared);
+                nuevoLaberinto.setTipoCelda(i, j, new Pared());
                 nuevoLaberinto.setTipoContenido(i, j, null);
             }
         }
@@ -52,8 +51,7 @@ public class GestorLaberinto {
         
         for (int i = 1; i < nuevoLaberinto.getSizeM(); i+= 2) {
             for (int j = 1; j < nuevoLaberinto.getSizeN(); j+= 2) {
-                Pasadizo auxPasadizo = new Pasadizo();
-                nuevoLaberinto.setTipoCelda(i, j, auxPasadizo);
+                nuevoLaberinto.setTipoCelda(i, j, new Pasadizo());
             } 
         }
         
@@ -76,29 +74,29 @@ public class GestorLaberinto {
         pilaCeldas.push(new IntPair(rx,ry));
         
         // algunos auxiliares para el while...
-        IntPair aux1, aux2;
+        IntPair aux, ady;
         
         while(!pilaCeldas.empty()) {
             // 3.1 tomamos la ultima apilada
-            aux1 = pilaCeldas.peek();
+            aux = pilaCeldas.peek();
             // 3.2 y 3.2.1 tomamos uno de los adjacentes aleatoriamente
-            aux2 = devuelveRandomAdjacente(nuevoLaberinto, aux1.x, aux1.y, 1);
+            ady = devuelveRandomAdjacente(nuevoLaberinto, aux.x, aux.y, 2);
             
             // 3.3 si bota -1 entonces significa que no hay adyacentes. Entonces,
             // hacemos pop 
-            if (aux2.x == -1) {
+            if (ady.x == -1) {
                 pilaCeldas.pop();
             } else {
                 // 3.2.2 hacemos caminito
-                int puente_x = ( aux1.x + aux2.x )/2;
-                int puente_y = ( aux1.y + aux2.y )/2;
+                int puente_x = ( aux.x + ady.x )/2;
+                int puente_y = ( aux.y + ady.y )/2;
                 nuevoLaberinto.setTipoCelda(puente_x, puente_y, new Pasadizo());
                 
                 // 3.2.3 marcamos el adyacente como adentro tambien
-                nuevoLaberinto.setTipoCelda(aux2.x, aux2.y, new Pasadizo());
+                nuevoLaberinto.setTipoCelda(ady.x, ady.y, new Pasadizo());
                 
                 // 3.2.4 apilamos v
-                pilaCeldas.push(aux2);                
+                pilaCeldas.push(ady);                
             }
         }
         
@@ -180,25 +178,25 @@ public class GestorLaberinto {
         List<IntPair> posibles = new ArrayList<>();
 
         // checkeamos nodo a la derecha:
-        if (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo) {
+        if ((x > i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)) {
             pair = new IntPair(x-i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo arriba
-        if (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo) {
+        if ((y > i) && (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo)) {
             pair = new IntPair(x, y-i);
             posibles.add(pair);
         }
         
         // checkeamos nodo izquierda
-        if (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo) {
+        if ((x < lab.getSizeN() - i) && (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo)) {
             pair = new IntPair(x+i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo derecha
-        if (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo) {
+        if ((y < lab.getSizeM() - i) && (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo)) {
             pair = new IntPair(x, y + i);
             posibles.add(pair);
         }

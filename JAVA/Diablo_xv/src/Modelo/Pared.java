@@ -10,8 +10,15 @@ package Modelo;
  * @author degva
  */
 public class Pared implements ObjetoGrafico{
+    
+    public char _elementoGrafico;
+    
+    public Pared() {
+        _elementoGrafico = '#';
+    }
+    
     @Override
     public void Dibujar(){
-        System.out.print("#");
+        System.out.print(_elementoGrafico);
     }
 }

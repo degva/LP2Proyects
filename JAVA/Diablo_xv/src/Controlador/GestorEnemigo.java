@@ -18,6 +18,7 @@ public class GestorEnemigo {
     private ArrayList<String> _enemigosDisponibles;
     
     public GestorEnemigo(){
+        _enemigosDisponibles = new ArrayList<>();
         _enemigosDisponibles.add("Enemigo 1");
         _enemigosDisponibles.add("Enemigo 2");
         _enemigosDisponibles.add("Enemigo 3");

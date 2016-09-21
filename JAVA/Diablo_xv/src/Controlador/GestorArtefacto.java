@@ -22,6 +22,9 @@ public class GestorArtefacto {
     private ArrayList<String> _armadurasDisponibles; //arreglo con las armaduras que se pueden agregar al laberinto 
     
     public GestorArtefacto(){
+        _armasDisponibles = new ArrayList<>();
+        _armadurasDisponibles = new ArrayList<>();
+        
         //Creamos varios tipos de armas y los agregamos
         _armasDisponibles.add("Arma tipo 1");
         _armasDisponibles.add("Arma tipo 2");

@@ -37,6 +37,13 @@ public class Laberinto {
         this._sizeN = sizeN;
         
         _laberinto = new Celda[_sizeM + 1][_sizeN + 1];
+        
+        for (int i =0; i < _sizeM; i++) {
+            for (int j = 0; j < _sizeN; j++) {
+                _laberinto[i][j] = new Celda(null);
+            }
+        }
+        
         _nivelesEnemigo = new int[_sizeM];
         for(int i =0; i < _sizeM; i++) 
             _nivelesEnemigo[i]= rnd.nextInt(10) +1;

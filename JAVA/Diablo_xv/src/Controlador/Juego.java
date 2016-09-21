@@ -30,7 +30,7 @@ public class Juego {
     private final ArrayList<Laberinto> _laberintos;
     
     
-    public Juego(String username) {
+    public Juego() {
         Scanner input = new Scanner(System.in);
         
         _gestorLab = new GestorLaberinto();
@@ -47,7 +47,7 @@ public class Juego {
         nombre = input.nextLine();
         
         
-        _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), username, _idxLaberinto);
+        _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), nombre, _idxLaberinto);
     }
     
     public void CrearListaLaberintos() {
