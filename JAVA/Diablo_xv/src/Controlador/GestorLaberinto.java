@@ -58,10 +58,10 @@ public class GestorLaberinto {
             } 
         }
         
-        /*
-        //****************
-        //Inicia el DFS 
-        //****************
+        
+        // ****************
+        //  Inicia el DFS 
+        // ****************
         
         // creamos una pila
         Stack<IntPair> pilaCeldas = new Stack<>();
@@ -83,9 +83,7 @@ public class GestorLaberinto {
             // 3.1 tomamos la ultima apilada
             aux1 = pilaCeldas.peek();
             // 3.2 y 3.2.1 tomamos uno de los adjacentes aleatoriamente
-            
-            aux2 = this.devuelveRandomAdjacente(nuevoLaberinto, aux1.x, aux1.y, 
-                    nuevoLaberinto.getSizeM(), nuevoLaberinto.getSizeN(), 2, TipoCelda.AFUERA);
+            aux2 = devuelveRandomAdjacente(nuevoLaberinto, aux1.x, aux1.y, 1);
             
             // 3.3 si bota -1 entonces significa que no hay adyacentes. Entonces,
             // hacemos pop 
@@ -95,17 +93,15 @@ public class GestorLaberinto {
                 // 3.2.2 hacemos caminito
                 int puente_x = ( aux1.x + aux2.x )/2;
                 int puente_y = ( aux1.y + aux2.y )/2;
-                //lab[puente_x][puente_y].setTipo(TipoCelda.ADENTRO); ------------------- ESTO HAY QUE CAMBIARLO TOTALMENTE
+                nuevoLaberinto.setTipoCelda(puente_x, puente_y, new Pasadizo());
                 
                 // 3.2.3 marcamos el adyacente como adentro tambien
-                //lab[aux2.x][aux2.y].setTipo(TipoCelda.ADENTRO); ----------------------tambien hay que cambiarlo totalmente
+                nuevoLaberinto.setTipoCelda(aux2.x, aux2.y, new Pasadizo());
                 
                 // 3.2.4 apilamos v
                 pilaCeldas.push(aux2);                
             }
         }
-        
-        */
         
         CrearListaEnemigos(nuevoLaberinto, numeroLaberinto);
         CrearListaArtefactos(nuevoLaberinto, numeroLaberinto);

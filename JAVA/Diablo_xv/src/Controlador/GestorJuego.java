@@ -38,8 +38,8 @@ public class GestorJuego {
         IntPair desplazamiento = consola.ObtenerDesplazamiento();
         if(DesplazamientoEsValido(avatar, laberinto, desplazamiento)){
             avatar.Mover(desplazamiento.x, desplazamiento.y);
-            int nuevoX = avatar.getPosicionX() + desplazamiento.x;
-            int nuevoY = avatar.getPosicionY() + desplazamiento.y;
+            int nuevoX = avatar.getPosX() + desplazamiento.x;
+            int nuevoY = avatar.getPosY() + desplazamiento.y;
             Celda nuevaCeldaAvatar = laberinto.getCelda(nuevoX, nuevoY);
             if(nuevaCeldaAvatar.getTipo() instanceof Anterior)
                 return -1;
@@ -54,14 +54,14 @@ public class GestorJuego {
     }
     
     private boolean PosicionDisparaInteraccion(Avatar avatar, Laberinto laberinto){
-        IntPair coordenadasAvatar = new IntPair(avatar.getPosicionX(), avatar.getPosicionY());
+        IntPair coordenadasAvatar = new IntPair(avatar.getPosX(), avatar.getPosY());
         Celda celdaAvatar = laberinto.getCelda(coordenadasAvatar.x, coordenadasAvatar.y);
         return celdaAvatar.getTipo() != null;
     }
     
     private boolean DesplazamientoEsValido(Avatar avatar, Laberinto laberinto, IntPair desplazamiento){
-        int nuevoX = avatar.getPosicionX() + desplazamiento.x;
-        int nuevoY = avatar.getPosicionY() + desplazamiento.y;
+        int nuevoX = avatar.getPosX() + desplazamiento.x;
+        int nuevoY = avatar.getPosY() + desplazamiento.y;
         Celda celdaADesplazarse = laberinto.getCelda(nuevoX, nuevoY);
         return celdaADesplazarse.getTipo() instanceof Pasadizo;
     }

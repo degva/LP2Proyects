@@ -125,8 +125,8 @@ public class Entidad implements ObjetoGrafico {
     
     
     public void setPosXY(IntPair pair){
-        setPosicionX(pair.x);
-        setPosicionY(pair.y);
+        setPosX(pair.x);
+        setPosY(pair.y);
     }
 
     /**

@@ -21,7 +21,7 @@ public class GestorInteraccion {
     public void interactuarEnemigo(Avatar a, Laberinto l){
         //gg wp
         int vidaA, vidaE;
-        Enemigo e = l.obtenerEnemigoActual(a.getPosicionX(), a.getPosicionY());
+        Enemigo e = l.obtenerEnemigoActual(a.getPosX(), a.getPosY());
         vidaA = a.getVidaActual() - e.getAtaque();
         vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
         a.setVidaActual(vidaA);
@@ -31,7 +31,7 @@ public class GestorInteraccion {
     }
     
     public void interactuarArtefacto(Avatar a, Laberinto l){
-        Artefacto ar = l.obtenerArtefactoActual(a.getPosicionX(), a.getPosicionY());
+        Artefacto ar = l.obtenerArtefactoActual(a.getPosX(), a.getPosY());
         _gestorAvatar.RecogerArtefacto(a, ar);
     }
     

@@ -31,7 +31,7 @@ public class Consola {
     
     public IntPair ObtenerDesplazamiento(){
         String comando;
-        IntPair desplazamiento;
+        IntPair desplazamiento = null;
         boolean comandoEsValido = false;
         while(!comandoEsValido){
             comando = consoleScanner.nextLine();
@@ -61,6 +61,6 @@ public class Consola {
         return desplazamiento;
     }
     
-    public void Interactuar()
+    //public void Interactuar()
 }
 
