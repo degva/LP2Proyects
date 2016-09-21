@@ -27,11 +27,11 @@ public class GestorInteraccion {
         //Mini consola
         System.out.println("A pelear!");
         System.out.print("Enemigo: "); System.out.print(e.getNombre());        
-        System.out.print(" Vida: "); System.out.print(e.getVidaMaxima());        
+        System.out.print(" Vida: "); System.out.print(e.getVidaActual());        
         System.out.print(" Ataque: "); System.out.print(e.getAtaque());        
-        System.out.print("  Tu: "); System.out.print(e.getNombre());        
-        System.out.print(" Vida: "); System.out.print(e.getVidaMaxima());        
-        System.out.print(" Ataque: "); System.out.print(e.getAtaque());        
+        System.out.print("  Tu: "); System.out.print(a.getNombre());        
+        System.out.print(" Vida: "); System.out.print(a.getVidaActual());        
+        System.out.print(" Ataque: "); System.out.print(a.getArmaActual().getDano_max());        
         System.out.print("\n[atacar | huir | usar i]");
         System.out.print("\n - > ");
         //Batalla
@@ -44,7 +44,6 @@ public class GestorInteraccion {
                     vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
                     a.setVidaActual(vidaA);
                     e.setVidaActual(vidaE);
-                    l.retornarEnemigoActual(e);
                     break;
                 case "huir":
                     //Me muevo a la posicion de la interaccion para no chocar adyacentemente
@@ -62,19 +61,23 @@ public class GestorInteraccion {
                     }
                     
             }
+            if (e.getVidaActual() <= 0) {
+                System.out.println("Ganaste :v");
+                break;
+            }
             System.out.println("A pelear!");
             System.out.print("Enemigo: "); System.out.print(e.getNombre());        
-            System.out.print(" Vida: "); System.out.print(e.getVidaMaxima());        
+            System.out.print(" Vida: "); System.out.print(e.getVidaActual());        
             System.out.print(" Ataque: "); System.out.print(e.getAtaque());        
-            System.out.print("  Tu: "); System.out.print(e.getNombre());        
-            System.out.print(" Vida: "); System.out.print(e.getVidaMaxima());        
-            System.out.print(" Ataque: "); System.out.print(e.getAtaque());
+            System.out.print("  Tu: "); System.out.print(a.getNombre());        
+            System.out.print(" Vida: "); System.out.print(a.getVidaActual());        
+            System.out.print(" Ataque: "); System.out.print(a.getArmaActual().getDano_max());
 
             System.out.print("\n[atacar | huir | usar i]");
             System.out.print("\n - > ");
             comando = consolaBatalla.nextLine();
-        }        
-        
+        }
+        l.retornarEnemigoActual(e);
     }
     
     public void interactuarArtefacto(Avatar a, Laberinto l, IntPair coordenadaInteraccion){
