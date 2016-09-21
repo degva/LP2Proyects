@@ -26,6 +26,7 @@ public class Juego {
     private Render _render;
     private int _idxLaberinto;
     private int _idxLaberintoAnterior;
+    private int _numLaberintos;
     //private GestorAvatar _gestorAvatar;
     private final ArrayList<Laberinto> _laberintos;
     
@@ -38,6 +39,7 @@ public class Juego {
         _render = new Render();
         _laberintos = new ArrayList<>();
         _idxLaberinto = _idxLaberintoAnterior = 0;
+        _numLaberintos = (int)(Math.random()*10+5);
         //_gestorAvatar = new GestorAvatar();
         
         this.CrearListaLaberintos();
@@ -51,7 +53,6 @@ public class Juego {
     }
     
     public void CrearListaLaberintos() {
-        int _numLaberintos = (int)(Math.random()*10+5);
         for (int i = 0; i < _numLaberintos; i++) {
             _laberintos.add(_gestorLab.CrearLaberinto(i+1));
         }
@@ -86,15 +87,25 @@ public class Juego {
         while (_gestorJuego.GameON) {
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto),_idxLaberinto);
             di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
-            _idxLaberintoAnterior = _idxLaberinto;
             _idxLaberinto += di;
-            if (di == -1) {
+            // Si querías evitar que el indice de laberintoActual sea negativo, bastaba:
+            if (_idxLaberinto < 0)
+                _idxLaberinto = 0;
+            // Evaluamos si hemos ganado
+            if (_idxLaberinto == _numLaberintos){
+                System.out.println("¡¡¡GANASTE!!!");
+                break;
+            }
+            //Evaluamos el avance
+            if ((di == -1) && (_idxLaberinto != 0)) {
                 _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverSiguiente());
             } else if (di == 1) {
                 _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverAnterior());
             }
             _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
         }
+        System.out.println("Bye o/");
     }
     
 }
+

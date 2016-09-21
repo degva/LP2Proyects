@@ -158,12 +158,14 @@ public class GestorLaberinto {
         for (int i = 0; i < l.getSizeM(); i++) {
             for (int j = 0; j < l.getSizeN(); j++) {
                 if (l.getContenidoCelda(i, j) instanceof Enemigo) {
-                    e = (Enemigo) l.getContenidoCelda(i, j);
-                    l.getCelda(i, j).setContenido(null);
-                    
                     nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
-                    e.Mover(nuevaPos.x - i, nuevaPos.y - j);
-                    l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                    if (l.getContenidoCelda(nuevaPos.x, nuevaPos.y) == null) {
+                        e = (Enemigo) l.getContenidoCelda(i, j);
+                        l.getCelda(i, j).setContenido(null);
+
+                        e.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                        l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                    }
                 }
             }
         }
