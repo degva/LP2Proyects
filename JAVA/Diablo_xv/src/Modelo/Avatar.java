@@ -19,8 +19,8 @@ public class Avatar extends Entidad {
         super(posicionX,poscionY,nombre,nivel, 100);
         super.setVidaActual(100);
         this.saco = new Saco();
-        this.armaduraActual = null;
-        this.armaActual = null;
+        this.armaduraActual = new Armadura("Armor", 0, 0, 50);
+        this.armaActual = new Arma("Espada", 0, 0, 25, 75);
         this._elementoGrafico = 'O';
     }
      
@@ -28,8 +28,8 @@ public class Avatar extends Entidad {
         super(coord.x, coord.y,nombre,nivel, 100);
         super.setVidaActual(100);
         this.saco = new Saco();
-        this.armaduraActual = null;
-        this.armaActual = null;
+        this.armaduraActual = new Armadura("Armor", 0, 0, 50);
+        this.armaActual = new Arma("Espada", 0, 0, 25, 75);
         this._elementoGrafico = 'O';
     }
     
