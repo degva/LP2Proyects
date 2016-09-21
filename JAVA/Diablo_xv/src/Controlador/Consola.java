@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package Controlador;
+import Modelo.Artefacto;
 import java.util.Scanner;
 import Modelo.IntPair;
+import Modelo.Enemigo;
 
 /**
  *
@@ -53,6 +55,32 @@ public class Consola {
         return desplazamiento;
     }
     
-    //public void Interactuar()
+    public void MostrarEnemigo(Enemigo enemigo){
+        System.out.println("Estas sobre un enemigo");
+        System.out.print("Enemigo: ");
+        System.out.print(enemigo.getNombre());
+        System.out.print(" Vida: ");
+        System.out.print(enemigo.getVidaActual());
+        System.out.print(" Ataque: ");
+        System.out.println(enemigo.getAtaque());
+        System.out.println("Ataca ! [escribe interactuar");
+        System.out.print("> ");
+        String comando = "";
+        while(!comando.equals("interactuar")){
+            comando = consoleScanner.nextLine();
+        }
+    }
+    
+    public void MostrarArtefacto(Artefacto artefacto){
+        System.out.println("Estas sobre un artefacto");
+        System.out.print("Artefacto: ");
+        System.out.print(artefacto.getNombre());
+        System.out.println("Recogelo ! [escribe interactuar");
+        System.out.print("> ");
+        String comando = "";
+        while(!comando.equals("interactuar")){
+            comando = consoleScanner.nextLine();
+        }
+    }
 }
 

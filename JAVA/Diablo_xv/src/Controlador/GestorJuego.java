@@ -14,18 +14,32 @@ public class GestorJuego {
     
     private final Consola consola;
     // private final GestorLaberinto controladorLaberinto;
+    private final GestorInteraccion gestorInteraccion;
     public boolean GameON;
     
     public GestorJuego(){
         consola = new Consola();
         GameON = true;
+        gestorInteraccion = new GestorInteraccion();
         // controladorLaberinto = new GestorLaberinto();
     }
     
     public int Procesar(Avatar avatar, Laberinto laberinto){
         consola.MostrarMenu();
-        String opcion = consola.consoleScanner.nextLine();
         
+        if(PosicionDisparaInteraccion(avatar, laberinto)){
+            Celda celda = laberinto.getCelda(avatar.getPosX(), avatar.getPosY());
+            if(celda.getContenido() instanceof Enemigo){
+                consola.MostrarEnemigo(laberinto.obtenerEnemigoActual(avatar.getPosX(), avatar.getPosY()));
+                gestorInteraccion.interactuarEnemigo(avatar, laberinto);
+            } else if (celda.getContenido() instanceof Artefacto) {
+                consola.MostrarArtefacto(laberinto.obtenerArtefactoActual(avatar.getPosX(), avatar.getPosY()));
+                gestorInteraccion.interactuarArtefacto(avatar, laberinto);
+            }
+            return 0;
+        }
+        
+        String opcion = consola.consoleScanner.nextLine();        
         String[] split = opcion.split(" ");
         switch (split[0]) {
             case "w":
@@ -52,10 +66,6 @@ public class GestorJuego {
             default:
                 return 2;
         }
-        if(PosicionDisparaInteraccion(avatar, laberinto)){
-            //interaccion
-            return 0;
-        }
         return 0;
     }
     
@@ -66,7 +76,7 @@ public class GestorJuego {
     private boolean PosicionDisparaInteraccion(Avatar avatar, Laberinto laberinto){
         IntPair coordenadasAvatar = new IntPair(avatar.getPosX(), avatar.getPosY());
         Celda celdaAvatar = laberinto.getCelda(coordenadasAvatar.x, coordenadasAvatar.y);
-        return celdaAvatar.getTipo() != null;
+        return (celdaAvatar.getContenido() instanceof Enemigo || celdaAvatar.getContenido() instanceof Artefacto);
     }
     
     private boolean DesplazamientoEsValido(Avatar avatar, Laberinto laberinto, IntPair desplazamiento){
