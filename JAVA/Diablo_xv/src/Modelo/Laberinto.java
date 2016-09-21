@@ -179,7 +179,8 @@ public class Laberinto {
         }
         //se quita el artefacto de la lista, 
         //para que luego el render no lo imprima
-        _listaArtefactos.remove(i);
+        //_listaArtefactos.remove(i);
+        setTipoContenido(x,y,null);
         return a;
     }
     
