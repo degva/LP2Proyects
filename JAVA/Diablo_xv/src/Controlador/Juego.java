@@ -26,6 +26,7 @@ public class Juego {
     private Render _render;
     private int _idxLaberinto;
     private int _idxLaberintoAnterior;
+    private int _numLaberintos;
     //private GestorAvatar _gestorAvatar;
     private final ArrayList<Laberinto> _laberintos;
     
@@ -38,6 +39,7 @@ public class Juego {
         _render = new Render();
         _laberintos = new ArrayList<>();
         _idxLaberinto = _idxLaberintoAnterior = 0;
+        _numLaberintos = (int)(Math.random()*10+5);
         //_gestorAvatar = new GestorAvatar();
         
         this.CrearListaLaberintos();
@@ -51,7 +53,6 @@ public class Juego {
     }
     
     public void CrearListaLaberintos() {
-        int _numLaberintos = (int)(Math.random()*10+5);
         for (int i = 0; i < _numLaberintos; i++) {
             _laberintos.add(_gestorLab.CrearLaberinto(i+1));
         }
@@ -87,14 +88,20 @@ public class Juego {
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto),_idxLaberinto);
             di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
             _idxLaberintoAnterior = _idxLaberinto;
-            _idxLaberinto += di;
-            if (di == -1) {
-                _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverSiguiente());
-            } else if (di == 1) {
-                _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverAnterior());
+            if (!(_idxLaberinto == 0 && di == -1)) {
+                _idxLaberinto += di;
+                if (di == -1) {
+                    _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverSiguiente());
+                } else if (di == 1) {
+                    _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverAnterior());
+                }
+            }            
+            if (_idxLaberinto == _numLaberintos) {
+                break;
             }
             _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
         }
+        System.out.println("GANASTE");
     }
     
 }

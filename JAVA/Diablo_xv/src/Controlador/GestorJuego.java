@@ -35,11 +35,12 @@ public class GestorJuego {
                     int nuevoX = avatar.getPosX() + desplazamiento.x;
                     int nuevoY = avatar.getPosY() + desplazamiento.y;
                     Celda nuevaCeldaAvatar = laberinto.getCelda(nuevoX, nuevoY);
+                    avatar.Mover(desplazamiento.x, desplazamiento.y);
                     if(nuevaCeldaAvatar.getContenido() instanceof Anterior)
                         return -1;
                     else if (nuevaCeldaAvatar.getContenido() instanceof Siguiente)
                         return 1;
-                    avatar.Mover(desplazamiento.x, desplazamiento.y);
+                    
                 }
                 break;
             case "cambiar":
@@ -70,6 +71,6 @@ public class GestorJuego {
         int nuevoY = avatar.getPosY() + desplazamiento.y;
         Celda celdaADesplazarse = laberinto.getCelda(nuevoX, nuevoY);
         ObjetoGrafico aux = celdaADesplazarse.getTipo();
-        return (aux instanceof Pasadizo) || (aux instanceof Anterior) || (aux instanceof Siguiente);
+        return aux instanceof Pasadizo;
     }
 }
