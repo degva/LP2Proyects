@@ -103,6 +103,7 @@ public class Juego {
                 _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverAnterior());
             }
             _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
+            _gestorLab.MoverAliado(ObtenerLaberinto(_idxLaberinto));
         }
         System.out.println("Bye o/");
     }

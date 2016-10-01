@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
+import Facilidades.Aliado;
 
 /**
  *
@@ -101,6 +102,7 @@ public class GestorLaberinto {
         
         CrearListaEnemigos(nuevoLaberinto, numeroLaberinto);
         CrearListaArtefactos(nuevoLaberinto, numeroLaberinto);
+        AgregarAliado(nuevoLaberinto, numeroLaberinto);
         AgregarAnteriorSiguiente(nuevoLaberinto);
         return nuevoLaberinto;
     }
@@ -151,6 +153,29 @@ public class GestorLaberinto {
         } 
     }
     
+    public void AgregarAliado(Laberinto l, int numeroLaberitno){
+        Random rnd = new Random();
+        int maxX = l.getSizeM();
+        int maxY = l.getSizeN();
+
+        int aliX, aliY;                
+        
+        for(int i=0; i< 1; i++){
+            //nodos impares
+            aliX = (rnd.nextInt(maxX/2)*2 +1);
+            aliY = (rnd.nextInt(maxY/2)*2 +1);
+            
+            //verificamos que las cordenadas no esten ocupadas
+            Celda auxCelda = new Celda(l.getTipoCelda(aliX, aliY));
+            auxCelda.setContenido(l.getContenidoCelda(aliX, aliY));
+            
+            if(l.celdaVacia(aliX, aliY)){ //si la celda es del tipo pasadizo y esta vacia
+                //agregamos al aliado
+                l.agregarAliado(new Aliado("Alditus",aliX,aliY,numeroLaberitno));
+            } else i--;
+        }
+    }
+    
     public void MoverEnemigos(Laberinto l) {
         Enemigo e; 
         IntPair nuevaPos;
@@ -161,6 +186,27 @@ public class GestorLaberinto {
                     nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
                     if (l.getContenidoCelda(nuevaPos.x, nuevaPos.y) == null) {
                         e = (Enemigo) l.getContenidoCelda(i, j);
+                        l.getCelda(i, j).setContenido(null);
+
+                        e.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                        l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                    }
+                }
+            }
+        }
+    }
+    
+    ///MODIFICACION
+    public void MoverAliado(Laberinto l) {
+        Aliado e; 
+        IntPair nuevaPos;
+        
+        for (int i = 0; i < l.getSizeM(); i++) {
+            for (int j = 0; j < l.getSizeN(); j++) {
+                if (l.getContenidoCelda(i, j) instanceof Aliado) {
+                    nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
+                    if (l.getContenidoCelda(nuevaPos.x, nuevaPos.y) == null) {
+                        e = (Aliado) l.getContenidoCelda(i, j);
                         l.getCelda(i, j).setContenido(null);
 
                         e.Mover(nuevaPos.x - i, nuevaPos.y - j);

@@ -7,6 +7,7 @@ package Modelo;
 
 import java.util.ArrayList;
 import java.util.Random;
+import Facilidades.Aliado;
 
 
 
@@ -30,6 +31,8 @@ public class Laberinto {
     private ArrayList<Enemigo> _listaEnemigos;
     private ArrayList<Artefacto> _listaArtefactos;
     
+    private Aliado _aliado;
+    
     public Laberinto(int sizeM, int sizeN) {
         Random rnd = new Random();
 
@@ -49,7 +52,7 @@ public class Laberinto {
             _nivelesEnemigo[i]= rnd.nextInt(10) +1;
         
         _listaEnemigos = new ArrayList<>();
-        _listaArtefactos = new ArrayList<>(); 
+        _listaArtefactos = new ArrayList<>();
     }
         
     /**
@@ -83,6 +86,16 @@ public class Laberinto {
     public void agregarArtefacto(Artefacto a){
         _laberinto[a.getPosX()][a.getPosY()].setContenido(a);
         _listaArtefactos.add(a);
+    }
+    
+    public void agregarAliado(Aliado aliado){
+        this._laberinto[aliado.getPosX()][aliado.getPosY()].setContenido(aliado);
+        this._aliado = aliado;
+    }
+    
+    
+    public Aliado obtenerAliado(){        
+        return _aliado;
     }
     
     public void agregarEnemigo(Enemigo e){

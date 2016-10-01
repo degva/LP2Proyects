@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Controlador;
+import Facilidades.Aliado;
 import Modelo.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -86,4 +87,11 @@ public class GestorInteraccion {
         _gestorAvatar.RecogerArtefacto(a, ar);
     }
     
+    public void interactuarAliado(Avatar a, Laberinto l, IntPair coordenadaInteraccion){
+        Aliado al = l.obtenerAliado();
+        String consejo = al.darConsejo();
+        System.out.println("=====================================================\n\n");
+        System.out.println("Hola, soy tu aliado y este es mi consejo: " + consejo + "\n\n");
+        System.out.println("=====================================================\n\n");
+    }    
 }

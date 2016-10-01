@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Controlador;
+import Facilidades.Aliado;
 import Modelo.*;
 
 /**
@@ -116,7 +117,9 @@ public class GestorJuego {
             gestorInteraccion.interactuarEnemigo(avatar, laberinto, coordenadaInteraccion);
         } else if (objetoInteraccion instanceof Artefacto){
             gestorInteraccion.interactuarArtefacto(avatar, laberinto, coordenadaInteraccion);
-        } else {
+        }else if (objetoInteraccion instanceof Aliado){
+            gestorInteraccion.interactuarAliado(avatar, laberinto, coordenadaInteraccion);
+        }else{
             consola.SetLog("Aqui no hay nada para interactuar");
         }
     }
