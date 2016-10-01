@@ -15,6 +15,7 @@ import java.util.List;
 public class GestorInteraccion {
     
     private GestorAvatar _gestorAvatar;
+    
     public GestorInteraccion(){
         _gestorAvatar = new GestorAvatar();
     }
