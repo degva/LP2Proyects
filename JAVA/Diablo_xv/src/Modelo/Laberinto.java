@@ -162,7 +162,7 @@ public class Laberinto {
             if (e.getPosX() == posX && e.getPosY() == posY)
                 break;
         }
-        if (eNew.getVidaActual() <= 0) _listaEnemigos.remove(i); // eliminar de la lista si muere
+        if (eNew.getVidaActual() <= 0) setTipoContenido(posX, posY, null);
         else _listaEnemigos.set(i, eNew);
          
         
@@ -179,8 +179,8 @@ public class Laberinto {
         }
         //se quita el artefacto de la lista, 
         //para que luego el render no lo imprima
-        //_listaArtefactos.remove(i);
-        setTipoContenido(x,y,null);
+        // _listaArtefactos.remove(i);
+        setTipoContenido(x, y, null);
         return a;
     }
     
