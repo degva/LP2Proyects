@@ -102,7 +102,7 @@ public class Juego {
             } else if (di == 1) {
                 _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverAnterior());
             }
-            _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto));
+            _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto), _avatar.getPosX(), _avatar.getPosY());
             _gestorLab.MoverAliado(ObtenerLaberinto(_idxLaberinto));
         }
         System.out.println("Bye o/");

@@ -27,14 +27,14 @@ public class GestorInteraccion {
         //gg wp
         int vidaA, vidaE;
 
-        Enemigo e = l.obtenerEnemigoActual(a.getPosX(), a.getPosY());
-        vidaA = a.getVidaActual() - e.getAtaque();
-        vidaE = e.getVidaActual() -  5; //a.getArmaActual().getDano_max();
-        a.setVidaActual(vidaA);
-        e.setVidaActual(vidaE);
-
-        Scanner consolaBatalla = new Scanner(System.in);
+//        Enemigo e = l.obtenerEnemigoActual(coordenadaInteraccion.x, coordenadaInteraccion.y);
+//        vidaA = a.getVidaActual() - e.getAtaque();
+//        vidaE = e.getVidaActual() -  5; //a.getArmaActual().getDano_max();
+//        a.setVidaActual(vidaA);
+//        e.setVidaActual(vidaE);
         Enemigo e = l.obtenerEnemigoActual(coordenadaInteraccion.x, coordenadaInteraccion.y);
+        Scanner consolaBatalla = new Scanner(System.in);
+        
         //Mini consola
         System.out.println("A pelear!");
         System.out.print("Enemigo: "); System.out.print(e.getNombre());        
