@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6e6825d412ea32e993ba553e717c89d18f836945
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -192,10 +196,15 @@ public class Laberinto {
         }
         //se quita el artefacto de la lista, 
         //para que luego el render no lo imprima
+<<<<<<< HEAD
 
         // _listaArtefactos.remove(i);
         setTipoContenido(x, y, null);
 
+=======
+        // _listaArtefactos.remove(i);
+        setTipoContenido(x, y, null);
+>>>>>>> 6e6825d412ea32e993ba553e717c89d18f836945
         return a;
     }
     
