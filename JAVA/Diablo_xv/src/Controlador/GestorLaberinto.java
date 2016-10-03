@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
+import Facilidades.Aliado;
 
 /**
  *
@@ -101,6 +102,7 @@ public class GestorLaberinto {
         
         CrearListaEnemigos(nuevoLaberinto, numeroLaberinto);
         CrearListaArtefactos(nuevoLaberinto, numeroLaberinto);
+        AgregarAliado(nuevoLaberinto, numeroLaberinto);
         AgregarAnteriorSiguiente(nuevoLaberinto);
         return nuevoLaberinto;
     }
@@ -151,6 +153,29 @@ public class GestorLaberinto {
         } 
     }
     
+    public void AgregarAliado(Laberinto l, int numeroLaberitno){
+        Random rnd = new Random();
+        int maxX = l.getSizeM();
+        int maxY = l.getSizeN();
+
+        int aliX, aliY;                
+        
+        for(int i=0; i< 1; i++){
+            //nodos impares
+            aliX = (rnd.nextInt(maxX/2)*2 +1);
+            aliY = (rnd.nextInt(maxY/2)*2 +1);
+            
+            //verificamos que las cordenadas no esten ocupadas
+            Celda auxCelda = new Celda(l.getTipoCelda(aliX, aliY));
+            auxCelda.setContenido(l.getContenidoCelda(aliX, aliY));
+            
+            if(l.celdaVacia(aliX, aliY)){ //si la celda es del tipo pasadizo y esta vacia
+                //agregamos al aliado
+                l.agregarAliado(new Aliado("Alditus",aliX,aliY,numeroLaberitno));
+            } else i--;
+        }
+    }
+    
     public void MoverEnemigos(Laberinto l) {
         Enemigo e; 
         IntPair nuevaPos;
@@ -158,16 +183,100 @@ public class GestorLaberinto {
         for (int i = 0; i < l.getSizeM(); i++) {
             for (int j = 0; j < l.getSizeN(); j++) {
                 if (l.getContenidoCelda(i, j) instanceof Enemigo) {
-                    e = (Enemigo) l.getContenidoCelda(i, j);
-                    l.getCelda(i, j).setContenido(null);
-                    
-                    nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
-                    e.Mover(nuevaPos.x - i, nuevaPos.y - j);
-                    l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                    nuevaPos = devuelveRandomAdjacenteEnemigo(l, i, j, 1);
+                    if (l.getContenidoCelda(nuevaPos.x, nuevaPos.y) == null) {
+                        e = (Enemigo) l.getContenidoCelda(i, j);
+                        l.getCelda(i, j).setContenido(null);
+
+                        e.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                        l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                    }
                 }
             }
         }
     }
+    
+    ///MODIFICACION
+    public void MoverAliado(Laberinto l) {
+        Aliado e; 
+        IntPair nuevaPos;
+        
+        for (int i = 0; i < l.getSizeM(); i++) {
+            for (int j = 0; j < l.getSizeN(); j++) {
+                if (l.getContenidoCelda(i, j) instanceof Aliado) {
+                    nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
+                    if (l.getContenidoCelda(nuevaPos.x, nuevaPos.y) == null) {
+                        e = (Aliado) l.getContenidoCelda(i, j);
+                        l.getCelda(i, j).setContenido(null);
+
+                        e.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                        l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                    }
+                }
+            }
+        }
+    }
+    
+    private int ObtenerCuadrante(Laberinto lab){
+        
+        for (int i = 0; i < lab.getSizeM(); i++) 
+            for (int j = 0; j < lab.getSizeN(); j++) {
+                
+            }
+        return 0;
+    }
+    
+    private IntPair devuelveRandomAdjacenteEnemigo(Laberinto lab, int x, int y, int i) {
+
+        Random rnd = new Random();
+        
+        IntPair pair;
+        List<IntPair> posibles = new ArrayList<>();
+
+        int cuadrante = ObtenerCuadrante(lab);
+        
+        // checkeamos nodo a la derecha:
+        if ((x > i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)) {
+            pair = new IntPair(x-i, y);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo arriba
+        if ((y > i) && (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo)) {
+            pair = new IntPair(x, y-i);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo izquierda
+        if ((x < lab.getSizeM() - i) && (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo)) {
+            pair = new IntPair(x+i, y);
+            posibles.add(pair);
+        }
+        
+        // checkeamos nodo abajo
+        if ((y < lab.getSizeN() - i) && (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo)) {
+            pair = new IntPair(x, y + i);
+            posibles.add(pair);
+        }
+        
+        // si no tiene, devolvemos (-1,-1)
+        if (posibles.isEmpty()) {
+            pair = devuelveRandomAdjacentePasadizo(lab, x, y, i);
+        } else {
+            // Hey, aqui creo que podria haber error. 
+            // mi cerebro no me da para saber si en el caso hipotetico que me de
+            // el tamano de la lista, me bote error por overflow() :v
+            // Ej:
+            // Digamos que posibles.size() me de 1. Entonces, el random sera o 0
+            // o 1. Entonces, si sale 1, posibles.get es por las. O en todo caso
+            // si sale 0, puede que posibles.get tambien sea por las... 
+            // TODO: revisar documentación java :v
+            pair = posibles.get(rnd.nextInt(posibles.size()));
+        }
+        
+        return pair;
+    }
+    
     
     public IntPair devuelveRandomAdjacentePasadizo(Laberinto lab, int x, int y, int i) {
 
