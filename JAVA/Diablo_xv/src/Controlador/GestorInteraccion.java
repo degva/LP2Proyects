@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> 6e6825d412ea32e993ba553e717c89d18f836945
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,32 +19,20 @@ public class GestorInteraccion {
     private GestorAvatar _gestorAvatar;
     
     public GestorInteraccion(){
-<<<<<<< HEAD
+
 
         _gestorAvatar = new GestorAvatar();
 
-=======
-        _gestorAvatar = new GestorAvatar();
->>>>>>> 6e6825d412ea32e993ba553e717c89d18f836945
+
     }
     
     public void interactuarEnemigo(Avatar a, Laberinto l, IntPair coordenadaInteraccion){
         //gg wp
         int vidaA, vidaE;
-<<<<<<< HEAD
 
-//        Enemigo e = l.obtenerEnemigoActual(coordenadaInteraccion.x, coordenadaInteraccion.y);
-//        vidaA = a.getVidaActual() - e.getAtaque();
-//        vidaE = e.getVidaActual() -  5; //a.getArmaActual().getDano_max();
-//        a.setVidaActual(vidaA);
-//        e.setVidaActual(vidaE);
-        Enemigo e = l.obtenerEnemigoActual(coordenadaInteraccion.x, coordenadaInteraccion.y);
-        Scanner consolaBatalla = new Scanner(System.in);
-        
-=======
         Scanner consolaBatalla = new Scanner(System.in);
         Enemigo e = l.obtenerEnemigoActual(coordenadaInteraccion.x, coordenadaInteraccion.y);
->>>>>>> 6e6825d412ea32e993ba553e717c89d18f836945
+
         //Mini consola
         System.out.println("A pelear!");
         System.out.print("Enemigo: "); System.out.print(e.getNombre());        
@@ -101,10 +86,7 @@ public class GestorInteraccion {
             System.out.print("\n - > ");
             comando = consolaBatalla.nextLine();
         }
-<<<<<<< HEAD
 
-=======
->>>>>>> 6e6825d412ea32e993ba553e717c89d18f836945
         l.retornarEnemigoActual(e);
     }
     
