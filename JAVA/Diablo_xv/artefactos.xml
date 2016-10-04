@@ -1,0 +1,47 @@
+<ArregloArmasDisponibles>
+  <Arma>
+    <_nombre>Excalibur</_nombre>
+    <_posX>-1</_posX>
+    <_posY>-1</_posY>
+    <_elementoGrafico>A</_elementoGrafico>
+    <_dano_min>5</_dano_min>
+    <_dano_max>15</_dano_max>
+  </Arma>
+  <Arma>
+    <_nombre>Shitty weapon</_nombre>
+    <_posX>-1</_posX>
+    <_posY>-1</_posY>
+    <_elementoGrafico>A</_elementoGrafico>
+    <_dano_min>4</_dano_min>
+    <_dano_max>17</_dano_max>
+  </Arma>
+  <Arma>
+    <_nombre>another shity weapon</_nombre>
+    <_posX>-1</_posX>
+    <_posY>-1</_posY>
+    <_elementoGrafico>A</_elementoGrafico>
+    <_dano_min>9</_dano_min>
+    <_dano_max>21</_dano_max>
+  </Arma>
+  <Armadura>
+    <_nombre>Ehe</_nombre>
+    <_posX>-1</_posX>
+    <_posY>-1</_posY>
+    <_elementoGrafico>x</_elementoGrafico>
+    <_defensa>15</_defensa>
+  </Armadura>
+  <Armadura>
+    <_nombre>Ehe x2</_nombre>
+    <_posX>-1</_posX>
+    <_posY>-1</_posY>
+    <_elementoGrafico>x</_elementoGrafico>
+    <_defensa>20</_defensa>
+  </Armadura>
+  <Armadura>
+    <_nombre>Ehe x3</_nombre>
+    <_posX>-1</_posX>
+    <_posY>-1</_posY>
+    <_elementoGrafico>x</_elementoGrafico>
+    <_defensa>40</_defensa>
+  </Armadura>
+</ArregloArmasDisponibles>

@@ -127,7 +127,7 @@ public class GestorLaberinto {
             
             if(l.celdaVacia(artX, artY)){ //si la celda es del tipo pasadizo y esta vacia
                 //agregamos un nuevo artefacto
-                l.agregarArtefacto(gestorArt.CrearArtefacto(artX, artY, numeroLaberitno));
+                l.agregarArtefacto(gestorArt.ObtenerArtefacto(artX, artY, numeroLaberitno));
             } else i--;
         }
     }

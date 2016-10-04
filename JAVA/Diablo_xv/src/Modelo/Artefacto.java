@@ -11,8 +11,8 @@ package Modelo;
  */
 public class Artefacto implements ObjetoGrafico {
     private String _nombre;
-    private final int _posX;
-    private final int _posY;
+    private int _posX;
+    private int _posY;
     private final char _elementoGrafico;
     
     public Artefacto(String nombre, int posX, int posY, char elemGraf) {
@@ -53,10 +53,17 @@ public class Artefacto implements ObjetoGrafico {
         return _posX;
     }
 
+    public void setPosX(int x) {
+        _posX = x;
+    }
     /**
      * @return the _posY
      */
     public int getPosY() {
         return _posY;
     }
+    public void setPosY(int y) {
+        _posY = y;
+    }
+    
 }

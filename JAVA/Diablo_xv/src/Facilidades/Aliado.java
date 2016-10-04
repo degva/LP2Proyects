@@ -33,7 +33,7 @@ public class Aliado extends Entidad{
     private void LlenarSaco(){
         GestorArtefacto gestorArt = new GestorArtefacto();
         for (int i = 0; i < 10; i++) {
-            _saco.agregarArtefacto(gestorArt.CrearArtefacto(this.getPosX(), this.getPosY(), this.getNivel()));
+            _saco.agregarArtefacto(gestorArt.ObtenerArtefacto(this.getPosX(), this.getPosY(), this.getNivel()));
         }
     }
     
