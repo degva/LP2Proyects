@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package Controlador;
+import Modelo.Artefacto;
 import java.util.Scanner;
 import Modelo.IntPair;
+import Modelo.Enemigo;
 
 /**
  *
@@ -13,54 +15,77 @@ import Modelo.IntPair;
  */
 public class Consola {
     
-    private final Scanner consoleScanner;   
+    private final Scanner consoleScanner;
+    private String log; //Dará mensajes del juego y de error
     
     public Consola(){
         consoleScanner = new Scanner(System.in);
+        log = "";
     }
     
     public void MostrarMenu(){
+        if(!log.isEmpty())
+            System.out.println(log);
         System.out.println("\n");
         System.out.println("Escriba una accion:");
         System.out.println("> [mover 'x'] (siendo x: arriba, abajo, derecha, izquierda):" );
-        System.out.println("> [interactuar]");
-        System.out.println("> [cambiar arma]");
-        System.out.println("> [cambiar armadura]");
+        System.out.println("> [interactuar 'x'] (siendo x: arriba, abajo, derecha, izquierda): ");
         System.out.print("> [salir]\n\n - > " );
     }
     
-    public IntPair ObtenerDesplazamiento(){
-        String comando;
-        IntPair desplazamiento = null;
-        boolean comandoEsValido = false;
-        while(!comandoEsValido){
-            comando = consoleScanner.nextLine();
-            switch(comando){
+    public String[] ObtenerComando(){
+        String input = consoleScanner.nextLine();
+        String[] inputSplit = input.split(" ");
+        while(true){
+            switch(inputSplit[0]){
                 case "w":
-                case "mover arriba":
-                    desplazamiento = new IntPair(0, -1);
-                    break;
                 case "a":
-                case "mover izquierda":
-                    desplazamiento = new IntPair(-1, 0);
-                    break;
                 case "s":
-                case "mover abajo":
-                    desplazamiento = new IntPair(0, 1);
-                    break;
                 case "d":
-                case "mover derecha":
-                    desplazamiento = new IntPair(1, 0);
-                    break;
-                default:                    
-                    System.out.print("\n> ");
-                    continue;
+                    return inputSplit;
+                case "interactuar":
+                    switch(inputSplit[1]){
+                        case "arriba":
+                        case "abajo":
+                        case "izquierda":
+                        case "derecha":
+                            return inputSplit;
+                        default:
+                            break;
+                    }
+                case "salir":
+                    return inputSplit;
+                        
             }
-            comandoEsValido = true;
+            System.out.println("Comando invalido");
+            System.out.print("- > ");
+            input = consoleScanner.nextLine();
+            inputSplit = input.split(" ");
         }
-        return desplazamiento;
     }
     
-    //public void Interactuar()
+    public void MostrarEnemigo(Enemigo enemigo){
+        System.out.println("Estas sobre un enemigo");
+        System.out.print("Enemigo: ");
+        System.out.print(enemigo.getNombre());
+        System.out.print(" Vida: ");
+        System.out.print(enemigo.getVidaActual());
+        System.out.print(" Ataque: ");
+        System.out.println(enemigo.getAtaque());
+    }
+    
+    public void MostrarArtefacto(Artefacto artefacto){
+        System.out.println("Estas sobre un artefacto");
+        System.out.print("Artefacto: ");
+        System.out.print(artefacto.getNombre());
+    }
+    
+    public void SetLog(String message){
+        log = message;
+    }
+    
+    public void ClearLog(){
+        log = "";
+    }
 }
 

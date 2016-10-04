@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,6 +8,7 @@ package Modelo;
 
 import java.util.ArrayList;
 import java.util.Random;
+import Facilidades.Aliado;
 
 
 
@@ -30,6 +32,8 @@ public class Laberinto {
     private ArrayList<Enemigo> _listaEnemigos;
     private ArrayList<Artefacto> _listaArtefactos;
     
+    private Aliado _aliado;
+    
     public Laberinto(int sizeM, int sizeN) {
         Random rnd = new Random();
 
@@ -49,7 +53,7 @@ public class Laberinto {
             _nivelesEnemigo[i]= rnd.nextInt(10) +1;
         
         _listaEnemigos = new ArrayList<>();
-        _listaArtefactos = new ArrayList<>(); 
+        _listaArtefactos = new ArrayList<>();
     }
         
     /**
@@ -83,6 +87,16 @@ public class Laberinto {
     public void agregarArtefacto(Artefacto a){
         _laberinto[a.getPosX()][a.getPosY()].setContenido(a);
         _listaArtefactos.add(a);
+    }
+    
+    public void agregarAliado(Aliado aliado){
+        this._laberinto[aliado.getPosX()][aliado.getPosY()].setContenido(aliado);
+        this._aliado = aliado;
+    }
+    
+    
+    public Aliado obtenerAliado(){        
+        return _aliado;
     }
     
     public void agregarEnemigo(Enemigo e){
@@ -162,7 +176,7 @@ public class Laberinto {
             if (e.getPosX() == posX && e.getPosY() == posY)
                 break;
         }
-        if (eNew.getVidaActual() <= 0) _listaEnemigos.remove(i); // eliminar de la lista si muere
+        if (eNew.getVidaActual() <= 0) setTipoContenido(posX, posY, null);
         else _listaEnemigos.set(i, eNew);
          
         
@@ -179,7 +193,11 @@ public class Laberinto {
         }
         //se quita el artefacto de la lista, 
         //para que luego el render no lo imprima
-        _listaArtefactos.remove(i);
+
+        // _listaArtefactos.remove(i);
+        setTipoContenido(x, y, null);
+
+
         return a;
     }
     

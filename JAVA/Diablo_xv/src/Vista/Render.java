@@ -74,8 +74,9 @@ public class Render {
                 if (aux.getContenido()!= null)
                     aux.getContenido().Dibujar();
                 else System.out.print(" ");
-            }else if(tipo instanceof Pared)
-                tipo.Dibujar();            
+            }else if(tipo instanceof Pared) {
+                tipo.Dibujar();
+            }
         }
     }
     
