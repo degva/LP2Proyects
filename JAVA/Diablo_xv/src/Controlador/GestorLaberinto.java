@@ -245,28 +245,28 @@ public class GestorLaberinto {
         
         // checkeamos nodo a la derecha:
         if ((x > i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)
-                && (cuadrante.x < 0) ) {
+                && (cuadrante.x < 0) && (lab.getCelda(x - i, y).getContenido() == null)) {
             pair = new IntPair(x+i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo arriba
         if ((y > i) && (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo)
-                && (cuadrante.y > 0)) {
+                && (cuadrante.y > 0) && (lab.getCelda(x, y - i).getContenido() == null)) {
             pair = new IntPair(x, y-i);
             posibles.add(pair);
         }
         
         // checkeamos nodo izquierda
         if ((x < lab.getSizeM() - i) && (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo)
-                && (cuadrante.x > 0)) {
+                && (cuadrante.x > 0) && (lab.getCelda(x + i, y).getContenido() == null)) {
             pair = new IntPair(x-i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo abajo
         if ((y < lab.getSizeN() - i) && (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo)
-                && (cuadrante.y < 0)) {
+                && (cuadrante.y < 0) && (lab.getCelda(x, y + i).getContenido() == null)) {
             pair = new IntPair(x, y+i);
             posibles.add(pair);
         }
@@ -298,25 +298,29 @@ public class GestorLaberinto {
         List<IntPair> posibles = new ArrayList<>();
 
         // checkeamos nodo a la izq:
-        if ((x > i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)) {
+        if ((x > i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)
+                && (lab.getCelda(x - i, y).getContenido() == null)) {
             pair = new IntPair(x-i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo arriba
-        if ((y > i) && (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo)) {
+        if ((y > i) && (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo)
+                && (lab.getCelda(x, y - i).getContenido() == null)) {
             pair = new IntPair(x, y-i);
             posibles.add(pair);
         }
         
         // checkeamos nodo der
-        if ((x < lab.getSizeM() - i) && (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo)) {
+        if ((x < lab.getSizeM() - i) && (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo)
+                && (lab.getCelda(x + i, y).getContenido() == null)) {
             pair = new IntPair(x+i, y);
             posibles.add(pair);
         }
         
         // checkeamos nodo abajo
-        if ((y < lab.getSizeN() - i) && (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo)) {
+        if ((y < lab.getSizeN() - i) && (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo)
+                && (lab.getCelda(x, y + i).getContenido() == null)) {
             pair = new IntPair(x, y + i);
             posibles.add(pair);
         }
