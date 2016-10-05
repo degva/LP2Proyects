@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import Facilidades.Aliado;
+import Controlador.GestorAliado;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -102,7 +106,11 @@ public class GestorLaberinto {
         
         CrearListaEnemigos(nuevoLaberinto, numeroLaberinto);
         CrearListaArtefactos(nuevoLaberinto, numeroLaberinto);
-        AgregarAliado(nuevoLaberinto, numeroLaberinto);
+        try {
+            AgregarAliados(nuevoLaberinto, numeroLaberinto);
+        } catch (IOException ex) {
+            Logger.getLogger(GestorLaberinto.class.getName()).log(Level.SEVERE, null, ex);
+        }
         AgregarAnteriorSiguiente(nuevoLaberinto);
         return nuevoLaberinto;
     }
@@ -153,14 +161,14 @@ public class GestorLaberinto {
         } 
     }
     
-    public void AgregarAliado(Laberinto l, int numeroLaberitno){
+    public void AgregarAliados(Laberinto l, int numeroLaberitno) throws IOException{
         Random rnd = new Random();
         int maxX = l.getSizeM();
         int maxY = l.getSizeN();
-
+        GestorAliado gestorAliados = new GestorAliado();
         int aliX, aliY;                
         
-        for(int i=0; i< 1; i++){
+        for(int i=0; i< gestorAliados.listaAliados.size(); i++){
             //nodos impares
             aliX = (rnd.nextInt(maxX/2)*2 +1);
             aliY = (rnd.nextInt(maxY/2)*2 +1);
@@ -171,7 +179,10 @@ public class GestorLaberinto {
             
             if(l.celdaVacia(aliX, aliY)){ //si la celda es del tipo pasadizo y esta vacia
                 //agregamos al aliado
-                l.agregarAliado(new Aliado("Alditus",aliX,aliY,numeroLaberitno));
+                gestorAliados.listaAliados.get(i).setPosX(aliX);
+                gestorAliados.listaAliados.get(i).setPosY(aliY);
+                gestorAliados.listaAliados.get(i).setNivel(numeroLaberitno);
+                l.agregarAliado(gestorAliados.listaAliados.get(i));
             } else i--;
         }
     }
