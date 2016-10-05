@@ -148,7 +148,7 @@ public class GestorLaberinto {
             eneY = (rnd.nextInt(maxY/2)*2 +1);
             
             if(l.celdaVacia(eneX, eneY)){ //si la celda es del tipo pasadizo y esta vacia
-                l.agregarEnemigo(gestorEne.CrearEnemigo(eneX, eneY, numeroLaberitno));
+                l.agregarEnemigo(gestorEne.ObtenerEnemigo(eneX, eneY, numeroLaberitno));
             } else i--;
         } 
     }
