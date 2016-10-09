@@ -17,11 +17,13 @@ namespace EQuipu.Vista
     {
         private GestorMiembros _gestorMiem;
         private List<Miembro> _lista;
-        public frmMantEquiEditorAgregarMiem(List<Miembro> list, GestorMiembros gm)
+        private List<Miembro> _alreadyThere;
+        public frmMantEquiEditorAgregarMiem(List<Miembro> list, GestorMiembros gm, List<Miembro> ll)
         {
             InitializeComponent();
             _gestorMiem = gm;
             _lista = list;
+            _alreadyThere = ll;
         }
 
         private void okBtn_Click(object sender, EventArgs e)
@@ -49,19 +51,33 @@ namespace EQuipu.Vista
             cargarGrilla(lista);
         }
 
+        private bool findMiembro(List<Miembro> listaMiembros, int codigo)
+        {
+            foreach (Miembro m in listaMiembros)
+            {
+                if (m.Codigo == codigo)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void cargarGrilla(List<Miembro> listaMiembros)
         {
             this.miembroGrilla.Rows.Clear();
             foreach (Miembro miem in listaMiembros)
             {
-                string[] row = new string[3];
-                row[0] = Convert.ToString(miem.Codigo);
-                row[1] = miem.Nombre;
-                if (miem is Alumno) row[2] = "Alumno";
-                else if (miem is Profesor) row[2] = "Profesor";
-                else if (miem is Externo) row[2] = "Externo";
+                if (!findMiembro(_alreadyThere, miem.Codigo)) { 
+                    string[] row = new string[3];
+                    row[0] = Convert.ToString(miem.Codigo);
+                    row[1] = miem.Nombre;
+                    if (miem is Alumno) row[2] = "Alumno";
+                    else if (miem is Profesor) row[2] = "Profesor";
+                    else if (miem is Externo) row[2] = "Externo";
 
-                this.miembroGrilla.Rows.Add(row);
+                    this.miembroGrilla.Rows.Add(row);
+                }
             }
         }
 

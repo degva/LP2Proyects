@@ -197,6 +197,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmMantEquiEditor";
             this.Text = "Equipo Nuevo";
+            this.Load += new System.EventHandler(this.frmMantEquiEditor_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

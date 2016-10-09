@@ -18,12 +18,24 @@ namespace EQuipu.Vista
         private GestorEquipos _gestorEqui;
         private GestorMiembros _gestorMiem;
         private List<Miembro> _miembros;
+        private Equipo _equipo;
+
         public frmMantEquiEditor(GestorEquipos ge, GestorMiembros gm)
         {
             InitializeComponent();
             _gestorEqui = ge;
             _gestorMiem = gm;
             _miembros = new List<Miembro>();
+            _equipo = null;
+        }
+
+        public frmMantEquiEditor(GestorEquipos ge, GestorMiembros gm, string nombre)
+        {
+            InitializeComponent();
+            _gestorEqui = ge;
+            _gestorMiem = gm;
+            _miembros = new List<Miembro>();
+            _equipo = _gestorEqui.ObtenerEquipo(nombre);
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)
@@ -33,7 +45,7 @@ namespace EQuipu.Vista
 
         private void agregarBtn_Click(object sender, EventArgs e)
         {
-            frmMantEquiEditorAgregarMiem agregarMiembro = new frmMantEquiEditorAgregarMiem(_miembros ,_gestorMiem);
+            frmMantEquiEditorAgregarMiem agregarMiembro = new frmMantEquiEditorAgregarMiem(_miembros ,_gestorMiem, _miembros);
             agregarMiembro.ShowDialog();
             cargarGrilla(_miembros);
         }
@@ -56,16 +68,42 @@ namespace EQuipu.Vista
 
         private void grabarBtn_Click(object sender, EventArgs e)
         {
-            string nombre = this.boxNombre.Text;
-            string interes = this.boxInteres.Text;
-            string categoria = this.boxCategoria.SelectedItem.ToString();
-            Equipo equ = new Equipo(nombre, interes, categoria);
-            foreach (Miembro m in _miembros)
+            if (_equipo == null)
             {
-                equ.AddMiembro(m);
+                string nombre = this.boxNombre.Text;
+                string interes = this.boxInteres.Text;
+                string categoria = this.boxCategoria.SelectedItem.ToString();
+                Equipo equ = new Equipo(nombre, interes, categoria);
+                foreach (Miembro m in _miembros)
+                {
+                    equ.AddMiembro(m);
+                }
+                _gestorEqui.AgregarEquipo(equ);
             }
-            _gestorEqui.AgregarEquipo(equ);
+            else
+            {
+                _equipo.Nombre = this.boxNombre.Text;
+                _equipo.Interes = this.boxInteres.Text;
+                _equipo.Categoria = this.boxCategoria.SelectedItem.ToString();
+                _equipo.ListaMiembros = _miembros;
+                _gestorEqui.ActualizarEquipo(_equipo);
+            }
             this.Close();
+        }
+
+        private void frmMantEquiEditor_Load(object sender, EventArgs e)
+        {
+            if (_equipo != null)
+            {
+                this.boxNombre.Enabled = false;
+                this.boxNombre.Text = _equipo.Nombre;
+                this.boxInteres.Text = _equipo.Interes;
+                this.boxCategoria.Text = _equipo.Categoria;
+
+                _miembros = _equipo.ListaMiembros;
+
+                cargarGrilla(_miembros);
+            }
         }
     }
 }

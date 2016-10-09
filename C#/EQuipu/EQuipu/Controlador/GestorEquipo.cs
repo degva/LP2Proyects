@@ -43,12 +43,12 @@ namespace EQuipu.Controlador
             this.listaEquipos.Add(objEquipo);
         }
 
-        public Equipo ObtenerEquipo(string categoria)
+        public Equipo ObtenerEquipo(string nombre)
         {
             Equipo objEquipo = null;
             for (int i = 0; i < this.listaEquipos.Count; i++)
             {
-                if (this.listaEquipos[i].Categoria == categoria)
+                if (this.listaEquipos[i].Nombre == nombre)
                 {
                     objEquipo = this.listaEquipos[i];
                     break;
@@ -99,7 +99,7 @@ namespace EQuipu.Controlador
             }
         }
 
-        public void ActualizarEvento(Equipo objEquipo)
+        public void ActualizarEquipo(Equipo objEquipo)
         {
             for (int i = 0; i < this.listaEquipos.Count; i++)
             {

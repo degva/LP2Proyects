@@ -83,5 +83,10 @@ namespace EQuipu.Modelo
             get { return fondo; }
             set { fondo = value; }
         }
+        public List<Miembro> ListaMiembros
+        {
+            get { return listaMiembros; }
+            set { listaMiembros = value; }
+        }
     }
 }

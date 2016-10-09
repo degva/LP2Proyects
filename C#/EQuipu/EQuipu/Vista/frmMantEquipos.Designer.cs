@@ -38,6 +38,8 @@
             this.categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fondo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nuevoBtn = new System.Windows.Forms.Button();
+            this.editBtn = new System.Windows.Forms.Button();
+            this.deleteBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -121,7 +123,7 @@
             // 
             // nuevoBtn
             // 
-            this.nuevoBtn.Location = new System.Drawing.Point(244, 302);
+            this.nuevoBtn.Location = new System.Drawing.Point(124, 301);
             this.nuevoBtn.Name = "nuevoBtn";
             this.nuevoBtn.Size = new System.Drawing.Size(75, 26);
             this.nuevoBtn.TabIndex = 2;
@@ -129,11 +131,33 @@
             this.nuevoBtn.UseVisualStyleBackColor = true;
             this.nuevoBtn.Click += new System.EventHandler(this.nuevoBtn_Click);
             // 
+            // editBtn
+            // 
+            this.editBtn.Location = new System.Drawing.Point(240, 303);
+            this.editBtn.Name = "editBtn";
+            this.editBtn.Size = new System.Drawing.Size(75, 23);
+            this.editBtn.TabIndex = 3;
+            this.editBtn.Text = "Editar";
+            this.editBtn.UseVisualStyleBackColor = true;
+            this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
+            // 
+            // deleteBtn
+            // 
+            this.deleteBtn.Location = new System.Drawing.Point(358, 303);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteBtn.TabIndex = 4;
+            this.deleteBtn.Text = "Eliminar";
+            this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            // 
             // frmMantEquipos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 348);
+            this.Controls.Add(this.deleteBtn);
+            this.Controls.Add(this.editBtn);
             this.Controls.Add(this.nuevoBtn);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
@@ -160,5 +184,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn categoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn fondo;
         private System.Windows.Forms.Button nuevoBtn;
+        private System.Windows.Forms.Button editBtn;
+        private System.Windows.Forms.Button deleteBtn;
     }
 }

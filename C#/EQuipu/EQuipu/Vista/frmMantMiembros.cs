@@ -109,7 +109,5 @@ namespace EQuipu.Vista
             _gestorMiem.EliminarMiembro(codigo);
             this.cargarGrilla(_gestorMiem.ListaMiembros);
         }
-
-
     }
 }

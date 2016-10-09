@@ -74,5 +74,20 @@ namespace EQuipu.Vista
             editor.ShowDialog();
             this.cargarGrilla(this._gestorEquipo.ListaEquipos);
         }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            string nombre = (string) this.dataGridView1.SelectedRows[0].Cells[0].Value;
+            _gestorEquipo.EliminarEquipo(nombre);
+            this.cargarGrilla(this._gestorEquipo.ListaEquipos); 
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            string nombre = (string) this.dataGridView1.SelectedRows[0].Cells[0].Value;
+            frmMantEquiEditor editor = new frmMantEquiEditor(this._gestorEquipo, this._gestorMiembro, nombre);
+            editor.ShowDialog();
+            this.cargarGrilla(this._gestorEquipo.ListaEquipos);
+        }
     }
 }
