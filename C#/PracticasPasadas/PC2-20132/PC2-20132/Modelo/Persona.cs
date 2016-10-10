@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PC2_20132.Modelo
 {
-    class Persona
+    class Persona : Imprimible
     {
         private int _id;
         private String _nombre;
