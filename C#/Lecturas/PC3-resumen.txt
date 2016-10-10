@@ -1,3 +1,26 @@
+######## LO QUE PREGUNTARON
+1. En base a la lectura Avoid Common Pitfalls when Programming 2D Graphics in 
+Java.pdf, explique en que consiste el Double Buffering.
+Rpta:
+Es una tecnica para evitar el flickering. Consiste en crear otro buffer que
+ayuda a que se impriman los objetos con major rapidez.
+
+2. De acuerdo a la lectura Painting in AWT and Swing, ¿cuál es la diferencia
+entre System-triggered Painting y App-triggered Painting ?
+Rpta:
+El system-triggered painting es cuando el sistema le pide a la aplicación que 
+renderize sus contenidos.
+El App-triggered painting es cuando el componente decide si es necesario 
+actualizar sus contenidos por un cambio en su estado interno.
+
+3. De acuerdo a la lectura de Painting in AWT and Swing. Explique en que 
+consiste el método paint().
+Rpta:
+El método paint() sirve para dibujar la clase de la cual esta implementada. 
+Sea como haya sido llamada, el AWT usa un callback para pintar. Este metodo 
+debe ser overriden dentro de la clase. 
+
+
 ######## PRIMERA LECTURA
 Avoid Common Pitfalls when Programming 2D Graphics in Java:
 ~ Things that degrade the graphics performance and how to go around this
@@ -106,3 +129,6 @@ en el momento correcto.
 			3. El AWT causa el envento que llama a repaint()
 			4. Si el componento no orverride update(), se limpia la pantalla y se llama
 			a paint().
+
+
+  Luego vienen cosas un poco mas ~complejas~. y hablan del double buffering.
