@@ -10,7 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace EQuipu.Controlador
 {
-    class GestorEventos
+    public class GestorEventos
     {
         private List<Evento> listaEventos;
 
@@ -63,6 +63,19 @@ namespace EQuipu.Controlador
             for (int i = 0; i < this.listaEventos.Count; i++)
             {
                 if (this.listaEventos[i].Nombre == nombre)
+                {
+                    listaEventosBuscados.Add(this.listaEventos[i]);
+                }
+            }
+            return listaEventosBuscados;
+        }
+
+        public List<Evento> BuscarEventosPorCategoria(string categoria)
+        {
+            List<Evento> listaEventosBuscados = new List<Evento>();
+            for (int i = 0; i < this.listaEventos.Count; i++)
+            {
+                if (this.listaEventos[i].CategoriaEquipo == categoria)
                 {
                     listaEventosBuscados.Add(this.listaEventos[i]);
                 }

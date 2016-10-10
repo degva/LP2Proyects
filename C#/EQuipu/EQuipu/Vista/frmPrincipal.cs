@@ -30,5 +30,12 @@ namespace EQuipu.Vista
             ventanaMantEquipos.MdiParent = this;
             ventanaMantEquipos.Show();
         }
+
+        private void eventosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMantEvento ventanaMantEvento = new frmMantEvento();
+            ventanaMantEvento.MdiParent = this;
+            ventanaMantEvento.Show();
+        }
     }
 }

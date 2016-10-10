@@ -49,15 +49,20 @@
     <Compile Include="Controlador\GestorMiembros.cs" />
     <Compile Include="Modelo\Alumno.cs" />
     <Compile Include="Modelo\Consultable.cs" />
-    <Compile Include="Modelo\Entrada.cs" />
     <Compile Include="Modelo\Equipo.cs" />
     <Compile Include="Modelo\Evento.cs" />
-    <Compile Include="Modelo\ExposicionEvento.cs" />
+    <Compile Include="Modelo\Exposicion.cs" />
     <Compile Include="Modelo\Externo.cs" />
     <Compile Include="Modelo\Miembro.cs" />
     <Compile Include="Modelo\Profesor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vista\frmEventoNuevo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmEventoNuevo.Designer.cs">
+      <DependentUpon>frmEventoNuevo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vista\frmMantEquiEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +80,12 @@
     </Compile>
     <Compile Include="Vista\frmMantEquipos.Designer.cs">
       <DependentUpon>frmMantEquipos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmMantEvento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmMantEvento.Designer.cs">
+      <DependentUpon>frmMantEvento.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\frmMantMiembros.cs">
       <SubType>Form</SubType>
@@ -103,6 +114,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Vista\frmEventoNuevo.resx">
+      <DependentUpon>frmEventoNuevo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmMantEquiEditor.resx">
       <DependentUpon>frmMantEquiEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -111,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmMantEquipos.resx">
       <DependentUpon>frmMantEquipos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmMantEvento.resx">
+      <DependentUpon>frmMantEvento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmMantMiembros.resx">
       <DependentUpon>frmMantMiembros.cs</DependentUpon>
