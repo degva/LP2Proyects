@@ -7,7 +7,10 @@ package Controlador;
 
 import java.util.ArrayList;
 import java.util.Random;
+import com.thoughtworks.xstream.XStream;
 import Modelo.*;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  *
@@ -15,36 +18,54 @@ import Modelo.*;
  */
 public class GestorEnemigo {
     private static final int NRO_ENEMIGOS = 15; //por ahora
-    private ArrayList<String> _enemigosDisponibles;
+    private ArrayList<Enemigo> _enemigosDisponibles;
     
     public GestorEnemigo(){
         _enemigosDisponibles = new ArrayList<>();
-        _enemigosDisponibles.add("Enemigo 1");
-        _enemigosDisponibles.add("Enemigo 2");
-        _enemigosDisponibles.add("Enemigo 3");
-        _enemigosDisponibles.add("Enemigo 4");
-        _enemigosDisponibles.add("Enemigo 5");
-        _enemigosDisponibles.add("Enemigo 6");
-        _enemigosDisponibles.add("Enemigo 7");
-        _enemigosDisponibles.add("Enemigo 8");
-        _enemigosDisponibles.add("Enemigo 9");
-        _enemigosDisponibles.add("Enemigo 10");
-        _enemigosDisponibles.add("Enemigo 11");
-        _enemigosDisponibles.add("Enemigo 12");
-        _enemigosDisponibles.add("Enemigo 13");
-        _enemigosDisponibles.add("Enemigo 14");
-        _enemigosDisponibles.add("Enemigo 15");
+        leerEnemigoDeArchivo("enemigos.xml");
     }
     
-    public Enemigo CrearEnemigo(int x, int y, int numeroLaberinto){
+    
+    public Enemigo ObtenerEnemigo(int x, int y, int numeroLaberinto){
         Random rnd = new Random();
-        int numeroEnemigo = rnd.nextInt(NRO_ENEMIGOS);//Devuelve el numero de nombre del enemigo
-        
-        //Datos
-        String nombre = _enemigosDisponibles.get(numeroEnemigo);
-        Enemigo nuevoEnemigo = new Enemigo(nombre, x, y, numeroLaberinto);
-        return nuevoEnemigo;
+        Enemigo enem = null;
+        int numEnemigo = rnd.nextInt(_enemigosDisponibles.size());
+        enem = _enemigosDisponibles.get(numEnemigo); //obtenemos el enemigo
+        //colocamos algunos atributos
+        enem.setPosX(x);
+        enem.setPosY(y);
+        enem.setNivel(numeroLaberinto);
+        /*la formula en estas funciones se puede cambiar*/
+        /*
+        vidaMaxima = nivel*10
+        vidaactual = 0 y la vida maxima
+        ataque = numero random entre uno y 10 * nivel
+        */
+        enem.setVidaMaxima(numeroLaberinto*10); 
+        enem.setVidaActual(rnd.nextInt(numeroLaberinto*10));
+        enem.setAtaque((rnd.nextInt(9)+1)*numeroLaberinto);
+        return enem;
     }
+           
+    public final void leerEnemigoDeArchivo(String archivoNombre){
+        try {
+            XStream xs = new XStream();
+            configureXStream(xs);
+            
+            FileReader fr = new FileReader(archivoNombre);
+            _enemigosDisponibles = (ArrayList<Enemigo>)xs.fromXML(fr);
+            fr.close();
+        } catch (IOException e) {
+             System.out.println(e.toString());
+        }
+        
+    }
+    
+    private static void configureXStream(XStream xs) {
+        xs.alias("Enemigo", Enemigo.class);
+        xs.alias("ArregloEnemigosDisponibles", ArrayList.class);
+    }
+    
     
 
     

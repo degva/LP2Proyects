@@ -20,6 +20,7 @@ import java.io.IOException;
  */
 public class GestorArtefacto {    
     private ArrayList<Artefacto> _artefactosDisponibles;
+    
     public GestorArtefacto(){
         _artefactosDisponibles = new ArrayList<>();
         leerArtefactoDeArchivo("artefactos.xml");

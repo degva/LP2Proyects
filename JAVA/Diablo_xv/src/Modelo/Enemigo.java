@@ -32,6 +32,13 @@ public class Enemigo extends Entidad {
     public int getAtaque() {
         return ataque;
     }
+
+    /**
+     * @param ataque the ataque to set
+     */
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
     
 
 }

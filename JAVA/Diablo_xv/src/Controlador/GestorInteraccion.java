@@ -37,8 +37,8 @@ public class GestorInteraccion {
         System.out.println("A pelear!");
         System.out.print("Enemigo: "); System.out.print(e.getNombre());        
         System.out.print(" Vida: "); System.out.print(e.getVidaActual());        
-        System.out.print(" Ataque: "); System.out.print(e.getAtaque());        
-        System.out.print("  Tu: "); System.out.print(a.getNombre());        
+        System.out.print(" Ataque: "); System.out.print(e.getAtaque()); 
+        System.out.print("\nTu: "); System.out.print(a.getNombre());        
         System.out.print(" Vida: "); System.out.print(a.getVidaActual());        
         System.out.print(" Ataque: "); System.out.print(a.getArmaActual().getDano_max());        
         System.out.print("\n[atacar | huir | usar i]");
