@@ -31,8 +31,8 @@ public class Juego {
     private final ArrayList<Laberinto> _laberintos;
     
     
-    public Juego() {
-        Scanner input = new Scanner(System.in);
+    public Juego(String name) {
+        //Scanner input = new Scanner(System.in);
         
         _gestorLab = new GestorLaberinto();
         _gestorJuego = new GestorJuego();
@@ -45,8 +45,8 @@ public class Juego {
         this.CrearListaLaberintos();
         
         String nombre;
-        System.out.print("Ingresa tu nombre:\n");
-        nombre = input.nextLine();
+        //System.out.print("Ingresa tu nombre:\n");
+        nombre = name;
         
         
         _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), nombre, _idxLaberinto);
