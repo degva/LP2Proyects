@@ -1,17 +1,9 @@
 package Vista;
 
 import Modelo.*;
-import com.thoughtworks.xstream.converters.Converter;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Graphics;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import java.util.Scanner;
 //import Controlador.*;
 
 /**
@@ -24,24 +16,16 @@ public class Render {
     private static final int ANCHO = 6;
     private static final int ALTO = 6;
     private int map_width = 0;
-    private MapPanel mapPanel;
-    private InfoPanel infoPanel;
-    BufferedImage chipset;
-    HashMap<String, BufferedImage> imgs;
     
-    public Render(MapPanel mapPanel, InfoPanel infoPanel) {
+    public Render() {
         map_width = ANCHO*2 + 2;
-        this.mapPanel = mapPanel;
-        this.infoPanel = infoPanel;
-        try {
-            chipset = ImageIO.read(new File("rm2k3_mario_chipset_by_tiguidou.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(Render.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        imgs = new HashMap<>();
-        inicializarHashMap();
     }
     
+    /*
+    TODO: 
+        - Avatar: getNombre, getSaco()
+        - Artefacto: toString() (?)
+    */
     
     public List<String> ObtenerListaDatos(Avatar avatar) {
         List<String> datos = new ArrayList<>();
@@ -76,31 +60,31 @@ public class Render {
      * @param x
      * @param y 
      */
-    public void RenderCell(Avatar avatar, Laberinto lab, int x_lab, int y_lab, int x, int y) {
+    public void RenderCell(Avatar avatar, Laberinto lab, int x, int y) {
         Celda aux;
         ObjetoGrafico tipo, contenido;
-        Graphics g = mapPanel.getGraphics();
-        if (x_lab<0 || y_lab<0) {
-            g.drawImage(imgs.get("pasadizo"), x, y, mapPanel);
-        }else if ((x_lab > lab.getSizeM()-1) || (y_lab > lab.getSizeN()-1)){
-            g.drawImage(imgs.get("vacio"), x, y, mapPanel);
+        if (x<0 || y<0) {
+            System.out.print('.');
+        }else if ((x > lab.getSizeM()-1) || (y > lab.getSizeN()-1)){
+            System.out.print('.');
         } else {
-            aux = lab.getCelda(x_lab, y_lab);
+            aux = lab.getCelda(x, y);
             tipo = aux.getTipo();            
             if (tipo instanceof Pasadizo){ 
-                if (aux.getContenido()!= null){
-                    g.drawImage(imgs.get(aux.getContenido().Contenido()), x, y, mapPanel);
-                } else
-                    g.drawImage(imgs.get("pasadizo"), x, y, mapPanel);
+                if (aux.getContenido()!= null)
+                    aux.getContenido().Dibujar();
+                else System.out.print(" ");
             }else if(tipo instanceof Pared) {
-                g.drawImage(imgs.get("pared"), x, y, mapPanel);
+                tipo.Dibujar();
             }
         }
     }
     
     
-    //Clearscreen borrado 
-    
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    }
     
     /**
      * 
@@ -114,54 +98,28 @@ public class Render {
      */
     public void Render(Avatar avatar,Laberinto lab, int nivel) {        
         List<String> listaDatos = ObtenerListaDatos(avatar);
-        actualizarLaberinto(avatar, lab, nivel);
-        actualizarInfo(listaDatos);
-    }
-    
-    
-    private void actualizarLaberinto(Avatar avatar,Laberinto lab, int nivel){
-        Graphics g = mapPanel.getGraphics();
-        g.clearRect(0, 0, 480, 480);
-        for (int i = avatar.getPosY() - ALTO, x=0; i <= avatar.getPosY() + ALTO; i++, x+=16) {
-            for (int j = avatar.getPosX() - ANCHO, y=0; j <= avatar.getPosX() + ANCHO; j++, y+=16) {
+        // List<Enemigo> listaEnemigos = lab.getEnemigos();
+        int state = 0;
+        // imprimimos el nivel del mapa
+        System.out.println(">> NIVEL " + (nivel+1) + " " + lab.getSizeM() + "-" + lab.getSizeN());
+        
+        // Imprimir
+        OUTER:
+        for (int i = avatar.getPosY() - ALTO; i <= avatar.getPosY() + ALTO; i++) {
+            for (int j = avatar.getPosX() - ANCHO; j <= avatar.getPosX() + ANCHO; j++) {
                 if (i == avatar.getPosY() && j == avatar.getPosX()) { //si es la posicion en la que esta el avatar
-                    //avatar.Dibujar();
-                    g.drawImage(imgs.get("avatar"), y, x, mapPanel);
+                    avatar.Dibujar();                    
                 } else {
-                    RenderCell(avatar, lab, j, i, y, x);
+                    RenderCell(avatar, lab, j, i);
                 }
             }
+            if (listaDatos.size() > (i + ALTO - avatar.getPosY())) {
+                System.out.print(' ');
+                System.out.print(listaDatos.get(i + ALTO - avatar.getPosY()));
+            }
+            
+            System.out.print('\n');
         }
     }
     
-    private void actualizarInfo(List<String> info){
-        Graphics g = infoPanel.getGraphics();
-        for (int i=0; i< info.size(); i++){
-            g.drawString(info.get(i), 15, 20+i*20);
-        }
-    }
-    
-    private void inicializarHashMap(){
-        BufferedImage psd = chipset.getSubimage(10*16, 12*16, 16, 16);
-        imgs.put("pasadizo", psd);
-        BufferedImage av = chipset.getSubimage(12*16, 10*16, 16, 16);
-        imgs.put("avatar", av);
-        BufferedImage prd = chipset.getSubimage(12*16, 12*16, 16, 16);
-        imgs.put("pared", prd);
-        BufferedImage ant = chipset.getSubimage(28*16, 11*16, 16, 16);
-        imgs.put("anterior", ant);
-        BufferedImage sgt = chipset.getSubimage(27*16, 12*16, 16, 16);
-        imgs.put("siguiente", sgt);
-        BufferedImage enm = chipset.getSubimage(24*16, 3*16, 16, 16);
-        imgs.put("enemigo", enm);
-        BufferedImage ald = chipset.getSubimage(26*16, 8*16, 16, 16);
-        imgs.put("aliado", ald);
-        BufferedImage arm= chipset.getSubimage(18*16, 5*16, 16, 16);
-        imgs.put("arma", arm);
-        BufferedImage art = chipset.getSubimage(19*16, 12*16, 16, 16);
-        imgs.put("artefacto", art);
-        BufferedImage nada = chipset.getSubimage(16, 0, 16, 16);
-        imgs.put("vacio", nada);
-        
-    }
 }

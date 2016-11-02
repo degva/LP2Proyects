@@ -12,8 +12,8 @@ package Modelo;
 public class Pasadizo implements ObjetoGrafico{
 
     @Override
-    public String Contenido() {
-        return "pasadizo";
+    public void Dibujar() {
+        System.out.print(" ");
     }
     
 }

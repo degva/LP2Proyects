@@ -12,7 +12,7 @@ package Modelo;
 public class Anterior implements ObjetoGrafico{
     
     @Override
-    public String Contenido() {
-        return "anterior";
+    public void Dibujar() {
+        System.out.print("-");
     }
 }

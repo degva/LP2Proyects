@@ -17,7 +17,6 @@ public class Entidad implements ObjetoGrafico {
     private int nivel;
     private int vidaActual;
     private int vidaMaxima;
-    public char _elementoGrafico;
     
     public Entidad(int posicionX, int posicionY, String nombre, int nivel, int vidaMaxima){
         this.nombre = nombre;
@@ -45,8 +44,8 @@ public class Entidad implements ObjetoGrafico {
     }
     
     @Override
-    public String Contenido() {
-        return "";
+    public void Dibujar() {
+        //
     }
     
     @Override

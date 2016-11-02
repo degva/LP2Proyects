@@ -18,7 +18,7 @@ public class Pared implements ObjetoGrafico{
     }
     
     @Override
-    public String Contenido(){
-        return "pared";
+    public void Dibujar(){
+        System.out.print(_elementoGrafico);
     }
 }

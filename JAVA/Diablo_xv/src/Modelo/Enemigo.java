@@ -11,7 +11,7 @@ package Modelo;
  */
 public class Enemigo extends Entidad {
     
-    
+    private final char _elementoGrafico;
     private int ataque;
     
     public Enemigo(String nombre, int posicionX, int poscionY, int nivel){
@@ -22,8 +22,8 @@ public class Enemigo extends Entidad {
     }
     
     @Override
-    public String Contenido() {
-        return "enemigo";
+    public void Dibujar() {
+        System.out.print(_elementoGrafico);
     }
 
     /**

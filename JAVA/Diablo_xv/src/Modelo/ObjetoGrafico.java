@@ -5,12 +5,10 @@
  */
 package Modelo;
 
-import java.awt.Image;
-
 /**
  *
  * @author degva
  */
 public interface ObjetoGrafico {
-    public String Contenido();
+    public void Dibujar();
 }

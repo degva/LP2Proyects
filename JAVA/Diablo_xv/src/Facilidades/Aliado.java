@@ -19,7 +19,7 @@ import java.util.Comparator;
 ////MODIFICACION 1
 public class Aliado extends Entidad{
 
-    
+    private final char _elementoGrafico;
     private ArrayList<Consejo> _consejos;
     private Saco _saco;
     
@@ -70,8 +70,8 @@ public class Aliado extends Entidad{
     
     
     @Override
-    public String Contenido() {
-        return "aliado";
+    public void Dibujar() {
+        System.out.print(_elementoGrafico);
     }
 
 
