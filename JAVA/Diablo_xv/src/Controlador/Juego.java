@@ -30,26 +30,24 @@ public class Juego {
     //private GestorAvatar _gestorAvatar;
     private final ArrayList<Laberinto> _laberintos;
     
+    private final GameWindow ventanaJuego;
+    
     
     public Juego(String name) {
         //Scanner input = new Scanner(System.in);
-        
         _gestorLab = new GestorLaberinto();
-        _gestorJuego = new GestorJuego();
-        _render = new Render();
+        _gestorJuego = new GestorJuego();        
         _laberintos = new ArrayList<>();
         _idxLaberinto = _idxLaberintoAnterior = 0;
         _numLaberintos = (int)(Math.random()*10+5);
         //_gestorAvatar = new GestorAvatar();
         
         this.CrearListaLaberintos();
+        _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), name, _idxLaberinto);
         
-        String nombre;
-        //System.out.print("Ingresa tu nombre:\n");
-        nombre = name;
-        
-        
-        _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), nombre, _idxLaberinto);
+        ventanaJuego = new GameWindow();        
+        ventanaJuego.setVisible(true);
+        _render = new Render(ventanaJuego.mapPanel, ventanaJuego.infoPanel);
     }
     
     public void CrearListaLaberintos() {
@@ -78,10 +76,7 @@ public class Juego {
         _laberintos.add(lab);
     }
     
-    public void Jugar() {
-        
-        // InterpreteComandos interprete = new InterpreteComandos();
-
+    public void Jugar() {               
         // Otra vista: Consola
         int di;
         while (_gestorJuego.GameON) {
@@ -103,9 +98,8 @@ public class Juego {
                 _avatar.setPosXY(ObtenerLaberinto(_idxLaberinto).DevolverAnterior());
             }
             _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto), _avatar.getPosX(), _avatar.getPosY());
-            _gestorLab.MoverAliado(ObtenerLaberinto(_idxLaberinto));
+            _gestorLab.MoverAliado(ObtenerLaberinto(_idxLaberinto));            
         }
-        System.out.println("Bye o/");
     }
     
 }

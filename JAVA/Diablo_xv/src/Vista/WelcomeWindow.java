@@ -18,11 +18,13 @@ import javax.swing.*;
  * @author fabricioandres
  */
 public class WelcomeWindow extends javax.swing.JFrame {
+    
+    public String name = "";
 
     /**
      * Creates new form WelcomeWindow
      */
-    public WelcomeWindow() {        
+    public WelcomeWindow(String name) {        
         initComponents();
         setLocation(100, 100);
         setVisible(true);        
@@ -100,14 +102,12 @@ public class WelcomeWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_nameTextActionPerformed
 
     private void botonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarActionPerformed
-        String name = nameText.getText();        
+        name = nameText.getText();        
         if (name.equals("")){
             JOptionPane.showMessageDialog(this, "Ingresa un nombre!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         this.setVisible(false);
-        Juego juego = new Juego(name);
-        juego.Jugar();
     }//GEN-LAST:event_botonIniciarActionPerformed
 
 

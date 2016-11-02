@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.awt.Image;
+
 /**
  *
  * @author degva

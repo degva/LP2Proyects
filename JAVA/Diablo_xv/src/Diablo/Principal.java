@@ -7,6 +7,8 @@ package Diablo;
 import Controlador.*;
 import java.awt.Canvas;
 import Vista.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,8 +28,17 @@ public class Principal {
 //        //juego.Jugar();
 //    }
     
+    @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
-        WelcomeWindow window = new WelcomeWindow();
+        WelcomeWindow welcomeWindow = new WelcomeWindow("");
+        try {
+            while(welcomeWindow.isVisible())
+                Thread.sleep(1);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Juego juego = new Juego(welcomeWindow.name);
+        juego.Jugar();
     }
     
 //    
