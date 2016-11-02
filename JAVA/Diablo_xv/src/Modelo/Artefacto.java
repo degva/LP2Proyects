@@ -15,6 +15,7 @@ public class Artefacto implements ObjetoGrafico {
     private int _posY;
     private final char _elementoGrafico;
     
+    
     public Artefacto(String nombre, int posX, int posY, char elemGraf) {
         _posX = posX;
         _posY = posY;
@@ -23,8 +24,8 @@ public class Artefacto implements ObjetoGrafico {
     }
     
     @Override
-    public void Dibujar() {
-        System.out.print(_elementoGrafico);
+    public String Contenido() {
+        return "artefacto";
     }
 
     /**

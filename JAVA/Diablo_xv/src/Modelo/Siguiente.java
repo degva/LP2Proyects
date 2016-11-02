@@ -12,8 +12,8 @@ package Modelo;
 public class Siguiente implements ObjetoGrafico{
 
     @Override
-    public void Dibujar() {
-        System.out.print("+");
+    public String Contenido() {
+        return "siguiente";
     }
     
 }

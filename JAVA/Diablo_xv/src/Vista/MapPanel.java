@@ -7,6 +7,7 @@ package Vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  *
@@ -23,6 +24,12 @@ public class MapPanel extends javax.swing.JPanel {
         setSize(480, 480);
         setBackground(Color.cyan);
     }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+    }    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

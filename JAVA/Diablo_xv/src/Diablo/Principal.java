@@ -33,7 +33,7 @@ public class Principal {
         WelcomeWindow welcomeWindow = new WelcomeWindow("");
         try {
             while(welcomeWindow.isVisible())
-                Thread.sleep(1);
+                Thread.sleep(10);
         } catch (InterruptedException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }

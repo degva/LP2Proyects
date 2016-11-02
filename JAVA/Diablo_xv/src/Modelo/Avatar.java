@@ -13,7 +13,7 @@ public class Avatar extends Entidad {
     private Saco saco;
     private Armadura armaduraActual; 
     private Arma armaActual;
-    private final char _elementoGrafico;
+    
      
      public Avatar(int posicionX, int poscionY, String nombre, int nivel){
         super(posicionX,poscionY,nombre,nivel, 100);
@@ -74,7 +74,7 @@ public class Avatar extends Entidad {
     }
     
     @Override
-    public void Dibujar() {
-        System.out.print(_elementoGrafico);
+    public String Contenido() {
+        return "avatar";
     }        
 }

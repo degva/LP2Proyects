@@ -12,5 +12,5 @@ import java.awt.Image;
  * @author degva
  */
 public interface ObjetoGrafico {
-    public void Dibujar();
+    public String Contenido();
 }
