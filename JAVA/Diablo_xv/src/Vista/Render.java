@@ -79,8 +79,9 @@ public class Render {
     public void RenderCell(Avatar avatar, Laberinto lab, int x, int y) {
         Celda aux;
         ObjetoGrafico tipo, contenido;
+        Graphics g = mapPanel.getGraphics();
         if (x<0 || y<0) {
-            System.out.print('.');
+            g.drawImage(imgs.get("nada"), x, y, mapPanel);
         }else if ((x > lab.getSizeM()-1) || (y > lab.getSizeN()-1)){
             System.out.print('.');
         } else {
@@ -88,10 +89,10 @@ public class Render {
             tipo = aux.getTipo();            
             if (tipo instanceof Pasadizo){ 
                 if (aux.getContenido()!= null)
-                    aux.getContenido().Dibujar();
+                    g.drawImage(imgs.get("pasadizo"), x, y, mapPanel);
                 else System.out.print(" ");
             }else if(tipo instanceof Pared) {
-                tipo.Dibujar();
+                g.drawImage(imgs.get("pared"), x, y, mapPanel);
             }
         }
     }
@@ -117,18 +118,18 @@ public class Render {
         //System.out.println(">> NIVEL " + (nivel+1) + " " + lab.getSizeM() + "-" + lab.getSizeN());
         
         // Imprimir
-        //actualizarLaberinto(avatar, lab, nivel);
+        actualizarLaberinto(avatar, lab, nivel);
         actualizarInfo(listaDatos);
     }
     
     
     private void actualizarLaberinto(Avatar avatar,Laberinto lab, int nivel){
         Graphics g = mapPanel.getGraphics();
-        for (int i = avatar.getPosY() - ALTO; i <= avatar.getPosY() + ALTO; i++) {
-            for (int j = avatar.getPosX() - ANCHO; j <= avatar.getPosX() + ANCHO; j++) {
+        for (int i = avatar.getPosY() - ALTO, x=0; i <= avatar.getPosY() + ALTO; i++, x+=16) {
+            for (int j = avatar.getPosX() - ANCHO, y=0; j <= avatar.getPosX() + ANCHO; j++, y+=16) {
                 if (i == avatar.getPosY() && j == avatar.getPosX()) { //si es la posicion en la que esta el avatar
                     //avatar.Dibujar();
-                    g.drawImage(imgs.get("pasadizo"), 0, 0, mapPanel);
+                    g.drawImage(imgs.get("avatar"), x, y, mapPanel);
                 } else {
                     RenderCell(avatar, lab, j, i);
                 }
@@ -146,15 +147,33 @@ public class Render {
     private void inicializarHashMap(){
         Graphics g = mapPanel.getGraphics();
         int count = 1;
-        for(int i=0; i<30; i++){
-            for (int j=0; j<16; j++){                
-                BufferedImage img = chipset.getSubimage(i*16, j*16, 16, 16);
-                imgs.put(Integer.toString(count), img);
-                count++;
-                //probar si funciona
-                g.drawImage(img, i*16, j*16, mapPanel);
-            }
-        }        
+//        for(int i=0; i<30; i++){
+//            for (int j=0; j<16; j++){                
+//                BufferedImage img = chipset.getSubimage(i*16, j*16, 16, 16);
+//                imgs.put(Integer.toString(count), img);
+//                count++;
+//                //probar si funciona
+//                g.drawImage(img, i*16, j*16, mapPanel);
+//            }
+//        }
+        BufferedImage psd = chipset.getSubimage(0, 0, 16, 16);
+        imgs.put("pasadizo", psd);
+        BufferedImage av = chipset.getSubimage(12*16, 10*16, 16, 16);
+        imgs.put("avatar", av);
+        BufferedImage prd = chipset.getSubimage(12*16, 12*16, 16, 16);
+        imgs.put("pared", prd);
+        BufferedImage sgt = chipset.getSubimage(23*16, 5*16, 16, 16);
+        imgs.put("siguiente", sgt);
+        BufferedImage enm = chipset.getSubimage(24*16, 3*16, 16, 16);
+        imgs.put("enemigo", enm);
+        BufferedImage ald = chipset.getSubimage(26*16, 8*16, 16, 16);
+        imgs.put("aliado", ald);
+        BufferedImage arm= chipset.getSubimage(18*16, 15*16, 16, 16);
+        imgs.put("arma", arm);
+        BufferedImage art = chipset.getSubimage(19*16, 11*16, 16, 16);
+        imgs.put("artefacto", art);
+        BufferedImage nada = chipset.getSubimage(16, 0, 16, 16);
+        imgs.put("vacio", nada);
         
     }
 }
