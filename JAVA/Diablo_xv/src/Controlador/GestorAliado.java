@@ -37,28 +37,20 @@ public class GestorAliado {
         int numeroDeConsejos, nivelConsejo;
         for(int i=0; i < numeroDeAliados; i++){
             linea = readerAliados.readLine();
-            s1 = linea.split(" ");
-            s2 = s1[1].split(":");
-            s3 = s2[1].split("/");
-            nombreAliado = s3[0];
-            s4 = s3[1].split(":");
-            s5 = s4[1].split("@");
-            numeroDeConsejos = Integer.parseInt(s5[0]);
+            s1 = linea.split("/");
+            s2 = s1[0].split(":");
+            nombreAliado = s2[1];
+            s3 = s1[1].split(":");
+            s4 = s3[1].split("@");
+            numeroDeConsejos = Integer.parseInt(s4[0]);
             Aliado nuevoAliado = new Aliado(nombreAliado, 0, 0, 0);
-            for (int j=0; j< numeroDeConsejos-1; j++){
-                s6 = s5[1].split("@");
-                consejoStr =  s6[0].split(".");
+            for (int j=1; j<=numeroDeConsejos; j++){
+                consejoStr =  s4[j].split("\\.");
                 consejo = consejoStr[0];
                 nivelConsejo = Integer.parseInt(consejoStr[1]);                
                 Consejo nuevoConsejo = new Consejo(consejo, nivelConsejo);
                 nuevoAliado.AnadirConsejo(nuevoConsejo);
-                s5 = s4[1].split("@");
             }
-            consejoStr = s5[1].split(".");
-            consejo = consejoStr[0];
-            nivelConsejo = Integer.parseInt(consejoStr[1]);                
-            Consejo nuevoConsejo = new Consejo(consejo, nivelConsejo);
-            nuevoAliado.AnadirConsejo(nuevoConsejo);
             listaAliados.add(nuevoAliado);         
         }
         
