@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author Gina
  */
-public class Entidad implements ObjetoGrafico {
+public class Entidad implements Sprite {
     
     private String nombre;
     private int posX;
@@ -44,8 +44,8 @@ public class Entidad implements ObjetoGrafico {
     }
     
     @Override
-    public void Dibujar() {
-        //
+    public String GetSpriteType() {
+        return "";
     }
     
     @Override

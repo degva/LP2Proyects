@@ -9,11 +9,11 @@ package Modelo;
  *
  * @author fabricioandres
  */
-public class Siguiente implements ObjetoGrafico{
+public class Siguiente implements Sprite{
 
     @Override
-    public void Dibujar() {
-        System.out.print("+");
+    public String GetSpriteType() {
+        return "siguiente";
     }
     
 }

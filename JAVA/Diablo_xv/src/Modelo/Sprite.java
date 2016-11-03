@@ -9,6 +9,6 @@ package Modelo;
  *
  * @author degva
  */
-public interface ObjetoGrafico {
-    public void Dibujar();
+public interface Sprite {
+    public String GetSpriteType();
 }

@@ -14,10 +14,10 @@ public class Celda {
     // Esto debe tener tambien un tipo de Celda
     // private TipoCelda tipo;
     
-    private ObjetoGrafico _tipo; //Pared o Pasadizo
-    private ObjetoGrafico _contenido; //Enemigo, Artefacto, Avatar, Anterior, Siguiente, NULL
+    private Sprite _tipo; //Pared o Pasadizo
+    private Sprite _contenido; //Enemigo, Artefacto, Avatar, Anterior, Siguiente, NULL
 
-    public Celda(ObjetoGrafico tipo) {
+    public Celda(Sprite tipo) {
         if (tipo instanceof Pared || tipo instanceof Pasadizo){
             this._tipo = tipo;
             this._contenido = null; //null significa que la celda no tiene contenido
@@ -27,19 +27,19 @@ public class Celda {
         }
     }
 
-    public ObjetoGrafico getTipo() {
+    public Sprite getTipo() {
         return _tipo;
     }
 
-    public void setTipo(ObjetoGrafico _tipo) {
+    public void setTipo(Sprite _tipo) {
         this._tipo = _tipo;
     }
 
-    public ObjetoGrafico getContenido() {
+    public Sprite getContenido() {
         return _contenido;
     }
 
-    public void setContenido(ObjetoGrafico _contenido) {
+    public void setContenido(Sprite _contenido) {
         this._contenido = _contenido;
     }        
 }

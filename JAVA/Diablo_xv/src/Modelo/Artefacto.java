@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author degva
  */
-public class Artefacto implements ObjetoGrafico {
+public class Artefacto implements Sprite {
     private String _nombre;
     private int _posX;
     private int _posY;
@@ -23,8 +23,8 @@ public class Artefacto implements ObjetoGrafico {
     }
     
     @Override
-    public void Dibujar() {
-        System.out.print(_elementoGrafico);
+    public String GetSpriteType() {
+        return "artefacto";
     }
 
     /**

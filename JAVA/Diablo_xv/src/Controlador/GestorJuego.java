@@ -101,7 +101,7 @@ public class GestorJuego {
         int nuevoX = avatar.getPosX() + desplazamiento.x;
         int nuevoY = avatar.getPosY() + desplazamiento.y;
         Celda celdaADesplazarse = laberinto.getCelda(nuevoX, nuevoY);
-        ObjetoGrafico aux = celdaADesplazarse.getTipo();
+        Sprite aux = celdaADesplazarse.getTipo();
         return ((aux instanceof Pasadizo) && !(celdaADesplazarse.getContenido() instanceof Enemigo));
     }
     
@@ -110,7 +110,7 @@ public class GestorJuego {
     private void Interactuar(String direccion, Avatar avatar, Laberinto laberinto){        
         IntPair desplazamiento = DesplazamientoByComando(direccion);
         IntPair coordenadaInteraccion = new IntPair(avatar.getPosX()+desplazamiento.x, avatar.getPosY()+desplazamiento.y);
-        ObjetoGrafico objetoInteraccion = laberinto.getContenidoCelda(coordenadaInteraccion.x, coordenadaInteraccion.y);        
+        Sprite objetoInteraccion = laberinto.getContenidoCelda(coordenadaInteraccion.x, coordenadaInteraccion.y);        
         // Revisamos el tipo de interaccion que corresponde
         if(objetoInteraccion instanceof Enemigo){
             //Se inicia una batalla
