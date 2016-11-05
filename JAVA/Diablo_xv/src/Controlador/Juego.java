@@ -6,6 +6,7 @@
 package Controlador;
 import Modelo.*;
 import Vista.*;
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,6 +31,8 @@ public class Juego {
     //private GestorAvatar _gestorAvatar;
     private final ArrayList<Laberinto> _laberintos;
     
+    private GameWindow gameWindow;
+    
     
     public Juego() {
         Scanner input = new Scanner(System.in);
@@ -44,9 +47,7 @@ public class Juego {
         
         this.CrearListaLaberintos();
         
-        String nombre;
-        System.out.print("Ingresa tu nombre:\n");
-        nombre = input.nextLine();
+        String nombre = "William";
         
         
         _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), nombre, _idxLaberinto);
@@ -80,9 +81,6 @@ public class Juego {
     
     public void Jugar() {
         
-        // InterpreteComandos interprete = new InterpreteComandos();
-
-        // Otra vista: Consola
         int di;
         while (_gestorJuego.GameON) {
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto),_idxLaberinto);
@@ -108,5 +106,14 @@ public class Juego {
         System.out.println("Bye o/");
     }
     
+    public void Welcome(){
+        gameWindow = new GameWindow();
+        gameWindow.setLocationRelativeTo(null);
+        gameWindow.setLayout(new BorderLayout());
+        gameWindow.add(new WelcomeHarambe());
+        gameWindow.pack();
+        gameWindow.setSize(500, 650);
+        gameWindow.setVisible(true);
+    }    
 }
 
