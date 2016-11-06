@@ -41,5 +41,12 @@ public class Celda {
 
     public void setContenido(Sprite _contenido) {
         this._contenido = _contenido;
-    }        
+    }
+    
+    public String getSprite(){
+        if (_contenido != null)
+            return _contenido.GetSpriteType();
+        else 
+            return _tipo.GetSpriteType();
+    }
 }

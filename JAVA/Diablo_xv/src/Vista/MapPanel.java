@@ -76,6 +76,8 @@ public class MapPanel extends javax.swing.JPanel {
             imgs.put("pared", sprite);
             sprite = ImageIO.read(new File("./res/pasadizo.png"));
             imgs.put("pasadizo", sprite);
+            sprite = ImageIO.read(new File("./res/afuera.png"));
+            imgs.put("afuera", sprite);
             sprite = ImageIO.read(new File("./res/anterior.png"));
             imgs.put("anterior", sprite);
             sprite = ImageIO.read(new File("./res/siguiente.png"));
@@ -91,32 +93,25 @@ public class MapPanel extends javax.swing.JPanel {
     
     @Override
     public void paintComponent(Graphics g){
+        boolean cellIsOut, cellIsEmpty;
         super.paintComponent(g);
         int avX = data.avatar.getPosX();
         int avY = data.avatar.getPosY();
-        for (int i = avX - ANCHO; i <= avX + ANCHO; i++) {
-            for (int j = avY - ALTO; j <= avY + ALTO; j++) {
-                boolean cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
+        for (int i = avX - ANCHO, x = 0; i <= avX + ANCHO; i++, x++) {
+            for (int j = avY - ALTO, y = 0; j <= avY + ALTO; j++, y++) {
+                cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
                 BufferedImage sp;
-                if (cellIsOut )
-                    sp = imgs.get("vacio");
-                else{
-                    String spType = data.laberinto.getContenidoCelda(i, j).GetSpriteType();
-                    sp = imgs.get(data.laberinto.getContenidoCelda(i, j).GetSpriteType());
+                String spType;
+                if (cellIsOut)
+                    sp = imgs.get("afuera");
+                else if (i == avX && j == avY){
+                    sp = imgs.get(data.avatar.GetSpriteType());
+                } else{
+                    spType = data.laberinto.getCelda(i, j).getSprite();
+                    sp = imgs.get(spType);
                 }
-                g.drawImage(sp, i*32, j*32, this);
-//                if (i == avX && j == avY) { //si es la posicion en la que esta el avatar
-//                    data.avatar.GetSpriteType();                    
-//                } else {
-//                    RenderCell(avatar, lab, j, i);
-//                }
+                g.drawImage(sp, x*32, y*32, this);
             }
-//            if (listaDatos.size() > (i + ALTO - data.avatar.getPosY())) {
-////                System.out.print(' ');
-////                System.out.print(listaDatos.get(i + ALTO - data.avatar.getPosY()));
-//            }
-//            
-////            System.out.print('\n');
         }
     }
 

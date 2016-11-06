@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author Gina
  */
-public class Entidad implements Sprite {
+public abstract class Entidad implements Sprite {
     
     private String nombre;
     private int posX;
@@ -41,12 +41,8 @@ public class Entidad implements Sprite {
     public void Mover(int dx, int dy) {
         setPosX(getPosX() + dx);
         setPosY(getPosY() + dy);
-    }
+    }    
     
-    @Override
-    public String GetSpriteType() {
-        return "";
-    }
     
     @Override
     public String toString(){

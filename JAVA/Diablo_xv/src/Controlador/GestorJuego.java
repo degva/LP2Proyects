@@ -13,52 +13,68 @@ import Modelo.*;
  */
 public class GestorJuego {
     
-    private final Consola consola;
     // private final GestorLaberinto controladorLaberinto;
     private final GestorInteraccion gestorInteraccion;
     public boolean GameON;
+    private final Avatar avatar;
     
-    public GestorJuego(){
-        consola = new Consola();
+    public GestorJuego(Avatar a){
         GameON = true;
         gestorInteraccion = new GestorInteraccion();
-        // controladorLaberinto = new GestorLaberinto();
+        avatar = a;
     }
     
-    public int Procesar(Avatar avatar, Laberinto laberinto){        
-        consola.MostrarMenu();
-        String[] opcion = consola.ObtenerComando();
-        switch (opcion[0]) {
-            case "w":
-            case "a":
-            case "s":
-            case "d":
-                IntPair desplazamiento = DesplazamientoByComando(opcion[0]);
-                if(DesplazamientoEsValido(avatar, laberinto, desplazamiento)){
-                    int nuevoX = avatar.getPosX() + desplazamiento.x;
-                    int nuevoY = avatar.getPosY() + desplazamiento.y;
-                    Celda nuevaCeldaAvatar = laberinto.getCelda(nuevoX, nuevoY);
-                    avatar.Mover(desplazamiento.x, desplazamiento.y);
-                    consola.ClearLog();
-                    if(nuevaCeldaAvatar.getContenido() instanceof Anterior)
-                        return -1;
-                    else if (nuevaCeldaAvatar.getContenido() instanceof Siguiente)
-                        return 1;
-                } else{
-                    consola.SetLog("¡Movimiento invalido!");
-                    return 0;
-                }
+    public void Procesar(int keyCode){
+//        switch (opcion[0]) {
+//            case "w":
+//            case "a":
+//            case "s":
+//            case "d":
+//                IntPair desplazamiento = DesplazamientoByComando(opcion[0]);
+//                if(DesplazamientoEsValido(avatar, laberinto, desplazamiento)){
+//                    int nuevoX = avatar.getPosX() + desplazamiento.x;
+//                    int nuevoY = avatar.getPosY() + desplazamiento.y;
+//                    Celda nuevaCeldaAvatar = laberinto.getCelda(nuevoX, nuevoY);
+//                    avatar.Mover(desplazamiento.x, desplazamiento.y);
+//                    consola.ClearLog();
+//                    if(nuevaCeldaAvatar.getContenido() instanceof Anterior)
+//                        return -1;
+//                    else if (nuevaCeldaAvatar.getContenido() instanceof Siguiente)
+//                        return 1;
+//                } else{
+//                    consola.SetLog("¡Movimiento invalido!");
+//                    return 0;
+//                }
+//                break;
+//            case "interactuar":
+//                Interactuar(opcion[1], avatar, laberinto);
+//                break;
+//            case "salir":
+//                this.GameOff();
+//                break;
+//            default:
+//                return 0;
+//        }
+//        return 0;
+        System.out.println("Controlador.GestorJuego.Procesar()");
+        switch (keyCode){
+            case 104:
+                System.out.println("Controlador.GestorJuego.Procesar()");
+                avatar.Mover(0, -1);
                 break;
-            case "interactuar":
-                Interactuar(opcion[1], avatar, laberinto);
+            case 102:
+                System.out.println("Controlador.GestorJuego.Procesar()");
+                avatar.Mover(1, 0);
                 break;
-            case "salir":
-                this.GameOff();
+            case 100:
+                System.out.println("Controlador.GestorJuego.Procesar()");
+                avatar.Mover(-1, 0);
                 break;
-            default:
-                return 0;
+            case 98:
+                System.out.println("Controlador.GestorJuego.Procesar()");
+                avatar.Mover(0, 1);
+                break;
         }
-        return 0;
     }
     
     private void GameOff(){
@@ -120,7 +136,7 @@ public class GestorJuego {
         }else if (objetoInteraccion instanceof Aliado){
             gestorInteraccion.interactuarAliado(avatar, laberinto, coordenadaInteraccion);
         }else{
-            consola.SetLog("Aqui no hay nada para interactuar");
+            //consola.SetLog("Aqui no hay nada para interactuar");
         }
     }
     

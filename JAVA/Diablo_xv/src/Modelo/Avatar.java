@@ -15,7 +15,7 @@ public class Avatar extends Entidad {
     private Saco saco;
     private Armadura armaduraActual; 
     private Arma armaActual;
-    private int dir; 
+    private int dir = 6; 
      
      public Avatar(int posicionX, int poscionY, String nombre, int nivel){
         super(posicionX,poscionY,nombre,nivel, 100);
@@ -23,7 +23,6 @@ public class Avatar extends Entidad {
         this.saco = new Saco();
         this.armaduraActual = new Armadura("Armor", 0, 0, 50);
         this.armaActual = new Arma("Espada", 0, 0, 25, 75);
-        dir = 6;
     }
      
     public Avatar(IntPair coord, String nombre, int nivel){

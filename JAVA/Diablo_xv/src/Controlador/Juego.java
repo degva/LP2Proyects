@@ -25,7 +25,6 @@ public class Juego {
     public static final int MAX_LABERINTOS = 10;
     public static final int MIN_LABERINTOS = 5;
     
-    private String nombre;
     private Avatar _avatar;
     private GestorLaberinto _gestorLab;
     private GestorJuego _gestorJuego;
@@ -45,9 +44,8 @@ public class Juego {
         _laberintos = new ArrayList<>();
         _idxLaberinto = _idxLaberintoAnterior = 0;
         _numLaberintos = (int)(Math.random()*10+5);
-        //_gestorAvatar = new GestorAvatar();
+        //_gestorAvatar = new GestorAvatar();        
         
-        gameWindow = new GameWindow();
     }
     
     private void CrearListaLaberintos() {
@@ -82,12 +80,13 @@ public class Juego {
         PrepareGameWindow();
     }
     
-    private void Welcome(){                
-        gameWindow.setLayout(new BorderLayout());
-        WelcomeHarambe welcomeHarambeWindow = new WelcomeHarambe();
-        gameWindow.add(welcomeHarambeWindow);
+    private void Welcome(){
+        gameWindow = new GameWindow();
         gameWindow.setSize(600, 400);
         gameWindow.setLocationRelativeTo(null);
+        gameWindow.setLayout(new BorderLayout());
+        WelcomeHarambe welcomeHarambeWindow = new WelcomeHarambe();
+        gameWindow.add(welcomeHarambeWindow);        
         gameWindow.setVisible(true);
         while(welcomeHarambeWindow.isShowing()){
             try {
@@ -96,17 +95,17 @@ public class Juego {
                 Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        nombre = welcomeHarambeWindow.NombreJugador;
+        String nombre = welcomeHarambeWindow.NombreJugador;
         _avatar.setNombre(nombre);
         gameWindow.remove(welcomeHarambeWindow);
     }    
     
     private void PrepareData(){
         _gestorLab = new GestorLaberinto();
-        _gestorJuego = new GestorJuego();
         CrearListaLaberintos();
         _avatar = new Avatar(_laberintos.get(0).DevolverAnterior(), "", _idxLaberinto);
         mapPanelData = new MapPanelData(_laberintos.get(0), _avatar);
+        _gestorJuego = new GestorJuego(_avatar);
     }
     
     private void PrepareGameWindow(){
@@ -115,22 +114,29 @@ public class Juego {
         mapPanel.setBackground(Color.GREEN);
         InfoPanel infoPanel = new InfoPanel();
         infoPanel.setSize(200, 420);
-        infoPanel.setBackground(Color.CYAN);
+        infoPanel.setBackground(Color.CYAN);        
+        mapPanel.setVisible(true);
+        infoPanel.setVisible(true);        
         gameWindow.add(mapPanel);
         gameWindow.add(infoPanel);
         gameWindow.setSize(700, 420);
-        mapPanel.setVisible(true);
-        infoPanel.setVisible(true);
-        ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel);
+        ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
         inputController.setListener();
+        while (_gestorJuego.GameON) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     private void Play() {
         
-        int di;
+        int di= 0;
         while (_gestorJuego.GameON) {
             _render.Render(_avatar, ObtenerLaberinto(_idxLaberinto),_idxLaberinto);
-            di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
+            //di = _gestorJuego.Procesar(_avatar, ObtenerLaberinto(_idxLaberinto));
             _idxLaberinto += di;
             // Si querías evitar que el indice de laberintoActual sea negativo, bastaba:
             if (_idxLaberinto < 0)

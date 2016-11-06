@@ -17,14 +17,16 @@ import java.awt.event.KeyListener;
  */
 public class ViewInputController implements KeyListener {
     
-    private GameWindow gameWindow;
-    private MapPanel mapPanel;
-    private InfoPanel infoPanel;
+    private final GameWindow gameWindow;
+    private final MapPanel mapPanel;
+    private final InfoPanel infoPanel;
+    private final GestorJuego gestorJuego;
     
-    public ViewInputController(GameWindow gameWindow, MapPanel mapPanel, InfoPanel infoPanel){
+    public ViewInputController(GameWindow gameWindow, MapPanel mapPanel, InfoPanel infoPanel, GestorJuego gestorJuego){
         this.gameWindow = gameWindow;
         this.mapPanel = mapPanel;
         this.infoPanel = infoPanel;
+        this.gestorJuego = gestorJuego;
     }
     
     public void setListener(){
@@ -43,6 +45,9 @@ public class ViewInputController implements KeyListener {
     
     @Override
     public void keyReleased(KeyEvent e){
+        System.out.println("Controlador.ViewInputController.keyReleased()");
+        int keyCode = e.getKeyCode();
+        gestorJuego.Procesar(keyCode);
         mapPanel.repaint();
         infoPanel.repaint();
     }   
