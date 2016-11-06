@@ -9,6 +9,8 @@ import Vista.*;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +23,7 @@ public class Juego {
     public static final int MAX_LABERINTOS = 10;
     public static final int MIN_LABERINTOS = 5;
     
+    private String nombre;
     private Avatar _avatar;
     private GestorLaberinto _gestorLab;
     private GestorJuego _gestorJuego;
@@ -35,7 +38,6 @@ public class Juego {
     
     
     public Juego() {
-        Scanner input = new Scanner(System.in);
         
         _gestorLab = new GestorLaberinto();
         _gestorJuego = new GestorJuego();
@@ -45,15 +47,12 @@ public class Juego {
         _numLaberintos = (int)(Math.random()*10+5);
         //_gestorAvatar = new GestorAvatar();
         
+        gameWindow = new GameWindow();
+        
         this.CrearListaLaberintos();
-        
-        String nombre = "William";
-        
-        
-        _avatar = new Avatar(GetLaberintoActual().DevolverAnterior(), nombre, _idxLaberinto);
     }
     
-    public void CrearListaLaberintos() {
+    private void CrearListaLaberintos() {
         for (int i = 0; i < _numLaberintos; i++) {
             _laberintos.add(_gestorLab.CrearLaberinto(i+1));
         }
@@ -91,7 +90,6 @@ public class Juego {
                 _idxLaberinto = 0;
             // Evaluamos si hemos ganado
             if (_idxLaberinto == _numLaberintos){
-                System.out.println("¡¡¡GANASTE!!!");
                 break;
             }
             //Evaluamos el avance
@@ -103,17 +101,31 @@ public class Juego {
             _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto), _avatar.getPosX(), _avatar.getPosY());
             _gestorLab.MoverAliado(ObtenerLaberinto(_idxLaberinto));
         }
-        System.out.println("Bye o/");
     }
     
-    public void Welcome(){
-        gameWindow = new GameWindow();
-        gameWindow.setLocationRelativeTo(null);
+    public void Welcome(){                
         gameWindow.setLayout(new BorderLayout());
-        gameWindow.add(new WelcomeHarambe());
-        gameWindow.pack();
-        gameWindow.setSize(500, 650);
+        WelcomeHarambe welcomeHarambeWindow = new WelcomeHarambe();
+        gameWindow.add(welcomeHarambeWindow);
+        gameWindow.setSize(600, 400);
+        gameWindow.setLocationRelativeTo(null);
         gameWindow.setVisible(true);
-    }    
+        while(welcomeHarambeWindow.isShowing()){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }        
+        nombre = welcomeHarambeWindow.NombreJugador;
+        gameWindow.remove(welcomeHarambeWindow);
+    }
+
+    private void PrepareGameWindow(){
+        MapPanel mapPanel = new MapPanel();
+        InfoPanel infoPanel = new InfoPanel();
+        ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel);
+        
+    }
 }
 

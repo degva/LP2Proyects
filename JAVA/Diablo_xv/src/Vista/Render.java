@@ -80,12 +80,6 @@ public class Render {
         }
     }
     
-    
-    public static void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
-    }
-    
     /**
      * 
      * Muestra: nombre, vida, arma, armadura y elementos que tiene el saco (con
@@ -98,10 +92,9 @@ public class Render {
      */
     public void Render(Avatar avatar,Laberinto lab, int nivel) {        
         List<String> listaDatos = ObtenerListaDatos(avatar);
-        // List<Enemigo> listaEnemigos = lab.getEnemigos();
         int state = 0;
-        // imprimimos el nivel del mapa
-        System.out.println(">> NIVEL " + (nivel+1) + " " + lab.getSizeM() + "-" + lab.getSizeN());
+        
+//        System.out.println(">> NIVEL " + (nivel+1) + " " + lab.getSizeM() + "-" + lab.getSizeN());
         
         // Imprimir
         OUTER:
@@ -114,11 +107,11 @@ public class Render {
                 }
             }
             if (listaDatos.size() > (i + ALTO - avatar.getPosY())) {
-                System.out.print(' ');
-                System.out.print(listaDatos.get(i + ALTO - avatar.getPosY()));
+//                System.out.print(' ');
+//                System.out.print(listaDatos.get(i + ALTO - avatar.getPosY()));
             }
             
-            System.out.print('\n');
+//            System.out.print('\n');
         }
     }
     

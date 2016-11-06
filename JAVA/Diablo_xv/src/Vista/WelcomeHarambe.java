@@ -5,9 +5,14 @@
  */
 package Vista;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 
 /**
@@ -16,7 +21,8 @@ import java.awt.Toolkit;
  */
 public class WelcomeHarambe extends javax.swing.JPanel {
     
-    Image harambeGIF;
+    Image harambesRevenge;
+    public String NombreJugador;
 
     /**
      * Creates new form WelcomeHarambe
@@ -24,11 +30,11 @@ public class WelcomeHarambe extends javax.swing.JPanel {
     public WelcomeHarambe() {
         initComponents();
         try {
-            harambeGIF = Toolkit.getDefaultToolkit().createImage("./res/harambe.gif");
-        } catch (Exception e){
-            
+            harambesRevenge = ImageIO.read(new File("./res/Harambe-Revenge.jpg")).getScaledInstance(600, 205, Image.SCALE_SMOOTH);            
+        } catch (IOException e){
         }
-        setSize(600, 600);
+        setSize(600, 400);
+        setBackground(Color.BLACK);
         setVisible(true);
     }
 
@@ -62,16 +68,16 @@ public class WelcomeHarambe extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(133, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(128, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -88,13 +94,14 @@ public class WelcomeHarambe extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println("uhm");
+        NombreJugador = jTextPane1.getText();
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
-        g.drawImage(harambeGIF, 0, 0, this);
+        g.drawImage(harambesRevenge, 0, 50, this);
     }
 
     

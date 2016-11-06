@@ -5,17 +5,25 @@
  */
 package Vista;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+
 /**
  *
  * @author wperezp
  */
 public class MapPanel extends javax.swing.JPanel {
+    
+    HashMap<String, BufferedImage> imgs;
 
     /**
      * Creates new form MapPanel
      */
     public MapPanel() {
+        imgs = new HashMap<>();
         initComponents();
+        initHashMap();
     }
 
     /**
@@ -39,6 +47,14 @@ public class MapPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initHashMap(){
+        
+    }
+    
+    @Override
+    public void paintComponent(Graphics g){
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

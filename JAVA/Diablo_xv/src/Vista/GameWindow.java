@@ -17,7 +17,7 @@ public class GameWindow extends javax.swing.JFrame {
     public GameWindow() {
         initComponents();
         setVisible(true);
-        this.setTitle("Harambe's Quest");
+        this.setTitle("Harambe's Revenge");
     }
     
 
