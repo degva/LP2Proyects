@@ -7,7 +7,13 @@ package Vista;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 
 /**
  *
@@ -15,13 +21,20 @@ import java.util.HashMap;
  */
 public class MapPanel extends javax.swing.JPanel {
     
+    MapPanelData data;
     HashMap<String, BufferedImage> imgs;
+    BufferedImage bgTiles;
+    
+    private final int ALTO = 6;
+    private final int ANCHO = 6;
 
     /**
      * Creates new form MapPanel
+     * @param data
      */
-    public MapPanel() {
+    public MapPanel(MapPanelData data) {
         imgs = new HashMap<>();
+        this.data = data;
         initComponents();
         initHashMap();
     }
@@ -48,12 +61,63 @@ public class MapPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initHashMap(){
-        
+        try {
+            //Image harambeGIF = Toolkit.getDefaultToolkit().createImage("./res/harambe.gif");
+            BufferedImage sprite = ImageIO.read(new File("./res/harambe_der.png"));
+            imgs.put("avatar", sprite);
+            sprite = ImageIO.read(new File("./res/harambe_izq.png"));
+            imgs.put("avatar-izq", sprite);
+            sprite = ImageIO.read(new File("./res/harambe_arr.png"));
+            imgs.put("avatar-arr", sprite);
+            sprite = ImageIO.read(new File("./res/harambe_abj.png"));
+            imgs.put("avatar-abj", sprite);
+            bgTiles = ImageIO.read(new File("./res/tiles1.png"));
+            sprite = bgTiles.getSubimage(128, 96, 32, 32);
+            imgs.put("pared", sprite);
+            sprite = ImageIO.read(new File("./res/pasadizo.png"));
+            imgs.put("pasadizo", sprite);
+            sprite = ImageIO.read(new File("./res/anterior.png"));
+            imgs.put("anterior", sprite);
+            sprite = ImageIO.read(new File("./res/siguiente.png"));
+            imgs.put("siguiente", sprite);
+            sprite = ImageIO.read(new File("./res/artefacto.png"));
+            imgs.put("artefacto", sprite);
+            sprite = ImageIO.read(new File("./res/enemigo.png"));
+            imgs.put("enemigo", sprite);
+        } catch (IOException ex) {
+            Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }
     
     @Override
     public void paintComponent(Graphics g){
-        
+        super.paintComponent(g);
+        int avX = data.avatar.getPosX();
+        int avY = data.avatar.getPosY();
+        for (int i = avX - ANCHO; i <= avX + ANCHO; i++) {
+            for (int j = avY - ALTO; j <= avY + ALTO; j++) {
+                boolean cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
+                BufferedImage sp;
+                if (cellIsOut )
+                    sp = imgs.get("vacio");
+                else{
+                    String spType = data.laberinto.getContenidoCelda(i, j).GetSpriteType();
+                    sp = imgs.get(data.laberinto.getContenidoCelda(i, j).GetSpriteType());
+                }
+                g.drawImage(sp, i*32, j*32, this);
+//                if (i == avX && j == avY) { //si es la posicion en la que esta el avatar
+//                    data.avatar.GetSpriteType();                    
+//                } else {
+//                    RenderCell(avatar, lab, j, i);
+//                }
+            }
+//            if (listaDatos.size() > (i + ALTO - data.avatar.getPosY())) {
+////                System.out.print(' ');
+////                System.out.print(listaDatos.get(i + ALTO - data.avatar.getPosY()));
+//            }
+//            
+////            System.out.print('\n');
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

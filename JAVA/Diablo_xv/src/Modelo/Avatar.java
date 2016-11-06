@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import javafx.scene.input.KeyCode;
+
 /**
  *
  * @author degva
@@ -13,7 +15,7 @@ public class Avatar extends Entidad {
     private Saco saco;
     private Armadura armaduraActual; 
     private Arma armaActual;
-    private final char _elementoGrafico;
+    private int dir; 
      
      public Avatar(int posicionX, int poscionY, String nombre, int nivel){
         super(posicionX,poscionY,nombre,nivel, 100);
@@ -21,7 +23,7 @@ public class Avatar extends Entidad {
         this.saco = new Saco();
         this.armaduraActual = new Armadura("Armor", 0, 0, 50);
         this.armaActual = new Arma("Espada", 0, 0, 25, 75);
-        this._elementoGrafico = 'O';
+        dir = 6;
     }
      
     public Avatar(IntPair coord, String nombre, int nivel){
@@ -30,7 +32,6 @@ public class Avatar extends Entidad {
         this.saco = new Saco();
         this.armaduraActual = new Armadura("Armor", 0, 0, 50);
         this.armaActual = new Arma("Espada", 0, 0, 25, 75);
-        this._elementoGrafico = 'O';
     }
     
 
@@ -73,8 +74,13 @@ public class Avatar extends Entidad {
         this.armaActual = arma;
     }
     
+    public void setDireccion(int d){
+        
+    }
+    
     @Override
     public String GetSpriteType() {
-        return "avatar";
+        String direccion = (dir == 6) ? "" : (dir == 8) ? "-arr": (dir == 4) ? "-izq": "-abj";
+        return "avatar"+direccion;
     }        
 }

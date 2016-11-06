@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package Controlador;
+import Vista.MapPanelData;
 import Modelo.*;
 import Vista.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -35,12 +37,10 @@ public class Juego {
     private final ArrayList<Laberinto> _laberintos;
     
     private GameWindow gameWindow;
+    private MapPanelData mapPanelData;
     
     
     public Juego() {
-        
-        _gestorLab = new GestorLaberinto();
-        _gestorJuego = new GestorJuego();
         _render = new Render();
         _laberintos = new ArrayList<>();
         _idxLaberinto = _idxLaberintoAnterior = 0;
@@ -48,8 +48,6 @@ public class Juego {
         //_gestorAvatar = new GestorAvatar();
         
         gameWindow = new GameWindow();
-        
-        this.CrearListaLaberintos();
     }
     
     private void CrearListaLaberintos() {
@@ -78,7 +76,56 @@ public class Juego {
         _laberintos.add(lab);
     }
     
-    public void Jugar() {
+    public void Start(){        
+        PrepareData();
+        Welcome();
+        PrepareGameWindow();
+    }
+    
+    private void Welcome(){                
+        gameWindow.setLayout(new BorderLayout());
+        WelcomeHarambe welcomeHarambeWindow = new WelcomeHarambe();
+        gameWindow.add(welcomeHarambeWindow);
+        gameWindow.setSize(600, 400);
+        gameWindow.setLocationRelativeTo(null);
+        gameWindow.setVisible(true);
+        while(welcomeHarambeWindow.isShowing()){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        nombre = welcomeHarambeWindow.NombreJugador;
+        _avatar.setNombre(nombre);
+        gameWindow.remove(welcomeHarambeWindow);
+    }    
+    
+    private void PrepareData(){
+        _gestorLab = new GestorLaberinto();
+        _gestorJuego = new GestorJuego();
+        CrearListaLaberintos();
+        _avatar = new Avatar(_laberintos.get(0).DevolverAnterior(), "", _idxLaberinto);
+        mapPanelData = new MapPanelData(_laberintos.get(0), _avatar);
+    }
+    
+    private void PrepareGameWindow(){
+        MapPanel mapPanel = new MapPanel(mapPanelData);
+        mapPanel.setSize(420, 420);
+        mapPanel.setBackground(Color.GREEN);
+        InfoPanel infoPanel = new InfoPanel();
+        infoPanel.setSize(200, 420);
+        infoPanel.setBackground(Color.CYAN);
+        gameWindow.add(mapPanel);
+        gameWindow.add(infoPanel);
+        gameWindow.setSize(700, 420);
+        mapPanel.setVisible(true);
+        infoPanel.setVisible(true);
+        ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel);
+        inputController.setListener();
+    }
+    
+    private void Play() {
         
         int di;
         while (_gestorJuego.GameON) {
@@ -101,31 +148,6 @@ public class Juego {
             _gestorLab.MoverEnemigos(ObtenerLaberinto(_idxLaberinto), _avatar.getPosX(), _avatar.getPosY());
             _gestorLab.MoverAliado(ObtenerLaberinto(_idxLaberinto));
         }
-    }
-    
-    public void Welcome(){                
-        gameWindow.setLayout(new BorderLayout());
-        WelcomeHarambe welcomeHarambeWindow = new WelcomeHarambe();
-        gameWindow.add(welcomeHarambeWindow);
-        gameWindow.setSize(600, 400);
-        gameWindow.setLocationRelativeTo(null);
-        gameWindow.setVisible(true);
-        while(welcomeHarambeWindow.isShowing()){
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }        
-        nombre = welcomeHarambeWindow.NombreJugador;
-        gameWindow.remove(welcomeHarambeWindow);
-    }
-
-    private void PrepareGameWindow(){
-        MapPanel mapPanel = new MapPanel();
-        InfoPanel infoPanel = new InfoPanel();
-        ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel);
-        
     }
 }
 

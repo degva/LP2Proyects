@@ -12,7 +12,6 @@ import Controlador.*;
 public class Principal {
     public static void main(String[] args) {
         Juego juego = new Juego();
-        juego.Welcome();
-        juego.Jugar();
+        juego.Start();
     }
 }

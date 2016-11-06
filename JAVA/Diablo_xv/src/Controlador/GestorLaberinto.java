@@ -77,7 +77,6 @@ public class GestorLaberinto {
         nuevoLaberinto.setTipoCelda(rx, ry, auxPasadizo);
         pilaCeldas.push(new IntPair(rx,ry));
         
-        // algunos auxiliares para el while...
         IntPair aux, ady;
         
         while(!pilaCeldas.empty()) {
@@ -134,7 +133,6 @@ public class GestorLaberinto {
             auxCelda.setContenido(l.getContenidoCelda(artX, artY));
             
             if(l.celdaVacia(artX, artY)){ //si la celda es del tipo pasadizo y esta vacia
-                //agregamos un nuevo artefacto
                 l.agregarArtefacto(gestorArt.ObtenerArtefacto(artX, artY, numeroLaberitno));
             } else i--;
         }
@@ -146,7 +144,6 @@ public class GestorLaberinto {
         int maxY = l.getSizeN();
         
         //Hallar el nro de enemigos por mapa segun la probabilidad de que aparezca
-        //La formula puede ir cambiando
         int nroEnemigos = Math.round((l.getPctEnemigo()* maxX * maxY)/20);
         int eneX, eneY;
         GestorEnemigo gestorEne = new GestorEnemigo();
@@ -157,7 +154,8 @@ public class GestorLaberinto {
             
             if(l.celdaVacia(eneX, eneY)){ //si la celda es del tipo pasadizo y esta vacia
                 l.agregarEnemigo(gestorEne.ObtenerEnemigo(eneX, eneY, numeroLaberitno));
-            } else i--;
+            } else 
+                i--;
         } 
     }
     
@@ -198,7 +196,6 @@ public class GestorLaberinto {
                     if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo) {
                         e = (Enemigo) l.getContenidoCelda(i, j);
                         l.getCelda(i, j).setContenido(null);
-
                         e.Mover(nuevaPos.x - i, nuevaPos.y - j);
                         l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
                     }
@@ -219,7 +216,6 @@ public class GestorLaberinto {
                     if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo) {
                         e = (Aliado) l.getContenidoCelda(i, j);
                         l.getCelda(i, j).setContenido(null);
-
                         e.Mover(nuevaPos.x - i, nuevaPos.y - j);
                         l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
                     }
@@ -252,7 +248,6 @@ public class GestorLaberinto {
 
         IntPair cuadrante = ObtenerCuadrante(x,y,avX,avY);
         //añadiremos nuevas condiciones para verificar el cuadrante correcto
-        
         
         // checkeamos nodo a la derecha:
         if ((x > i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)
