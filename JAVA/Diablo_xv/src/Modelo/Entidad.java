@@ -90,6 +90,10 @@ public abstract class Entidad implements Sprite {
     public void setPosY(int posY) {
         this.posY = posY;
     }
+    
+    public IntPair getPos(){
+        return new IntPair(posX, posY);
+    }
 
     /**
      * @return the nivel

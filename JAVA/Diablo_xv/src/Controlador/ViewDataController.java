@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.Laberinto;
 import Vista.MapPanelData;
 
 /**
@@ -17,5 +18,15 @@ public class ViewDataController {
     
     public ViewDataController(MapPanelData md){
         mapPanelData = md;
+    }
+    
+    public void LevelUp(Laberinto l){
+        mapPanelData.setLaberinto(l);
+        mapPanelData.avatarReposition(1);
+    }
+    
+    public void LevelDown(Laberinto l){
+        mapPanelData.setLaberinto(l);
+        mapPanelData.avatarReposition(-1);
     }
 }

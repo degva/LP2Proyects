@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 package Controlador;
-import Facilidades.Aliado;
 import Modelo.*;
-import java.awt.event.KeyEvent;
+import Vista.MapPanelData;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -22,6 +20,8 @@ public class GestorJuego {
     private ArrayList<Laberinto> laberintos;
     private GameInfo gameInfo;
     
+    private ViewDataController vdController;
+    
     public GestorJuego(Avatar a, ArrayList<Laberinto> l, GameInfo g){
         gestorInteraccion = new GestorInteraccion();
         avatar = a;
@@ -29,11 +29,17 @@ public class GestorJuego {
         gameInfo = g;
     }
     
+    public void setViewDataController(MapPanelData md){
+        vdController = new ViewDataController(md);
+    }
+    
     public void Procesar(int keyCode){
         if (PressedKeyIsMovement(keyCode)){
             IntPair desp = DesplazamientoByKeyCode(keyCode);
-            if (DesplazamientoEsValido(desp))
+            if (DesplazamientoEsValido(desp)){
                 avatar.Mover(desp.x, desp.y);
+                CheckLevelChange();
+            }
         }
     }
     
@@ -86,6 +92,22 @@ public class GestorJuego {
         Celda celdaADesplazarse = laberinto.getCelda(nuevoX, nuevoY);
         Sprite aux = celdaADesplazarse.getTipo();
         return ((aux instanceof Pasadizo) && !(celdaADesplazarse.getContenido() instanceof Enemigo));
+    }
+    
+    private void CheckLevelChange(){
+        IntPair avatarPos = avatar.getPos();
+        Laberinto l = laberintos.get(gameInfo.LaberintoActual());
+        IntPair antPos = l.DevolverAnterior();
+        IntPair sigPos = l.DevolverSiguiente();
+        if (IntPair.Equals(antPos, avatarPos)){
+            if (gameInfo.LaberintoActual() != 0){
+                gameInfo.Back();
+                vdController.LevelDown(laberintos.get(gameInfo.LaberintoActual()));
+            }
+        } else if (IntPair.Equals(sigPos, avatarPos)){
+            gameInfo.Next();
+            vdController.LevelUp(laberintos.get(gameInfo.LaberintoActual()));
+        }
     }
     
     // Metodo para efectuar la interacción con el objeto en la dirección especificada

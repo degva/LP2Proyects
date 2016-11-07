@@ -12,6 +12,7 @@ package Modelo;
 public class GameInfo {
     
     private boolean gameON;
+    private boolean winner;
     private int idxLaberinto;
     private int idxLaberintoAnterior;
     

@@ -27,7 +27,7 @@ public class MapPanelData {
         laberinto = l;
     }
     
-    private void avatarReposition(int step){
+    public void avatarReposition(int step){
         IntPair reposition = new IntPair(0, 0);
         if (step == 1){
             reposition = laberinto.DevolverAnterior();
