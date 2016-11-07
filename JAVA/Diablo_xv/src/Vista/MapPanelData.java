@@ -6,11 +6,12 @@
 package Vista;
 
 import Modelo.Avatar;
+import Modelo.IntPair;
 import Modelo.Laberinto;
 
 /**
  *
- * @author Fam. Pérez Portilla
+ * @author wperezp
  */
 public class MapPanelData {
     
@@ -24,5 +25,15 @@ public class MapPanelData {
     
     public void setLaberinto(Laberinto l){
         laberinto = l;
+    }
+    
+    private void avatarReposition(int step){
+        IntPair reposition = new IntPair(0, 0);
+        if (step == 1){
+            reposition = laberinto.DevolverAnterior();
+        } else if (step == -1){
+            reposition = laberinto.DevolverSiguiente();
+        }
+        avatar.Mover(reposition.x, reposition.y);
     }
 }

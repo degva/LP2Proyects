@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.IntPair;
 import Vista.GameWindow;
 import Vista.InfoPanel;
 import Vista.MapPanel;
@@ -13,7 +14,7 @@ import java.awt.event.KeyListener;
 
 /**
  *
- * @author Fam. Pérez Portilla
+ * @author wperezp
  */
 public class ViewInputController implements KeyListener {
     
@@ -45,7 +46,6 @@ public class ViewInputController implements KeyListener {
     
     @Override
     public void keyReleased(KeyEvent e){
-        System.out.println("Controlador.ViewInputController.keyReleased()");
         int keyCode = e.getKeyCode();
         gestorJuego.Procesar(keyCode);
         mapPanel.repaint();
