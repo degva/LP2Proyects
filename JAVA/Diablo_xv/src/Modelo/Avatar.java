@@ -5,8 +5,6 @@
  */
 package Modelo;
 
-import javafx.scene.input.KeyCode;
-
 /**
  *
  * @author degva
@@ -75,6 +73,20 @@ public class Avatar extends Entidad {
     
     public void setDireccion(int d){
         
+    }
+    
+    @Override
+    public void Mover(int dx, int dy){
+        setPosX(getPosX() + dx);
+        setPosY(getPosY() + dy);
+        if (dx == 1)
+            dir = 6;
+        else if (dx == -1)
+            dir = 4;
+        else if (dy == 1)
+            dir = 2;
+        else if (dy == -1)
+            dir = 8;
     }
     
     @Override

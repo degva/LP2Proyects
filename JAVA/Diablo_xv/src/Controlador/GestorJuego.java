@@ -6,6 +6,7 @@
 package Controlador;
 import Facilidades.Aliado;
 import Modelo.*;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -56,22 +57,21 @@ public class GestorJuego {
 //                return 0;
 //        }
 //        return 0;
-        System.out.println("Controlador.GestorJuego.Procesar()");
         switch (keyCode){
+            case 87:
             case 104:
-                System.out.println("Controlador.GestorJuego.Procesar()");
                 avatar.Mover(0, -1);
                 break;
+            case 68:
             case 102:
-                System.out.println("Controlador.GestorJuego.Procesar()");
                 avatar.Mover(1, 0);
                 break;
+            case 65:
             case 100:
-                System.out.println("Controlador.GestorJuego.Procesar()");
                 avatar.Mover(-1, 0);
                 break;
+            case 83:
             case 98:
-                System.out.println("Controlador.GestorJuego.Procesar()");
                 avatar.Mover(0, 1);
                 break;
         }

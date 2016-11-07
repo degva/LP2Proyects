@@ -9,6 +9,7 @@ import Modelo.*;
 import Vista.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -86,7 +87,8 @@ public class Juego {
         gameWindow.setLocationRelativeTo(null);
         gameWindow.setLayout(new BorderLayout());
         WelcomeHarambe welcomeHarambeWindow = new WelcomeHarambe();
-        gameWindow.add(welcomeHarambeWindow);        
+        gameWindow.add(welcomeHarambeWindow);
+        gameWindow.setFocusable(true);
         gameWindow.setVisible(true);
         while(welcomeHarambeWindow.isShowing()){
             try {
@@ -109,17 +111,19 @@ public class Juego {
     }
     
     private void PrepareGameWindow(){
+        gameWindow.setSize(620, 420);
+        gameWindow.setLocationRelativeTo(null);
         MapPanel mapPanel = new MapPanel(mapPanelData);
         mapPanel.setSize(420, 420);
         mapPanel.setBackground(Color.GREEN);
+        gameWindow.add(mapPanel);
         InfoPanel infoPanel = new InfoPanel();
         infoPanel.setSize(200, 420);
-        infoPanel.setBackground(Color.CYAN);        
-        mapPanel.setVisible(true);
-        infoPanel.setVisible(true);        
-        gameWindow.add(mapPanel);
         gameWindow.add(infoPanel);
-        gameWindow.setSize(700, 420);
+        infoPanel.setLocation(420, 0);
+        infoPanel.setBackground(Color.CYAN);
+        mapPanel.setVisible(true);
+        infoPanel.setVisible(true);
         ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
         inputController.setListener();
         while (_gestorJuego.GameON) {
