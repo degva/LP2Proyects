@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author degva
  */
-public class Pared implements ObjetoGrafico{
+public class Pared implements Sprite{
     
     public char _elementoGrafico;
     
@@ -18,7 +18,7 @@ public class Pared implements ObjetoGrafico{
     }
     
     @Override
-    public void Dibujar(){
-        System.out.print(_elementoGrafico);
+    public String GetSpriteType(){
+        return "pared";
     }
 }

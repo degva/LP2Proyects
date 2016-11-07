@@ -70,8 +70,8 @@ public class Aliado extends Entidad{
     
     
     @Override
-    public void Dibujar() {
-        System.out.print(_elementoGrafico);
+    public String GetSpriteType() {
+        return "aliado";
     }
 
 

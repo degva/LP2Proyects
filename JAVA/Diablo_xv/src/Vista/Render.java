@@ -62,7 +62,7 @@ public class Render {
      */
     public void RenderCell(Avatar avatar, Laberinto lab, int x, int y) {
         Celda aux;
-        ObjetoGrafico tipo, contenido;
+        Sprite tipo, contenido;
         if (x<0 || y<0) {
             System.out.print('.');
         }else if ((x > lab.getSizeM()-1) || (y > lab.getSizeN()-1)){
@@ -72,18 +72,12 @@ public class Render {
             tipo = aux.getTipo();            
             if (tipo instanceof Pasadizo){ 
                 if (aux.getContenido()!= null)
-                    aux.getContenido().Dibujar();
+                    aux.getContenido().GetSpriteType();
                 else System.out.print(" ");
             }else if(tipo instanceof Pared) {
-                tipo.Dibujar();
+                tipo.GetSpriteType();
             }
         }
-    }
-    
-    
-    public static void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
     }
     
     /**
@@ -98,27 +92,26 @@ public class Render {
      */
     public void Render(Avatar avatar,Laberinto lab, int nivel) {        
         List<String> listaDatos = ObtenerListaDatos(avatar);
-        // List<Enemigo> listaEnemigos = lab.getEnemigos();
         int state = 0;
-        // imprimimos el nivel del mapa
-        System.out.println(">> NIVEL " + (nivel+1) + " " + lab.getSizeM() + "-" + lab.getSizeN());
+        
+//        System.out.println(">> NIVEL " + (nivel+1) + " " + lab.getSizeM() + "-" + lab.getSizeN());
         
         // Imprimir
         OUTER:
         for (int i = avatar.getPosY() - ALTO; i <= avatar.getPosY() + ALTO; i++) {
             for (int j = avatar.getPosX() - ANCHO; j <= avatar.getPosX() + ANCHO; j++) {
                 if (i == avatar.getPosY() && j == avatar.getPosX()) { //si es la posicion en la que esta el avatar
-                    avatar.Dibujar();                    
+                    avatar.GetSpriteType();                    
                 } else {
                     RenderCell(avatar, lab, j, i);
                 }
             }
             if (listaDatos.size() > (i + ALTO - avatar.getPosY())) {
-                System.out.print(' ');
-                System.out.print(listaDatos.get(i + ALTO - avatar.getPosY()));
+//                System.out.print(' ');
+//                System.out.print(listaDatos.get(i + ALTO - avatar.getPosY()));
             }
             
-            System.out.print('\n');
+//            System.out.print('\n');
         }
     }
     
