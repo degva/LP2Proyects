@@ -99,21 +99,21 @@ public class MapPanel extends javax.swing.JPanel {
         int avY = data.avatar.getPosY();
         for (int i = avX - ANCHO, x = 0; i <= avX + ANCHO; i++, x++) {
             for (int j = avY - ALTO, y = 0; j <= avY + ALTO; j++, y++) {
-                cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
-                BufferedImage sp;
-                String spType;
-                if (cellIsOut)
-                    sp = imgs.get("afuera");
-                else if (i == avX && j == avY){
-                    sp = imgs.get(data.avatar.GetSpriteType());
-                } else{
-                    spType = data.laberinto.getCelda(i, j).getSprite();
-                    sp = imgs.get(spType);
-                }
-                if (sp == null){
-                    System.out.println("No Sprite detected");
-                }
-                g.drawImage(sp, x*32, y*32, this);
+/*This are*/  cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
+/*indentation*/ BufferedImage sp;
+/*bunnys, they*/String spType;
+/*prevent*/     if (cellIsOut)
+/*changes to*/      sp = imgs.get("afuera");
+/*this blocks*/ else if (i == avX && j == avY){
+/*()()*of*/         sp = imgs.get(data.avatar.GetSpriteType());
+/*('.')**code*/ } else {
+/*(() ()*/          spType = data.laberinto.getCelda(i, j).getSprite();
+/*(_() ()*/         sp = imgs.get(spType);
+/*********()()*/}
+/*commit*('.')*/if (sp == null){
+/*me!***() ())*/    System.out.println("No Sprite detected");
+/******() ()_)*/}
+/**************/g.drawImage(sp, x*32, y*32, this);
             }
         }
     }
