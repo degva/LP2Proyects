@@ -104,12 +104,12 @@ public class GestorJuego {
         IntPair sigPos = l.DevolverSiguiente();
         if (IntPair.Equals(antPos, avatarPos)){
             if (gameInfo.LaberintoActual() != 0){
-                gameInfo.Back();
-                vdController.LevelDown(laberintos.get(gameInfo.LaberintoActual()));
+                gameInfo.LevelDown();
+                vdController.Back(laberintos.get(gameInfo.LaberintoActual()));
             }
         } else if (IntPair.Equals(sigPos, avatarPos)){
-            gameInfo.Next();
-            vdController.LevelUp(laberintos.get(gameInfo.LaberintoActual()));
+            gameInfo.LevelUp();
+            vdController.Next(laberintos.get(gameInfo.LaberintoActual()));
         }
     }
     

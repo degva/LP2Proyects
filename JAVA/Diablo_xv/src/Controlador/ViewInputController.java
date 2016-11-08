@@ -41,7 +41,6 @@ public class ViewInputController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e){
         int keyCode = e.getKeyCode();
-        System.out.println(keyCode);
         gestorJuego.Procesar(keyCode);
         mapPanel.repaint();
         infoPanel.repaint();

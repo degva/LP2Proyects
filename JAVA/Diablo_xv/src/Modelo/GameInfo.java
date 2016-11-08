@@ -39,7 +39,7 @@ public class GameInfo {
         gameON = false;
     }
     
-    public void Next(){
+    public void LevelUp(){
         idxLaberinto += 1;
         if (idxLaberintoAnterior != 0)
             idxLaberintoAnterior += 1;
@@ -50,7 +50,7 @@ public class GameInfo {
         }
     }
     
-    public void Back(){
+    public void LevelDown(){
         if (idxLaberinto > 0)
             idxLaberinto -= 1;
         if (idxLaberintoAnterior > 0)
