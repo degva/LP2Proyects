@@ -5,7 +5,6 @@
  */
 package Controlador;
 
-import Modelo.IntPair;
 import Vista.GameWindow;
 import Vista.InfoPanel;
 import Vista.MapPanel;
@@ -41,15 +40,16 @@ public class ViewInputController implements KeyListener {
     
     @Override
     public void keyPressed(KeyEvent e){
-        
+        int keyCode = e.getKeyCode();
+        System.out.println(keyCode);
+        gestorJuego.Procesar(keyCode);
+        mapPanel.repaint();
+        infoPanel.repaint();
     }
     
     @Override
     public void keyReleased(KeyEvent e){
-        int keyCode = e.getKeyCode();
-        gestorJuego.Procesar(keyCode);
-        mapPanel.repaint();
-        infoPanel.repaint();
+        
     }   
     
 }

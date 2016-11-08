@@ -34,6 +34,6 @@ public class MapPanelData {
         } else if (step == -1){
             reposition = laberinto.DevolverSiguiente();
         }
-        avatar.Mover(reposition.x, reposition.y);
+        avatar.setPosXY(reposition);
     }
 }

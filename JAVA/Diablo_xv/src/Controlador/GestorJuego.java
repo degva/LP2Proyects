@@ -51,7 +51,7 @@ public class GestorJuego {
 //    }
     
     private boolean PressedKeyIsMovement(int keyCode){
-        int[] moveKeys = {87,104,68,102,65,100,83,98};
+        int[] moveKeys = {37,38,39,40,87,104,68,102,65,100,83,98};
         for (int i=0; i< 8; i++){
             if (keyCode == moveKeys[i])
                 return true;
@@ -63,18 +63,22 @@ public class GestorJuego {
     private IntPair DesplazamientoByKeyCode(int keyCode){
         IntPair desplazamiento;
         switch(keyCode){
+            case 38:
             case 87:
             case 104:
                 desplazamiento = new IntPair(0, -1);
                 break;
+            case 39:
             case 68:
             case 102:
                 desplazamiento = new IntPair(1, 0);
                 break;
+            case 37:
             case 65:
             case 100:
                 desplazamiento = new IntPair(-1, 0);
                 break;
+            case 40:
             case 83:
             case 98:
                 desplazamiento = new IntPair(0, 1);
