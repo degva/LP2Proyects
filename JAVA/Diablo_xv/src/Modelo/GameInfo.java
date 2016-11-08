@@ -15,21 +15,33 @@ public class GameInfo {
     private boolean winner;
     private int idxLaberinto;
     private int idxLaberintoAnterior;
+    private final int numeroDeLaberintos;
     
-    public GameInfo(){
+    public GameInfo(int nLabs){
         gameON = true;
+        winner = false;
         idxLaberinto = 0;
         idxLaberintoAnterior = 0;
+        numeroDeLaberintos = nLabs;
     }
     
     public boolean GameIsNotOver(){
         return gameON;
     }
     
+    public void GameOff(){
+        gameON = false;
+    }
+    
     public void Next(){
         idxLaberinto += 1;
         if (idxLaberintoAnterior != 0)
             idxLaberintoAnterior += 1;
+        if (idxLaberinto == numeroDeLaberintos){
+            idxLaberinto -= 1;
+            winner = true;
+            gameON = false;
+        }
     }
     
     public void Back(){

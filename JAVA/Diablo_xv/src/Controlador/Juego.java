@@ -78,7 +78,7 @@ public class Juego {
         CrearListaLaberintos();
         _avatar = new Avatar(_laberintos.get(0).DevolverAnterior(), "", _idxLaberinto);
         mapPanelData = new MapPanelData(_laberintos.get(0), _avatar);
-        gameInfo = new GameInfo();
+        gameInfo = new GameInfo(_numLaberintos);
         _gestorJuego = new GestorJuego(_avatar, _laberintos, gameInfo);
         _gestorJuego.setViewDataController(mapPanelData);
     }
