@@ -11,18 +11,24 @@ package Modelo;
  */
 public class GameInfo {
     
-    private boolean gameON;
-    private boolean winner;
-    private int idxLaberinto;
-    private int idxLaberintoAnterior;
-    private final int numeroDeLaberintos;
+    private boolean gameON = true;
+    private boolean winner = false;
+    private int idxLaberinto = 0;
+    private int idxLaberintoAnterior = 0;
+    private int numeroDeLaberintos = 0;
+    private static GameInfo INSTANCE = null;
     
-    public GameInfo(int nLabs){
-        gameON = true;
-        winner = false;
-        idxLaberinto = 0;
-        idxLaberintoAnterior = 0;
-        numeroDeLaberintos = nLabs;
+    protected GameInfo(){
+    }
+    
+    public static GameInfo Get(){
+        if (INSTANCE == null)
+            INSTANCE = new GameInfo();
+        return INSTANCE;
+    }
+    
+    public void SetNumeroDeLaberintos(int n){
+        numeroDeLaberintos = n;
     }
     
     public boolean GameIsNotOver(){
@@ -33,7 +39,7 @@ public class GameInfo {
         gameON = false;
     }
     
-    public void Next(){
+    public void LevelUp(){
         idxLaberinto += 1;
         if (idxLaberintoAnterior != 0)
             idxLaberintoAnterior += 1;
@@ -44,7 +50,7 @@ public class GameInfo {
         }
     }
     
-    public void Back(){
+    public void LevelDown(){
         if (idxLaberinto > 0)
             idxLaberinto -= 1;
         if (idxLaberintoAnterior > 0)

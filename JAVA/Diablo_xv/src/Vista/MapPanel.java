@@ -110,6 +110,9 @@ public class MapPanel extends javax.swing.JPanel {
                     spType = data.laberinto.getCelda(i, j).getSprite();
                     sp = imgs.get(spType);
                 }
+                if (sp == null){
+                    System.out.println("No Sprite detected");
+                }
                 g.drawImage(sp, x*32, y*32, this);
             }
         }

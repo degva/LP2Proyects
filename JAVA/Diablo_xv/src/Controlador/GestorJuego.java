@@ -18,15 +18,14 @@ public class GestorJuego {
     private final GestorInteraccion gestorInteraccion;
     private final Avatar avatar;
     private ArrayList<Laberinto> laberintos;
-    private GameInfo gameInfo;
+    private GameInfo gameInfo = GameInfo.Get();
     
     private ViewDataController vdController;
     
-    public GestorJuego(Avatar a, ArrayList<Laberinto> l, GameInfo g){
+    public GestorJuego(Avatar a, ArrayList<Laberinto> l){
         gestorInteraccion = new GestorInteraccion();
         avatar = a;
         laberintos = l;
-        gameInfo = g;
     }
     
     public void setViewDataController(MapPanelData md){
@@ -52,7 +51,7 @@ public class GestorJuego {
     
     private boolean PressedKeyIsMovement(int keyCode){
         int[] moveKeys = {37,38,39,40,87,104,68,102,65,100,83,98};
-        for (int i=0; i< 8; i++){
+        for (int i=0; i< 12; i++){
             if (keyCode == moveKeys[i])
                 return true;
         }
@@ -105,12 +104,12 @@ public class GestorJuego {
         IntPair sigPos = l.DevolverSiguiente();
         if (IntPair.Equals(antPos, avatarPos)){
             if (gameInfo.LaberintoActual() != 0){
-                gameInfo.Back();
-                vdController.LevelDown(laberintos.get(gameInfo.LaberintoActual()));
+                gameInfo.LevelDown();
+                vdController.Back(laberintos.get(gameInfo.LaberintoActual()));
             }
         } else if (IntPair.Equals(sigPos, avatarPos)){
-            gameInfo.Next();
-            vdController.LevelUp(laberintos.get(gameInfo.LaberintoActual()));
+            gameInfo.LevelUp();
+            vdController.Next(laberintos.get(gameInfo.LaberintoActual()));
         }
     }
     

@@ -20,12 +20,12 @@ public class ViewDataController {
         mapPanelData = md;
     }
     
-    public void LevelUp(Laberinto l){
+    public void Next(Laberinto l){
         mapPanelData.setLaberinto(l);
         mapPanelData.avatarReposition(1);
     }
     
-    public void LevelDown(Laberinto l){
+    public void Back(Laberinto l){
         mapPanelData.setLaberinto(l);
         mapPanelData.avatarReposition(-1);
     }
