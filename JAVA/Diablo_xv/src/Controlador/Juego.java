@@ -9,9 +9,7 @@ import Modelo.*;
 import Vista.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -110,13 +108,11 @@ public class Juego {
         gameWindow.setLocationRelativeTo(null);
         MapPanel mapPanel = new MapPanel(mapPanelData);
         mapPanel.setSize(420, 420);
-        mapPanel.setBackground(Color.GREEN);
         gameWindow.add(mapPanel);
         InfoPanel infoPanel = new InfoPanel();
         infoPanel.setSize(200, 420);
         gameWindow.add(infoPanel);
         infoPanel.setLocation(420, 0);
-        infoPanel.setBackground(Color.CYAN);
         mapPanel.setVisible(true);
         infoPanel.setVisible(true);
         ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
@@ -131,7 +127,11 @@ public class Juego {
                 Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+        if (gameInfo.PlayerHasWon()){
+            //Display winning window
+        } else {
+            
+        }
     }
 }
 
