@@ -35,6 +35,10 @@ public class GameInfo {
         return gameON;
     }
     
+    public boolean PlayerHasWon(){
+        return (gameON == false && winner == true);
+    }
+    
     public void GameOff(){
         gameON = false;
     }
