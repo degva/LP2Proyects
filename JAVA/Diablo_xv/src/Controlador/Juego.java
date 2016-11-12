@@ -109,7 +109,8 @@ public class Juego {
         MapPanel mapPanel = new MapPanel(mapPanelData);
         mapPanel.setSize(420, 420);
         gameWindow.add(mapPanel);
-        InfoPanel infoPanel = new InfoPanel();
+        InfoPanelData infoPanelData = new InfoPanelData(_avatar);
+        InfoPanel infoPanel = new InfoPanel(infoPanelData);
         infoPanel.setSize(200, 420);
         gameWindow.add(infoPanel);
         infoPanel.setLocation(420, 0);
