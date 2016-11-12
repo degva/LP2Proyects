@@ -9,10 +9,10 @@ package Modelo;
  *
  * @author fabricioandres
  */
-public class Anterior implements ObjetoGrafico{
+public class Anterior implements Sprite{
     
     @Override
-    public void Dibujar() {
-        System.out.print("-");
+    public String GetSpriteType() {
+        return "anterior";
     }
 }

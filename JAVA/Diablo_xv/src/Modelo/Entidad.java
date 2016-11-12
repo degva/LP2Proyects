@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author Gina
  */
-public class Entidad implements ObjetoGrafico {
+public abstract class Entidad implements Sprite {
     
     private String nombre;
     private int posX;
@@ -41,12 +41,8 @@ public class Entidad implements ObjetoGrafico {
     public void Mover(int dx, int dy) {
         setPosX(getPosX() + dx);
         setPosY(getPosY() + dy);
-    }
+    }    
     
-    @Override
-    public void Dibujar() {
-        //
-    }
     
     @Override
     public String toString(){
@@ -93,6 +89,10 @@ public class Entidad implements ObjetoGrafico {
      */
     public void setPosY(int posY) {
         this.posY = posY;
+    }
+    
+    public IntPair getPos(){
+        return new IntPair(posX, posY);
     }
 
     /**

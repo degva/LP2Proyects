@@ -80,7 +80,7 @@
 		<ataque>0</ataque>
 	</Enemigo>
 	<Enemigo>
-		<nombre>Dath Vader</nombre>
+		<nombre>Darth Vader</nombre>
 		<posX>-1</posX>
 		<posY>-1</posY>
 		<nivel>-1</nivel>
