@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Diablo;
-import Controlador.*;
+package Vista;
+
+import Modelo.Avatar;
+
 /**
  *
- * @author degva
+ * @author wperezp
  */
-public class Principal {
-    public static void main(String[] args) {
-        Juego juego = new Juego();
-        juego.Start();
+public class InfoPanelData {
+    Avatar avatar;
+    
+    public InfoPanelData(Avatar a){
+        avatar = a;
     }
 }

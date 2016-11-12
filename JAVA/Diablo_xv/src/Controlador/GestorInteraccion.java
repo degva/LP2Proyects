@@ -45,9 +45,10 @@ public class GestorInteraccion {
         System.out.print("\n - > ");
         //Batalla
         String comando = consolaBatalla.nextLine();
+        String[] instruccion = comando.split(" ");
         OUTER:
         while(true){
-            switch(comando){
+            switch(instruccion[0]){
                 case "atacar":                    
                     vidaA = a.getVidaActual() - e.getAtaque();
                     vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
@@ -58,9 +59,8 @@ public class GestorInteraccion {
                     //Me muevo a la posicion de la interaccion para no chocar adyacentemente
                     a.setPosXY(coordenadaInteraccion);
                     break OUTER;
-                case "usar i":
-                    String[] usar = comando.split(" ");
-                    int indexArtefactoElegido = Integer.parseInt(usar[1]);
+                case "usar":                    
+                    int indexArtefactoElegido = Integer.parseInt(instruccion[1]);
                     if (indexArtefactoElegido > 0 && indexArtefactoElegido <= a.getSaco().getSize()){
                         Artefacto artefactoElegido = a.getSaco().getItem(indexArtefactoElegido-1);
                         if (artefactoElegido instanceof Arma)

@@ -9,11 +9,11 @@ package Modelo;
  *
  * @author degva
  */
-public class Pasadizo implements ObjetoGrafico{
+public class Pasadizo implements Sprite{
 
     @Override
-    public void Dibujar() {
-        System.out.print(" ");
+    public String GetSpriteType() {
+        return "pasadizo";
     }
     
 }

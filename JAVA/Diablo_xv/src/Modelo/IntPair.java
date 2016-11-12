@@ -17,4 +17,8 @@ public class IntPair {
       this.x=x;
       this.y=y;
   }
+  
+  public static boolean Equals(IntPair a, IntPair b){
+      return a.x == b.x && a.y == b.y;
+  }
 }

@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Diablo;
-import Controlador.*;
+package Modelo;
+
 /**
  *
  * @author degva
  */
-public class Principal {
-    public static void main(String[] args) {
-        Juego juego = new Juego();
-        juego.Start();
-    }
+public interface Sprite {
+    public String GetSpriteType();
 }
