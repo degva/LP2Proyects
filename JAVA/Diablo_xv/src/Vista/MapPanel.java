@@ -86,6 +86,8 @@ public class MapPanel extends javax.swing.JPanel {
             imgs.put("artefacto", sprite);
             sprite = ImageIO.read(new File("./res/enemigo.png"));
             imgs.put("enemigo", sprite);
+            sprite = ImageIO.read(new File("./res/aliado.png"));
+            imgs.put("aliado", sprite);
         } catch (IOException ex) {
             Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -99,7 +101,7 @@ public class MapPanel extends javax.swing.JPanel {
         int avY = data.avatar.getPosY();
         for (int i = avX - ANCHO, x = 0; i <= avX + ANCHO; i++, x++) {
             for (int j = avY - ALTO, y = 0; j <= avY + ALTO; j++, y++) {
-/*This are*/  cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
+/*Thes   are*/  cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
 /*indentation*/ BufferedImage sp;
 /*bunnys, they*/String spType;
 /*prevent*/     if (cellIsOut)

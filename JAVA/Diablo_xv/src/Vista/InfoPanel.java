@@ -5,18 +5,54 @@
  */
 package Vista;
 
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author wperezp
  */
 public class InfoPanel extends javax.swing.JPanel {
+    
+    BufferedImage frame;
+    InfoPanelData data;
 
     /**
      * Creates new form InfoPanel
+     * @param d
      */
-    public InfoPanel() {
+    public InfoPanel(InfoPanelData d) {
         initComponents();
+        data = d;
+        frame = new BufferedImage(200, 420, BufferedImage.TYPE_INT_RGB);
+        try {
+            Image srcFrame = ImageIO.read(new File("./res/jungle_frame.jpg"));
+            Image sclFrame = srcFrame.getScaledInstance(200, 420, Image.SCALE_SMOOTH);
+            frame.getGraphics().drawImage(sclFrame, 0, 0, null);
+        } catch (IOException ex) {
+            Logger.getLogger(InfoPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        //Graphics gFrame = frame.getGraphics();
+        //gFrame.drawString("Cosillas", 30, 30);
+        g.drawImage(frame, 0, 0, this);
+        g.drawString(data.avatar.getNombre(), 50, 50);
+        g.drawString("Vida: " + data.avatar.getVidaActual(), 50, 70);
+        g.drawString("Arma: " + data.avatar.getArmaActual().getNombre(), 50, 90);
+        g.drawString("Armadura: " + data.avatar.getArmaduraActual().getNombre(), 50, 110);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

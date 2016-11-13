@@ -32,7 +32,7 @@ public class GestorArtefacto {
         int numArtefacto = rnd.nextInt(_artefactosDisponibles.size());//Devuelve el numero dle nombre dle artefacto
         art = _artefactosDisponibles.get(numArtefacto);
         art.setPosX(x);
-        art.setPosY(x);
+        art.setPosY(y);
         return art;
     }
     
