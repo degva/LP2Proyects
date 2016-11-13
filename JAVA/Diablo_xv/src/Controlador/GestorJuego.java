@@ -45,6 +45,9 @@ public class GestorJuego {
             }
         }
         _gesLab.MoverEnemigos(laberintos.get(gameInfo.LaberintoActual()), avatar.getPosX(), avatar.getPosY());
+        if (colisionConEnemigo()) {
+            gameInfo.setOnColission(true);
+        }
     }
     
     
@@ -53,6 +56,15 @@ public class GestorJuego {
 //        Celda celdaAvatar = laberinto.getCelda(coordenadasAvatar.x, coordenadasAvatar.y);
 //        return (celdaAvatar.getContenido() instanceof Enemigo || celdaAvatar.getContenido() instanceof Artefacto);
 //    }
+    
+    private boolean colisionConEnemigo() {
+        Laberinto l = laberintos.get(gameInfo.LaberintoActual());
+        IntPair av_pos = avatar.getPos();
+        return  l.getCelda(av_pos.x + 1, av_pos.y).getContenido() instanceof Enemigo ||
+                l.getCelda(av_pos.x - 1, av_pos.y).getContenido() instanceof Enemigo ||
+                l.getCelda(av_pos.x, av_pos.y + 1).getContenido() instanceof Enemigo ||
+                l.getCelda(av_pos.x, av_pos.y - 1).getContenido() instanceof Enemigo;
+    }
     
     private boolean PressedKeyIsMovement(int keyCode){
         int[] moveKeys = {37,38,39,40,87,104,68,102,65,100,83,98};

@@ -10,9 +10,10 @@ package Modelo;
  * @author wperezp
  */
 public class GameInfo {
-    
+
     private boolean gameON = true;
     private boolean winner = false;
+    private boolean onColission = false;
     private int idxLaberinto = 0;
     private int idxLaberintoAnterior = 0;
     private int numeroDeLaberintos = 0;
@@ -67,5 +68,19 @@ public class GameInfo {
     
     public int LaberintoAnterior(){
         return idxLaberintoAnterior;
+    }
+    
+    /**
+     * @return the onColission
+     */
+    public boolean isOnColission() {
+        return onColission;
+    }
+
+    /**
+     * @param onColission the onColission to set
+     */
+    public void setOnColission(boolean onColission) {
+        this.onColission = onColission;
     }
 }

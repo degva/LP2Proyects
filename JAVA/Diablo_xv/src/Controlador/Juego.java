@@ -8,10 +8,10 @@ import Vista.MapPanelData;
 import Modelo.*;
 import Vista.*;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 
 /**
  *
@@ -27,7 +27,7 @@ public class Juego {
     private Avatar _avatar;
     private GestorLaberinto _gestorLab;
     private GestorJuego _gestorJuego;
-    private Render _render;
+    //private Render _render;
     private int _idxLaberinto;
     private int _idxLaberintoAnterior;
     private int _numLaberintos;
@@ -39,9 +39,10 @@ public class Juego {
     private GameWindow gameWindow;
     private MapPanelData mapPanelData;
     
+    private JDialog interaccionDialog;
     
     public Juego() {
-        _render = new Render();
+        //_render = new Render();
         _laberintos = new ArrayList<>();
         _idxLaberinto = _idxLaberintoAnterior = 0;
         _numLaberintos = (int)(Math.random()*10+5);
@@ -118,14 +119,32 @@ public class Juego {
         infoPanel.setVisible(true);
         ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
         inputController.setListener();        
+        
+        interaccionDialog = new JDialog(gameWindow, "Interaccion", true);
+        InteractuarPanel intPanel = new InteractuarPanel();
+        interaccionDialog.getContentPane().add(intPanel);
+        interaccionDialog.pack();
+        
+        // L5 : creo los threads
     }
     
-    private void Play() {        
+    private void Play() {  
+        // L5 : start thread
         while (gameInfo.GameIsNotOver()) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+            //try {
+            //    Thread.sleep(100);
+            //} catch (InterruptedException ex) {
+            //    Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+            
+            // L5 : verificar colision (avatar | enemigo | artefacto)
+            // L5 : pausar threds
+            // L5 : hacer todo lo del dialog
+            // L5 : reanudar threads
+            if (gameInfo.isOnColission()) {
+                interaccionDialog.setVisible(true);
+                
+                gameInfo.setOnColission(false);
             }
         }
         if (gameInfo.PlayerHasWon()){

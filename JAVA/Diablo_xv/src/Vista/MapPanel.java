@@ -101,7 +101,7 @@ public class MapPanel extends javax.swing.JPanel {
         int avY = data.avatar.getPosY();
         for (int i = avX - ANCHO, x = 0; i <= avX + ANCHO; i++, x++) {
             for (int j = avY - ALTO, y = 0; j <= avY + ALTO; j++, y++) {
-/*Thes   are*/  cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
+/*This are*/    cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
 /*indentation*/ BufferedImage sp;
 /*bunnys, they*/String spType;
 /*prevent*/     if (cellIsOut)
@@ -112,7 +112,7 @@ public class MapPanel extends javax.swing.JPanel {
 /*(() ()*/          spType = data.laberinto.getCelda(i, j).getSprite();
 /*(_() ()*/         sp = imgs.get(spType);
 /*********()()*/}
-/*commit*('.')*/if (sp == null){
+/*commit*('.')*/if (sp == null) {
 /*me!***() ())*/    System.out.println("No Sprite detected");
 /******() ()_)*/}
 /**************/g.drawImage(sp, x*32, y*32, this);
