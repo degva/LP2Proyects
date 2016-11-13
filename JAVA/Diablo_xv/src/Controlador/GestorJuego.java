@@ -20,9 +20,12 @@ public class GestorJuego {
     private ArrayList<Laberinto> laberintos;
     private GameInfo gameInfo = GameInfo.Get();
     
+    private GestorLaberinto _gesLab;
+    
     private ViewDataController vdController;
     
-    public GestorJuego(Avatar a, ArrayList<Laberinto> l){
+    public GestorJuego(Avatar a, ArrayList<Laberinto> l, GestorLaberinto gesLab){
+        _gesLab = gesLab;
         gestorInteraccion = new GestorInteraccion();
         avatar = a;
         laberintos = l;
@@ -33,6 +36,7 @@ public class GestorJuego {
     }
     
     public void Procesar(int keyCode){
+        _gesLab.MoverEnemigos(laberintos.get(gameInfo.LaberintoActual()), avatar.getPosX(), avatar.getPosY());
         if (PressedKeyIsMovement(keyCode)){
             IntPair desp = DesplazamientoByKeyCode(keyCode);
             if (DesplazamientoEsValido(desp)){
