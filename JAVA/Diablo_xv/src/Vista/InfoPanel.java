@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.*;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -23,6 +24,7 @@ public class InfoPanel extends javax.swing.JPanel {
     
     BufferedImage frame;
     InfoPanelData data;
+    GameInfo gameInfo = GameInfo.Get();
 
     /**
      * Creates new form InfoPanel
@@ -47,6 +49,7 @@ public class InfoPanel extends javax.swing.JPanel {
         //Graphics gFrame = frame.getGraphics();
         //gFrame.drawString("Cosillas", 30, 30);
         g.drawImage(frame, 0, 0, this);
+        g.drawString(String.format("Nivel %d ", gameInfo.LaberintoActual()+1), 50, 30);
         g.drawString(data.avatar.getNombre(), 50, 50);
         g.drawString("Vida: " + data.avatar.getVidaActual(), 50, 70);
         g.drawString("Arma: " + data.avatar.getArmaActual().getNombre(), 50, 90);
