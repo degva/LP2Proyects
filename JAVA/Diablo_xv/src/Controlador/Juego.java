@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 
 /**
  *
@@ -38,6 +39,7 @@ public class Juego {
     private GameWindow gameWindow;
     private MapPanelData mapPanelData;
     
+    private JDialog interaccionDialog;
     
     public Juego() {
         //_render = new Render();
@@ -118,6 +120,11 @@ public class Juego {
         ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
         inputController.setListener();        
         
+        interaccionDialog = new JDialog(gameWindow, "Interaccion", true);
+        InteractuarPanel intPanel = new InteractuarPanel();
+        interaccionDialog.getContentPane().add(intPanel);
+        interaccionDialog.pack();
+        
         // L5 : creo los threads
     }
     
@@ -134,6 +141,11 @@ public class Juego {
             // L5 : pausar threds
             // L5 : hacer todo lo del dialog
             // L5 : reanudar threads
+            if (gameInfo.isOnColission()) {
+                interaccionDialog.setVisible(true);
+                
+                gameInfo.setOnColission(false);
+            }
         }
         if (gameInfo.PlayerHasWon()){
             //Display winning window
