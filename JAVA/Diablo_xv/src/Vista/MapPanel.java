@@ -86,11 +86,8 @@ public class MapPanel extends javax.swing.JPanel {
             imgs.put("artefacto", sprite);
             sprite = ImageIO.read(new File("./res/enemigo.png"));
             imgs.put("enemigo", sprite);
-<<<<<<< HEAD
-=======
             sprite = ImageIO.read(new File("./res/aliado.png"));
             imgs.put("aliado", sprite);
->>>>>>> ggWP
         } catch (IOException ex) {
             Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
         }        
