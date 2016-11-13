@@ -28,23 +28,23 @@ public class GestorEnemigo {
     
     public Enemigo ObtenerEnemigo(int x, int y, int numeroLaberinto){
         Random rnd = new Random();
-        Enemigo enem = null;
+        Enemigo nuevoEne = new Enemigo("hue", 1, 1, 1);
         int numEnemigo = rnd.nextInt(_enemigosDisponibles.size());
-        enem = _enemigosDisponibles.get(numEnemigo); //obtenemos el enemigo
+        nuevoEne.setNombre(_enemigosDisponibles.get(numEnemigo).getNombre()); //obtenemos el enemigo
         //colocamos algunos atributos
-        enem.setPosX(x);
-        enem.setPosY(y);
-        enem.setNivel(numeroLaberinto);
+        nuevoEne.setPosX(x);
+        nuevoEne.setPosY(y);
+        nuevoEne.setNivel(numeroLaberinto);
         /*la formula en estas funciones se puede cambiar*/
         /*
         vidaMaxima = nivel*10
         vidaactual = 0 y la vida maxima
         ataque = numero random entre uno y 10 * nivel
         */
-        enem.setVidaMaxima(numeroLaberinto*10); 
-        enem.setVidaActual(rnd.nextInt(numeroLaberinto*10));
-        enem.setAtaque((rnd.nextInt(9)+1)*numeroLaberinto);
-        return enem;
+        nuevoEne.setVidaMaxima(numeroLaberinto*10); 
+        nuevoEne.setVidaActual(rnd.nextInt(numeroLaberinto*10));
+        nuevoEne.setAtaque((rnd.nextInt(9)+1)*numeroLaberinto);
+        return nuevoEne;
     }
            
     public final void leerEnemigoDeArchivo(String archivoNombre){

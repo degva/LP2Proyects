@@ -189,19 +189,25 @@ public class GestorLaberinto {
         Enemigo e; 
         IntPair nuevaPos;
         
-        for (int i = 0; i < l.getSizeM(); i++) {
-            for (int j = 0; j < l.getSizeN(); j++) {
-                if (l.getContenidoCelda(i, j) instanceof Enemigo) {
-                    nuevaPos = devuelveRandomAdjacenteEnemigo(l, i, j, 1, avatarX, avatarY);
-                    if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo) {
-                        e = (Enemigo) l.getContenidoCelda(i, j);
-                        l.getCelda(i, j).setContenido(null);
-                        e.Mover(nuevaPos.x - i, nuevaPos.y - j);
-                        l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
-                    }
+        ArrayList<Enemigo> enemies = l.getListaEnemigos();
+        int cantE = enemies.size();
+        for (int z = 0; z < cantE; z++){
+            e = enemies.get(z);
+            int i = e.getPosX();
+            int j = e.getPosY();
+            if (l.getContenidoCelda(i, j) instanceof Enemigo) {
+                nuevaPos = devuelveRandomAdjacenteEnemigo(l, i, j, 1, avatarX, avatarY);
+                if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo
+                        && (nuevaPos.x != avatarX || nuevaPos.y != avatarY)) {
+                    //e = (Enemigo) l.getContenidoCelda(i, j);
+
+                    e.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                    l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                    l.getCelda(i, j).setContenido(null);
                 }
             }
-        }
+        }    
+        
     }
     
     ///MODIFICACION
@@ -250,31 +256,31 @@ public class GestorLaberinto {
         //añadiremos nuevas condiciones para verificar el cuadrante correcto
         
         // checkeamos nodo a la derecha:
-        if ((x > i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)
-                && (cuadrante.x < 0) && (lab.getCelda(x - i, y).getContenido() == null)) {
-            pair = new IntPair(x+i, y);
-            posibles.add(pair);
+        if ((x > i) && (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo)
+                && (cuadrante.x < 0) && (lab.getCelda(x + i, y).getContenido() == null)) {
+            IntPair pairR = new IntPair(x+i, y);
+            posibles.add(pairR);
         }
         
         // checkeamos nodo arriba
         if ((y > i) && (lab.getCelda(x, y - i).getTipo() instanceof Pasadizo)
                 && (cuadrante.y > 0) && (lab.getCelda(x, y - i).getContenido() == null)) {
-            pair = new IntPair(x, y-i);
-            posibles.add(pair);
+            IntPair pairU = new IntPair(x, y-i);
+            posibles.add(pairU);
         }
         
         // checkeamos nodo izquierda
-        if ((x < lab.getSizeM() - i) && (lab.getCelda(x + i, y).getTipo() instanceof Pasadizo)
-                && (cuadrante.x > 0) && (lab.getCelda(x + i, y).getContenido() == null)) {
-            pair = new IntPair(x-i, y);
-            posibles.add(pair);
+        if ((x < lab.getSizeM() - i) && (lab.getCelda(x - i, y).getTipo() instanceof Pasadizo)
+                && (cuadrante.x > 0) && (lab.getCelda(x - i, y).getContenido() == null)) {
+            IntPair pairL = new IntPair(x-i, y);
+            posibles.add(pairL);
         }
         
         // checkeamos nodo abajo
         if ((y < lab.getSizeN() - i) && (lab.getCelda(x, y + i).getTipo() instanceof Pasadizo)
                 && (cuadrante.y < 0) && (lab.getCelda(x, y + i).getContenido() == null)) {
-            pair = new IntPair(x, y+i);
-            posibles.add(pair);
+            IntPair pairD = new IntPair(x, y+i);
+            posibles.add(pairD);
         }
         
         // si no tiene, devolvemos (-1,-1)

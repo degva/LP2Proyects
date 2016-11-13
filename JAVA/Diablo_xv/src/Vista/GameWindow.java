@@ -18,6 +18,7 @@ public class GameWindow extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         this.setTitle("Harambe's Revenge");
+        setResizable(false);
     }
     
 
