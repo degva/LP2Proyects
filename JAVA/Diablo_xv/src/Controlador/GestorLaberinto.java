@@ -103,7 +103,7 @@ public class GestorLaberinto {
             }
         }
         
-        //CrearListaEnemigos(nuevoLaberinto, numeroLaberinto);
+        CrearListaEnemigos(nuevoLaberinto, numeroLaberinto);
         CrearListaArtefactos(nuevoLaberinto, numeroLaberinto);
         try {
             AgregarAliados(nuevoLaberinto, numeroLaberinto);

@@ -77,7 +77,7 @@ public class Juego {
         mapPanelData = new MapPanelData(_laberintos.get(0), _avatar);
         gameInfo = GameInfo.Get();
         gameInfo.SetNumeroDeLaberintos(_numLaberintos);
-        _gestorJuego = new GestorJuego(_avatar, _laberintos);
+        _gestorJuego = new GestorJuego(_avatar, _laberintos, _gestorLab);
         _gestorJuego.setViewDataController(mapPanelData);
     }
     
@@ -108,7 +108,8 @@ public class Juego {
         MapPanel mapPanel = new MapPanel(mapPanelData);
         mapPanel.setSize(420, 420);
         gameWindow.add(mapPanel);
-        InfoPanel infoPanel = new InfoPanel();
+        InfoPanelData infoPanelData = new InfoPanelData(_avatar);
+        InfoPanel infoPanel = new InfoPanel(infoPanelData);
         infoPanel.setSize(200, 420);
         gameWindow.add(infoPanel);
         infoPanel.setLocation(420, 0);
