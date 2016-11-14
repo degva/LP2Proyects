@@ -8,8 +8,7 @@ package Controlador;
 import Facilidades.Aliado;
 import Modelo.*;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+
 /**
  *
  * @author DAVID

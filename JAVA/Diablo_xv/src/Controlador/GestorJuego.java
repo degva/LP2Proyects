@@ -17,10 +17,10 @@ public class GestorJuego {
     // private final GestorLaberinto controladorLaberinto;
     private final GestorInteraccion gestorInteraccion;
     private final Avatar avatar;
-    private ArrayList<Laberinto> laberintos;
-    private GameInfo gameInfo = GameInfo.Get();
+    private final ArrayList<Laberinto> laberintos;
+    private final GameInfo gameInfo = GameInfo.Get();
     
-    private GestorLaberinto _gesLab;
+    private final GestorLaberinto _gesLab;
     
     private ViewDataController vdController;
     

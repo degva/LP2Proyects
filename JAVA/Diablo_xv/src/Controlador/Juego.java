@@ -118,14 +118,7 @@ public class Juego {
         mapPanel.setVisible(true);
         infoPanel.setVisible(true);
         ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
-        inputController.setListener();        
-        
-        interaccionDialog = new JDialog(gameWindow, "Interaccion", true);
-        InteractuarPanel intPanel = new InteractuarPanel();
-        interaccionDialog.getContentPane().add(intPanel);
-        interaccionDialog.pack();
-        
-        // L5 : creo los threads
+        inputController.setListener();
     }
     
     private void Play() {  
