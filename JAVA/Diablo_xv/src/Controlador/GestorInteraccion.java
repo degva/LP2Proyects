@@ -25,6 +25,8 @@ public class GestorInteraccion {
 
     }
     
+    
+    
     public void interactuarEnemigo(Avatar a, Laberinto l, IntPair coordenadaInteraccion){
         //gg wp
         int vidaA, vidaE;
@@ -94,11 +96,13 @@ public class GestorInteraccion {
         _gestorAvatar.RecogerArtefacto(a, ar);
     }
     
-    public void interactuarAliado(Avatar a, Laberinto l, IntPair coordenadaInteraccion){
+    public String interactuarAliado(Avatar a, Laberinto l, IntPair coordenadaInteraccion){
         Aliado al = l.obtenerAliado();
         String consejo = al.darConsejo();
-        System.out.println("=====================================================\n\n");
-        System.out.println("Hola, soy tu aliado y este es mi consejo: " + consejo + "\n\n");
-        System.out.println("=====================================================\n\n");
+        return consejo;
+        
+        //System.out.println("=====================================================\n\n");
+        //System.out.println("Hola, soy tu aliado y este es mi consejo: " + consejo + "\n\n");
+        //System.out.println("=====================================================\n\n");
     }    
 }

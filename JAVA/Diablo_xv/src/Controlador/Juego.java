@@ -116,7 +116,7 @@ public class Juego {
         mapPanel.setSize(420, 420);
         gameWindow.add(mapPanel);
         InfoPanelData infoPanelData = new InfoPanelData(getAvatar());
-        InfoPanel infoPanel = new InfoPanel(infoPanelData);
+        InfoPanel infoPanel = new InfoPanel(infoPanelData, _laberintos); //deep gg
         gameWindow.getContentPane().add(mapPanel);
         gameWindow.getContentPane().add(infoPanel);
         gameWindow.pack();

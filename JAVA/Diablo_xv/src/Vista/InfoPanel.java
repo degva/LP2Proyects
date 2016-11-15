@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Controlador.GestorInteraccion;
+import Facilidades.Aliado;
 import Modelo.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,9 +16,11 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /**
  *
@@ -26,15 +30,19 @@ public class InfoPanel extends javax.swing.JPanel {
     
     BufferedImage frameBg;
     InfoPanelData data;
+    ArrayList<Laberinto> laberintos;
+    GestorInteraccion gestorInteraccion;
     GameInfo gameInfo = GameInfo.Get();
 
     /**
      * Creates new form InfoPanel
      * @param d
      */
-    public InfoPanel(InfoPanelData d) {
+    public InfoPanel(InfoPanelData d, ArrayList<Laberinto> labs) {
         initComponents();
         data = d;
+        laberintos = labs;
+        gestorInteraccion = new GestorInteraccion();
         frameBg = new BufferedImage(200, 416, BufferedImage.TYPE_INT_RGB);
         try {
             Image srcFrame = ImageIO.read(new File("./res/jungle_frame.png"));
@@ -150,21 +158,46 @@ public class InfoPanel extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // izquierda
-        data.avatar.setNombre("crippling");
+        //data.avatar.setNombre("crippling");
+        IntPair pos = new IntPair(data.avatar.getPosX() -1, data.avatar.getPosY());
+        Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
+        verificarInteraccion(data.avatar, labAct, pos);
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // arriba
+        IntPair pos = new IntPair(data.avatar.getPosX(), data.avatar.getPosY() -1);
+        Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
+        verificarInteraccion(data.avatar, labAct, pos);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // abajo
+        IntPair pos = new IntPair(data.avatar.getPosX(), data.avatar.getPosY() +1);
+        Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
+        verificarInteraccion(data.avatar, labAct, pos);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // derecha
+        IntPair pos = new IntPair(data.avatar.getPosX() +1, data.avatar.getPosY());
+        Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
+        verificarInteraccion(data.avatar, labAct, pos);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void verificarInteraccion(Avatar a, Laberinto l, IntPair coordInter){
+        
+        if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Enemigo) {
+            //interactuarEnemigo(a, l, coordInter);
+        }else if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Artefacto){
+            gestorInteraccion.interactuarArtefacto(a, l, coordInter);
+        }else if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Aliado){
+            String consejo = gestorInteraccion.interactuarAliado(a, l, coordInter);
+            JOptionPane.showMessageDialog(this, consejo, "Consejo del Aliado:", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

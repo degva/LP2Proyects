@@ -181,6 +181,7 @@ public class GestorLaberinto {
                 gestorAliados.listaAliados.get(i).setPosY(aliY);
                 gestorAliados.listaAliados.get(i).setNivel(numeroLaberitno);
                 l.agregarAliado(gestorAliados.listaAliados.get(i));
+                l.getCelda(aliX,aliY).setContenido(gestorAliados.listaAliados.get(i));
             } else i--;
         }
     }
