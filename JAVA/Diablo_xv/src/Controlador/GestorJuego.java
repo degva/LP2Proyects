@@ -36,7 +36,11 @@ public class GestorJuego {
     }
     
     public void Procesar(int keyCode){
+<<<<<<< HEAD
         _gesLab.MoverEnemigos(laberintos.get(gameInfo.LaberintoActual()), avatar.getPosX(), avatar.getPosY());
+=======
+        
+>>>>>>> dev
         if (PressedKeyIsMovement(keyCode)){
             IntPair desp = DesplazamientoByKeyCode(keyCode);
             if (DesplazamientoEsValido(desp)){
@@ -44,6 +48,10 @@ public class GestorJuego {
                 CheckLevelChange();
             }
         }
+<<<<<<< HEAD
+=======
+        _gesLab.MoverEnemigos(laberintos.get(gameInfo.LaberintoActual()), avatar.getPosX(), avatar.getPosY());
+>>>>>>> dev
         if (colisionConEnemigo()) {
             gameInfo.setOnColission(true);
         }

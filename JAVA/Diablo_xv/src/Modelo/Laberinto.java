@@ -86,7 +86,7 @@ public class Laberinto {
 
     public void agregarArtefacto(Artefacto a){
         _laberinto[a.getPosX()][a.getPosY()].setContenido(a);
-        _listaArtefactos.add(a);
+        getListaArtefactos().add(a);
     }
     
     public void agregarAliado(Aliado aliado){
@@ -101,7 +101,7 @@ public class Laberinto {
     
     public void agregarEnemigo(Enemigo e){
         _laberinto[e.getPosX()][e.getPosY()].setContenido(e);
-        _listaEnemigos.add(e);
+        getListaEnemigos().add(e);
     }
     
     public void setTipoCelda(int x, int y, Sprite tipoCelda){
@@ -156,9 +156,9 @@ public class Laberinto {
     public Enemigo obtenerEnemigoActual(int x, int y){
         // a esta funcion se le va a pasar la ubicacion del avatar
         // para asi poder detectar a que enemigo de la lista se refiere
-        Enemigo e = _listaEnemigos.get(0); 
-        for (int i = 0; i < _listaEnemigos.size(); i++) {
-            e = _listaEnemigos.get(i);
+        Enemigo e = getListaEnemigos().get(0); 
+        for (int i = 0; i < getListaEnemigos().size(); i++) {
+            e = getListaEnemigos().get(i);
             if (e.getPosX() == x && e.getPosY() == y)
                 break;
         }
@@ -171,13 +171,13 @@ public class Laberinto {
         int posX = eNew.getPosX();
         int posY = eNew.getPosY();
         
-        for (i = 0; i < _listaEnemigos.size(); i++) {
-            e = _listaEnemigos.get(i);
+        for (i = 0; i < getListaEnemigos().size(); i++) {
+            e = getListaEnemigos().get(i);
             if (e.getPosX() == posX && e.getPosY() == posY)
                 break;
         }
         if (eNew.getVidaActual() <= 0) setTipoContenido(posX, posY, null);
-        else _listaEnemigos.set(i, eNew);
+        else getListaEnemigos().set(i, eNew);
          
         
     }
@@ -185,9 +185,9 @@ public class Laberinto {
         // a esta funcion se le va a pasar la ubicacion del avatar
         // para asi poder detectar a que enemigo de la lista se refiere
         int i;
-        Artefacto a = _listaArtefactos.get(0); 
-        for (i = 0; i < _listaArtefactos.size(); i++) {
-            a = _listaArtefactos.get(i);
+        Artefacto a = getListaArtefactos().get(0); 
+        for (i = 0; i < getListaArtefactos().size(); i++) {
+            a = getListaArtefactos().get(i);
             if (a.getPosX() == x && a.getPosY() == y)
                 break;
         }
@@ -199,6 +199,20 @@ public class Laberinto {
 
 
         return a;
+    }
+
+    /**
+     * @return the _listaEnemigos
+     */
+    public ArrayList<Enemigo> getListaEnemigos() {
+        return _listaEnemigos;
+    }
+
+    /**
+     * @return the _listaArtefactos
+     */
+    public ArrayList<Artefacto> getListaArtefactos() {
+        return _listaArtefactos;
     }
     
     
