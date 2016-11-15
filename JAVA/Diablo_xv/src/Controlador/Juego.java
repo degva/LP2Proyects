@@ -43,6 +43,9 @@ public class Juego {
     
     private JDialog interaccionDialog;
     
+    private Thread movEnemigos;
+    private Thread movArtefactos;
+    
     public Juego() {
         //_render = new Render();
         _laberintos = new ArrayList<>();
@@ -54,12 +57,12 @@ public class Juego {
     
     private void CrearListaLaberintos() {
         for (int i = 0; i < _numLaberintos; i++) {
-            _laberintos.add(_gestorLab.CrearLaberinto(i+1));
+            _laberintos.add(getGestorLab().CrearLaberinto(i+1));
         }
     }
     
-    public Laberinto GetLaberintoActual() {
-        return _laberintos.get(_idxLaberinto);
+    public synchronized Laberinto GetLaberintoActual() {
+        return _laberintos.get(gameInfo.getIdxLaberinto());
     }
     
     
@@ -75,13 +78,13 @@ public class Juego {
     }
     
     private void PrepareData(){
-        _gestorLab = new GestorLaberinto();
+        setGestorLab(new GestorLaberinto());
         CrearListaLaberintos();
         _avatar = new Avatar(_laberintos.get(0).DevolverAnterior(), "", _idxLaberinto);
-        mapPanelData = new MapPanelData(_laberintos.get(0), _avatar);
+        mapPanelData = new MapPanelData(_laberintos.get(0), getAvatar());
         gameInfo = GameInfo.Get();
         gameInfo.SetNumeroDeLaberintos(_numLaberintos);
-        _gestorJuego = new GestorJuego(_avatar, _laberintos, _gestorLab);
+        _gestorJuego = new GestorJuego(getAvatar(), _laberintos, getGestorLab());
         _gestorJuego.setViewDataController(mapPanelData);
     }
     
@@ -103,14 +106,14 @@ public class Juego {
             }
         }
         String nombre = welcomeHarambeWindow.NombreJugador;
-        _avatar.setNombre(nombre);
+        getAvatar().setNombre(nombre);
         gameWindow.remove(welcomeHarambeWindow);
     }    
     
     private void PrepareGameWindow(){
         gameWindow.setLocationRelativeTo(null);
         MapPanel mapPanel = new MapPanel(mapPanelData);
-        InfoPanelData infoPanelData = new InfoPanelData(_avatar);
+        InfoPanelData infoPanelData = new InfoPanelData(getAvatar());
         InfoPanel infoPanel = new InfoPanel(infoPanelData);
         gameWindow.getContentPane().add(mapPanel);
         gameWindow.getContentPane().add(infoPanel);
@@ -120,26 +123,84 @@ public class Juego {
         ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
         inputController.setListener();
         
+        interaccionDialog = new JDialog(gameWindow, "Interaccion", true);
+        InteractuarPanel intPanel = new InteractuarPanel();
+        interaccionDialog.getContentPane().add(intPanel);
+        interaccionDialog.pack();
+            
+        this.movEnemigos = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(gameInfo.GameIsNotOver()){
+                    _gestorLab.MoverEnemigos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
+                    
+                    try {
+                        Thread.sleep(600);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+        
+
+        this.movArtefactos = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //OPCION 1
+                /*
+                while(gameInfo.GameIsNotOver()){
+                    int cont = gameInfo.getContador();
+                    
+                    if(cont > 10000 && gameInfo.getContador()%10000 == 0){
+                        _gestorLab.MoverArtefactos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
+                        
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    
+                    cont++;
+                    gameInfo.setContador(cont);
+                    
+                }
+                */
+                
+                //OPCION 2
+                while(gameInfo.GameIsNotOver()){
+
+                    _gestorLab.MoverArtefactos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
+
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+ 
+                }
+            }
+        });
+     
     }
     
     private void Play() {  
-        // L5 : start thread
+        
+        this.movEnemigos.start();
+        this.movArtefactos.start();
+        
         while (gameInfo.GameIsNotOver()) {
-            //try {
-            //    Thread.sleep(100);
-            //} catch (InterruptedException ex) {
-            //    Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
-            //}
-            
-            // L5 : verificar colision (avatar | enemigo | artefacto)
-            // L5 : pausar threds
-            // L5 : hacer todo lo del dialog
-            // L5 : reanudar threads
+            /*
             if (gameInfo.isOnColission()) {
                 interaccionDialog.setVisible(true);
                 
                 gameInfo.setOnColission(false);
             }
+            */
+            
+            gameWindow.repaint();
+
         }
         if (gameInfo.PlayerHasWon()){
             //Display winning window
@@ -147,5 +208,27 @@ public class Juego {
             
         }
     }
+
+    /**
+     * @return the _gestorLab
+     */
+    public synchronized GestorLaberinto getGestorLab() {
+        return _gestorLab;
+    }
+
+    /**
+     * @param _gestorLab the _gestorLab to set
+     */
+    public void setGestorLab(GestorLaberinto _gestorLab) {
+        this._gestorLab = _gestorLab;
+    }
+
+    /**
+     * @return the _avatar
+     */
+    public synchronized Avatar getAvatar() {
+        return _avatar;
+    }
+
 }
 

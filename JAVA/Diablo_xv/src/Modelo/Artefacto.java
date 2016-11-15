@@ -66,4 +66,8 @@ public class Artefacto implements Sprite {
         _posY = y;
     }
     
+    public void Mover(int dx, int dy) {
+        setPosX(getPosX() + dx);
+        setPosY(getPosY() + dy);
+    } 
 }

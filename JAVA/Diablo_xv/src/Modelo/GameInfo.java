@@ -17,7 +17,9 @@ public class GameInfo {
     private int idxLaberinto = 0;
     private int idxLaberintoAnterior = 0;
     private int numeroDeLaberintos = 0;
+    private int contador = 0;
     private static GameInfo INSTANCE = null;
+    
     
     protected GameInfo(){
     }
@@ -48,7 +50,7 @@ public class GameInfo {
         idxLaberinto += 1;
         if (idxLaberintoAnterior != 0)
             idxLaberintoAnterior += 1;
-        if (idxLaberinto == numeroDeLaberintos){
+        if (getIdxLaberinto() == numeroDeLaberintos){
             idxLaberinto -= 1;
             winner = true;
             gameON = false;
@@ -56,14 +58,14 @@ public class GameInfo {
     }
     
     public void LevelDown(){
-        if (idxLaberinto > 0)
+        if (getIdxLaberinto() > 0)
             idxLaberinto -= 1;
         if (idxLaberintoAnterior > 0)
             idxLaberintoAnterior -= 1;
     }
     
     public int LaberintoActual() {
-        return idxLaberinto;
+        return getIdxLaberinto();
     }
     
     public int LaberintoAnterior(){
@@ -83,4 +85,26 @@ public class GameInfo {
     public void setOnColission(boolean onColission) {
         this.onColission = onColission;
     }
+
+    /**
+     * @return the contador
+     */
+    public synchronized int getContador() {
+        return contador;
+    }
+
+    /**
+     * @param contador the contador to set
+     */
+    public synchronized void setContador(int contador) {
+        this.contador = contador;
+    }
+
+    /**
+     * @return the idxLaberinto
+     */
+    public int getIdxLaberinto() {
+        return idxLaberinto;
+    }
+
 }
