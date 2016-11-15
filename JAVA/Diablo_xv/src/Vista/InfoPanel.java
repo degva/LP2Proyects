@@ -6,6 +6,8 @@
 package Vista;
 
 import Modelo.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -22,7 +24,7 @@ import javax.imageio.ImageIO;
  */
 public class InfoPanel extends javax.swing.JPanel {
     
-    BufferedImage frame;
+    BufferedImage frameBg;
     InfoPanelData data;
     GameInfo gameInfo = GameInfo.Get();
 
@@ -33,27 +35,27 @@ public class InfoPanel extends javax.swing.JPanel {
     public InfoPanel(InfoPanelData d) {
         initComponents();
         data = d;
-        frame = new BufferedImage(200, 420, BufferedImage.TYPE_INT_RGB);
+        frameBg = new BufferedImage(200, 416, BufferedImage.TYPE_INT_RGB);
         try {
-            Image srcFrame = ImageIO.read(new File("./res/jungle_frame.jpg"));
-            Image sclFrame = srcFrame.getScaledInstance(200, 420, Image.SCALE_SMOOTH);
-            frame.getGraphics().drawImage(sclFrame, 0, 0, null);
+            Image srcFrame = ImageIO.read(new File("./res/jungle_frame.png"));
+            Image sclFrame = srcFrame.getScaledInstance(200, 416, Image.SCALE_SMOOTH);
+            frameBg.getGraphics().drawImage(sclFrame, 0, 0, null);
         } catch (IOException ex) {
             Logger.getLogger(InfoPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        setPreferredSize(new Dimension(200, 420));
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //Graphics gFrame = frame.getGraphics();
-        //gFrame.drawString("Cosillas", 30, 30);
-        g.drawImage(frame, 0, 0, this);
-        g.drawString(String.format("Nivel %d ", gameInfo.LaberintoActual()+1), 50, 30);
-        g.drawString(data.avatar.getNombre(), 50, 50);
-        g.drawString("Vida: " + data.avatar.getVidaActual(), 50, 70);
-        g.drawString("Arma: " + data.avatar.getArmaActual().getNombre(), 50, 90);
-        g.drawString("Armadura: " + data.avatar.getArmaduraActual().getNombre(), 50, 110);
+        int x_ini = 60, y_ini = 60;
+        g.drawImage(frameBg, 0, 0, this);
+        g.drawString(String.format("Nivel %d ", gameInfo.LaberintoActual()+1), x_ini, y_ini);
+        g.drawString(data.avatar.getNombre(), x_ini, y_ini + 20);
+        g.drawString("Vida: " + data.avatar.getVidaActual(), x_ini, y_ini + 40);
+        g.drawString("Arma: " + data.avatar.getArmaActual().getNombre(), x_ini, y_ini + 60);
+        g.drawString("Armadura: " + data.avatar.getArmaduraActual().getNombre(), x_ini, y_ini + 80);        
     }
     
 
@@ -66,19 +68,66 @@ public class InfoPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+
+        jButton1.setText("^");
+
+        jLabel1.setText("Interactuar");
+
+        jButton2.setText(">");
+
+        jButton3.setText("v");
+
+        jButton4.setText("<");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton4)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel1)
+                .addGap(3, 3, 3)
+                .addComponent(jButton2)
+                .addGap(0, 273, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(160, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addGap(60, 60, 60))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,7 @@
 package Vista;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -33,7 +34,7 @@ public class WelcomeHarambe extends javax.swing.JPanel {
             harambesRevenge = ImageIO.read(new File("./res/Harambe-Revenge.jpg")).getScaledInstance(600, 205, Image.SCALE_SMOOTH);            
         } catch (IOException e){
         }
-        setSize(600, 400);
+        setPreferredSize(new Dimension(600, 400));
         setBackground(Color.BLACK);
         setVisible(true);
     }

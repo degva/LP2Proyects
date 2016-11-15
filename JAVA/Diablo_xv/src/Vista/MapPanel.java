@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -37,6 +38,7 @@ public class MapPanel extends javax.swing.JPanel {
         this.data = data;
         initComponents();
         initHashMap();
+        setPreferredSize(new Dimension(420,420));
     }
 
     /**
@@ -101,12 +103,12 @@ public class MapPanel extends javax.swing.JPanel {
         int avY = data.avatar.getPosY();
         for (int i = avX - ANCHO, x = 0; i <= avX + ANCHO; i++, x++) {
             for (int j = avY - ALTO, y = 0; j <= avY + ALTO; j++, y++) {
-/*This are*/    cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
+/*These are*/   cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
 /*indentation*/ BufferedImage sp;
-/*bunnys, they*/String spType;
+/*bunnies they*/String spType;
 /*prevent*/     if (cellIsOut)
 /*changes to*/      sp = imgs.get("afuera");
-/*this blocks*/ else if (i == avX && j == avY){
+/*these blocks*/else if (i == avX && j == avY){
 /*()()*of*/         sp = imgs.get(data.avatar.GetSpriteType());
 /*('.')**code*/ } else {
 /*(() ()*/          spType = data.laberinto.getCelda(i, j).getSprite();
