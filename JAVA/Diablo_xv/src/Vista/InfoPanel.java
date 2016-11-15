@@ -11,8 +11,10 @@ import Modelo.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -69,7 +71,8 @@ public class InfoPanel extends javax.swing.JPanel {
         g.drawString(data.avatar.getNombre(), x_ini, y_ini + 20);
         g.drawString("Vida: " + data.avatar.getVidaActual(), x_ini, y_ini + 40);
         g.drawString("Arma: " + data.avatar.getArmaActual().getNombre(), x_ini, y_ini + 60);
-        g.drawString("Armadura: " + data.avatar.getArmaduraActual().getNombre(), x_ini, y_ini + 80);        
+        g.drawString("Armadura: " + data.avatar.getArmaduraActual().getNombre(), x_ini, y_ini + 80);
+        //falta saco
     }
     
 
@@ -187,10 +190,23 @@ public class InfoPanel extends javax.swing.JPanel {
         verificarInteraccion(data.avatar, labAct, pos);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void verificarInteraccion(Avatar a, Laberinto l, IntPair coordInter){
+    public synchronized void verificarInteraccion(Avatar a, Laberinto l, IntPair coordInter){
         
         if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Enemigo) {
-            //interactuarEnemigo(a, l, coordInter);
+            //gestorInteraccion.interactuarEnemigo(a, l, coordInter);
+            
+            Enemigo e = l.obtenerEnemigoActual(coordInter.x, coordInter.y);
+            // Hardcode is a philosophy
+            
+            Window parentWindow = SwingUtilities.windowForComponent(this);
+            Frame parentFrame = null;
+            if (parentWindow instanceof Frame) {
+                parentFrame = (Frame) parentWindow;
+            }
+            PeleaDialog ventanaPelea = new PeleaDialog(a, e, gestorInteraccion, parentFrame, true);
+            ventanaPelea.setVisible(true);
+
+            l.retornarEnemigoActual(e);
         }else if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Artefacto){
             gestorInteraccion.interactuarArtefacto(a, l, coordInter);
         }else if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Aliado){
