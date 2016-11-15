@@ -38,15 +38,18 @@ public class GestorJuego {
     public void Procesar(int keyCode){
         if (PressedKeyIsMovement(keyCode)){
             IntPair desp = DesplazamientoByKeyCode(keyCode);
+            
+            /*esto no deberia estar*/
+            //avatar.Mover(desp.x, desp.y);
             if (DesplazamientoEsValido(desp)){
                 avatar.Mover(desp.x, desp.y);
                 CheckLevelChange();
             }
         }
-        _gesLab.MoverEnemigos(laberintos.get(gameInfo.LaberintoActual()), avatar.getPosX(), avatar.getPosY());
-        if (colisionConEnemigo()) {
-            gameInfo.setOnColission(true);
-        }
+        //_gesLab.MoverEnemigos(laberintos.get(gameInfo.LaberintoActual()), avatar.getPosX(), avatar.getPosY());
+        //if (colisionConEnemigo()) {
+            //gameInfo.setOnColission(true);
+        //}
     }
     
     
@@ -110,7 +113,8 @@ public class GestorJuego {
         Laberinto laberinto = laberintos.get(gameInfo.LaberintoActual());
         Celda celdaADesplazarse = laberinto.getCelda(nuevoX, nuevoY);
         Sprite aux = celdaADesplazarse.getTipo();
-        return ((aux instanceof Pasadizo) && !(celdaADesplazarse.getContenido() instanceof Enemigo));
+        //return ((aux instanceof Pasadizo) && !(celdaADesplazarse.getContenido() instanceof Enemigo));
+        return (aux instanceof Pasadizo);
     }
     
     private void CheckLevelChange(){

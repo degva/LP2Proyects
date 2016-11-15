@@ -196,7 +196,7 @@ public class GestorLaberinto {
             int i = e.getPosX();
             int j = e.getPosY();
             if (l.getContenidoCelda(i, j) instanceof Enemigo) {
-                nuevaPos = devuelveRandomAdjacenteEnemigo(l, i, j, 1, avatarX, avatarY);
+                nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
                 if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo
                         && (nuevaPos.x != avatarX || nuevaPos.y != avatarY)) {
                     //e = (Enemigo) l.getContenidoCelda(i, j);
@@ -214,19 +214,23 @@ public class GestorLaberinto {
         Artefacto a; 
         IntPair nuevaPos;
         
-        for (int i = 0; i < l.getSizeM(); i++) {
-            for (int j = 0; j < l.getSizeN(); j++) {
-                if (l.getContenidoCelda(i, j) instanceof Artefacto) {
-                    nuevaPos = devuelveRandomAdjacenteEnemigo(l, i, j, 1, avatarX, avatarY);
-                    if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo) {
-                        a = (Artefacto) l.getContenidoCelda(i, j);
-                        l.getCelda(i, j).setContenido(null);
-                        a.Mover(nuevaPos.x - i, nuevaPos.y - j);
-                        l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(a);
-                    }
+        ArrayList<Artefacto> artefactos = l.getListaArtefactos();
+        int cantA = artefactos.size();
+        for (int z = 0; z < cantA; z++){
+            a = artefactos.get(z);
+            int i = a.getPosX();
+            int j = a.getPosY();
+            if (l.getContenidoCelda(i, j) instanceof Artefacto) {
+                nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
+                if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo
+                        && (nuevaPos.x != avatarX || nuevaPos.y != avatarY)) {
+                    
+                    a.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                    l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(a);
+                    l.getCelda(i, j).setContenido(null);
                 }
             }
-        }
+        }   
     }
     
     ///MODIFICACION
@@ -360,14 +364,6 @@ public class GestorLaberinto {
         if (posibles.isEmpty()) {
             pair = new IntPair(0,0);
         } else {
-            // Hey, aqui creo que podria haber error. 
-            // mi cerebro no me da para saber si en el caso hipotetico que me de
-            // el tamano de la lista, me bote error por overflow() :v
-            // Ej:
-            // Digamos que posibles.size() me de 1. Entonces, el random sera o 0
-            // o 1. Entonces, si sale 1, posibles.get es por las. O en todo caso
-            // si sale 0, puede que posibles.get tambien sea por las... 
-            // TODO: revisar documentación java :v
             pair = posibles.get(rnd.nextInt(posibles.size()));
         }
         
