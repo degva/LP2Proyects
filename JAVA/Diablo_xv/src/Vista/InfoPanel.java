@@ -75,14 +75,23 @@ public class InfoPanel extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
 
         jButton1.setText("^");
+        jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Interactuar");
 
         jButton2.setText(">");
+        jButton2.setFocusable(false);
 
         jButton3.setText("v");
+        jButton3.setFocusable(false);
 
         jButton4.setText("<");
+        jButton4.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -121,6 +130,10 @@ public class InfoPanel extends javax.swing.JPanel {
                 .addGap(60, 60, 60))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
