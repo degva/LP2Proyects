@@ -137,7 +137,7 @@ public class Juego {
                     _gestorLab.MoverEnemigos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
                     
                     try {
-                        Thread.sleep(600);
+                        Thread.sleep(2000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -176,7 +176,7 @@ public class Juego {
                     _gestorLab.MoverArtefactos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
 
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
                     }
