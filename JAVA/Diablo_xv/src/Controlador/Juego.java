@@ -8,6 +8,8 @@ import Vista.MapPanelData;
 import Modelo.*;
 import Vista.*;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,10 +89,11 @@ public class Juego {
         gameWindow = new GameWindow();
         gameWindow.setSize(600, 400);
         gameWindow.setLocationRelativeTo(null);
-        gameWindow.setLayout(new BorderLayout());
+        gameWindow.setLayout(new FlowLayout());
         WelcomeHarambe welcomeHarambeWindow = new WelcomeHarambe();
-        gameWindow.add(welcomeHarambeWindow);
+        gameWindow.getContentPane().add(welcomeHarambeWindow);
         gameWindow.setFocusable(true);
+        gameWindow.pack();
         gameWindow.setVisible(true);
         while(welcomeHarambeWindow.isShowing()){
             try {
@@ -105,15 +108,13 @@ public class Juego {
     }    
     
     private void PrepareGameWindow(){
-        gameWindow.setSize(620, 420);
         gameWindow.setLocationRelativeTo(null);
         MapPanel mapPanel = new MapPanel(mapPanelData);
         InfoPanelData infoPanelData = new InfoPanelData(_avatar);
         InfoPanel infoPanel = new InfoPanel(infoPanelData);
-        gameWindow.add(mapPanel);
-        gameWindow.add(infoPanel);
-        //gameWindow.pack();
-        
+        gameWindow.getContentPane().add(mapPanel);
+        gameWindow.getContentPane().add(infoPanel);
+        gameWindow.pack();
         mapPanel.setVisible(true);
         infoPanel.setVisible(true);
         ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
