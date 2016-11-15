@@ -17,7 +17,9 @@ public class GameInfo {
     private int idxLaberinto = 0;
     private int idxLaberintoAnterior = 0;
     private int numeroDeLaberintos = 0;
+    private int contador = 0;
     private static GameInfo INSTANCE = null;
+    
     
     protected GameInfo(){
     }
@@ -83,4 +85,19 @@ public class GameInfo {
     public void setOnColission(boolean onColission) {
         this.onColission = onColission;
     }
+
+    /**
+     * @return the contador
+     */
+    public synchronized int getContador() {
+        return contador;
+    }
+
+    /**
+     * @param contador the contador to set
+     */
+    public synchronized void setContador(int contador) {
+        this.contador = contador;
+    }
+
 }

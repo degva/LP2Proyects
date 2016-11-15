@@ -204,6 +204,25 @@ public class GestorLaberinto {
         }
     }
     
+    public void MoverArtefactos(Laberinto l, int avatarX, int avatarY) {
+        Artefacto a; 
+        IntPair nuevaPos;
+        
+        for (int i = 0; i < l.getSizeM(); i++) {
+            for (int j = 0; j < l.getSizeN(); j++) {
+                if (l.getContenidoCelda(i, j) instanceof Artefacto) {
+                    nuevaPos = devuelveRandomAdjacenteEnemigo(l, i, j, 1, avatarX, avatarY);
+                    if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo) {
+                        a = (Artefacto) l.getContenidoCelda(i, j);
+                        l.getCelda(i, j).setContenido(null);
+                        a.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                        l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(a);
+                    }
+                }
+            }
+        }
+    }
+    
     ///MODIFICACION
     public void MoverAliado(Laberinto l) {
         Aliado e; 

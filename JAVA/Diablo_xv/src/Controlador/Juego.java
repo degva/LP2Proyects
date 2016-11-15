@@ -41,6 +41,8 @@ public class Juego {
     
     private JDialog interaccionDialog;
     
+    private Thread movArtefactos;
+    
     public Juego() {
         //_render = new Render();
         _laberintos = new ArrayList<>();
@@ -126,10 +128,24 @@ public class Juego {
         interaccionDialog.pack();
         
         // L5 : creo los threads
+        
+        movArtefactos = new Thread( new Runnable() {
+            @Override
+            public void run() {
+                while (gameInfo.GameIsNotOver()){
+                    int cont = gameInfo.getContador();
+                    cont++;
+                    gameInfo.setContador(cont);  
+                   
+                }           
+            }
+        });
     }
     
     private void Play() {  
         // L5 : start thread
+        this.movArtefactos.start();
+        
         while (gameInfo.GameIsNotOver()) {
             //try {
             //    Thread.sleep(100);
@@ -137,15 +153,29 @@ public class Juego {
             //    Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
             //}
             
+            
             // L5 : verificar colision (avatar | enemigo | artefacto)
             // L5 : pausar threds
             // L5 : hacer todo lo del dialog
             // L5 : reanudar threads
+            
+            if (gameInfo.getContador() >10000 && gameInfo.getContador()%10000 == 0){
+                this._gestorLab.MoverArtefactos(this.GetLaberintoActual(), this._avatar.getPosX(), this._avatar.getPosY());
+                gameWindow.setTitle("ggwp");
+                
+            }else{
+               gameWindow.setTitle("Harambe's revenge"); 
+            }
+            
             if (gameInfo.isOnColission()) {
                 interaccionDialog.setVisible(true);
                 
                 gameInfo.setOnColission(false);
             }
+            
+            gameWindow.repaint();
+           
+            
         }
         if (gameInfo.PlayerHasWon()){
             //Display winning window
@@ -153,5 +183,6 @@ public class Juego {
             
         }
     }
+
 }
 
