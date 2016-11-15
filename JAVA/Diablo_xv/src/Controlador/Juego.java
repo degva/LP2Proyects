@@ -108,17 +108,17 @@ public class Juego {
         gameWindow.setSize(620, 420);
         gameWindow.setLocationRelativeTo(null);
         MapPanel mapPanel = new MapPanel(mapPanelData);
-        mapPanel.setSize(420, 420);
-        gameWindow.add(mapPanel);
         InfoPanelData infoPanelData = new InfoPanelData(_avatar);
         InfoPanel infoPanel = new InfoPanel(infoPanelData);
-        infoPanel.setSize(200, 420);
+        gameWindow.add(mapPanel);
         gameWindow.add(infoPanel);
-        infoPanel.setLocation(420, 0);
+        //gameWindow.pack();
+        
         mapPanel.setVisible(true);
         infoPanel.setVisible(true);
         ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
         inputController.setListener();
+        
     }
     
     private void Play() {  

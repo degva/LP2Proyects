@@ -37,6 +37,7 @@ public class MapPanel extends javax.swing.JPanel {
         this.data = data;
         initComponents();
         initHashMap();
+        setSize(420, 420);
     }
 
     /**
