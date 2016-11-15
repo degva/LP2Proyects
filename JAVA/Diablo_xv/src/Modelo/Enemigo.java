@@ -14,13 +14,14 @@ public class Enemigo extends Entidad {
     private final char _elementoGrafico;
     private int ataque;
     private int defensa;
+
     
     public Enemigo(String nombre, int posicionX, int poscionY, int nivel){
         super(posicionX,poscionY,nombre,nivel, nivel * 2);
         super.setVidaActual(nivel * 2);
         ataque = this.getNivel() * 2; 
         defensa = this.getNivel(); 
-        _elementoGrafico = 'E';
+        _elementoGrafico = 'E';   
     }
     
     @Override
@@ -48,13 +49,5 @@ public class Enemigo extends Entidad {
     public int getDefensa() {
         return defensa;
     }
-
-    /**
-     * @param defensa the defensa to set
-     */
-    public void setDefensa(int defensa) {
-        this.defensa = defensa;
-    }
-    
 
 }
