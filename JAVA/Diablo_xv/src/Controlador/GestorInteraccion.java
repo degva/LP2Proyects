@@ -28,70 +28,12 @@ public class GestorInteraccion {
     
     
     public void interactuarEnemigo(Avatar a, Enemigo e){
-        //gg wp
         int vidaA, vidaE;
         vidaA = a.getVidaActual() - e.getAtaque();
         vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
         a.setVidaActual(vidaA);
         e.setVidaActual(vidaE);
- 
-        
-        
-        //Mini consola
-//        System.out.println("A pelear!");
-//        System.out.print("Enemigo: "); System.out.print(e.getNombre());        
-//        System.out.print(" Vida: "); System.out.print(e.getVidaActual());        
-//        System.out.print(" Ataque: "); System.out.print(e.getAtaque()); 
-//        System.out.print("\nTu: "); System.out.print(a.getNombre());        
-//        System.out.print(" Vida: "); System.out.print(a.getVidaActual());        
-//        System.out.print(" Ataque: "); System.out.print(a.getArmaActual().getDano_max());        
-//        System.out.print("\n[atacar | huir | usar i]");
-//        System.out.print("\n - > ");
-        //Batalla
-//        String comando = consolaBatalla.nextLine();
-//        String[] instruccion = comando.split(" ");
-//        OUTER:
-//        while(true){
-//            switch(instruccion[0]){
-//                case "atacar":                    
-//                    vidaA = a.getVidaActual() - e.getAtaque();
-//                    vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
-//                    a.setVidaActual(vidaA);
-//                    e.setVidaActual(vidaE);
-//                    break;
-//                case "huir":
-//                    //Me muevo a la posicion de la interaccion para no chocar adyacentemente
-//                    a.setPosXY(coordenadaInteraccion);
-//                    break OUTER;
-//                case "usar":                    
-//                    int indexArtefactoElegido = Integer.parseInt(instruccion[1]);
-//                    if (indexArtefactoElegido > 0 && indexArtefactoElegido <= a.getSaco().getSize()){
-//                        Artefacto artefactoElegido = a.getSaco().getItem(indexArtefactoElegido-1);
-//                        if (artefactoElegido instanceof Arma)
-//                            a.setArmaActual((Arma)artefactoElegido);
-//                        else 
-//                            a.setArmaduraActual((Armadura) artefactoElegido);
-//                    }
-//                    
-//            }
-//            if (e.getVidaActual() <= 0) {
-//                System.out.println("Ganaste :v");
-//                break;
-//            }
-//            System.out.println("A pelear!");
-//            System.out.print("Enemigo: "); System.out.print(e.getNombre());        
-//            System.out.print(" Vida: "); System.out.print(e.getVidaActual());        
-//            System.out.print(" Ataque: "); System.out.print(e.getAtaque());        
-//            System.out.print("  Tu: "); System.out.print(a.getNombre());        
-//            System.out.print(" Vida: "); System.out.print(a.getVidaActual());        
-//            System.out.print(" Ataque: "); System.out.print(a.getArmaActual().getDano_max());
-//
-//            System.out.print("\n[atacar | huir | usar i]");
-//            System.out.print("\n - > ");
-//            comando = consolaBatalla.nextLine();
-//        }
-
-        
+       
     }
     
     public void interactuarArtefacto(Avatar a, Laberinto l, IntPair coordenadaInteraccion){
@@ -103,9 +45,5 @@ public class GestorInteraccion {
         Aliado al = l.obtenerAliado();
         String consejo = al.darConsejo();
         return consejo;
-        
-        //System.out.println("=====================================================\n\n");
-        //System.out.println("Hola, soy tu aliado y este es mi consejo: " + consejo + "\n\n");
-        //System.out.println("=====================================================\n\n");
     }    
 }

@@ -277,7 +277,6 @@ public class PeleaDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, arma.getNombre(), "Arma seleccionada:", JOptionPane.INFORMATION_MESSAGE);
         }                         
         this.AvatarArmaLbl.setText(avatar.getArmaActual().getNombre());
-        //cargarMeme();
     }//GEN-LAST:event_UsarBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

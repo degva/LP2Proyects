@@ -107,14 +107,13 @@ public class GestorJuego {
         return desplazamiento;
     }
     
-    private boolean DesplazamientoEsValido(IntPair desplazamiento){
+    private synchronized boolean DesplazamientoEsValido(IntPair desplazamiento){
         int nuevoX = avatar.getPosX() + desplazamiento.x;
         int nuevoY = avatar.getPosY() + desplazamiento.y;
         Laberinto laberinto = laberintos.get(gameInfo.LaberintoActual());
         Celda celdaADesplazarse = laberinto.getCelda(nuevoX, nuevoY);
         Sprite aux = celdaADesplazarse.getTipo();
-        //return ((aux instanceof Pasadizo) && !(celdaADesplazarse.getContenido() instanceof Enemigo));
-        return (aux instanceof Pasadizo);
+        return ((aux instanceof Pasadizo) && !(celdaADesplazarse.getContenido() instanceof Enemigo));
     }
     
     private void CheckLevelChange(){

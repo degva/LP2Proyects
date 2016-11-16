@@ -41,8 +41,6 @@ public class Juego {
     private GameWindow gameWindow;
     private MapPanelData mapPanelData;
     
-    private JDialog interaccionDialog;
-    
     public Thread movEnemigos;
     public Thread movArtefactos;
     public Thread movAliado;
@@ -133,11 +131,6 @@ public class Juego {
         infoPanel.setVisible(true);
         ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
         inputController.setListener();
-        
-        interaccionDialog = new JDialog(gameWindow, "Interaccion", true);
-        InteractuarPanel intPanel = new InteractuarPanel();
-        interaccionDialog.getContentPane().add(intPanel);
-        interaccionDialog.pack();
     }
     
     private void PrepareThreads(){
