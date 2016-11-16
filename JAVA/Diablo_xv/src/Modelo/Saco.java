@@ -33,6 +33,14 @@ public class Saco {
         return artefactos.get(i);                  
     }
     
+    public Artefacto getItemByName(String name){
+        for (Artefacto artefacto : artefactos) {
+            if (artefacto.getNombre().equals(name))
+                return artefacto;
+        }
+        return null;
+    }
+    
     public void removeItem(int i){
         this.artefactos.remove(i);
     }

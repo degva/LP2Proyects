@@ -73,6 +73,23 @@ public class InfoPanel extends javax.swing.JPanel {
         g.drawString("Arma: " + data.avatar.getArmaActual().getNombre(), x_ini, y_ini + 60);
         g.drawString("Armadura: " + data.avatar.getArmaduraActual().getNombre(), x_ini, y_ini + 80);
         //falta saco
+        g.drawString("Cosillas:",x_ini,y_ini + 100);
+        Saco saco = data.avatar.getSaco();
+        int sacoSize = saco.getSize();
+        if (sacoSize > 0){            
+            DefaultListModel dlm = new DefaultListModel();
+            Artefacto art;
+            for (int i = 0; i < sacoSize; i++) {
+                art = saco.getItem(i);       
+                
+                if (art instanceof Arma)
+                    dlm.addElement(String.format("%d) Arma: ",i+1) + art.getNombre());     
+                else if (art instanceof Armadura)
+                    dlm.addElement(String.format("%d) Armadura: ",i+1) + art.getNombre());
+            }
+            listaSaco.setModel(dlm);
+        }
+        
     }
     
 
@@ -90,6 +107,8 @@ public class InfoPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaSaco = new javax.swing.JList<>();
 
         jButton1.setText("^");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,32 +140,43 @@ public class InfoPanel extends javax.swing.JPanel {
             }
         });
 
+        listaSaco.setFocusTraversalKeysEnabled(false);
+        listaSaco.setFocusable(false);
+        jScrollPane1.setViewportView(listaSaco);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton4)
-                .addGap(6, 6, 6)
-                .addComponent(jLabel1)
-                .addGap(3, 3, 3)
-                .addComponent(jButton2)
-                .addGap(0, 273, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton3))
+                        .addComponent(jButton4)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1)
+                        .addGap(3, 3, 3)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jButton1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(jButton3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(jButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 279, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(160, Short.MAX_VALUE)
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -155,7 +185,7 @@ public class InfoPanel extends javax.swing.JPanel {
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addGap(60, 60, 60))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -221,5 +251,7 @@ public class InfoPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listaSaco;
     // End of variables declaration//GEN-END:variables
 }

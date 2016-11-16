@@ -186,7 +186,7 @@ public class GestorLaberinto {
         }
     }
     
-    public void MoverEnemigos(Laberinto l, int avatarX, int avatarY) {
+    public synchronized void MoverEnemigos(Laberinto l, int avatarX, int avatarY) {
         Enemigo e; 
         IntPair nuevaPos;
         

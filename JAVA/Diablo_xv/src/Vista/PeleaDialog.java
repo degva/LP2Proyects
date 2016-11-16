@@ -6,6 +6,9 @@
 package Vista;
 import Modelo.*;
 import Controlador.GestorInteraccion;
+import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +19,8 @@ public class PeleaDialog extends javax.swing.JDialog {
     private Avatar avatar;
     private Enemigo enemigo;
     private GestorInteraccion gestor;
+    private DefaultListModel armaSeleccionada;
+    private Saco saco;
     
     /**
      * Creates new form PeleaDialog
@@ -35,11 +40,28 @@ public class PeleaDialog extends javax.swing.JDialog {
         this.AvatarVidaLbl.setText(String.format("%d", avatar.getVidaActual()));
         this.AvatarAtaqueLbl.setText(String.format("%d", avatar.getArmaActual().getDano_max()));
         this.AvatarDefensaLbl.setText(String.format("%d", avatar.getArmaduraActual().getDefensa()));
+        this.AvatarArmaLbl.setText(avatar.getArmaActual().getNombre());
         
         this.EnemigoName.setText(enemigo.getNombre());
         this.EnemigoVidaLbl.setText(String.format("%d", enemigo.getVidaActual()));
         this.EnemigoAtaqueLbl.setText(String.format("%d", enemigo.getAtaque()));
         this.EnemigoDefensaLbl.setText(String.format("%d", enemigo.getDefensa()));
+        
+        saco = avatar.getSaco();
+        int sacoSize = saco.getSize();
+        if (sacoSize > 0){            
+            DefaultListModel dlm = new DefaultListModel();
+            Artefacto art;
+            for (int i = 0; i < sacoSize; i++) {
+                art = saco.getItem(i);       
+                
+                if (art instanceof Arma)
+                    dlm.addElement(String.format("%d) Arma: ",i+1) + art.getNombre());     
+                else if (art instanceof Armadura)
+                    dlm.addElement(String.format("%d) Armadura: ",i+1) + art.getNombre());
+            }
+            listSaco.setModel(dlm);
+        }
     }
 
     /**
@@ -51,6 +73,7 @@ public class PeleaDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButton1 = new javax.swing.JRadioButton();
         AvatarName = new javax.swing.JLabel();
         AtacarBtn = new javax.swing.JButton();
         HuirBtn = new javax.swing.JButton();
@@ -68,6 +91,13 @@ public class PeleaDialog extends javax.swing.JDialog {
         EnemigoVidaLbl = new javax.swing.JLabel();
         EnemigoAtaqueLbl = new javax.swing.JLabel();
         EnemigoDefensaLbl = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listSaco = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        labelArma = new javax.swing.JLabel();
+        AvatarArmaLbl = new javax.swing.JLabel();
+
+        jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -120,6 +150,14 @@ public class PeleaDialog extends javax.swing.JDialog {
 
         EnemigoDefensaLbl.setText("jLabel9");
 
+        jScrollPane1.setViewportView(listSaco);
+
+        jLabel1.setText("Cosillas:");
+
+        labelArma.setText("Arma");
+
+        AvatarArmaLbl.setText("jLabel9");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,40 +166,46 @@ public class PeleaDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(AvatarName)
-                                .addGap(149, 149, 149)
-                                .addComponent(EnemigoName))
-                            .addComponent(HuirBtn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                        .addComponent(UsarBtn)
-                        .addGap(51, 51, 51))
+                        .addComponent(AvatarName)
+                        .addGap(149, 149, 149)
+                        .addComponent(EnemigoName))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(AtacarBtn)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(AvatarAtaqueLbl)
-                                    .addComponent(AvatarDefensaLbl)
-                                    .addComponent(AvatarVidaLbl))))
-                        .addGap(97, 97, 97)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(27, 27, 27)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)
+                                        .addComponent(labelArma))
+                                    .addGap(21, 21, 21)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(AvatarArmaLbl)
+                                        .addComponent(AvatarAtaqueLbl)
+                                        .addComponent(AvatarDefensaLbl)
+                                        .addComponent(AvatarVidaLbl)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EnemigoVidaLbl)
-                            .addComponent(EnemigoAtaqueLbl)
-                            .addComponent(EnemigoDefensaLbl))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(EnemigoVidaLbl)
+                                    .addComponent(EnemigoAtaqueLbl)
+                                    .addComponent(EnemigoDefensaLbl)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(HuirBtn)
+                                .addGap(33, 33, 33)
+                                .addComponent(UsarBtn)))))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,12 +232,20 @@ public class PeleaDialog extends javax.swing.JDialog {
                     .addComponent(jLabel8)
                     .addComponent(AvatarDefensaLbl)
                     .addComponent(EnemigoDefensaLbl))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AtacarBtn)
+                    .addComponent(labelArma)
+                    .addComponent(AvatarArmaLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HuirBtn)
-                    .addComponent(UsarBtn))
-                .addGap(34, 34, 34))
+                    .addComponent(UsarBtn)
+                    .addComponent(AtacarBtn))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -209,11 +261,24 @@ public class PeleaDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_HuirBtnActionPerformed
 
     private void UsarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsarBtnActionPerformed
-        // TODO add your handling code here:
+        //armaSeleccionada.addElement(listSaco.getSelectedValue());
+        String selectedItem = listSaco.getSelectedValue();
+        String[] sel = selectedItem.split(": ");
+        
+        Artefacto art = saco.getItemByName(sel[1]);                 
+        
+        if (art instanceof Arma){
+            Arma arma = (Arma)art;
+            avatar.setArmaActual(arma);
+            JOptionPane.showMessageDialog(this, arma.getNombre(), "Arma seleccionada:", JOptionPane.INFORMATION_MESSAGE);
+        }                         
+        this.AvatarArmaLbl.setText(avatar.getArmaActual().getNombre());
+        //cargarMeme();
     }//GEN-LAST:event_UsarBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AtacarBtn;
+    private javax.swing.JLabel AvatarArmaLbl;
     private javax.swing.JLabel AvatarAtaqueLbl;
     private javax.swing.JLabel AvatarDefensaLbl;
     private javax.swing.JLabel AvatarName;
@@ -224,11 +289,16 @@ public class PeleaDialog extends javax.swing.JDialog {
     private javax.swing.JLabel EnemigoVidaLbl;
     private javax.swing.JButton HuirBtn;
     private javax.swing.JButton UsarBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelArma;
+    private javax.swing.JList<String> listSaco;
     // End of variables declaration//GEN-END:variables
 }
