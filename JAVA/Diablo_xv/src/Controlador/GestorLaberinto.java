@@ -196,6 +196,8 @@ public class GestorLaberinto {
             e = enemies.get(z);
             int i = e.getPosX();
             int j = e.getPosY();
+            if (EnemigoEsAdyacenteAlAvatar(i,j,avatarX,avatarY))
+                continue;
             if (l.getContenidoCelda(i, j) instanceof Enemigo) {
                 nuevaPos = devuelveRandomAdjacenteEnemigo(l, i, j, 1,avatarX, avatarY); // cambiar si molesta por adjpasadizo
                 if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo
@@ -235,7 +237,7 @@ public class GestorLaberinto {
     }
     
     ///MODIFICACION
-    public void MoverAliado(Laberinto l) {
+    public synchronized void MoverAliado(Laberinto l) {
         Aliado e; 
         IntPair nuevaPos;
         
@@ -245,9 +247,9 @@ public class GestorLaberinto {
                     nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
                     if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo) {
                         e = (Aliado) l.getContenidoCelda(i, j);
-                        l.getCelda(i, j).setContenido(null);
                         e.Mover(nuevaPos.x - i, nuevaPos.y - j);
                         l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                        l.getCelda(i, j).setContenido(null);
                     }
                 }
             }
@@ -325,6 +327,17 @@ public class GestorLaberinto {
         return pair;
     }
     
+    private boolean EnemigoEsAdyacenteAlAvatar(int eX, int eY, int aX, int aY){
+        if (eX-1 == aX && eY == aY)
+            return true;
+        if (eX+1 == aX && eY == aY)
+            return true;
+        if (eY-1 == aY && eX == aX)
+            return true;
+        if (eY+1 == aY && eX == aX)
+            return true;
+        return false;
+    }
     
     public synchronized IntPair devuelveRandomAdjacentePasadizo(Laberinto lab, int x, int y, int i) {
 

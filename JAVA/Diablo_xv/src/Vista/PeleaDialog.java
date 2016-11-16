@@ -7,7 +7,6 @@ package Vista;
 import Modelo.*;
 import Controlador.GestorInteraccion;
 import javax.swing.DefaultListModel;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +23,11 @@ public class PeleaDialog extends javax.swing.JDialog {
     
     /**
      * Creates new form PeleaDialog
+     * @param a
+     * @param e
+     * @param gi
+     * @param parent
+     * @param modal
      */
     public PeleaDialog(Avatar a, Enemigo e, GestorInteraccion gi, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -32,10 +36,10 @@ public class PeleaDialog extends javax.swing.JDialog {
         avatar = a;
         enemigo = e;
         gestor = gi;
-        cargarMeme();
+        LoadDialogItems();
     }
     
-    private void cargarMeme() {
+    private void LoadDialogItems() {
         this.AvatarName.setText(avatar.getNombre());
         this.AvatarVidaLbl.setText(String.format("%d", avatar.getVidaActual()));
         this.AvatarAtaqueLbl.setText(String.format("%d", avatar.getArmaActual().getDano_max()));
