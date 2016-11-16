@@ -211,7 +211,7 @@ public class GestorLaberinto {
         
     }
     
-    public void MoverArtefactos(Laberinto l, int avatarX, int avatarY) {
+    public synchronized void MoverArtefactos(Laberinto l, int avatarX, int avatarY) {
         Artefacto a; 
         IntPair nuevaPos;
         
@@ -326,7 +326,7 @@ public class GestorLaberinto {
     }
     
     
-    public IntPair devuelveRandomAdjacentePasadizo(Laberinto lab, int x, int y, int i) {
+    public synchronized IntPair devuelveRandomAdjacentePasadizo(Laberinto lab, int x, int y, int i) {
 
         Random rnd = new Random();
         
