@@ -45,6 +45,7 @@ public class Juego {
     
     public Thread movEnemigos;
     public Thread movArtefactos;
+    public Thread movAliado;
     
     private static Juego INSTANCE = null;
     
@@ -82,6 +83,7 @@ public class Juego {
         PrepareData();
         Welcome();
         PrepareGameWindow();
+        PrepareThreads();
         Play();
     }
     
@@ -121,7 +123,6 @@ public class Juego {
     private void PrepareGameWindow(){
         gameWindow.setLocationRelativeTo(null);
         MapPanel mapPanel = new MapPanel(mapPanelData);
-        mapPanel.setSize(420, 420);
         gameWindow.add(mapPanel);
         InfoPanelData infoPanelData = new InfoPanelData(getAvatar());
         InfoPanel infoPanel = new InfoPanel(infoPanelData, _laberintos); //deep gg
@@ -137,13 +138,14 @@ public class Juego {
         InteractuarPanel intPanel = new InteractuarPanel();
         interaccionDialog.getContentPane().add(intPanel);
         interaccionDialog.pack();
-            
+    }
+    
+    private void PrepareThreads(){
         this.movEnemigos = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(gameInfo.GameIsNotOver()){
-                    _gestorLab.MoverEnemigos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
-                    
+                    getGestorLab().MoverEnemigos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException ex) {
@@ -153,16 +155,11 @@ public class Juego {
             }
         });
         
-
         this.movArtefactos = new Thread(new Runnable() {
             @Override
             public void run() {
-                
-                //OPCION 2
                 while(gameInfo.GameIsNotOver()){
-
-                    _gestorLab.MoverArtefactos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
-
+                    getGestorLab().MoverArtefactos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
@@ -172,18 +169,33 @@ public class Juego {
                 }
             }
         });
-     
+        
+        this.movAliado = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(gameInfo.GameIsNotOver()){
+                    getGestorLab().MoverAliado(GetLaberintoActual());
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
     }
     
-    private void Play() {  
-        
+    private void Play() {
         this.movEnemigos.start();
         this.movArtefactos.start();
-        
+        this.movAliado.start();
         while (gameInfo.GameIsNotOver()) {
-            
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+            }
             gameWindow.repaint();
-
         }
         if (gameInfo.PlayerHasWon()){
             //Display winning window
