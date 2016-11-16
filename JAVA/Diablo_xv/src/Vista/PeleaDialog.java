@@ -6,8 +6,18 @@
 package Vista;
 import Modelo.*;
 import Controlador.GestorInteraccion;
+import Controlador.Juego;
+import java.awt.Frame;
+import java.awt.Window;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -20,7 +30,6 @@ public class PeleaDialog extends javax.swing.JDialog {
     private GestorInteraccion gestor;
     private DefaultListModel armaSeleccionada;
     private Saco saco;
-    
     /**
      * Creates new form PeleaDialog
      * @param a
@@ -31,12 +40,15 @@ public class PeleaDialog extends javax.swing.JDialog {
      */
     public PeleaDialog(Avatar a, Enemigo e, GestorInteraccion gi, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
         
         avatar = a;
         enemigo = e;
         gestor = gi;
+        initComponents();
+        
         LoadDialogItems();
+
+        // this.EnemigoPanel.repaint();
     }
     
     private void LoadDialogItems() {
@@ -47,7 +59,12 @@ public class PeleaDialog extends javax.swing.JDialog {
         this.AvatarArmaLbl.setText(avatar.getArmaActual().getNombre());
         
         this.EnemigoName.setText(enemigo.getNombre());
-        this.EnemigoVidaLbl.setText(String.format("%d", enemigo.getVidaActual()));
+        if (enemigo.getVidaActual() > 0) {
+            this.EnemigoVidaLbl.setText(String.format("%d", enemigo.getVidaActual()));
+        } else {
+            this.EnemigoVidaLbl.setText("It's dead");
+        }
+        
         this.EnemigoAtaqueLbl.setText(String.format("%d", enemigo.getAtaque()));
         this.EnemigoDefensaLbl.setText(String.format("%d", enemigo.getDefensa()));
         
@@ -100,10 +117,16 @@ public class PeleaDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         labelArma = new javax.swing.JLabel();
         AvatarArmaLbl = new javax.swing.JLabel();
+        EnemigoPanel = new EnemyDrawPanel(Juego.Get().mapPanel.getImage("enemigo"));
 
         jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         AvatarName.setText("jLabel1");
 
@@ -162,43 +185,53 @@ public class PeleaDialog extends javax.swing.JDialog {
 
         AvatarArmaLbl.setText("jLabel9");
 
+        EnemigoPanel.setBackground(new java.awt.Color(240, 240, 150));
+
+        javax.swing.GroupLayout EnemigoPanelLayout = new javax.swing.GroupLayout(EnemigoPanel);
+        EnemigoPanel.setLayout(EnemigoPanelLayout);
+        EnemigoPanelLayout.setHorizontalGroup(
+            EnemigoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        EnemigoPanelLayout.setVerticalGroup(
+            EnemigoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(AtacarBtn)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(labelArma)
+                                .addComponent(AvatarName))
+                            .addGap(21, 21, 21)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(AvatarArmaLbl)
+                                .addComponent(AvatarAtaqueLbl)
+                                .addComponent(AvatarDefensaLbl)
+                                .addComponent(AvatarVidaLbl)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(AvatarName)
-                        .addGap(149, 149, 149)
-                        .addComponent(EnemigoName))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AtacarBtn)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel5)
-                                        .addComponent(labelArma))
-                                    .addGap(21, 21, 21)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(AvatarArmaLbl)
-                                        .addComponent(AvatarAtaqueLbl)
-                                        .addComponent(AvatarDefensaLbl)
-                                        .addComponent(AvatarVidaLbl)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(97, 97, 97)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(EnemigoName, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(EnemigoVidaLbl)
@@ -208,8 +241,12 @@ public class PeleaDialog extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(HuirBtn)
                                 .addGap(33, 33, 33)
-                                .addComponent(UsarBtn)))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                                .addComponent(UsarBtn)))
+                        .addContainerGap(31, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(EnemigoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,13 +280,18 @@ public class PeleaDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(HuirBtn)
-                    .addComponent(UsarBtn)
-                    .addComponent(AtacarBtn))
-                .addGap(19, 19, 19))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(HuirBtn)
+                            .addComponent(UsarBtn)
+                            .addComponent(AtacarBtn))
+                        .addGap(19, 19, 19))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(EnemigoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -257,7 +299,12 @@ public class PeleaDialog extends javax.swing.JDialog {
 
     private void AtacarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtacarBtnActionPerformed
         gestor.interactuarEnemigo(avatar, enemigo);
-        if (enemigo.getVidaActual() <= 0) dispose();
+        if (avatar.getVidaActual() <=0) {
+            GameInfo.Get().GameOff();
+            dispose();
+        } else {
+            LoadDialogItems();
+        }
     }//GEN-LAST:event_AtacarBtnActionPerformed
 
     private void HuirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HuirBtnActionPerformed
@@ -279,6 +326,10 @@ public class PeleaDialog extends javax.swing.JDialog {
         this.AvatarArmaLbl.setText(avatar.getArmaActual().getNombre());
     }//GEN-LAST:event_UsarBtnActionPerformed
 
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        dispose();
+    }//GEN-LAST:event_formKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AtacarBtn;
     private javax.swing.JLabel AvatarArmaLbl;
@@ -289,6 +340,7 @@ public class PeleaDialog extends javax.swing.JDialog {
     private javax.swing.JLabel EnemigoAtaqueLbl;
     private javax.swing.JLabel EnemigoDefensaLbl;
     private javax.swing.JLabel EnemigoName;
+    private javax.swing.JPanel EnemigoPanel;
     private javax.swing.JLabel EnemigoVidaLbl;
     private javax.swing.JButton HuirBtn;
     private javax.swing.JButton UsarBtn;
@@ -304,4 +356,7 @@ public class PeleaDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelArma;
     private javax.swing.JList<String> listSaco;
     // End of variables declaration//GEN-END:variables
+
+
+
 }

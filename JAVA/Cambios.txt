@@ -1,0 +1,11 @@
+1. PeleaDialog se muestra cuando entra cuando hay interaccion con el enemigo.
+   Tanto los datos del enemigo como del avatar se muestran en la pantalla.
+2. Al momento de crear la PeleaDialog, se crear el EnemyDrawPanel, donde esta
+   el dibujo del enemigo. Esto se crea dentro de initComponents() de PeleaDialog.
+3. Los enemigos se detienen cuando se suspenden los threads en infoPanel.verificarInteraccion
+   para mostrar el PeleaDialog.
+4. Si el enemigo muere (cuando tiene vida menor a 0), se llama la function el Singleton GameInfo, GameOff().
+   Y luego se procede a hacer un dispose().
+5. Asi tambien, cuando se sale de la ventana de pelea, los  threads se reinician.
+6. Para salir del Dialogo, se creo una function cada vez que se ejecutaria cuando presiona cualquier
+   tecla, pero parece no funcionar correctamente. por ello tiene que salir con Huir o con el X de la ventana

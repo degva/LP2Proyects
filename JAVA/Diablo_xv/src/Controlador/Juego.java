@@ -45,6 +45,8 @@ public class Juego {
     public Thread movArtefactos;
     public Thread movAliado;
     
+    public MapPanel mapPanel;
+    
     private static Juego INSTANCE = null;
     
     protected Juego() {
@@ -120,7 +122,7 @@ public class Juego {
     
     private void PrepareGameWindow(){
         gameWindow.setLocationRelativeTo(null);
-        MapPanel mapPanel = new MapPanel(mapPanelData);
+        mapPanel = new MapPanel(mapPanelData);
         gameWindow.add(mapPanel);
         InfoPanelData infoPanelData = new InfoPanelData(getAvatar());
         InfoPanel infoPanel = new InfoPanel(infoPanelData, _laberintos); //deep gg
@@ -194,7 +196,16 @@ public class Juego {
             //Display winning window
         } else {
             
+            try {
+                movAliado.join();
+                movEnemigos.join();
+                movArtefactos.join();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
+        gameWindow.dispose();
     }
 
     /**

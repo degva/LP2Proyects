@@ -29,10 +29,13 @@ public class GestorInteraccion {
     
     public void interactuarEnemigo(Avatar a, Enemigo e){
         int vidaA, vidaE;
-        vidaA = a.getVidaActual() - e.getAtaque();
-        vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
-        a.setVidaActual(vidaA);
-        e.setVidaActual(vidaE);
+        if (e.getVidaActual() > 0) {
+            vidaA = a.getVidaActual() - e.getAtaque();
+            vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
+            a.setVidaActual(vidaA);
+            e.setVidaActual(vidaE);
+        }
+        
        
     }
     

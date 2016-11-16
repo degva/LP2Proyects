@@ -237,25 +237,25 @@ public class GestorLaberinto {
     }
     
     ///MODIFICACION
-    public synchronized void MoverAliado(Laberinto l) {
+public synchronized void MoverAliado(Laberinto l) {
         Aliado e; 
         IntPair nuevaPos;
         
-        for (int i = 0; i < l.getSizeM(); i++) {
-            for (int j = 0; j < l.getSizeN(); j++) {
-                if (l.getContenidoCelda(i, j) instanceof Aliado) {
-                    nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
-                    if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo) {
-                        e = (Aliado) l.getContenidoCelda(i, j);
-                        e.Mover(nuevaPos.x - i, nuevaPos.y - j);
-                        l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
-                        l.getCelda(i, j).setContenido(null);
-                    }
-                }
+        Aliado a = l.obtenerAliado();
+        int i = a.getPosX();
+        int j = a.getPosY();
+        
+        if (l.getContenidoCelda(i, j) instanceof Aliado) {
+            nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
+            if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo) {
+                e = (Aliado) l.getContenidoCelda(i, j);
+                e.Mover(nuevaPos.x - i, nuevaPos.y - j);
+                l.getCelda(nuevaPos.x, nuevaPos.y).setContenido(e);
+                l.getCelda(i, j).setContenido(null);
             }
         }
+
     }
-    
     private IntPair ObtenerCuadrante(int eneX, int eneY, int avX, int avY){
         // posicion del avatar respecto al enemigo (posE-posA):
         //  si xCuadrante < 0, el avatar está a la derecha, si > 0, a la izquierda

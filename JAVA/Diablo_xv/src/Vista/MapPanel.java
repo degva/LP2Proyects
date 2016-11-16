@@ -122,6 +122,10 @@ public class MapPanel extends javax.swing.JPanel {
         }
     }
 
+    public BufferedImage getImage(String name) {
+        return imgs.get(name);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

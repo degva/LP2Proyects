@@ -242,7 +242,8 @@ public class InfoPanel extends javax.swing.JPanel {
             }
             PeleaDialog ventanaPelea = new PeleaDialog(a, e, gestorInteraccion, parentFrame, true);
             ventanaPelea.setVisible(true);
-
+            ventanaPelea.repaint();
+            
             l.retornarEnemigoActual(e);
         }else if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Artefacto){
             gestorInteraccion.interactuarArtefacto(a, l, coordInter);
