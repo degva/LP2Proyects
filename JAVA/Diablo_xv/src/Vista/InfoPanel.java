@@ -8,6 +8,7 @@ package Vista;
 import Controlador.GestorInteraccion;
 import Facilidades.Aliado;
 import Modelo.*;
+import Controlador.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -35,6 +36,9 @@ public class InfoPanel extends javax.swing.JPanel {
     ArrayList<Laberinto> laberintos;
     GestorInteraccion gestorInteraccion;
     GameInfo gameInfo = GameInfo.Get();
+    private Juego _juegoActual;
+    
+    
 
     /**
      * Creates new form InfoPanel
@@ -54,6 +58,8 @@ public class InfoPanel extends javax.swing.JPanel {
             Logger.getLogger(InfoPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         setPreferredSize(new Dimension(200, 420));
+        
+        _juegoActual = Juego.Get();
         
         this.jButton1.setFocusable(false);
         this.jButton2.setFocusable(false);
@@ -221,12 +227,13 @@ public class InfoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public synchronized void verificarInteraccion(Avatar a, Laberinto l, IntPair coordInter){
+        _juegoActual.movEnemigos.suspend();
+        _juegoActual.movArtefactos.suspend();
         
         if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Enemigo) {
             //gestorInteraccion.interactuarEnemigo(a, l, coordInter);
             
             Enemigo e = l.obtenerEnemigoActual(coordInter.x, coordInter.y);
-            // Hardcode is a philosophy
             
             Window parentWindow = SwingUtilities.windowForComponent(this);
             Frame parentFrame = null;
@@ -243,6 +250,9 @@ public class InfoPanel extends javax.swing.JPanel {
             String consejo = gestorInteraccion.interactuarAliado(a, l, coordInter);
             JOptionPane.showMessageDialog(this, consejo, "Consejo del Aliado:", JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        _juegoActual.movEnemigos.resume();
+        _juegoActual.movArtefactos.resume();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

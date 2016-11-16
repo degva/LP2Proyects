@@ -43,16 +43,24 @@ public class Juego {
     
     private JDialog interaccionDialog;
     
-    private Thread movEnemigos;
-    private Thread movArtefactos;
+    public Thread movEnemigos;
+    public Thread movArtefactos;
     
-    public Juego() {
+    private static Juego INSTANCE = null;
+    
+    protected Juego() {
         //_render = new Render();
         _laberintos = new ArrayList<>();
         _idxLaberinto = _idxLaberintoAnterior = 0;
         _numLaberintos = (int)(Math.random()*10+5);
         //_gestorAvatar = new GestorAvatar();        
         
+    }
+    
+    public static Juego Get(){
+        if (INSTANCE == null)
+            INSTANCE = new Juego();
+        return INSTANCE;
     }
     
     private void CrearListaLaberintos() {
@@ -136,7 +144,7 @@ public class Juego {
                     _gestorLab.MoverEnemigos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
                     
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(500);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -148,26 +156,6 @@ public class Juego {
         this.movArtefactos = new Thread(new Runnable() {
             @Override
             public void run() {
-                //OPCION 1
-                /*
-                while(gameInfo.GameIsNotOver()){
-                    int cont = gameInfo.getContador();
-                    
-                    if(cont > 10000 && gameInfo.getContador()%10000 == 0){
-                        _gestorLab.MoverArtefactos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
-                        
-                        try {
-                            Thread.sleep(5000);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    
-                    cont++;
-                    gameInfo.setContador(cont);
-                    
-                }
-                */
                 
                 //OPCION 2
                 while(gameInfo.GameIsNotOver()){
@@ -175,7 +163,7 @@ public class Juego {
                     _gestorLab.MoverArtefactos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
 
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -192,13 +180,6 @@ public class Juego {
         this.movArtefactos.start();
         
         while (gameInfo.GameIsNotOver()) {
-            /*
-            if (gameInfo.isOnColission()) {
-                interaccionDialog.setVisible(true);
-                
-                gameInfo.setOnColission(false);
-            }
-            */
             
             gameWindow.repaint();
 
