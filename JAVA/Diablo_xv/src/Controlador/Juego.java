@@ -113,8 +113,9 @@ public class Juego {
     private void PrepareGameWindow(){
         gameWindow.setLocationRelativeTo(null);
         MapPanel mapPanel = new MapPanel(mapPanelData);
+        gameWindow.add(mapPanel);
         InfoPanelData infoPanelData = new InfoPanelData(getAvatar());
-        InfoPanel infoPanel = new InfoPanel(infoPanelData);
+        InfoPanel infoPanel = new InfoPanel(infoPanelData, _laberintos); //deep gg
         gameWindow.getContentPane().add(mapPanel);
         gameWindow.getContentPane().add(infoPanel);
         gameWindow.pack();
@@ -135,7 +136,7 @@ public class Juego {
                     _gestorLab.MoverEnemigos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
                     
                     try {
-                        Thread.sleep(600);
+                        Thread.sleep(2000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -174,7 +175,7 @@ public class Juego {
                     _gestorLab.MoverArtefactos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
 
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
                     }

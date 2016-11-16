@@ -5,18 +5,24 @@
  */
 package Vista;
 
+import Controlador.GestorInteraccion;
+import Facilidades.Aliado;
 import Modelo.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /**
  *
@@ -26,15 +32,19 @@ public class InfoPanel extends javax.swing.JPanel {
     
     BufferedImage frameBg;
     InfoPanelData data;
+    ArrayList<Laberinto> laberintos;
+    GestorInteraccion gestorInteraccion;
     GameInfo gameInfo = GameInfo.Get();
 
     /**
      * Creates new form InfoPanel
      * @param d
      */
-    public InfoPanel(InfoPanelData d) {
+    public InfoPanel(InfoPanelData d, ArrayList<Laberinto> labs) {
         initComponents();
         data = d;
+        laberintos = labs;
+        gestorInteraccion = new GestorInteraccion();
         frameBg = new BufferedImage(200, 416, BufferedImage.TYPE_INT_RGB);
         try {
             Image srcFrame = ImageIO.read(new File("./res/jungle_frame.png"));
@@ -44,6 +54,12 @@ public class InfoPanel extends javax.swing.JPanel {
             Logger.getLogger(InfoPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         setPreferredSize(new Dimension(200, 420));
+        
+        this.jButton1.setFocusable(false);
+        this.jButton2.setFocusable(false);
+        this.jButton3.setFocusable(false);
+        this.jButton4.setFocusable(false);
+        
     }
 
     @Override
@@ -55,7 +71,8 @@ public class InfoPanel extends javax.swing.JPanel {
         g.drawString(data.avatar.getNombre(), x_ini, y_ini + 20);
         g.drawString("Vida: " + data.avatar.getVidaActual(), x_ini, y_ini + 40);
         g.drawString("Arma: " + data.avatar.getArmaActual().getNombre(), x_ini, y_ini + 60);
-        g.drawString("Armadura: " + data.avatar.getArmaduraActual().getNombre(), x_ini, y_ini + 80);        
+        g.drawString("Armadura: " + data.avatar.getArmaduraActual().getNombre(), x_ini, y_ini + 80);
+        //falta saco
     }
     
 
@@ -75,7 +92,6 @@ public class InfoPanel extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
 
         jButton1.setText("^");
-        jButton1.setFocusable(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -85,13 +101,25 @@ public class InfoPanel extends javax.swing.JPanel {
         jLabel1.setText("Interactuar");
 
         jButton2.setText(">");
-        jButton2.setFocusable(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("v");
-        jButton3.setFocusable(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("<");
-        jButton4.setFocusable(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,10 +159,61 @@ public class InfoPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // izquierda
+        //data.avatar.setNombre("crippling");
+        IntPair pos = new IntPair(data.avatar.getPosX() -1, data.avatar.getPosY());
+        Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
+        verificarInteraccion(data.avatar, labAct, pos);
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // arriba
+        IntPair pos = new IntPair(data.avatar.getPosX(), data.avatar.getPosY() -1);
+        Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
+        verificarInteraccion(data.avatar, labAct, pos);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // abajo
+        IntPair pos = new IntPair(data.avatar.getPosX(), data.avatar.getPosY() +1);
+        Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
+        verificarInteraccion(data.avatar, labAct, pos);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // derecha
+        IntPair pos = new IntPair(data.avatar.getPosX() +1, data.avatar.getPosY());
+        Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
+        verificarInteraccion(data.avatar, labAct, pos);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public synchronized void verificarInteraccion(Avatar a, Laberinto l, IntPair coordInter){
+        
+        if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Enemigo) {
+            //gestorInteraccion.interactuarEnemigo(a, l, coordInter);
+            
+            Enemigo e = l.obtenerEnemigoActual(coordInter.x, coordInter.y);
+            // Hardcode is a philosophy
+            
+            Window parentWindow = SwingUtilities.windowForComponent(this);
+            Frame parentFrame = null;
+            if (parentWindow instanceof Frame) {
+                parentFrame = (Frame) parentWindow;
+            }
+            PeleaDialog ventanaPelea = new PeleaDialog(a, e, gestorInteraccion, parentFrame, true);
+            ventanaPelea.setVisible(true);
+
+            l.retornarEnemigoActual(e);
+        }else if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Artefacto){
+            gestorInteraccion.interactuarArtefacto(a, l, coordInter);
+        }else if (l.getContenidoCelda(coordInter.x, coordInter.y) instanceof Aliado){
+            String consejo = gestorInteraccion.interactuarAliado(a, l, coordInter);
+            JOptionPane.showMessageDialog(this, consejo, "Consejo del Aliado:", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

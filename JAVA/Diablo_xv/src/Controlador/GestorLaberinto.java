@@ -181,6 +181,7 @@ public class GestorLaberinto {
                 gestorAliados.listaAliados.get(i).setPosY(aliY);
                 gestorAliados.listaAliados.get(i).setNivel(numeroLaberitno);
                 l.agregarAliado(gestorAliados.listaAliados.get(i));
+                l.getCelda(aliX,aliY).setContenido(gestorAliados.listaAliados.get(i));
             } else i--;
         }
     }
@@ -196,7 +197,7 @@ public class GestorLaberinto {
             int i = e.getPosX();
             int j = e.getPosY();
             if (l.getContenidoCelda(i, j) instanceof Enemigo) {
-                nuevaPos = devuelveRandomAdjacentePasadizo(l, i, j, 1);
+                nuevaPos = devuelveRandomAdjacenteEnemigo(l, i, j, 1,avatarX, avatarY); // cambiar si molesta por adjpasadizo
                 if (l.getCelda(nuevaPos.x, nuevaPos.y).getTipo() instanceof Pasadizo
                         && (nuevaPos.x != avatarX || nuevaPos.y != avatarY)) {
                     //e = (Enemigo) l.getContenidoCelda(i, j);

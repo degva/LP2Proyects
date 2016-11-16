@@ -64,7 +64,7 @@ public class Aliado extends Entidad{
     
     public String darConsejo(){
         Random rnd = new Random();
-        int indice = rnd.nextInt(9);        
+        int indice = rnd.nextInt(_consejos.size());        
         return _consejos.get(indice).getConsejo();
     }
     
