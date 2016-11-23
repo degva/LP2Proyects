@@ -30,33 +30,33 @@ public class Arma extends Artefacto {
     /**
      * @return the _dano_min
      */
-    public int getDano_min() {
+    public int GetMinDamage() {
         return _dano_min;
     }
 
     /**
      * @param _dano_min the _dano_min to set
      */
-    public void setDano_min(int _dano_min) {
+    public void SetMinDamage(int _dano_min) {
         this._dano_min = _dano_min;
     }
 
     /**
      * @return the _dano_max
      */
-    public int getDano_max() {
+    public int GetMaxDamage() {
         return _dano_max;
     }
 
     /**
      * @param _dano_max the _dano_max to set
      */
-    public void setDano_max(int _dano_max) {
+    public void SetMaxDamage(int _dano_max) {
         this._dano_max = _dano_max;
     }
     
     @Override
     public String toString(){
-        return "Arma: " + getNombre() + " " + getDano_min() + "/" + getDano_max();
+        return "Arma: " + getNombre() + " " + GetMinDamage() + "/" + GetMaxDamage();
     }
 }

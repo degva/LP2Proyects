@@ -31,7 +31,7 @@ public class GestorInteraccion {
         //gg wp
         int vidaA, vidaE;
         vidaA = a.getVidaActual() - e.getAtaque();
-        vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
+        vidaE = e.getVidaActual() - a.getArmaActual().GetMaxDamage();
         a.setVidaActual(vidaA);
         e.setVidaActual(vidaE);
  
@@ -44,7 +44,7 @@ public class GestorInteraccion {
 //        System.out.print(" Ataque: "); System.out.print(e.getAtaque()); 
 //        System.out.print("\nTu: "); System.out.print(a.getNombre());        
 //        System.out.print(" Vida: "); System.out.print(a.getVidaActual());        
-//        System.out.print(" Ataque: "); System.out.print(a.getArmaActual().getDano_max());        
+//        System.out.print(" Ataque: "); System.out.print(a.getArmaActual().GetMaxDamage());        
 //        System.out.print("\n[atacar | huir | usar i]");
 //        System.out.print("\n - > ");
         //Batalla
@@ -55,7 +55,7 @@ public class GestorInteraccion {
 //            switch(instruccion[0]){
 //                case "atacar":                    
 //                    vidaA = a.getVidaActual() - e.getAtaque();
-//                    vidaE = e.getVidaActual() - a.getArmaActual().getDano_max();
+//                    vidaE = e.getVidaActual() - a.getArmaActual().GetMaxDamage();
 //                    a.setVidaActual(vidaA);
 //                    e.setVidaActual(vidaE);
 //                    break;
@@ -84,7 +84,7 @@ public class GestorInteraccion {
 //            System.out.print(" Ataque: "); System.out.print(e.getAtaque());        
 //            System.out.print("  Tu: "); System.out.print(a.getNombre());        
 //            System.out.print(" Vida: "); System.out.print(a.getVidaActual());        
-//            System.out.print(" Ataque: "); System.out.print(a.getArmaActual().getDano_max());
+//            System.out.print(" Ataque: "); System.out.print(a.getArmaActual().GetMaxDamage());
 //
 //            System.out.print("\n[atacar | huir | usar i]");
 //            System.out.print("\n - > ");

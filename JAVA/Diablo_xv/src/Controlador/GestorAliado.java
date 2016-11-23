@@ -7,8 +7,11 @@ package Controlador;
 
 import java.util.ArrayList;
 import Facilidades.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,21 +21,30 @@ public class GestorAliado {
     
     ArrayList<Aliado> listaAliados;
     
-    public GestorAliado() throws IOException {
+    public GestorAliado() {
         listaAliados = new ArrayList<>();
         CargarListaDeAliados();
     }
     
-    private void CargarListaDeAliados() throws IOException{
-        String linea, nombreAliado, consejo;
+    private void CargarListaDeAliados() {
+        String linea = "", nombreAliado, consejo;
         String[] s1,s2,s3,s4,s5, s6, consejoStr;
-        RandomAccessFile readerAliados = new RandomAccessFile("aliados.txt", "r");
-        linea = readerAliados.readLine();
+        RandomAccessFile readerAliados = null;
+        try {
+            readerAliados = new RandomAccessFile("aliados.txt", "r");
+            linea = readerAliados.readLine();
+        } catch (Exception ex) {
+            Logger.getLogger(GestorAliado.class.getName()).log(Level.SEVERE, null, ex);
+        }
         s1 = linea.split(":");
         int numeroDeAliados = Integer.parseInt(s1[1]);
         int numeroDeConsejos, nivelConsejo;
         for(int i=0; i < numeroDeAliados; i++){
-            linea = readerAliados.readLine();
+            try {
+                linea = readerAliados.readLine();
+            } catch (IOException ex) {
+                Logger.getLogger(GestorAliado.class.getName()).log(Level.SEVERE, null, ex);
+            }
             s1 = linea.split("/");
             s2 = s1[0].split(":");
             nombreAliado = s2[1];

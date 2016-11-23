@@ -42,7 +42,7 @@ public class PeleaDialog extends javax.swing.JDialog {
     private void LoadDialogItems() {
         this.AvatarName.setText(avatar.getNombre());
         this.AvatarVidaLbl.setText(String.format("%d", avatar.getVidaActual()));
-        this.AvatarAtaqueLbl.setText(String.format("%d", avatar.getArmaActual().getDano_max()));
+        this.AvatarAtaqueLbl.setText(String.format("%d", avatar.getArmaActual().GetMaxDamage()));
         this.AvatarDefensaLbl.setText(String.format("%d", avatar.getArmaduraActual().getDefensa()));
         this.AvatarArmaLbl.setText(avatar.getArmaActual().getNombre());
         

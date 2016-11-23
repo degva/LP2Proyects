@@ -40,7 +40,6 @@ public class GestorArtefacto {
         try {
             XStream xs = new XStream();
             configureXStream(xs);
-            
             FileReader fr = new FileReader(archivoNombre);
             _artefactosDisponibles = (ArrayList<Artefacto>)xs.fromXML(fr);
             fr.close();
