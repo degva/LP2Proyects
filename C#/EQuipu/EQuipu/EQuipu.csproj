@@ -44,24 +44,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controlador\GestorEncuesta.cs" />
     <Compile Include="Controlador\GestorEquipo.cs" />
     <Compile Include="Controlador\GestorEventos.cs" />
+    <Compile Include="Controlador\GestorFeria.cs" />
     <Compile Include="Controlador\GestorMiembros.cs" />
     <Compile Include="Modelo\Alumno.cs" />
     <Compile Include="Modelo\Consultable.cs" />
+    <Compile Include="Modelo\Encuesta.cs" />
     <Compile Include="Modelo\Equipo.cs" />
     <Compile Include="Modelo\Evento.cs" />
     <Compile Include="Modelo\Exposicion.cs" />
     <Compile Include="Modelo\Externo.cs" />
+    <Compile Include="Modelo\Feria.cs" />
     <Compile Include="Modelo\Miembro.cs" />
+    <Compile Include="Modelo\Pregunta.cs" />
     <Compile Include="Modelo\Profesor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vista\frmBuscarFeria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmBuscarFeria.Designer.cs">
+      <DependentUpon>frmBuscarFeria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmCalificarPregunta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmCalificarPregunta.Designer.cs">
+      <DependentUpon>frmCalificarPregunta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vista\frmEventoNuevo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vista\frmEventoNuevo.Designer.cs">
       <DependentUpon>frmEventoNuevo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmMantEncuesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmMantEncuesta.Designer.cs">
+      <DependentUpon>frmMantEncuesta.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\frmMantEquiEditor.cs">
       <SubType>Form</SubType>
@@ -93,6 +116,18 @@
     <Compile Include="Vista\frmMantMiembros.Designer.cs">
       <DependentUpon>frmMantMiembros.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vista\frmNuevaFeria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmNuevaFeria.Designer.cs">
+      <DependentUpon>frmNuevaFeria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmNuevaFeriaAddEquipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmNuevaFeriaAddEquipo.Designer.cs">
+      <DependentUpon>frmNuevaFeriaAddEquipo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vista\frmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +140,18 @@
     <Compile Include="Vista\frmMantMiemEditor.Designer.cs">
       <DependentUpon>frmMantMiemEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vista\frmProcesarEntrada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmProcesarEntrada.Designer.cs">
+      <DependentUpon>frmProcesarEntrada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmRendirEncuesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmRendirEncuesta.Designer.cs">
+      <DependentUpon>frmRendirEncuesta.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -114,8 +161,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Vista\frmBuscarFeria.resx">
+      <DependentUpon>frmBuscarFeria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmCalificarPregunta.resx">
+      <DependentUpon>frmCalificarPregunta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmEventoNuevo.resx">
       <DependentUpon>frmEventoNuevo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmMantEncuesta.resx">
+      <DependentUpon>frmMantEncuesta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmMantEquiEditor.resx">
       <DependentUpon>frmMantEquiEditor.cs</DependentUpon>
@@ -135,8 +191,20 @@
     <EmbeddedResource Include="Vista\frmMantMiemEditor.resx">
       <DependentUpon>frmMantMiemEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmNuevaFeria.resx">
+      <DependentUpon>frmNuevaFeria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmNuevaFeriaAddEquipo.resx">
+      <DependentUpon>frmNuevaFeriaAddEquipo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmProcesarEntrada.resx">
+      <DependentUpon>frmProcesarEntrada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmRendirEncuesta.resx">
+      <DependentUpon>frmRendirEncuesta.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

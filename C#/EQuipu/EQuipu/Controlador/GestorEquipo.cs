@@ -76,6 +76,20 @@ namespace EQuipu.Controlador
             return listaEquiposBuscados;
         }
 
+        public List<Equipo> BuscarEquiposPorNombre(string nombre)
+        {
+            if (nombre == null || nombre == "") return this.listaEquipos;
+            List<Equipo> listaEquiposBuscados = new List<Equipo>();
+            for (int i = 0; i < this.listaEquipos.Count; i++)
+            {
+                if (this.listaEquipos[i].Nombre == nombre)
+                {
+                    listaEquiposBuscados.Add(this.listaEquipos[i]);
+                }
+            }
+            return listaEquiposBuscados;
+        }
+
         public void Serializar()
         {
             Stream stream = File.Open("Equipu.bin", FileMode.Create);

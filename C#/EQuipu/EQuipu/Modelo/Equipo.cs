@@ -2,25 +2,74 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using System.Threading;
 
 namespace EQuipu.Modelo
 {
     [Serializable]
     public class Equipo
     {
+
         private List<Miembro> listaMiembros;
         private string nombre;
         private string interes;
         private string categoria;
         private double fondo;
 
+        private Thread hilo;
+        private ListBox _lb;
+        private TextBox _texb;
+        private int entradas;
+        
         public Equipo(string nombre, string interes, string categoria)
         {
             this.nombre = nombre;
             this.interes = interes;
             this.categoria = categoria;
             this.listaMiembros = new List<Miembro>();
+
+            this.entradas = 0;
+        }
+
+        public void CreateThread(ListBox lb, Label l, TextBox tb)
+        {
+            l.Text = nombre;
+            _texb = tb;
+            _texb.Text = "0";
+            _lb = lb;
+            hilo = new Thread(KeepOnGoing);
+            hilo.Name = nombre;
+        }
+
+        public void Start()
+        {
+            Console.WriteLine("Iniciando Hilo [" + this.nombre + "]");
+            hilo.Start();
+        }
+
+        public void Join()
+        {
+            hilo.Join();
+        }
+
+        public void Interrupt()
+        {
+            hilo.Interrupt();
+        }
+
+        public void KeepOnGoing()
+        {
+            for (int i = 0; i < _lb.Items.Count; i++)
+            {
+                if (_lb.Items[i].ToString() == this.nombre)
+                {
+                    // _lb.Items.RemoveAt(0);
+                    entradas += 1;
+                }
+            }
+            Console.WriteLine("Acabo bien con " + entradas + "Entradas");
         }
 
         public string ConsultarMiembrosPUCP()
@@ -87,6 +136,11 @@ namespace EQuipu.Modelo
         {
             get { return listaMiembros; }
             set { listaMiembros = value; }
+        }
+        public int Entradas
+        {
+            get { return entradas; }
+            set { entradas = value; }
         }
     }
 }
