@@ -36,9 +36,9 @@
             this.encuestaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevaFeriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.procesarEntradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.encuestasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rendirEncuestaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.procesarEntradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,6 +109,13 @@
             this.nuevaFeriaToolStripMenuItem.Text = "Nueva Feria";
             this.nuevaFeriaToolStripMenuItem.Click += new System.EventHandler(this.nuevaFeriaToolStripMenuItem_Click);
             // 
+            // procesarEntradasToolStripMenuItem
+            // 
+            this.procesarEntradasToolStripMenuItem.Name = "procesarEntradasToolStripMenuItem";
+            this.procesarEntradasToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.procesarEntradasToolStripMenuItem.Text = "Procesar Entradas";
+            this.procesarEntradasToolStripMenuItem.Click += new System.EventHandler(this.procesarEntradasToolStripMenuItem_Click);
+            // 
             // encuestasToolStripMenuItem
             // 
             this.encuestasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -124,13 +131,6 @@
             this.rendirEncuestaToolStripMenuItem.Text = "Rendir Encuesta";
             this.rendirEncuestaToolStripMenuItem.Click += new System.EventHandler(this.rendirEncuestaToolStripMenuItem_Click);
             // 
-            // procesarEntradasToolStripMenuItem
-            // 
-            this.procesarEntradasToolStripMenuItem.Name = "procesarEntradasToolStripMenuItem";
-            this.procesarEntradasToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.procesarEntradasToolStripMenuItem.Text = "Procesar Entradas";
-            this.procesarEntradasToolStripMenuItem.Click += new System.EventHandler(this.procesarEntradasToolStripMenuItem_Click);
-            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,6 +141,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmPrincipal";
             this.Text = "E-Quipu";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPrincipal_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

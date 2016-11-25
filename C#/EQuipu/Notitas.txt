@@ -1,0 +1,12 @@
+Polimorfismo:
+	knowtype
+
+Serializacion / Desarializacion
+	- static / constructor statico
+	- por codigo
+
+List<T>
+	T[] => convertir
+	- analizar por codigo
+
+Multijugador

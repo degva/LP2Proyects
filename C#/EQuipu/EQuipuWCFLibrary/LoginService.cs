@@ -5,13 +5,19 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace EQuipuWCFService
+namespace EQuipuWCFLibrary
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "LoginService" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select LoginService.svc or LoginService.svc.cs at the Solution Explorer and start debugging.
+    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "LoginService" en el código y en el archivo de configuración a la vez.
     public class LoginService : ILoginService
     {
         private List<Usuario> _lista_usuarios;
+
+        public LoginService()
+        {
+            Usuario u = new Usuario("degva", "123");
+            _lista_usuarios = new List<Usuario>();
+            _lista_usuarios.Add(u);
+        }
 
         public bool ValidarUsuario(string username, string password)
         {

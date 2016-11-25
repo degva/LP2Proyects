@@ -65,5 +65,10 @@ namespace EQuipu.Vista
             v.MdiParent = this;
             v.Show();
         }
+
+        private void frmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
