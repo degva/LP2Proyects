@@ -36,7 +36,7 @@ public class Juego {
     //private GestorAvatar _gestorAvatar;
     private final ArrayList<Laberinto> _laberintos;
     
-    private GameInfo gameInfo;
+    private GameStatus gameInfo;
     
     private GameWindow gameWindow;
     private MapPanelData mapPanelData;
@@ -50,12 +50,9 @@ public class Juego {
     private static Juego INSTANCE = null;
     
     protected Juego() {
-        //_render = new Render();
         _laberintos = new ArrayList<>();
         _idxLaberinto = _idxLaberintoAnterior = 0;
         _numLaberintos = (int)(Math.random()*10+5);
-        //_gestorAvatar = new GestorAvatar();        
-        
     }
     
     public static Juego Get(){
@@ -92,7 +89,7 @@ public class Juego {
         CrearListaLaberintos();
         _avatar = new Avatar(_laberintos.get(0).DevolverAnterior(), "", _idxLaberinto);
         mapPanelData = new MapPanelData(_laberintos.get(0), getAvatar());
-        gameInfo = GameInfo.Get();
+        gameInfo = GameStatus.Get();
         gameInfo.SetNumeroDeLaberintos(_numLaberintos);
         _gestorJuego = new GestorJuego(getAvatar(), _laberintos, getGestorLab());
         _gestorJuego.setViewDataController(mapPanelData);
@@ -116,7 +113,7 @@ public class Juego {
             }
         }
         String nombre = welcomeHarambeWindow.NombreJugador;
-        getAvatar().setNombre(nombre);
+        getAvatar().SetNombre(nombre);
         gameWindow.remove(welcomeHarambeWindow);
     }    
     
@@ -125,7 +122,7 @@ public class Juego {
         MapPanel mapPanel = new MapPanel(mapPanelData);
         gameWindow.add(mapPanel);
         InfoPanelData infoPanelData = new InfoPanelData(getAvatar());
-        InfoPanel infoPanel = new InfoPanel(infoPanelData, _laberintos); //deep gg
+        InfoPanel infoPanel = new InfoPanel(infoPanelData, _laberintos); 
         gameWindow.getContentPane().add(mapPanel);
         gameWindow.getContentPane().add(infoPanel);
         gameWindow.pack();
@@ -145,7 +142,7 @@ public class Juego {
             @Override
             public void run() {
                 while(gameInfo.GameIsNotOver()){
-                    getGestorLab().MoverEnemigos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
+                    getGestorLab().MoverEnemigos(GetLaberintoActual(), getAvatar().GetPosX(), getAvatar().GetPosY());
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException ex) {
@@ -159,7 +156,7 @@ public class Juego {
             @Override
             public void run() {
                 while(gameInfo.GameIsNotOver()){
-                    getGestorLab().MoverArtefactos(GetLaberintoActual(), getAvatar().getPosX(), getAvatar().getPosY());
+                    getGestorLab().MoverArtefactos(GetLaberintoActual(), getAvatar().GetPosX(), getAvatar().GetPosY());
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {

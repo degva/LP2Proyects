@@ -13,12 +13,10 @@ public class Artefacto implements Sprite {
     private String _nombre;
     private int _posX;
     private int _posY;
-    private final char _elementoGrafico;
     
-    public Artefacto(String nombre, int posX, int posY, char elemGraf) {
+    public Artefacto(String nombre, int posX, int posY) {
         _posX = posX;
         _posY = posY;
-        _elementoGrafico = elemGraf;
         _nombre = nombre;
     }
     
@@ -30,44 +28,32 @@ public class Artefacto implements Sprite {
     /**
      * @return the nombre
      */
-    public String getNombre() {
+    public String Nombre() {
         return _nombre;
-    }
-
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this._nombre = nombre;
-    }
-    
-    @Override
-    public String toString(){
-        return getNombre();
     }
 
     /**
      * @return the _posX
      */
-    public int getPosX() {
+    public int GetPosX() {
         return _posX;
     }
 
-    public void setPosX(int x) {
+    public void SetPosX(int x) {
         _posX = x;
     }
     /**
      * @return the _posY
      */
-    public int getPosY() {
+    public int GetPosY() {
         return _posY;
     }
-    public void setPosY(int y) {
+    public void SetPosY(int y) {
         _posY = y;
     }
     
     public void Mover(int dx, int dy) {
-        setPosX(getPosX() + dx);
-        setPosY(getPosY() + dy);
+        SetPosX(GetPosX() + dx);
+        SetPosY(GetPosY() + dy);
     } 
 }

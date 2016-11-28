@@ -27,19 +27,19 @@ public class Render {
     
     public List<String> ObtenerListaDatos(Avatar avatar) {
         List<String> datos = new ArrayList<>();
-        datos.add("Nombre: " + avatar.getNombre());
-        String vida = Integer.toString(avatar.getVidaActual()) + "/" + Integer.toString(avatar.getVidaMaxima());
+        datos.add("Nombre: " + avatar.GetNombre());
+        String vida = Integer.toString(avatar.GetVidaActual()) + "/" + Integer.toString(avatar.GetVidaMaxima());
         datos.add("Vida: " + vida);
         //datos.add("Arma: " + avatar.getArmaActual().toString());
         //datos.add("Armadura: " + avatar.getArmaduraActual().toString());
         datos.add("Cosillas: ");
-        Saco saco_aux = avatar.getSaco();
+        Saco saco_aux = avatar.Saco();
         String aux;
         Artefacto item;
-        if (saco_aux.getSize() != 0) {
-            for (int i = 0; i < saco_aux.getSize(); i++) {
+        if (saco_aux.Size() != 0) {
+            for (int i = 0; i < saco_aux.Size(); i++) {
                 aux = Integer.toString(i + 1) + ". ";
-                item = saco_aux.getItem(i);
+                item = saco_aux.Get(i);
                 // aux.concat(item.getNombre());
                 String aux2 = item.toString();
                 String aux3 = aux.concat(aux2);

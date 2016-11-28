@@ -13,43 +13,29 @@ public class Avatar extends Entidad {
     private Saco saco;
     private Armadura armaduraActual; 
     private Arma armaActual;
-    private int dir = 6; 
-     
-     public Avatar(int posicionX, int poscionY, String nombre, int nivel){
-        super(posicionX,poscionY,nombre,nivel, 100);
-        super.setVidaActual(100);
-        this.saco = new Saco();
-        this.armaduraActual = new Armadura("Armor", 0, 0, 50);
-        this.armaActual = new Arma("Espada", 0, 0, 25, 75);
-    }
+    private String direccion;
      
     public Avatar(IntPair coord, String nombre, int nivel){
         super(coord.x, coord.y,nombre,nivel, 100);
-        super.setVidaActual(100);
+        super.SetVidaActual(100);
         this.saco = new Saco();
         this.armaduraActual = new Armadura("Armor", 0, 0, 50);
         this.armaActual = new Arma("Espada", 0, 0, 25, 75);
+        this.direccion = "-der";
     }
     
 
      /**
      * @return the saco
      */
-    public Saco getSaco() {
+    public Saco Saco() {
         return this.saco;
-    }
-    
-    /**
-     * @param saco the saco to set
-     */
-    public void setSaco(Saco saco) {
-        this.saco = saco;
     }
 
     /**
      * @return the armaduraActual
      */
-    public Armadura getArmaduraActual() {
+    public Armadura ArmaduraActual() {
         return armaduraActual;
     }
 
@@ -63,35 +49,30 @@ public class Avatar extends Entidad {
     /**
      * @return the armaActual
      */
-    public Arma getArmaActual() {
+    public Arma ArmaActual() {
         return armaActual;
     } 
     
-    public void setArmaActual(Arma arma){
+    public void SetArmaActual(Arma arma){
         this.armaActual = arma;
-    }
-    
-    public void setDireccion(int d){
-        
     }
     
     @Override
     public void Mover(int dx, int dy){
-        setPosX(getPosX() + dx);
-        setPosY(getPosY() + dy);
+        SetPosX(GetPosX() + dx);
+        SetPosY(GetPosY() + dy);
         if (dx == 1)
-            dir = 6;
+            direccion = "-der";
         else if (dx == -1)
-            dir = 4;
+            direccion = "-izq";
         else if (dy == 1)
-            dir = 2;
+            direccion = "-abj";
         else if (dy == -1)
-            dir = 8;
+            direccion = "-arr";
     }
     
     @Override
     public String GetSpriteType() {
-        String direccion = (dir == 6) ? "" : (dir == 8) ? "-arr": (dir == 4) ? "-izq": "-abj";
         return "avatar"+direccion;
     }        
 }

@@ -40,29 +40,29 @@ public class PeleaDialog extends javax.swing.JDialog {
     }
     
     private void LoadDialogItems() {
-        this.AvatarName.setText(avatar.getNombre());
-        this.AvatarVidaLbl.setText(String.format("%d", avatar.getVidaActual()));
-        this.AvatarAtaqueLbl.setText(String.format("%d", avatar.getArmaActual().GetMaxDamage()));
-        this.AvatarDefensaLbl.setText(String.format("%d", avatar.getArmaduraActual().getDefensa()));
-        this.AvatarArmaLbl.setText(avatar.getArmaActual().getNombre());
+        this.AvatarName.setText(avatar.GetNombre());
+        this.AvatarVidaLbl.setText(String.format("%d", avatar.GetVidaActual()));
+        this.AvatarAtaqueLbl.setText(String.format("%d", avatar.ArmaActual().GetMaxDamage()));
+        this.AvatarDefensaLbl.setText(String.format("%d", avatar.ArmaduraActual().GetDefensa()));
+        this.AvatarArmaLbl.setText(avatar.ArmaActual().Nombre());
         
-        this.EnemigoName.setText(enemigo.getNombre());
-        this.EnemigoVidaLbl.setText(String.format("%d", enemigo.getVidaActual()));
-        this.EnemigoAtaqueLbl.setText(String.format("%d", enemigo.getAtaque()));
-        this.EnemigoDefensaLbl.setText(String.format("%d", enemigo.getDefensa()));
+        this.EnemigoName.setText(enemigo.GetNombre());
+        this.EnemigoVidaLbl.setText(String.format("%d", enemigo.GetVidaActual()));
+        this.EnemigoAtaqueLbl.setText(String.format("%d", enemigo.GetAtaque()));
+        this.EnemigoDefensaLbl.setText(String.format("%d", enemigo.GetDefensa()));
         
-        saco = avatar.getSaco();
-        int sacoSize = saco.getSize();
+        saco = avatar.Saco();
+        int sacoSize = saco.Size();
         if (sacoSize > 0){            
             DefaultListModel dlm = new DefaultListModel();
             Artefacto art;
             for (int i = 0; i < sacoSize; i++) {
-                art = saco.getItem(i);       
+                art = saco.Get(i);       
                 
                 if (art instanceof Arma)
-                    dlm.addElement(String.format("%d) Arma: ",i+1) + art.getNombre());     
+                    dlm.addElement(String.format("%d) Arma: ",i+1) + art.Nombre());     
                 else if (art instanceof Armadura)
-                    dlm.addElement(String.format("%d) Armadura: ",i+1) + art.getNombre());
+                    dlm.addElement(String.format("%d) Armadura: ",i+1) + art.Nombre());
             }
             listSaco.setModel(dlm);
         }
@@ -257,7 +257,7 @@ public class PeleaDialog extends javax.swing.JDialog {
 
     private void AtacarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtacarBtnActionPerformed
         gestor.interactuarEnemigo(avatar, enemigo);
-        if (enemigo.getVidaActual() <= 0) dispose();
+        if (enemigo.GetVidaActual() <= 0) dispose();
     }//GEN-LAST:event_AtacarBtnActionPerformed
 
     private void HuirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HuirBtnActionPerformed
@@ -269,14 +269,14 @@ public class PeleaDialog extends javax.swing.JDialog {
         String selectedItem = listSaco.getSelectedValue();
         String[] sel = selectedItem.split(": ");
         
-        Artefacto art = saco.getItemByName(sel[1]);                 
+        Artefacto art = saco.Get(sel[1]);                 
         
         if (art instanceof Arma){
             Arma arma = (Arma)art;
-            avatar.setArmaActual(arma);
-            JOptionPane.showMessageDialog(this, arma.getNombre(), "Arma seleccionada:", JOptionPane.INFORMATION_MESSAGE);
+            avatar.SetArmaActual(arma);
+            JOptionPane.showMessageDialog(this, arma.Nombre(), "Arma seleccionada:", JOptionPane.INFORMATION_MESSAGE);
         }                         
-        this.AvatarArmaLbl.setText(avatar.getArmaActual().getNombre());
+        this.AvatarArmaLbl.setText(avatar.ArmaActual().Nombre());
         //cargarMeme();
     }//GEN-LAST:event_UsarBtnActionPerformed
 

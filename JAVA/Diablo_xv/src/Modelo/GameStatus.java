@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author wperezp
  */
-public class GameInfo {
+public class GameStatus {
 
     private boolean gameON = true;
     private boolean winner = false;
@@ -18,15 +18,15 @@ public class GameInfo {
     private int idxLaberintoAnterior = 0;
     private int numeroDeLaberintos = 0;
     private int contador = 0;
-    private static GameInfo INSTANCE = null;
+    private static GameStatus INSTANCE = null;
     
     
-    protected GameInfo(){
+    protected GameStatus(){
     }
     
-    public static GameInfo Get(){
+    public static GameStatus Get(){
         if (INSTANCE == null)
-            INSTANCE = new GameInfo();
+            INSTANCE = new GameStatus();
         return INSTANCE;
     }
     

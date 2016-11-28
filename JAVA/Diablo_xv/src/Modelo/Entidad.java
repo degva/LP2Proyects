@@ -25,123 +25,105 @@ public abstract class Entidad implements Sprite {
         this.nivel = nivel;
         this.vidaMaxima = vidaMaxima;
     }
-
-            
-    /*
-    En estos metodos solo se hace la consulta, asumo que la autirizacion
-    de si se mueve o no se hace ene laberinto o en gestor de laberinto.
-    Si creen que esa confirmacion se debe hacer aca, diganme para implementarlo
-    
-    Antes estos metodos solo estaban en Avatar, ahora estan en entidad porque segun el texto
-    va a haber un momento en el que los enemigos se muevan
-    */
-    
-    
     
     public void Mover(int dx, int dy) {
-        setPosX(getPosX() + dx);
-        setPosY(getPosY() + dy);
+        posX += dx;
+        posY += dy;
     }    
     
-    
-    @Override
-    public String toString(){
-        return getNombre() + " " + getNivel();
-    }
 
     /**
      * @return the nombre
      */
-    public String getNombre() {
+    public String GetNombre() {
         return nombre;
     }
 
     /**
      * @param nombre the nombre to set
      */
-    public void setNombre(String nombre) {
+    public void SetNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
      * @return the posX
      */
-    public int getPosX() {
+    public int GetPosX() {
         return posX;
     }
 
     /**
      * @param posX the posX to set
      */
-    public void setPosX(int posX) {
+    public void SetPosX(int posX) {
         this.posX = posX;
     }
 
     /**
      * @return the posY
      */
-    public int getPosY() {
+    public int GetPosY() {
         return posY;
     }
 
     /**
      * @param posY the posY to set
      */
-    public void setPosY(int posY) {
+    public void SetPosY(int posY) {
         this.posY = posY;
     }
     
-    public IntPair getPos(){
+    public IntPair GetPosition(){
         return new IntPair(posX, posY);
     }
 
     /**
      * @return the nivel
      */
-    public int getNivel() {
+    public int GetNivel() {
         return nivel;
     }
-
+    
     /**
      * @param nivel the nivel to set
      */
-    public void setNivel(int nivel) {
+    public void SetNivel(int nivel) {
         this.nivel = nivel;
     }
 
     /**
      * @return the vidaActual
      */
-    public int getVidaActual() {
+    public int GetVidaActual() {
         return vidaActual;
     }
 
     /**
      * @param vidaActual the vidaActual to set
      */
-    public void setVidaActual(int vidaActual) {
+    public void SetVidaActual(int vidaActual) {
         this.vidaActual = vidaActual;
     }
     
     
-    public void setPosXY(IntPair pair){
-        setPosX(pair.x);
-        setPosY(pair.y);
+    public void SetPosXY(IntPair pair){
+        SetPosX(pair.x);
+        SetPosY(pair.y);
     }
 
     /**
      * @return the vidaMaxima
      */
-    public int getVidaMaxima() {
+    public int GetVidaMaxima() {
         return vidaMaxima;
     }
 
     /**
      * @param vidaMaxima the vidaMaxima to set
      */
-    public void setVidaMaxima(int vidaMaxima) {
+    public void SetVidaMaxima(int vidaMaxima) {
         this.vidaMaxima = vidaMaxima;
     }
 
-    
 }

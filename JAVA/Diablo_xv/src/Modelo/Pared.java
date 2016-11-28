@@ -11,10 +11,8 @@ package Modelo;
  */
 public class Pared implements Sprite{
     
-    public char _elementoGrafico;
     
     public Pared() {
-        _elementoGrafico = '#';
     }
     
     @Override

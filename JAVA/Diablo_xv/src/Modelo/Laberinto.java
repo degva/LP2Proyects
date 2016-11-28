@@ -18,8 +18,6 @@ import Facilidades.Aliado;
  */
 public class Laberinto {
     
-    //public static final int MAX_SIZE_LAB = 10;
-    
     private final int _sizeM;
     private final int _sizeN;
     private float _pctEnemigo;
@@ -84,82 +82,73 @@ public class Laberinto {
         this._pctEnemigo = _pctEnemigo;
     }
 
-    public void agregarArtefacto(Artefacto a){
-        _laberinto[a.getPosX()][a.getPosY()].setContenido(a);
-        getListaArtefactos().add(a);
+    public void AgregarArtefacto(Artefacto a){
+        _laberinto[a.GetPosX()][a.GetPosY()].SetContenido(a);
+        _listaArtefactos.add(a);
     }
     
-    public void agregarAliado(Aliado aliado){
-        this._laberinto[aliado.getPosX()][aliado.getPosY()].setContenido(aliado);
+    public void AgregarAliado(Aliado aliado){
+        this._laberinto[aliado.GetPosX()][aliado.GetPosY()].SetContenido(aliado);
         this._aliado = aliado;
     }
     
     
-    public Aliado obtenerAliado(){        
+    public Aliado GetAliado(){        
         return _aliado;
     }
     
-    public void agregarEnemigo(Enemigo e){
-        _laberinto[e.getPosX()][e.getPosY()].setContenido(e);
-        getListaEnemigos().add(e);
+    public void AgregarEnemigo(Enemigo e){
+        _laberinto[e.GetPosX()][e.GetPosY()].SetContenido(e);
+        _listaEnemigos.add(e);
     }
     
-    public void setTipoCelda(int x, int y, Sprite tipoCelda){
-        _laberinto[x][y].setTipo(tipoCelda);
+    public void SetTipoCelda(int x, int y, Sprite tipoCelda){
+        _laberinto[x][y].SetTipo(tipoCelda);
     }
     
-    public Sprite getTipoCelda(int x, int y){
-        return _laberinto[x][y].getTipo();
+    public Sprite GetTipoCelda(int x, int y){
+        return _laberinto[x][y].GetTipo();
     }
     
     public void setTipoContenido(int x, int y, Sprite tipoContenido){
-        _laberinto[x][y].setContenido(tipoContenido);
+        _laberinto[x][y].SetContenido(tipoContenido);
     }
     
     public Sprite getContenidoCelda(int x, int y){
-        return _laberinto[x][y].getContenido();
+        return _laberinto[x][y].GetContenido();
     }
     
     //verifica que la celda este vacia
     public Boolean celdaVacia(int x, int y){
-        return ((_laberinto[x][y].getTipo() instanceof Pasadizo) && (_laberinto[x][y].getContenido() == null));
+        return ((_laberinto[x][y].GetTipo() instanceof Pasadizo) && (_laberinto[x][y].GetContenido() == null));
     }
     
     public Celda getCelda(int x, int y) {
         return _laberinto[x][y];
     }
     
-    public IntPair DevolverAnterior() {
-        IntPair aux = null;
-        for (int i = 0; i < this.getSizeM(); i++) {
-            for (int j = 0; j < this.getSizeN(); j++) {
-                if ( this.getCelda(i, j).getContenido() instanceof Anterior) {
-                    aux = new IntPair(i,j);
-                }
-            }
-        }
-        return aux;
+    public void SetAnterior(IntPair coordenada){
+        _anterior = new IntPair(coordenada.x, coordenada.y);
     }
     
-    public IntPair DevolverSiguiente() {
-        IntPair aux = null;
-        for (int i = 0; i < this.getSizeM(); i++) {
-            for (int j = 0; j < this.getSizeN(); j++) {
-                if ( this.getCelda(i, j).getContenido() instanceof Siguiente) {
-                    aux = new IntPair(i,j);
-                }
-            }
-        }
-        return aux;
+    
+    public IntPair DevolverAnterior() {
+        return _anterior;
+    }
+    
+    public void SetSiguiente(IntPair coordenada){
+        _siguiente = new IntPair(coordenada.x, coordenada.y);
+    }
+    
+    public IntPair DevolverSiguiente() {        
+        return  _siguiente;
     }
     
     public Enemigo obtenerEnemigoActual(int x, int y){
-        // a esta funcion se le va a pasar la ubicacion del avatar
-        // para asi poder detectar a que enemigo de la lista se refiere
-        Enemigo e = getListaEnemigos().get(0); 
-        for (int i = 0; i < getListaEnemigos().size(); i++) {
-            e = getListaEnemigos().get(i);
-            if (e.getPosX() == x && e.getPosY() == y)
+        Enemigo e = _listaEnemigos.get(0); 
+        for (int i = 0; i < _listaEnemigos.size(); i++) {
+            e = _listaEnemigos.get(i);
+            if (e.GetPosX() == x && e.GetPosY() == y)
                 break;
         }
         return e;
@@ -167,37 +156,20 @@ public class Laberinto {
     
     public void retornarEnemigoActual(Enemigo eNew){
         Enemigo e;
-        int i;
-        int posX = eNew.getPosX();
-        int posY = eNew.getPosY();
-        
-        for (i = 0; i < getListaEnemigos().size(); i++) {
-            e = getListaEnemigos().get(i);
-            if (e.getPosX() == posX && e.getPosY() == posY)
-                break;
-        }
-        if (eNew.getVidaActual() <= 0) setTipoContenido(posX, posY, null);
-        else getListaEnemigos().set(i, eNew);
-         
-        
+        int posX = eNew.GetPosX();
+        int posY = eNew.GetPosY();
+        if (eNew.GetVidaActual() <= 0) setTipoContenido(posX, posY, null);
     }
+    
     public Artefacto obtenerArtefactoActual(int x, int y){
-        // a esta funcion se le va a pasar la ubicacion del avatar
-        // para asi poder detectar a que enemigo de la lista se refiere
         int i;
-        Artefacto a = getListaArtefactos().get(0); 
-        for (i = 0; i < getListaArtefactos().size(); i++) {
-            a = getListaArtefactos().get(i);
-            if (a.getPosX() == x && a.getPosY() == y)
+        Artefacto a = _listaArtefactos.get(0); 
+        for (i = 0; i < _listaArtefactos.size(); i++) {
+            a = _listaArtefactos.get(i);
+            if (a.GetPosX() == x && a.GetPosY() == y)
                 break;
         }
-        //se quita el artefacto de la lista, 
-        //para que luego el render no lo imprima
-
-        // _listaArtefactos.remove(i);
         setTipoContenido(x, y, null);
-
-
         return a;
     }
 
@@ -214,7 +186,4 @@ public class Laberinto {
     public ArrayList<Artefacto> getListaArtefactos() {
         return _listaArtefactos;
     }
-    
-    
-    
 }

@@ -35,7 +35,7 @@ public class InfoPanel extends javax.swing.JPanel {
     InfoPanelData data;
     ArrayList<Laberinto> laberintos;
     GestorInteraccion gestorInteraccion;
-    GameInfo gameInfo = GameInfo.Get();
+    GameStatus gameInfo = GameStatus.Get();
     private Juego _juegoActual;
     
     
@@ -74,24 +74,24 @@ public class InfoPanel extends javax.swing.JPanel {
         int x_ini = 60, y_ini = 60;
         g.drawImage(frameBg, 0, 0, this);
         g.drawString(String.format("Nivel %d ", gameInfo.LaberintoActual()+1), x_ini, y_ini);
-        g.drawString(data.avatar.getNombre(), x_ini, y_ini + 20);
-        g.drawString("Vida: " + data.avatar.getVidaActual(), x_ini, y_ini + 40);
-        g.drawString("Arma: " + data.avatar.getArmaActual().getNombre(), x_ini, y_ini + 60);
-        g.drawString("Armadura: " + data.avatar.getArmaduraActual().getNombre(), x_ini, y_ini + 80);
+        g.drawString(data.avatar.GetNombre(), x_ini, y_ini + 20);
+        g.drawString("Vida: " + data.avatar.GetVidaActual(), x_ini, y_ini + 40);
+        g.drawString("Arma: " + data.avatar.ArmaActual().Nombre(), x_ini, y_ini + 60);
+        g.drawString("Armadura: " + data.avatar.ArmaduraActual().Nombre(), x_ini, y_ini + 80);
         //falta saco
         g.drawString("Cosillas:",x_ini,y_ini + 100);
-        Saco saco = data.avatar.getSaco();
-        int sacoSize = saco.getSize();
+        Saco saco = data.avatar.Saco();
+        int sacoSize = saco.Size();
         if (sacoSize > 0){            
             DefaultListModel dlm = new DefaultListModel();
             Artefacto art;
             for (int i = 0; i < sacoSize; i++) {
-                art = saco.getItem(i);       
+                art = saco.Get(i);       
                 
                 if (art instanceof Arma)
-                    dlm.addElement(String.format("%d) Arma: ",i+1) + art.getNombre());     
+                    dlm.addElement(String.format("%d) Arma: ",i+1) + art.Nombre());     
                 else if (art instanceof Armadura)
-                    dlm.addElement(String.format("%d) Armadura: ",i+1) + art.getNombre());
+                    dlm.addElement(String.format("%d) Armadura: ",i+1) + art.Nombre());
             }
             listaSaco.setModel(dlm);
         }
@@ -198,7 +198,7 @@ public class InfoPanel extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // izquierda
         //data.avatar.setNombre("crippling");
-        IntPair pos = new IntPair(data.avatar.getPosX() -1, data.avatar.getPosY());
+        IntPair pos = new IntPair(data.avatar.GetPosX() -1, data.avatar.GetPosY());
         Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
         verificarInteraccion(data.avatar, labAct, pos);
         
@@ -207,21 +207,21 @@ public class InfoPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // arriba
-        IntPair pos = new IntPair(data.avatar.getPosX(), data.avatar.getPosY() -1);
+        IntPair pos = new IntPair(data.avatar.GetPosX(), data.avatar.GetPosY() -1);
         Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
         verificarInteraccion(data.avatar, labAct, pos);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // abajo
-        IntPair pos = new IntPair(data.avatar.getPosX(), data.avatar.getPosY() +1);
+        IntPair pos = new IntPair(data.avatar.GetPosX(), data.avatar.GetPosY() +1);
         Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
         verificarInteraccion(data.avatar, labAct, pos);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // derecha
-        IntPair pos = new IntPair(data.avatar.getPosX() +1, data.avatar.getPosY());
+        IntPair pos = new IntPair(data.avatar.GetPosX() +1, data.avatar.GetPosY());
         Laberinto labAct = laberintos.get(gameInfo.LaberintoActual());
         verificarInteraccion(data.avatar, labAct, pos);
     }//GEN-LAST:event_jButton2ActionPerformed

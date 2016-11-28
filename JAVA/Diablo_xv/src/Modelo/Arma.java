@@ -10,8 +10,8 @@ package Modelo;
  * @author degva
  */
 public class Arma extends Artefacto {
-    private int _dano_min;
-    private int _dano_max;
+    private final int _dano_min;
+    private final int _dano_max;
 
     /**
      *
@@ -22,7 +22,7 @@ public class Arma extends Artefacto {
      * @param dmax
      */
     public Arma(String nombre, int pX, int pY, int dmin, int dmax) {
-        super(nombre, pX, pY, 'a');
+        super(nombre, pX, pY);
         this._dano_max = dmax;
         this._dano_min = dmin;
     }
@@ -35,28 +35,10 @@ public class Arma extends Artefacto {
     }
 
     /**
-     * @param _dano_min the _dano_min to set
-     */
-    public void SetMinDamage(int _dano_min) {
-        this._dano_min = _dano_min;
-    }
-
-    /**
      * @return the _dano_max
      */
     public int GetMaxDamage() {
         return _dano_max;
     }
-
-    /**
-     * @param _dano_max the _dano_max to set
-     */
-    public void SetMaxDamage(int _dano_max) {
-        this._dano_max = _dano_max;
-    }
     
-    @Override
-    public String toString(){
-        return "Arma: " + getNombre() + " " + GetMinDamage() + "/" + GetMaxDamage();
-    }
 }

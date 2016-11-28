@@ -13,26 +13,14 @@ public class Armadura extends Artefacto {
     private int _defensa;
     
     public Armadura (String nombre, int posX, int posY, int defensa){
-        super(nombre, posX, posY, 'x');
+        super(nombre, posX, posY);
         this._defensa = defensa;
     }
     
     /**
      * @return the defensa
      */
-    public int getDefensa() {
+    public int GetDefensa() {
         return _defensa;
-    }
-
-    /**
-     * @param defensa the defensa to set
-     */
-    public void setDefensa(int defensa) {
-        this._defensa = defensa;
-    }
-    
-    @Override
-    public String toString(){
-        return "Armadura: " + getNombre() + " " + getDefensa();
     }
 }

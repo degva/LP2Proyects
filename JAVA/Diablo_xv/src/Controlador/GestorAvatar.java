@@ -16,11 +16,11 @@ public class GestorAvatar {
     }
     
     public void RecogerArtefacto(Avatar avatar, Artefacto newArtefacto){
-        avatar.getSaco().agregarArtefacto(newArtefacto);
+        avatar.Saco().AgregarArtefacto(newArtefacto);
     }
     
     public void AsignarArma(Avatar avatar, Arma newArma){
-        avatar.setArmaActual(newArma);
+        avatar.SetArmaActual(newArma);
     }
     
     public void ModificarArmadura(Avatar avatar, Armadura newArmadura){

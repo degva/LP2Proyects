@@ -11,17 +11,15 @@ package Modelo;
  */
 public class Enemigo extends Entidad {
     
-    private final char _elementoGrafico;
     private int ataque;
     private int defensa;
 
     
     public Enemigo(String nombre, int posicionX, int poscionY, int nivel){
         super(posicionX,poscionY,nombre,nivel, nivel * 2);
-        super.setVidaActual(nivel * 2);
-        ataque = this.getNivel() * 2; 
-        defensa = this.getNivel(); 
-        _elementoGrafico = 'E';   
+        super.SetVidaActual(nivel * 2);
+        ataque = this.GetNivel() * 2; 
+        defensa = this.GetNivel(); 
     }
     
     @Override
@@ -32,21 +30,18 @@ public class Enemigo extends Entidad {
     /**
      * @return the ataque
      */
-    public int getAtaque() {
+    public int GetAtaque() {
         return ataque;
     }
-
-    /**
-     * @param ataque the ataque to set
-     */
-    public void setAtaque(int ataque) {
+    
+    public void SetAtaque(int ataque){
         this.ataque = ataque;
     }
 
     /**
      * @return the defensa
      */
-    public int getDefensa() {
+    public int GetDefensa() {
         return defensa;
     }
 

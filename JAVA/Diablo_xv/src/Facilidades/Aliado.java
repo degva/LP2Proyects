@@ -19,14 +19,12 @@ import java.util.Comparator;
 ////MODIFICACION 1
 public class Aliado extends Entidad{
 
-    private final char _elementoGrafico;
-    private ArrayList<Consejo> _consejos;
-    private Saco _saco;
+    private final ArrayList<Consejo> _consejos;
+    private final Saco _saco;
     
     public Aliado(String nombre, int posicionX, int poscionY, int nivel){
         super(posicionX,poscionY,nombre,nivel, nivel * 2);
-        super.setVidaActual(nivel * 2);
-        _elementoGrafico = 'L';
+        super.SetVidaActual(nivel * 2);
         _consejos = new ArrayList<>();
         _saco = new Saco();
         LlenarSaco();
@@ -36,7 +34,7 @@ public class Aliado extends Entidad{
     private void LlenarSaco(){
         GestorArtefacto gestorArt = new GestorArtefacto();
         for (int i = 0; i < 10; i++) {
-            _saco.agregarArtefacto(gestorArt.ObtenerArtefacto(this.getPosX(), this.getPosY(), this.getNivel()));
+            _saco.AgregarArtefacto(gestorArt.ObtenerArtefacto(this.GetPosX(), this.GetPosY(), this.GetNivel()));
         }
     }
     

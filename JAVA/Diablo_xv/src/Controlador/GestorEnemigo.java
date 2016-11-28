@@ -30,20 +30,20 @@ public class GestorEnemigo {
         Random rnd = new Random();
         Enemigo nuevoEne = new Enemigo("hue", 1, 1, 1);
         int numEnemigo = rnd.nextInt(_enemigosDisponibles.size());
-        nuevoEne.setNombre(_enemigosDisponibles.get(numEnemigo).getNombre()); //obtenemos el enemigo
+        nuevoEne.SetNombre(_enemigosDisponibles.get(numEnemigo).GetNombre()); //obtenemos el enemigo
         //colocamos algunos atributos
-        nuevoEne.setPosX(x);
-        nuevoEne.setPosY(y);
-        nuevoEne.setNivel(numeroLaberinto);
+        nuevoEne.SetPosX(x);
+        nuevoEne.SetPosY(y);
+        nuevoEne.SetNivel(numeroLaberinto);
         /*la formula en estas funciones se puede cambiar*/
         /*
         vidaMaxima = nivel*10
         vidaactual = 0 y la vida maxima
         ataque = numero random entre uno y 10 * nivel
         */
-        nuevoEne.setVidaMaxima(numeroLaberinto*10); 
-        nuevoEne.setVidaActual(rnd.nextInt(numeroLaberinto*10));
-        nuevoEne.setAtaque((rnd.nextInt(9)+1)*numeroLaberinto);
+        nuevoEne.SetVidaMaxima(numeroLaberinto*10); 
+        nuevoEne.SetVidaActual(rnd.nextInt(numeroLaberinto*10));
+        nuevoEne.SetAtaque((rnd.nextInt(9)+1)*numeroLaberinto);
         return nuevoEne;
     }
            

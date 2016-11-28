@@ -13,35 +13,34 @@ import java.util.List;
  * @author degva
  */
 public class Saco {
-    private int size;
+    
     List<Artefacto> artefactos;
     
     public Saco() {
         artefactos = new ArrayList();
     }
     
-    public void agregarArtefacto (Artefacto item) {
+    public void AgregarArtefacto(Artefacto item) {
         artefactos.add(item);
-        this.size++;
     }
     
-    public int getSize() {
+    public int Size(){
         return artefactos.size();
     }
     
-    public Artefacto getItem(int i) {              
+    public Artefacto Get(int i) {              
         return artefactos.get(i);                  
     }
     
-    public Artefacto getItemByName(String name){
+    public Artefacto Get(String name){
         for (Artefacto artefacto : artefactos) {
-            if (artefacto.getNombre().equals(name))
+            if (artefacto.Nombre().equals(name))
                 return artefacto;
         }
         return null;
     }
     
-    public void removeItem(int i){
+    public void Remove(int i){
         this.artefactos.remove(i);
     }
 

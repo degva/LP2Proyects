@@ -66,7 +66,7 @@ public class MapPanel extends javax.swing.JPanel {
         try {
             //Image harambeGIF = Toolkit.getDefaultToolkit().createImage("./res/harambe.gif");
             BufferedImage sprite = ImageIO.read(new File("./res/harambe_der.png"));
-            imgs.put("avatar", sprite);
+            imgs.put("avatar-der", sprite);
             sprite = ImageIO.read(new File("./res/harambe_izq.png"));
             imgs.put("avatar-izq", sprite);
             sprite = ImageIO.read(new File("./res/harambe_arr.png"));
@@ -99,22 +99,24 @@ public class MapPanel extends javax.swing.JPanel {
     public void paintComponent(Graphics g){
         boolean cellIsOut, cellIsEmpty;
         super.paintComponent(g);
-        int avX = data.avatar.getPosX();
-        int avY = data.avatar.getPosY();
+        int avX = data.avatar.GetPosX();
+        int avY = data.avatar.GetPosY();
         for (int i = avX - ANCHO, x = 0; i <= avX + ANCHO; i++, x++) {
             for (int j = avY - ALTO, y = 0; j <= avY + ALTO; j++, y++) {
 /*These are*/   cellIsOut = i<0 || j<0 || i > data.laberinto.getSizeM()-1 || j > data.laberinto.getSizeN()-1 ;
 /*indentation*/ BufferedImage sp;
-/*bunnies they*/String spType;
+/*bunnies they*/String spType = null;
 /*prevent*/     if (cellIsOut)
 /*changes to*/      sp = imgs.get("afuera");
 /*these blocks*/else if (i == avX && j == avY){
+                    String gg = data.avatar.GetSpriteType();
 /*()()*of*/         sp = imgs.get(data.avatar.GetSpriteType());
 /*('.')**code*/ } else {
-/*(() ()*/          spType = data.laberinto.getCelda(i, j).getSprite();
+/*(() ()*/          spType = data.laberinto.getCelda(i, j).GetSprite();
 /*(_() ()*/         sp = imgs.get(spType);
 /*********()()*/}
 /*commit*('.')*/if (sp == null) {
+                    System.out.println(spType);
 /*me!***() ())*/    System.out.println("No Sprite detected");
 /******() ()_)*/}
 /**************/g.drawImage(sp, x*32, y*32, this);

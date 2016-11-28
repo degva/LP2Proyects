@@ -5,8 +5,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>
 	<Enemigo>
@@ -15,8 +14,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>	
 	<Enemigo>
@@ -25,8 +23,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>
 	<Enemigo>
@@ -35,8 +32,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>
 	<Enemigo>
@@ -45,8 +41,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>
 	<Enemigo>
@@ -55,8 +50,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>
 	<Enemigo>
@@ -65,8 +59,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>
 	<Enemigo>
@@ -75,8 +68,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>
 	<Enemigo>
@@ -85,8 +77,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>
 	<Enemigo>
@@ -95,8 +86,7 @@
 		<posY>-1</posY>
 		<nivel>-1</nivel>
 		<vidaActual>0</vidaActual>
-		<vidaMaxima>0</vidaMaxima>
-		<_elementoGrafico>E</_elementoGrafico>
+		<vidaMaxima>0</vidaMaxima>		
 		<ataque>0</ataque>
 	</Enemigo>
 </ArregloEnemigosDisponibles>

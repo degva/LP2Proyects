@@ -18,7 +18,7 @@ public class GestorJuego {
     private final GestorInteraccion gestorInteraccion;
     private final Avatar avatar;
     private final ArrayList<Laberinto> laberintos;
-    private final GameInfo gameInfo = GameInfo.Get();
+    private final GameStatus gameInfo = GameStatus.Get();
     
     private final GestorLaberinto _gesLab;
     
@@ -61,11 +61,11 @@ public class GestorJuego {
     
     private boolean colisionConEnemigo() {
         Laberinto l = laberintos.get(gameInfo.LaberintoActual());
-        IntPair av_pos = avatar.getPos();
-        return  l.getCelda(av_pos.x + 1, av_pos.y).getContenido() instanceof Enemigo ||
-                l.getCelda(av_pos.x - 1, av_pos.y).getContenido() instanceof Enemigo ||
-                l.getCelda(av_pos.x, av_pos.y + 1).getContenido() instanceof Enemigo ||
-                l.getCelda(av_pos.x, av_pos.y - 1).getContenido() instanceof Enemigo;
+        IntPair av_pos = avatar.GetPosition();
+        return  l.getCelda(av_pos.x + 1, av_pos.y).GetContenido() instanceof Enemigo ||
+                l.getCelda(av_pos.x - 1, av_pos.y).GetContenido() instanceof Enemigo ||
+                l.getCelda(av_pos.x, av_pos.y + 1).GetContenido() instanceof Enemigo ||
+                l.getCelda(av_pos.x, av_pos.y - 1).GetContenido() instanceof Enemigo;
     }
     
     private boolean PressedKeyIsMovement(int keyCode){
@@ -108,17 +108,17 @@ public class GestorJuego {
     }
     
     private boolean DesplazamientoEsValido(IntPair desplazamiento){
-        int nuevoX = avatar.getPosX() + desplazamiento.x;
-        int nuevoY = avatar.getPosY() + desplazamiento.y;
+        int nuevoX = avatar.GetPosX() + desplazamiento.x;
+        int nuevoY = avatar.GetPosY() + desplazamiento.y;
         Laberinto laberinto = laberintos.get(gameInfo.LaberintoActual());
         Celda celdaADesplazarse = laberinto.getCelda(nuevoX, nuevoY);
-        Sprite aux = celdaADesplazarse.getTipo();
+        Sprite aux = celdaADesplazarse.GetTipo();
         //return ((aux instanceof Pasadizo) && !(celdaADesplazarse.getContenido() instanceof Enemigo));
         return (aux instanceof Pasadizo);
     }
     
     private void CheckLevelChange(){
-        IntPair avatarPos = avatar.getPos();
+        IntPair avatarPos = avatar.GetPosition();
         Laberinto l = laberintos.get(gameInfo.LaberintoActual());
         IntPair antPos = l.DevolverAnterior();
         IntPair sigPos = l.DevolverSiguiente();

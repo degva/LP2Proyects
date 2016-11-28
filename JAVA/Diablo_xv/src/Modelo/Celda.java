@@ -11,9 +11,6 @@ package Modelo;
  */
 public class Celda {
     
-    // Esto debe tener tambien un tipo de Celda
-    // private TipoCelda tipo;
-    
     private Sprite _tipo; //Pared o Pasadizo
     private Sprite _contenido; //Enemigo, Artefacto, Avatar, Anterior, Siguiente, NULL
 
@@ -27,23 +24,23 @@ public class Celda {
         }
     }
 
-    public Sprite getTipo() {
+    public Sprite GetTipo() {
         return _tipo;
     }
 
-    public void setTipo(Sprite _tipo) {
+    public void SetTipo(Sprite _tipo) {
         this._tipo = _tipo;
     }
 
-    public Sprite getContenido() {
+    public Sprite GetContenido() {
         return _contenido;
     }
 
-    public void setContenido(Sprite _contenido) {
+    public void SetContenido(Sprite _contenido) {
         this._contenido = _contenido;
     }
     
-    public String getSprite(){
+    public String GetSprite(){
         if (_contenido != null)
             return _contenido.GetSpriteType();
         else 
