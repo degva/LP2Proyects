@@ -38,26 +38,13 @@ public class GestorJuego {
     public void Procesar(int keyCode){
         if (PressedKeyIsMovement(keyCode)){
             IntPair desp = DesplazamientoByKeyCode(keyCode);
-            
-            /*esto no deberia estar*/
-            //avatar.Mover(desp.x, desp.y);
             if (DesplazamientoEsValido(desp)){
                 avatar.Mover(desp.x, desp.y);
                 CheckLevelChange();
             }
         }
-        //_gesLab.MoverEnemigos(laberintos.get(gameInfo.LaberintoActual()), avatar.getPosX(), avatar.getPosY());
-        //if (colisionConEnemigo()) {
-            //gameInfo.setOnColission(true);
-        //}
     }
     
-    
-//    private boolean PosicionDisparaInteraccion(Avatar avatar, Laberinto laberinto){
-//        IntPair coordenadasAvatar = new IntPair(avatar.getPosX(), avatar.getPosY());
-//        Celda celdaAvatar = laberinto.getCelda(coordenadasAvatar.x, coordenadasAvatar.y);
-//        return (celdaAvatar.getContenido() instanceof Enemigo || celdaAvatar.getContenido() instanceof Artefacto);
-//    }
     
     private boolean colisionConEnemigo() {
         Laberinto l = laberintos.get(gameInfo.LaberintoActual());
@@ -132,24 +119,5 @@ public class GestorJuego {
             vdController.Next(laberintos.get(gameInfo.LaberintoActual()));
         }
     }
-    
-    // Metodo para efectuar la interacción con el objeto en la dirección especificada
-    // Si dirección = "", se hace la interacción con el objeto que está en la misma celda que el avatar. (DEPRECATED)
-//    private void Interactuar(String direccion, Avatar avatar, Laberinto laberinto){        
-//        IntPair desplazamiento = DesplazamientoByComando(direccion);
-//        IntPair coordenadaInteraccion = new IntPair(avatar.getPosX()+desplazamiento.x, avatar.getPosY()+desplazamiento.y);
-//        Sprite objetoInteraccion = laberinto.getContenidoCelda(coordenadaInteraccion.x, coordenadaInteraccion.y);        
-//        // Revisamos el tipo de interaccion que corresponde
-//        if(objetoInteraccion instanceof Enemigo){
-//            //Se inicia una batalla
-//            gestorInteraccion.interactuarEnemigo(avatar, laberinto, coordenadaInteraccion);
-//        } else if (objetoInteraccion instanceof Artefacto){
-//            gestorInteraccion.interactuarArtefacto(avatar, laberinto, coordenadaInteraccion);
-//        }else if (objetoInteraccion instanceof Aliado){
-//            gestorInteraccion.interactuarAliado(avatar, laberinto, coordenadaInteraccion);
-//        }else{
-//            //consola.SetLog("Aqui no hay nada para interactuar");
-//        }
-//    }
     
 }

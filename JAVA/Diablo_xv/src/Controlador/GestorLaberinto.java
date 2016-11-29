@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import Facilidades.Aliado;
-import Controlador.GestorAliado;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,12 +38,11 @@ public class GestorLaberinto {
         
         // creamos el arreglo de 2 dimensiones del laberinto
         Laberinto nuevoLaberinto = new Laberinto(sizeM, sizeN);
-        nuevoLaberinto.setPctEnemigo(rnd.nextFloat());
+        //nuevoLaberinto.setPctEnemigo(rnd.nextFloat());
         
         /*Ahora generamos el laberinto*/
         
         //inicializamos todas las celdas como PARED
-        
         for (int i = 0; i < nuevoLaberinto.getSizeM(); i++) {
             for (int j = 0; j < nuevoLaberinto.getSizeN(); j++) {
                 nuevoLaberinto.SetTipoCelda(i, j, new Pared());
@@ -144,7 +142,7 @@ public class GestorLaberinto {
         int maxY = l.getSizeN();
         
         //Hallar el nro de enemigos por mapa segun la probabilidad de que aparezca
-        int nroEnemigos = Math.round((l.getPctEnemigo()* maxX * maxY)/20);
+        int nroEnemigos = Math.round((rnd.nextFloat()* maxX * maxY)/20);
         int eneX, eneY;
         GestorEnemigo gestorEne = new GestorEnemigo();
         
@@ -153,7 +151,7 @@ public class GestorLaberinto {
             eneY = (rnd.nextInt(maxY/2)*2 +1);
             
             if(l.celdaVacia(eneX, eneY)){ //si la celda es del tipo pasadizo y esta vacia
-                l.AgregarEnemigo(gestorEne.ObtenerEnemigo(eneX, eneY, numeroLaberitno));
+                l.AgregarEnemigo(gestorEne.CrearEnemigo(eneX, eneY, numeroLaberitno));
             } else 
                 i--;
         } 

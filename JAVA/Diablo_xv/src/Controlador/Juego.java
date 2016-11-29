@@ -85,7 +85,7 @@ public class Juego {
     }
     
     private void PrepareData(){
-        setGestorLab(new GestorLaberinto());
+        _gestorLab = new GestorLaberinto();
         CrearListaLaberintos();
         _avatar = new Avatar(_laberintos.get(0).DevolverAnterior(), "", _idxLaberinto);
         mapPanelData = new MapPanelData(_laberintos.get(0), getAvatar());
@@ -113,7 +113,7 @@ public class Juego {
             }
         }
         String nombre = welcomeHarambeWindow.NombreJugador;
-        getAvatar().SetNombre(nombre);
+        _avatar.SetNombre(nombre);
         gameWindow.remove(welcomeHarambeWindow);
     }    
     
@@ -128,7 +128,7 @@ public class Juego {
         gameWindow.pack();
         mapPanel.setVisible(true);
         infoPanel.setVisible(true);
-        ViewInputController inputController = new ViewInputController(gameWindow, mapPanel, infoPanel, _gestorJuego);
+        GameKeyboard inputController = new GameKeyboard(gameWindow, mapPanel, infoPanel, _gestorJuego);
         inputController.setListener();
         
         interaccionDialog = new JDialog(gameWindow, "Interaccion", true);

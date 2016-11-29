@@ -26,9 +26,9 @@ public class GestorEnemigo {
     }
     
     
-    public Enemigo ObtenerEnemigo(int x, int y, int numeroLaberinto){
+    public Enemigo CrearEnemigo(int x, int y, int numeroLaberinto){
         Random rnd = new Random();
-        Enemigo nuevoEne = new Enemigo("hue", 1, 1, 1);
+        Enemigo nuevoEne = new Enemigo(null, 1, 1, 1);
         int numEnemigo = rnd.nextInt(_enemigosDisponibles.size());
         nuevoEne.SetNombre(_enemigosDisponibles.get(numEnemigo).GetNombre()); //obtenemos el enemigo
         //colocamos algunos atributos

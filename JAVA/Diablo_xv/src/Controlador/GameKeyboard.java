@@ -15,14 +15,14 @@ import java.awt.event.KeyListener;
  *
  * @author wperezp
  */
-public class ViewInputController implements KeyListener {
+public class GameKeyboard implements KeyListener {
     
     private final GameWindow gameWindow;
     private final MapPanel mapPanel;
     private final InfoPanel infoPanel;
     private final GestorJuego gestorJuego;
     
-    public ViewInputController(GameWindow gameWindow, MapPanel mapPanel, InfoPanel infoPanel, GestorJuego gestorJuego){
+    public GameKeyboard(GameWindow gameWindow, MapPanel mapPanel, InfoPanel infoPanel, GestorJuego gestorJuego){
         this.gameWindow = gameWindow;
         this.mapPanel = mapPanel;
         this.infoPanel = infoPanel;

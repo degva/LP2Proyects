@@ -18,136 +18,123 @@ import Facilidades.Aliado;
  */
 public class Laberinto {
     
-    private final int _sizeM;
-    private final int _sizeN;
-    private float _pctEnemigo;
-    public Celda[][] _laberinto;
-    private int[] _nivelesEnemigo;
+    private final int sizeM;
+    private final int sizeN;
+    public Celda[][] laberinto;
+    private int[] nivelesEnemigo;
     
-    private IntPair _anterior;
-    private IntPair _siguiente;
+    private IntPair anterior;
+    private IntPair siguiente;
    
-    private ArrayList<Enemigo> _listaEnemigos;
-    private ArrayList<Artefacto> _listaArtefactos;
+    private ArrayList<Enemigo> listaEnemigos;
+    private ArrayList<Artefacto> listaArtefactos;
     
-    private Aliado _aliado;
+    private Aliado aliado;
     
-    public Laberinto(int sizeM, int sizeN) {
+    public static final int MAX_SIZE_LAB = 10;
+    
+    public Laberinto() {
         Random rnd = new Random();
-
-        this._sizeM = sizeM;
-        this._sizeN = sizeN;
+        int rndAux = (int) (Math.random()*MAX_SIZE_LAB+5);
+        this.sizeM = 2*rndAux+1;
+        this.sizeN = sizeM;
         
-        _laberinto = new Celda[_sizeM + 1][_sizeN + 1];
+        laberinto = new Celda[sizeM + 1][sizeN + 1];
         
-        for (int i =0; i < _sizeM; i++) {
-            for (int j = 0; j < _sizeN; j++) {
-                _laberinto[i][j] = new Celda(null);
+        for (int i =0; i < sizeM; i++) {
+            for (int j = 0; j < sizeN; j++) {
+                laberinto[i][j] = new Celda(null);
             }
         }
         
-        _nivelesEnemigo = new int[_sizeM];
-        for(int i =0; i < _sizeM; i++) 
-            _nivelesEnemigo[i]= rnd.nextInt(10) +1;
+        nivelesEnemigo = new int[sizeM];
+        for(int i =0; i < sizeM; i++) 
+            nivelesEnemigo[i]= rnd.nextInt(10) +1;
         
-        _listaEnemigos = new ArrayList<>();
-        _listaArtefactos = new ArrayList<>();
+        listaEnemigos = new ArrayList<>();
+        listaArtefactos = new ArrayList<>();
     }
         
     /**
-     * @return the _sizeM
+     * @return the sizeM
      */
     public int getSizeM() {
-        return _sizeM;
+        return sizeM;
     }
 
     /**
-     * @return the _sizeN
+     * @return the sizeN
      */
     public int getSizeN() {
-        return _sizeN;
-    }
-
-    /**
-     * @return the _pctEnemigo
-     */
-    public float getPctEnemigo() {
-        return _pctEnemigo;
-    }
-
-    /**
-     * @param _pctEnemigo the _pctEnemigo to set
-     */
-    public void setPctEnemigo(float _pctEnemigo) {
-        this._pctEnemigo = _pctEnemigo;
+        return sizeN;
     }
 
     public void AgregarArtefacto(Artefacto a){
-        _laberinto[a.GetPosX()][a.GetPosY()].SetContenido(a);
-        _listaArtefactos.add(a);
+        laberinto[a.GetPosX()][a.GetPosY()].SetContenido(a);
+        listaArtefactos.add(a);
     }
     
     public void AgregarAliado(Aliado aliado){
-        this._laberinto[aliado.GetPosX()][aliado.GetPosY()].SetContenido(aliado);
-        this._aliado = aliado;
+        this.laberinto[aliado.GetPosX()][aliado.GetPosY()].SetContenido(aliado);
+        this.aliado = aliado;
     }
     
     
     public Aliado GetAliado(){        
-        return _aliado;
+        return aliado;
     }
     
     public void AgregarEnemigo(Enemigo e){
-        _laberinto[e.GetPosX()][e.GetPosY()].SetContenido(e);
-        _listaEnemigos.add(e);
+        laberinto[e.GetPosX()][e.GetPosY()].SetContenido(e);
+        listaEnemigos.add(e);
     }
     
     public void SetTipoCelda(int x, int y, Sprite tipoCelda){
-        _laberinto[x][y].SetTipo(tipoCelda);
+        laberinto[x][y].SetTipo(tipoCelda);
     }
     
     public Sprite GetTipoCelda(int x, int y){
-        return _laberinto[x][y].GetTipo();
+        return laberinto[x][y].GetTipo();
     }
     
     public void setTipoContenido(int x, int y, Sprite tipoContenido){
-        _laberinto[x][y].SetContenido(tipoContenido);
+        laberinto[x][y].SetContenido(tipoContenido);
     }
     
     public Sprite getContenidoCelda(int x, int y){
-        return _laberinto[x][y].GetContenido();
+        return laberinto[x][y].GetContenido();
     }
     
     //verifica que la celda este vacia
     public Boolean celdaVacia(int x, int y){
-        return ((_laberinto[x][y].GetTipo() instanceof Pasadizo) && (_laberinto[x][y].GetContenido() == null));
+        return ((laberinto[x][y].GetTipo() instanceof Pasadizo) && (laberinto[x][y].GetContenido() == null));
     }
     
     public Celda getCelda(int x, int y) {
-        return _laberinto[x][y];
+        return laberinto[x][y];
     }
     
     public void SetAnterior(IntPair coordenada){
-        _anterior = new IntPair(coordenada.x, coordenada.y);
+        anterior = new IntPair(coordenada.x, coordenada.y);
     }
     
     
     public IntPair DevolverAnterior() {
-        return _anterior;
+        return anterior;
     }
     
     public void SetSiguiente(IntPair coordenada){
-        _siguiente = new IntPair(coordenada.x, coordenada.y);
+        siguiente = new IntPair(coordenada.x, coordenada.y);
     }
     
     public IntPair DevolverSiguiente() {        
-        return  _siguiente;
+        return  siguiente;
     }
     
     public Enemigo obtenerEnemigoActual(int x, int y){
-        Enemigo e = _listaEnemigos.get(0); 
-        for (int i = 0; i < _listaEnemigos.size(); i++) {
-            e = _listaEnemigos.get(i);
+        Enemigo e = listaEnemigos.get(0); 
+        for (int i = 0; i < listaEnemigos.size(); i++) {
+            e = listaEnemigos.get(i);
             if (e.GetPosX() == x && e.GetPosY() == y)
                 break;
         }
@@ -163,9 +150,9 @@ public class Laberinto {
     
     public Artefacto obtenerArtefactoActual(int x, int y){
         int i;
-        Artefacto a = _listaArtefactos.get(0); 
-        for (i = 0; i < _listaArtefactos.size(); i++) {
-            a = _listaArtefactos.get(i);
+        Artefacto a = listaArtefactos.get(0); 
+        for (i = 0; i < listaArtefactos.size(); i++) {
+            a = listaArtefactos.get(i);
             if (a.GetPosX() == x && a.GetPosY() == y)
                 break;
         }
@@ -174,16 +161,16 @@ public class Laberinto {
     }
 
     /**
-     * @return the _listaEnemigos
+     * @return the listaEnemigos
      */
     public ArrayList<Enemigo> getListaEnemigos() {
-        return _listaEnemigos;
+        return listaEnemigos;
     }
 
     /**
-     * @return the _listaArtefactos
+     * @return the listaArtefactos
      */
     public ArrayList<Artefacto> getListaArtefactos() {
-        return _listaArtefactos;
+        return listaArtefactos;
     }
 }
