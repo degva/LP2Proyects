@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 
 using MySql.Data.MySqlClient;
+using EQuipuWCFLibrary.Modelo;
 
 namespace EQuipuWCFLibrary
 {
@@ -17,11 +18,13 @@ namespace EQuipuWCFLibrary
 
         public EquipuService()
         {
+            /*
             _con = new MySqlConnection();
 
             String pass = "F6700370";
             _con.ConnectionString = "Server=192.168.200.13;Database=BDLP2_20114297;User=U20114297;Password=" + pass + ";";
             _con.Open();
+             */
 
             /* Para usar la conexion de la base de datos
             SqlCommand comando = new SqlCommand();
@@ -36,6 +39,8 @@ namespace EQuipuWCFLibrary
 
 
             _lista_usuarios = new List<Usuario>();
+            Usuario u = new Usuario("degva", "123");
+            _lista_usuarios.Add(u);
         }
 
         public bool ValidarUsuario(string username, string password)

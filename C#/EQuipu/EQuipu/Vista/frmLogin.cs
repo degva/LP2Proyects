@@ -15,21 +15,21 @@ namespace EQuipu.Vista
     public partial class frmLogin : Form
     {
 
-        private LoginServiceClient loginService;
+        private EQuipuServiceClient equipuService;
 
         public frmLogin()
         {
             InitializeComponent();
-            loginService = new LoginServiceClient();
+            equipuService = new EQuipuServiceClient();
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            if (loginService.ValidarUsuario(this.usrInput.Text, this.passInput.Text))
+            if (equipuService.ValidarUsuario(this.usrInput.Text, this.passInput.Text))
             {
                 frmPrincipal principal = new frmPrincipal();
                 principal.Show();
-                loginService.Close();
+                equipuService.Close();
                 this.Hide();
             }
             else

@@ -53,6 +53,12 @@
   <ItemGroup>
     <Compile Include="IEQuipuService.cs" />
     <Compile Include="EQuipuService.cs" />
+    <Compile Include="Modelo\Alumno.cs" />
+    <Compile Include="Modelo\Consultable.cs" />
+    <Compile Include="Modelo\Externo.cs" />
+    <Compile Include="Modelo\Miembro.cs" />
+    <Compile Include="Modelo\Profesor.cs" />
+    <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
