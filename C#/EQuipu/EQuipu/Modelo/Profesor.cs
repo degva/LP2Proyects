@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace EQuipu.Modelo
 {
     [Serializable]
-    public class Profesor : Miembro, Consultable
+    public class Profesor : Miembro
     {
         private long codigoProfesor;
         private string estado;
@@ -31,9 +31,5 @@ namespace EQuipu.Modelo
             set { codigoProfesor = value; }
         }
 
-        public String getInformacion()
-        {
-            return this.codigoProfesor.ToString() + "-" + this.nombre + "-" + this.estado + "\n";
-        }
     }
 }

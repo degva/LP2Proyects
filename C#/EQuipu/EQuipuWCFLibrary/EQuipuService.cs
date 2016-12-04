@@ -34,6 +34,9 @@ namespace EQuipuWCFLibrary
             _lista_usuarios = new List<Usuario>();
         }
 
+        /*
+         * User Management
+         */
         public bool ValidarUsuario(string username, string password)
         {
             Usuario u = BuscarUsuario(username);
@@ -62,7 +65,7 @@ namespace EQuipuWCFLibrary
 
             MySqlCommand comando = new MySqlCommand();
             comando.Connection = _con;
-            comando.CommandText = "SELECT * FROM USERS WHERE username = {1}";
+            comando.CommandText = String.Format("SELECT * FROM USERS WHERE username = '{0}'", username);
             MySqlDataReader reader = comando.ExecuteReader();
             if (reader.Read())
             {
@@ -71,6 +74,113 @@ namespace EQuipuWCFLibrary
             }
 
             return null;
+        }
+
+        /**
+         * Miembros Management
+         */
+        public void AgregarMiembro(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo,
+                    string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion)
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("INSERT INTO MIEMBRO (codigo, nombre, fechaNacimiento, direccion, email, sexo) VALUES ({0},'{1}','{2}','{3}','{4}','{5}')", 
+                codigo, nombre, fechaNac, direccion, email, sexo);
+            comando.ExecuteNonQuery();
+            if (selected == "Alumno")
+            {
+                comando.CommandText = String.Format("INSERT INTO ALUMNO (codigo, codigo_alumno, craest) VALUES ({0},{1},{2})",
+                    codigo, codigoPucp, craest);
+                comando.ExecuteNonQuery();
+            }
+            else if (selected == "Profesor")
+            {
+                comando.CommandText = String.Format("INSERT INTO PROFESOR (codigo, codigo_prof, estado) VALUES ({0},{1},'{2}')",
+                    codigo, codigoProf, estado);
+                comando.ExecuteNonQuery();
+            }
+            else if (selected == "Externo")
+            {
+                comando.CommandText = String.Format("INSERT INTO EXTERNO (codigo, dedicacion) VALUES ({0},'{1}')",
+                    codigo, dedicacion);
+                comando.ExecuteNonQuery();
+            }
+            
+        }
+
+        public void ActualizarMiembro(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo,
+                    string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion)
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("UPDATE MIEMBRO SET (nombre, fechaNacimiento, direccion, email, sexo) = ('{1}','{2}','{3}','{4}','{5}') WHERE codigo = {0}",
+                codigo, nombre, fechaNac, direccion, email, sexo);
+            comando.ExecuteNonQuery();
+            if (selected == "Alumno")
+            {
+                comando.CommandText = String.Format("UPDATE ALUMNO SET (codigo_alumno, craest) = ({1},{2}) WHERE codigo = {0}",
+                    codigo, codigoPucp, craest);
+                comando.ExecuteNonQuery();
+            }
+            else if (selected == "Profesor")
+            {
+                comando.CommandText = String.Format("UPDATE PROFESOR SET (codigo_prof, estado) = ({1},'{2}') WHERE codigo = {0}",
+                    codigo, codigoProf, estado);
+                comando.ExecuteNonQuery();
+            }
+            else if (selected == "Externo")
+            {
+                comando.CommandText = String.Format("UPDATE EXTERNO SET (dedicacion) = ('{2}') WHERE codigo = {1}",
+                    codigo, dedicacion);
+                comando.ExecuteNonQuery();
+            }
+        }
+
+
+        public List<Miembro> ObtenerMiembros()
+        {
+            return null;
+        }
+
+        public Miembro ObtenerMiembro(int codigo)
+        {
+
+            string query = "select " +
+                                "m.*," +
+                                "case " +
+                                "a.codigoPucp, a.craest," +
+                                "p.codigoProfe, p.estado," +
+                                "e.dedicacion " +
+                            "from " +
+                                "miembro m " +
+                                "left join " +
+                                    "alumno a on m.codigo = a.miembro_codigo " +
+                                "left join " +
+                                    "profesor p on m.codigo = p.miembro_codigo " +
+                                "left join " +
+                                    "externo e on m.codigo = e.miembro_codigo " +
+                            "where " +
+                                "m.codigo = {0}";
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, codigo);
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                /* TODO */
+                Usuario u = new Miembro();
+                return u;
+            }
+            return null;
+        }
+        public List<Miembro> BuscarMiembro(int codigo, string tipo)
+        {
+            return null;
+        }
+
+        public void EliminarMiembro(int codigo)
+        {
         }
     }
 }

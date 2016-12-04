@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 namespace EQuipuWCFLibrary.Modelo
 {
     [DataContract]
+    [Serializable]
     public class Usuario
     {
         private string _username;

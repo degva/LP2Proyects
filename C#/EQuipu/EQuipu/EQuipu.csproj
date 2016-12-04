@@ -52,7 +52,6 @@
     <Compile Include="Controlador\GestorFeria.cs" />
     <Compile Include="Controlador\GestorMiembros.cs" />
     <Compile Include="Modelo\Alumno.cs" />
-    <Compile Include="Modelo\Consultable.cs" />
     <Compile Include="Modelo\Encuesta.cs" />
     <Compile Include="Modelo\Equipo.cs" />
     <Compile Include="Modelo\Evento.cs" />
@@ -231,6 +230,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\EQuipuService\EQuipu.EQuipuService.Miembro.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EQuipuService\EQuipuWCFLibrary.Modelo.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\EQuipuService\service.wsdl" />
     <None Include="Service References\EQuipuService\service.xsd">
       <SubType>Designer</SubType>

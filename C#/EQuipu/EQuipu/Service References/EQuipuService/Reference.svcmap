@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="45ecb81e-0a0f-4d39-aadf-eb75a3d15987" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a6caca43-5eb0-45b2-86e8-b36512c0f37a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -9,7 +9,9 @@
     <GenerateInternalTypes>false</GenerateInternalTypes>
     <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
-    <CollectionMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
@@ -22,9 +24,10 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/EQuipuWCFLibrary/LoginService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="ca3d86c4-c76c-4ed7-9ec4-ecefe743643a" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/EQuipuWCFLibrary/LoginService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0d73fd67-2392-42fb-8949-cdbadaa99fbe" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/EQuipuWCFLibrary/LoginService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="6dccc103-7a04-4cad-8d78-d2248974b67c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/EQuipuWCFLibrary/LoginService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="7167b6ac-ca7a-4754-8586-3ce6db4a021f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/EQuipuWCFLibrary/LoginService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4b63f65d-047b-4ffa-b321-e26dff68d259" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/EQuipuWCFLibrary/LoginService/mex" />
+    <MetadataFile FileName="EQuipuWCFLibrary.Modelo.xsd" MetadataType="Schema" ID="05368b96-6da8-45e2-9cce-bcf2733e5520" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/EQuipuWCFLibrary/LoginService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="38c440f2-7abb-4902-8fab-385d86072d5f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/EQuipuWCFLibrary/LoginService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

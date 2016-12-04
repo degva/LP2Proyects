@@ -8,28 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using EQuipu.Controlador;
-using EQuipu.Modelo;
+using EQuipu.EQuipuService;
 
 namespace EQuipu.Vista
 {
     public partial class frmMantMiemEditor : Form
     {
-        GestorMiembros _gestor;
+        private EQuipuServiceClient _equipuService;
         int _codigo;
-        public frmMantMiemEditor(GestorMiembros gestor)
+        public frmMantMiemEditor()
         {
             InitializeComponent();
-            this._gestor = gestor;
+            _equipuService = new EQuipuServiceClient();
             this.btnGrabar.Text = "Crear";
             this._codigo = -1;
             this.Text = "Crear nuevo miembro";
         }
 
-        public frmMantMiemEditor(GestorMiembros gestor, int codigo)
+        public frmMantMiemEditor(int codigo)
         {
             InitializeComponent();
-            this._gestor = gestor;
+            _equipuService = new EQuipuServiceClient();
             this.btnGrabar.Text = "Grabar";
             this._codigo = codigo;
             this.Text = "Editar miembro";
@@ -40,7 +39,7 @@ namespace EQuipu.Vista
             if (_codigo != -1)
             {
                 this.boxCodigo.Enabled = false;
-                Miembro miem = _gestor.ObtenerMiembro(this._codigo);
+                Miembro miem = _equipuService.ObtenerMiembro(this._codigo);
                 if (miem is Alumno)
                 {
                     Alumno aux = (Alumno)miem;
@@ -99,45 +98,48 @@ namespace EQuipu.Vista
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            Miembro aux = null;
             int codigo = Convert.ToInt32(this.boxCodigo.Text);
             string nombre = this.boxNombre.Text;
             string fechaNac = this.boxTimePicker.Text;
             string direccion = this.boxDireccion.Text;
             string email = this.boxEmail.Text;
 
+            int codigoPucp = -1;
+            double craest = -1;
+            int codigoProf = -1;
+            string estado = null;
+            string dedicacion = null;
+
+            string selected = this.boxTipo.SelectedItem.ToString();
+
             char sexo;
             if (this.boxSexo.Text == "Masculino") sexo = 'M';
             else sexo = 'F';
 
-            if (this.boxTipo.SelectedItem == "Alumno")
+            if (selected == "Alumno")
             {
-                int codigoPucp = Convert.ToInt32(this.boxCodigoPucp.Text);
-                double craest = Convert.ToDouble(this.boxCraest.Text);
-
-                aux = new Alumno(codigo, nombre, fechaNac, direccion, email, sexo, codigoPucp, craest);
+                codigoPucp = Convert.ToInt32(this.boxCodigoPucp.Text);
+                craest = Convert.ToDouble(this.boxCraest.Text);
             }
-            else if (this.boxTipo.SelectedItem == "Profesor")
+            else if (selected == "Profesor")
             {
-                int codigoProf = Convert.ToInt32(this.boxCodigoProf.Text);
-                string estado = this.boxEstado.Text;
-
-                aux = new Profesor(codigo, nombre, fechaNac, direccion, email, sexo, codigoProf, estado);
+                codigoProf = Convert.ToInt32(this.boxCodigoProf.Text);
+                estado = this.boxEstado.Text;
             }
-            else if (this.boxTipo.SelectedItem == "Externo")
+            else if (selected == "Externo")
             {
-                string dedicacion = this.boxDedicacion.Text;
-
-                aux = new Externo(codigo, nombre, fechaNac, direccion, email, sexo, dedicacion);
+                dedicacion = this.boxDedicacion.Text;
             }
 
             if (this._codigo == -1) {
-                _gestor.AgregarMiembro(aux);
+                _equipuService.AgregarMiembro(codigo, nombre, fechaNac, direccion, email, sexo,
+                    selected, codigoPucp, craest, codigoProf, estado, dedicacion);
                 MessageBox.Show("Agregado");
             }
             else
-            { 
-                _gestor.ActualizarMiembro(aux);
+            {
+                _equipuService.ActualizarMiembro(codigo, nombre, fechaNac, direccion, email, sexo,
+                    selected, codigoPucp, craest, codigoProf, estado, dedicacion);
                 MessageBox.Show("Actualizado");
             }
 

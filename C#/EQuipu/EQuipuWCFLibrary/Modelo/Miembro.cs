@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 namespace EQuipuWCFLibrary.Modelo
 {
     [DataContract]
+    [Serializable]
     [KnownType(typeof(Alumno))]
     [KnownType(typeof(Profesor))]
     [KnownType(typeof(Externo))]

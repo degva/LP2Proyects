@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Miembro">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codigo" type="xs:int" />
+      <xs:element minOccurs="0" name="Direccion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaNacimiento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sexo" type="ser:char" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Miembro" nillable="true" type="tns:Miembro" />
+  <xs:complexType name="Alumno">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Miembro">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodigoAlumno" type="xs:long" />
+          <xs:element minOccurs="0" name="Craest" type="xs:double" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Alumno" nillable="true" type="tns:Alumno" />
+  <xs:complexType name="Profesor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Miembro">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodigoProfesor" type="xs:long" />
+          <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Profesor" nillable="true" type="tns:Profesor" />
+  <xs:complexType name="Externo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Miembro">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Dedicacion" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Externo" nillable="true" type="tns:Externo" />
+  <xs:complexType name="ArrayOfMiembro">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Miembro" nillable="true" type="tns:Miembro" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMiembro" nillable="true" type="tns:ArrayOfMiembro" />
+</xs:schema>

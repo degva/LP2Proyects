@@ -82,12 +82,12 @@ namespace EQuipu.Modelo
                     if (this.listaMiembros[i] is Alumno)
                     {
                         Alumno objAlumno = (Alumno)(this.listaMiembros[i]);
-                        informacion = informacion + " " + objAlumno.getInformacion();
+                        informacion = informacion + " ";// +objAlumno.getInformacion();
                     }
                     else
                     {
                         Profesor objProfesor = (Profesor)(this.listaMiembros[i]);
-                        informacion = informacion + " " + objProfesor.getInformacion();
+                        informacion = informacion + " ";// +objProfesor.getInformacion();
                     }
                 }
             }

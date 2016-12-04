@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace EQuipu.Modelo
 {
     [Serializable]
-    public class Alumno : Miembro, Consultable
+    public class Alumno : Miembro
     {
         private long codigoAlumno;
         private double craest;
@@ -29,11 +29,6 @@ namespace EQuipu.Modelo
         {
             get { return craest; }
             set { craest = value; }
-        }
-
-        public String getInformacion()
-        {
-            return this.codigoAlumno.ToString() + "-" + this.nombre + "-" + this.craest.ToString() + "\n";
         }
     }
 }

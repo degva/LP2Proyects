@@ -9,7 +9,238 @@
 //------------------------------------------------------------------------------
 
 namespace EQuipu.EQuipuService {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Miembro", Namespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(EQuipu.EQuipuService.Alumno))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(EQuipu.EQuipuService.Profesor))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(EQuipu.EQuipuService.Externo))]
+    public partial class Miembro : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CodigoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DireccionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaNacimientoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private char SexoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Codigo {
+            get {
+                return this.CodigoField;
+            }
+            set {
+                if ((this.CodigoField.Equals(value) != true)) {
+                    this.CodigoField = value;
+                    this.RaisePropertyChanged("Codigo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Direccion {
+            get {
+                return this.DireccionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DireccionField, value) != true)) {
+                    this.DireccionField = value;
+                    this.RaisePropertyChanged("Direccion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FechaNacimiento {
+            get {
+                return this.FechaNacimientoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechaNacimientoField, value) != true)) {
+                    this.FechaNacimientoField = value;
+                    this.RaisePropertyChanged("FechaNacimiento");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nombre {
+            get {
+                return this.NombreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreField, value) != true)) {
+                    this.NombreField = value;
+                    this.RaisePropertyChanged("Nombre");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public char Sexo {
+            get {
+                return this.SexoField;
+            }
+            set {
+                if ((this.SexoField.Equals(value) != true)) {
+                    this.SexoField = value;
+                    this.RaisePropertyChanged("Sexo");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Alumno", Namespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Alumno : EQuipu.EQuipuService.Miembro {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long CodigoAlumnoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double CraestField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long CodigoAlumno {
+            get {
+                return this.CodigoAlumnoField;
+            }
+            set {
+                if ((this.CodigoAlumnoField.Equals(value) != true)) {
+                    this.CodigoAlumnoField = value;
+                    this.RaisePropertyChanged("CodigoAlumno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Craest {
+            get {
+                return this.CraestField;
+            }
+            set {
+                if ((this.CraestField.Equals(value) != true)) {
+                    this.CraestField = value;
+                    this.RaisePropertyChanged("Craest");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Profesor", Namespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Profesor : EQuipu.EQuipuService.Miembro {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long CodigoProfesorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long CodigoProfesor {
+            get {
+                return this.CodigoProfesorField;
+            }
+            set {
+                if ((this.CodigoProfesorField.Equals(value) != true)) {
+                    this.CodigoProfesorField = value;
+                    this.RaisePropertyChanged("CodigoProfesor");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Estado {
+            get {
+                return this.EstadoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EstadoField, value) != true)) {
+                    this.EstadoField = value;
+                    this.RaisePropertyChanged("Estado");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Externo", Namespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Externo : EQuipu.EQuipuService.Miembro {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DedicacionField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Dedicacion {
+            get {
+                return this.DedicacionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DedicacionField, value) != true)) {
+                    this.DedicacionField = value;
+                    this.RaisePropertyChanged("Dedicacion");
+                }
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EQuipuService.IEQuipuService")]
@@ -20,6 +251,42 @@ namespace EQuipu.EQuipuService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ValidarUsuario", ReplyAction="http://tempuri.org/IEQuipuService/ValidarUsuarioResponse")]
         System.Threading.Tasks.Task<bool> ValidarUsuarioAsync(string usuario, string contraseña);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarMiembro", ReplyAction="http://tempuri.org/IEQuipuService/AgregarMiembroResponse")]
+        void AgregarMiembro(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo, string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarMiembro", ReplyAction="http://tempuri.org/IEQuipuService/AgregarMiembroResponse")]
+        System.Threading.Tasks.Task AgregarMiembroAsync(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo, string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ActualizarMiembro", ReplyAction="http://tempuri.org/IEQuipuService/ActualizarMiembroResponse")]
+        void ActualizarMiembro(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo, string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ActualizarMiembro", ReplyAction="http://tempuri.org/IEQuipuService/ActualizarMiembroResponse")]
+        System.Threading.Tasks.Task ActualizarMiembroAsync(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo, string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerMiembro", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerMiembroResponse")]
+        EQuipu.EQuipuService.Miembro ObtenerMiembro(int codigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerMiembro", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerMiembroResponse")]
+        System.Threading.Tasks.Task<EQuipu.EQuipuService.Miembro> ObtenerMiembroAsync(int codigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarMiembro", ReplyAction="http://tempuri.org/IEQuipuService/BuscarMiembroResponse")]
+        System.Collections.Generic.List<EQuipu.EQuipuService.Miembro> BuscarMiembro(int codigo, string tipo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarMiembro", ReplyAction="http://tempuri.org/IEQuipuService/BuscarMiembroResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Miembro>> BuscarMiembroAsync(int codigo, string tipo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerMiembros", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerMiembrosResponse")]
+        System.Collections.Generic.List<EQuipu.EQuipuService.Miembro> ObtenerMiembros();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerMiembros", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerMiembrosResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Miembro>> ObtenerMiembrosAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/EliminarMiembro", ReplyAction="http://tempuri.org/IEQuipuService/EliminarMiembroResponse")]
+        void EliminarMiembro(int codigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/EliminarMiembro", ReplyAction="http://tempuri.org/IEQuipuService/EliminarMiembroResponse")]
+        System.Threading.Tasks.Task EliminarMiembroAsync(int codigo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +322,54 @@ namespace EQuipu.EQuipuService {
         
         public System.Threading.Tasks.Task<bool> ValidarUsuarioAsync(string usuario, string contraseña) {
             return base.Channel.ValidarUsuarioAsync(usuario, contraseña);
+        }
+        
+        public void AgregarMiembro(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo, string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion) {
+            base.Channel.AgregarMiembro(codigo, nombre, fechaNac, direccion, email, sexo, selected, codigoPucp, craest, codigoProf, estado, dedicacion);
+        }
+        
+        public System.Threading.Tasks.Task AgregarMiembroAsync(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo, string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion) {
+            return base.Channel.AgregarMiembroAsync(codigo, nombre, fechaNac, direccion, email, sexo, selected, codigoPucp, craest, codigoProf, estado, dedicacion);
+        }
+        
+        public void ActualizarMiembro(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo, string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion) {
+            base.Channel.ActualizarMiembro(codigo, nombre, fechaNac, direccion, email, sexo, selected, codigoPucp, craest, codigoProf, estado, dedicacion);
+        }
+        
+        public System.Threading.Tasks.Task ActualizarMiembroAsync(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo, string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion) {
+            return base.Channel.ActualizarMiembroAsync(codigo, nombre, fechaNac, direccion, email, sexo, selected, codigoPucp, craest, codigoProf, estado, dedicacion);
+        }
+        
+        public EQuipu.EQuipuService.Miembro ObtenerMiembro(int codigo) {
+            return base.Channel.ObtenerMiembro(codigo);
+        }
+        
+        public System.Threading.Tasks.Task<EQuipu.EQuipuService.Miembro> ObtenerMiembroAsync(int codigo) {
+            return base.Channel.ObtenerMiembroAsync(codigo);
+        }
+        
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Miembro> BuscarMiembro(int codigo, string tipo) {
+            return base.Channel.BuscarMiembro(codigo, tipo);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Miembro>> BuscarMiembroAsync(int codigo, string tipo) {
+            return base.Channel.BuscarMiembroAsync(codigo, tipo);
+        }
+        
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Miembro> ObtenerMiembros() {
+            return base.Channel.ObtenerMiembros();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Miembro>> ObtenerMiembrosAsync() {
+            return base.Channel.ObtenerMiembrosAsync();
+        }
+        
+        public void EliminarMiembro(int codigo) {
+            base.Channel.EliminarMiembro(codigo);
+        }
+        
+        public System.Threading.Tasks.Task EliminarMiembroAsync(int codigo) {
+            return base.Channel.EliminarMiembroAsync(codigo);
         }
     }
 }

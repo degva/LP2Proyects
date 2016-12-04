@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IEQuipuService_ValidarUsuario_InputMessage">
@@ -12,16 +13,130 @@
   <wsdl:message name="IEQuipuService_ValidarUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ValidarUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarMiembro_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarMiembro" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarMiembro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarMiembroResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ActualizarMiembro_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarMiembro" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ActualizarMiembro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarMiembroResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerMiembro_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerMiembro" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerMiembro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerMiembroResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarMiembro_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarMiembro" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarMiembro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarMiembroResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerMiembros_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerMiembros" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerMiembros_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerMiembrosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_EliminarMiembro_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarMiembro" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_EliminarMiembro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarMiembroResponse" />
+  </wsdl:message>
   <wsdl:portType name="IEQuipuService">
     <wsdl:operation name="ValidarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ValidarUsuario" message="tns:IEQuipuService_ValidarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ValidarUsuarioResponse" message="tns:IEQuipuService_ValidarUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarMiembro">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/AgregarMiembro" message="tns:IEQuipuService_AgregarMiembro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/AgregarMiembroResponse" message="tns:IEQuipuService_AgregarMiembro_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarMiembro">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ActualizarMiembro" message="tns:IEQuipuService_ActualizarMiembro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ActualizarMiembroResponse" message="tns:IEQuipuService_ActualizarMiembro_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMiembro">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerMiembro" message="tns:IEQuipuService_ObtenerMiembro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerMiembroResponse" message="tns:IEQuipuService_ObtenerMiembro_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarMiembro">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/BuscarMiembro" message="tns:IEQuipuService_BuscarMiembro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/BuscarMiembroResponse" message="tns:IEQuipuService_BuscarMiembro_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMiembros">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerMiembros" message="tns:IEQuipuService_ObtenerMiembros_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerMiembrosResponse" message="tns:IEQuipuService_ObtenerMiembros_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarMiembro">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/EliminarMiembro" message="tns:IEQuipuService_EliminarMiembro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/EliminarMiembroResponse" message="tns:IEQuipuService_EliminarMiembro_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IEQuipuService" type="tns:IEQuipuService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ValidarUsuario">
       <soap:operation soapAction="http://tempuri.org/IEQuipuService/ValidarUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarMiembro">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/AgregarMiembro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarMiembro">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ActualizarMiembro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMiembro">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ObtenerMiembro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarMiembro">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/BuscarMiembro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMiembros">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ObtenerMiembros" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarMiembro">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/EliminarMiembro" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -8,29 +8,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using EQuipu.Controlador;
-using EQuipu.Modelo;
+using EQuipu.EQuipuService;
 
 namespace EQuipu.Vista
 {
     public partial class frmMantMiembros : Form
     {
-        private GestorMiembros _gestorMiem;
+        private EQuipuServiceClient _equipuService;
         public frmMantMiembros()
         {
             InitializeComponent();
-            this._gestorMiem = new GestorMiembros();
+            _equipuService = new EQuipuServiceClient();
         }
 
         private void frmMantMiembros_Load(object sender, EventArgs e)
         {
-            this._gestorMiem.Deserializar();
-            this.cargarGrilla(_gestorMiem.ListaMiembros);
+            this.cargarGrilla(_equipuService.ObtenerMiembros());
         }
 
         private void cargarGrilla(List<Miembro> listaMiembros)
         {
             this.dataGridView1.Rows.Clear();
+            if (listaMiembros == null)
+                return;
             foreach (Miembro miem in listaMiembros)
             {
                 string[] row = new string[5];
@@ -57,24 +57,19 @@ namespace EQuipu.Vista
             }
         }
 
-        private void frmMantMiembros_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this._gestorMiem.Serializar();
-        }
-
         private void nuevoBtn_Click(object sender, EventArgs e)
         {
-            frmMantMiemEditor editor = new frmMantMiemEditor(_gestorMiem);
+            frmMantMiemEditor editor = new frmMantMiemEditor();
             editor.ShowDialog();
-            this.cargarGrilla(_gestorMiem.ListaMiembros);
+            this.cargarGrilla(_equipuService.ObtenerMiembros());
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
             int codigo = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
-            frmMantMiemEditor editor = new frmMantMiemEditor(_gestorMiem, codigo);
+            frmMantMiemEditor editor = new frmMantMiemEditor(codigo);
             editor.ShowDialog();
-            this.cargarGrilla(_gestorMiem.ListaMiembros);
+            this.cargarGrilla(_equipuService.ObtenerMiembros());
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -93,21 +88,21 @@ namespace EQuipu.Vista
                 tipo = null;
             }
             List<Miembro> lista = null;
-            
-            lista = _gestorMiem.BuscarMiembro(codigo, tipo);
+
+            lista = _equipuService.BuscarMiembro(codigo, tipo);
             this.cargarGrilla(lista);
         }
 
         private void resetBtn_Click(object sender, EventArgs e)
         {
-            this.cargarGrilla(_gestorMiem.ListaMiembros);
+            this.cargarGrilla(_equipuService.ObtenerMiembros());
         }
 
         private void eliminarBtn_Click(object sender, EventArgs e)
         {
             int codigo = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
-            _gestorMiem.EliminarMiembro(codigo);
-            this.cargarGrilla(_gestorMiem.ListaMiembros);
+            _equipuService.EliminarMiembro(codigo);
+            this.cargarGrilla(_equipuService.ObtenerMiembros());
         }
     }
 }

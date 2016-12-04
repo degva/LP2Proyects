@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.resetBtn = new System.Windows.Forms.Button();
             this.searchBtn = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.nuevoBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
             this.eliminarBtn = new System.Windows.Forms.Button();
-            this.resetBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -62,6 +62,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de Busqueda";
+            // 
+            // resetBtn
+            // 
+            this.resetBtn.Location = new System.Drawing.Point(360, 54);
+            this.resetBtn.Name = "resetBtn";
+            this.resetBtn.Size = new System.Drawing.Size(75, 23);
+            this.resetBtn.TabIndex = 5;
+            this.resetBtn.Text = "Reset";
+            this.resetBtn.UseVisualStyleBackColor = true;
+            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
             // 
             // searchBtn
             // 
@@ -179,16 +189,6 @@
             this.eliminarBtn.UseVisualStyleBackColor = true;
             this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
             // 
-            // resetBtn
-            // 
-            this.resetBtn.Location = new System.Drawing.Point(360, 54);
-            this.resetBtn.Name = "resetBtn";
-            this.resetBtn.Size = new System.Drawing.Size(75, 23);
-            this.resetBtn.TabIndex = 5;
-            this.resetBtn.Text = "Reset";
-            this.resetBtn.UseVisualStyleBackColor = true;
-            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
-            // 
             // frmMantMiembros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,7 +201,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmMantMiembros";
             this.Text = "Mantenimiento de Miembros";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMantMiembros_FormClosed);
             this.Load += new System.EventHandler(this.frmMantMiembros_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

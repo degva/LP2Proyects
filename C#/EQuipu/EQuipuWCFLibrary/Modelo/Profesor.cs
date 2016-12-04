@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 namespace EQuipuWCFLibrary.Modelo
 {
     [DataContract]
+    [Serializable]
     public class Profesor : Miembro
     {
         private long codigoProfesor;
