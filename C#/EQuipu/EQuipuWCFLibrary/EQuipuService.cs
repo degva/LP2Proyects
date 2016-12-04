@@ -13,7 +13,6 @@ namespace EQuipuWCFLibrary
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "LoginService" en el código y en el archivo de configuración a la vez.
     public class EquipuService : IEQuipuService
     {
-        private List<Usuario> _lista_usuarios;
         private MySqlConnection _con;
 
         public EquipuService()
@@ -30,8 +29,6 @@ namespace EQuipuWCFLibrary
 
 
             _con.Open();
-
-            _lista_usuarios = new List<Usuario>();
         }
 
         /*
@@ -113,24 +110,24 @@ namespace EQuipuWCFLibrary
         {
             MySqlCommand comando = new MySqlCommand();
             comando.Connection = _con;
-            comando.CommandText = String.Format("UPDATE MIEMBRO SET (nombre, fechaNacimiento, direccion, email, sexo) = ('{1}','{2}','{3}','{4}','{5}') WHERE codigo = {0}",
+            comando.CommandText = String.Format("UPDATE MIEMBRO SET nombre = '{1}', fechaNacimiento = '{2}', direccion = '{3}', email = '{4}', sexo = '{5}' WHERE codigo = {0}",
                 codigo, nombre, fechaNac, direccion, email, sexo);
             comando.ExecuteNonQuery();
             if (selected == "Alumno")
             {
-                comando.CommandText = String.Format("UPDATE ALUMNO SET (codigo_alumno, craest) = ({1},{2}) WHERE codigo = {0}",
+                comando.CommandText = String.Format("UPDATE ALUMNO SET codigo_alumno = {1}, craest = {2} WHERE codigo = {0}",
                     codigo, codigoPucp, craest);
                 comando.ExecuteNonQuery();
             }
             else if (selected == "Profesor")
             {
-                comando.CommandText = String.Format("UPDATE PROFESOR SET (codigo_prof, estado) = ({1},'{2}') WHERE codigo = {0}",
+                comando.CommandText = String.Format("UPDATE PROFESOR SET codigo_prof = {1}, estado = '{2}' WHERE codigo = {0}",
                     codigo, codigoProf, estado);
                 comando.ExecuteNonQuery();
             }
             else if (selected == "Externo")
             {
-                comando.CommandText = String.Format("UPDATE EXTERNO SET (dedicacion) = ('{2}') WHERE codigo = {1}",
+                comando.CommandText = String.Format("UPDATE EXTERNO SET dedicacion = '{2}' WHERE codigo = {1}",
                     codigo, dedicacion);
                 comando.ExecuteNonQuery();
             }
@@ -139,26 +136,99 @@ namespace EQuipuWCFLibrary
 
         public List<Miembro> ObtenerMiembros()
         {
-            return null;
+            List<Miembro> miembros = new List<Miembro>();
+            string query = "select " +
+                                "m.*, " +
+                                "case when a.codigo_alumno is not NULL then 'alumno' " +
+                                    "when p.codigo_prof is not NULL then 'profe' " +
+                                    "when e.dedicacion is not NULL then 'externo' " +
+                                "end as type, " +
+                                "a.codigo_alumno, " +
+                                "a.craest, " +
+                                "p.codigo_prof, " +
+                                "p.estado, " +
+                                "e.dedicacion " +
+                            "from " +
+                                "miembro m " +
+                                "left join " +
+                                    "alumno a on (m.codigo = a.codigo) " +
+                                "left join " +
+                                    "profesor p on (m.codigo = p.codigo) " +
+                                "left join " +
+                                    "externo e on (m.codigo = e.codigo)";
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = query;
+            MySqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                Miembro u = null;
+                if (reader["type"].ToString() == "alumno")
+                {
+                    u = new Alumno(
+                        Int32.Parse(reader["codigo"].ToString()),
+                        reader["nombre"].ToString(),
+                        reader["fechaNacimiento"].ToString(),
+                        reader["direccion"].ToString(),
+                        reader["email"].ToString(),
+                        reader["sexo"].ToString()[0],
+                        Int32.Parse(reader["codigo_alumno"].ToString()),
+                        Double.Parse(reader["craest"].ToString())
+                    );
+                }
+                else if (reader["type"].ToString() == "profe")
+                {
+                    u = new Profesor(
+                        Int32.Parse(reader["codigo"].ToString()),
+                        reader["nombre"].ToString(),
+                        reader["fechaNacimiento"].ToString(),
+                        reader["direccion"].ToString(),
+                        reader["email"].ToString(),
+                        reader["sexo"].ToString()[0],
+                        Int32.Parse(reader["codigo_prof"].ToString()),
+                        reader["estado"].ToString()
+                    );
+                }
+                else if (reader["type"].ToString() == "externo")
+                {
+                    u = new Externo(
+                        Int32.Parse(reader["codigo"].ToString()),
+                        reader["nombre"].ToString(),
+                        reader["fechaNacimiento"].ToString(),
+                        reader["direccion"].ToString(),
+                        reader["email"].ToString(),
+                        reader["sexo"].ToString()[0],
+                        reader["dedicacion"].ToString()
+                    );
+                }
+                miembros.Add(u);
+            }
+            return miembros;
         }
 
         public Miembro ObtenerMiembro(int codigo)
         {
 
             string query = "select " +
-                                "m.*," +
-                                "case " +
-                                "a.codigoPucp, a.craest," +
-                                "p.codigoProfe, p.estado," +
+                                "m.*, " +
+                                "case when a.codigo_alumno is not NULL then 'alumno' " +
+                                    "when p.codigo_prof is not NULL then 'profe' " +
+                                    "when e.dedicacion is not NULL then 'externo' " +
+                                "end as type, " +
+                                "a.codigo_alumno, " +
+                                "a.craest, " +
+                                "p.codigo_prof, " +
+                                "p.estado, " +
                                 "e.dedicacion " +
                             "from " +
                                 "miembro m " +
                                 "left join " +
-                                    "alumno a on m.codigo = a.miembro_codigo " +
+                                    "alumno a on (m.codigo = a.codigo) " +
                                 "left join " +
-                                    "profesor p on m.codigo = p.miembro_codigo " +
+                                    "profesor p on (m.codigo = p.codigo) " +
                                 "left join " +
-                                    "externo e on m.codigo = e.miembro_codigo " +
+                                    "externo e on (m.codigo = e.codigo) " +
                             "where " +
                                 "m.codigo = {0}";
 
@@ -166,13 +236,49 @@ namespace EQuipuWCFLibrary
             comando.Connection = _con;
             comando.CommandText = String.Format(query, codigo);
             MySqlDataReader reader = comando.ExecuteReader();
+            Miembro miem = null;
             if (reader.Read())
             {
-                /* TODO */
-                Usuario u = new Miembro();
-                return u;
+                if ( reader["type"].ToString() == "alumno" ) 
+                {
+                    miem = new Alumno(
+                        Int32.Parse(reader["codigo"].ToString()),
+                        reader["nombre"].ToString(),
+                        reader["fechaNacimiento"].ToString(),
+                        reader["direccion"].ToString(),
+                        reader["email"].ToString(),
+                        reader["sexo"].ToString()[0],
+                        Int32.Parse(reader["codigo_alumno"].ToString()),
+                        Double.Parse(reader["craest"].ToString())
+                    );
+                } 
+                else if ( reader["type"].ToString() == "profe" ) 
+                {
+                    miem = new Profesor(
+                        Int32.Parse(reader["codigo"].ToString()),
+                        reader["nombre"].ToString(),
+                        reader["fechaNacimiento"].ToString(),
+                        reader["direccion"].ToString(),
+                        reader["email"].ToString(),
+                        reader["sexo"].ToString()[0],
+                        Int32.Parse(reader["codigo_prof"].ToString()),
+                        reader["estado"].ToString()
+                    );
+                } 
+                else if ( reader["type"].ToString() == "externo" ) 
+                {
+                    miem = new Externo(
+                        Int32.Parse(reader["codigo"].ToString()),
+                        reader["nombre"].ToString(),
+                        reader["fechaNacimiento"].ToString(),
+                        reader["direccion"].ToString(),
+                        reader["email"].ToString(),
+                        reader["sexo"].ToString()[0],
+                        reader["dedicacion"].ToString()
+                    );
+                }
             }
-            return null;
+            return miem;
         }
         public List<Miembro> BuscarMiembro(int codigo, string tipo)
         {

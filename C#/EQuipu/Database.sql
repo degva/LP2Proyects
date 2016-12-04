@@ -43,4 +43,21 @@ CREATE TABLE EXTERNO (
 		REFERENCES MIEMBRO(codigo)
 );
 
-SELECT * FROM miembro;
+select m.*, 
+	case when a.codigo_alumno is not NULL then 'alumno'
+		when p.codigo_prof is not NULL then 'profe'
+		when e.dedicacion is not NULL then 'externo'
+	end as type,
+    a.codigo_alumno,
+    a.craest,
+    p.codigo_prof,
+    p.estado,
+    e.dedicacion
+from
+	miembro m 
+	left join
+		alumno a on (m.codigo = a.codigo)
+	left join
+		profesor p on (m.codigo = p.codigo)
+	left join
+		externo e on (m.codigo = e.codigo)
