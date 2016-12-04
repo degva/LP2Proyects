@@ -176,5 +176,10 @@ namespace EQuipu.Vista
                 this.boxDedicacion.Enabled = true;
             }
         }
+
+        private void frmMantMiemEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _equipuService.Close();
+        }
     }
 }

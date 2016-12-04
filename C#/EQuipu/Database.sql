@@ -43,6 +43,8 @@ CREATE TABLE EXTERNO (
 		REFERENCES MIEMBRO(codigo)
 );
 
+delete from alumno where codigo = 3;
+
 select m.*, 
 	case when a.codigo_alumno is not NULL then 'alumno'
 		when p.codigo_prof is not NULL then 'profe'

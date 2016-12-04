@@ -201,6 +201,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmMantMiembros";
             this.Text = "Mantenimiento de Miembros";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMantMiembros_FormClosed);
             this.Load += new System.EventHandler(this.frmMantMiembros_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

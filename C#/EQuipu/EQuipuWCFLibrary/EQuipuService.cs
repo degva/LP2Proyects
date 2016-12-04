@@ -27,7 +27,6 @@ namespace EQuipuWCFLibrary
             String pass = "123456";
             _con.ConnectionString = "Server=192.168.1.46;Database=diegodb;User=diegov;Password=" + pass + ";";
 
-
             _con.Open();
         }
 
@@ -291,53 +290,75 @@ namespace EQuipuWCFLibrary
             comando.Connection = _con;
             comando.CommandText = String.Format(query, codigo);
             MySqlDataReader reader = comando.ExecuteReader();
-            Miembro miem = null;
+
+            List<Miembro> miembros = new List<Miembro>();
+
             while (reader.Read())
             {
-                if (reader["type"].ToString() == "alumno")
-                {
-                    miem = new Alumno(
-                        Int32.Parse(reader["codigo"].ToString()),
-                        reader["nombre"].ToString(),
-                        reader["fechaNacimiento"].ToString(),
-                        reader["direccion"].ToString(),
-                        reader["email"].ToString(),
-                        reader["sexo"].ToString()[0],
-                        Int32.Parse(reader["codigo_alumno"].ToString()),
-                        Double.Parse(reader["craest"].ToString())
-                    );
+                Miembro miem = null;
+                switch (tipo) {
+                    case "Alumno":
+                        miem = new Alumno(
+                            Int32.Parse(reader["codigo"].ToString()),
+                            reader["nombre"].ToString(),
+                            reader["fechaNacimiento"].ToString(),
+                            reader["direccion"].ToString(),
+                            reader["email"].ToString(),
+                            reader["sexo"].ToString()[0],
+                            Int32.Parse(reader["codigo_alumno"].ToString()),
+                            Double.Parse(reader["craest"].ToString())
+                        );
+                        break;
+                    case "Profesor":
+                        miem = new Profesor(
+                            Int32.Parse(reader["codigo"].ToString()),
+                            reader["nombre"].ToString(),
+                            reader["fechaNacimiento"].ToString(),
+                            reader["direccion"].ToString(),
+                            reader["email"].ToString(),
+                            reader["sexo"].ToString()[0],
+                            Int32.Parse(reader["codigo_prof"].ToString()),
+                            reader["estado"].ToString()
+                        );
+                        break;
+                    case "Externo":
+                        miem = new Externo(
+                            Int32.Parse(reader["codigo"].ToString()),
+                            reader["nombre"].ToString(),
+                            reader["fechaNacimiento"].ToString(),
+                            reader["direccion"].ToString(),
+                            reader["email"].ToString(),
+                            reader["sexo"].ToString()[0],
+                            reader["dedicacion"].ToString()
+                        );
+                        break;   
                 }
-                else if (reader["type"].ToString() == "profe")
-                {
-                    miem = new Profesor(
-                        Int32.Parse(reader["codigo"].ToString()),
-                        reader["nombre"].ToString(),
-                        reader["fechaNacimiento"].ToString(),
-                        reader["direccion"].ToString(),
-                        reader["email"].ToString(),
-                        reader["sexo"].ToString()[0],
-                        Int32.Parse(reader["codigo_prof"].ToString()),
-                        reader["estado"].ToString()
-                    );
-                }
-                else if (reader["type"].ToString() == "externo")
-                {
-                    miem = new Externo(
-                        Int32.Parse(reader["codigo"].ToString()),
-                        reader["nombre"].ToString(),
-                        reader["fechaNacimiento"].ToString(),
-                        reader["direccion"].ToString(),
-                        reader["email"].ToString(),
-                        reader["sexo"].ToString()[0],
-                        reader["dedicacion"].ToString()
-                    );
-                }
+                miembros.Add(miem);
             }
-            return null;
+            return miembros;
         }
 
         public void EliminarMiembro(int codigo)
         {
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+
+            string query = "DELETE FROM alumno WHERE codigo = {0}";
+            comando.CommandText = String.Format(query, codigo);
+            comando.ExecuteNonQuery();
+
+            query = "DELETE FROM externo WHERE codigo = {0}";
+            comando.CommandText = String.Format(query, codigo);
+            comando.ExecuteNonQuery();
+
+            query = "DELETE FROM profesor WHERE codigo = {0}";
+            comando.CommandText = String.Format(query, codigo);
+            comando.ExecuteNonQuery();
+
+            query = "DELETE FROM miembro WHERE codigo = {0}";
+            comando.CommandText = String.Format(query, codigo);
+            comando.ExecuteNonQuery();
         }
     }
 }

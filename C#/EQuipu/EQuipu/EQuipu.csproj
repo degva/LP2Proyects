@@ -50,7 +50,6 @@
     <Compile Include="Controlador\GestorEquipo.cs" />
     <Compile Include="Controlador\GestorEventos.cs" />
     <Compile Include="Controlador\GestorFeria.cs" />
-    <Compile Include="Controlador\GestorMiembros.cs" />
     <Compile Include="Modelo\Alumno.cs" />
     <Compile Include="Modelo\Encuesta.cs" />
     <Compile Include="Modelo\Equipo.cs" />

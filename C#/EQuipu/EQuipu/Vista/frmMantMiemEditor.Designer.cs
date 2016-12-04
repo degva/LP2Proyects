@@ -365,6 +365,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmMantMiemEditor";
             this.Text = "frmMiembroNuevo";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMantMiemEditor_FormClosed);
             this.Load += new System.EventHandler(this.frmMantMiemEditor_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

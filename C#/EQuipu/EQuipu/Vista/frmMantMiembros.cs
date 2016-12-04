@@ -104,5 +104,10 @@ namespace EQuipu.Vista
             _equipuService.EliminarMiembro(codigo);
             this.cargarGrilla(_equipuService.ObtenerMiembros());
         }
+
+        private void frmMantMiembros_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _equipuService.Close();
+        }
     }
 }

@@ -8,20 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using EQuipu.Controlador;
-using EQuipu.Modelo;
+using EQuipu.EQuipuService;
 
 namespace EQuipu.Vista
 {
     public partial class frmMantEquiEditorAgregarMiem : Form
     {
-        private GestorMiembros _gestorMiem;
+        private EQuipuServiceClient _serviceClient;
         private List<Miembro> _lista;
         private List<Miembro> _alreadyThere;
-        public frmMantEquiEditorAgregarMiem(List<Miembro> list, GestorMiembros gm, List<Miembro> ll)
+        public frmMantEquiEditorAgregarMiem(List<Miembro> list, EQuipuServiceClient sc, List<Miembro> ll)
         {
             InitializeComponent();
-            _gestorMiem = gm;
+            _serviceClient = sc;
             _lista = list;
             _alreadyThere = ll;
         }
@@ -31,7 +30,7 @@ namespace EQuipu.Vista
             for (int i = 0; i < this.miembroGrilla.SelectedRows.Count; i++)
             {
                 int codigoMiembro = Convert.ToInt32(this.miembroGrilla.SelectedRows[i].Cells[0].Value);
-                _lista.Add(_gestorMiem.ObtenerMiembro(codigoMiembro));
+                _lista.Add(_serviceClient.ObtenerMiembro(codigoMiembro));
             }
             this.Close();
         }
@@ -47,7 +46,7 @@ namespace EQuipu.Vista
             {
                 codigo = -1;
             }
-            List<Miembro> lista = _gestorMiem.BuscarMiembro(codigo, null);
+            List<Miembro> lista = _serviceClient.BuscarMiembro(codigo, null);
             cargarGrilla(lista);
         }
 
@@ -83,7 +82,7 @@ namespace EQuipu.Vista
 
         private void frmMantEquiEditorAgregarMiem_Load(object sender, EventArgs e)
         {
-            cargarGrilla(_gestorMiem.ListaMiembros);
+            cargarGrilla(_serviceClient.ObtenerMiembros());
         }
     }
 }

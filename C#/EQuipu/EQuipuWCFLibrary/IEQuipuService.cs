@@ -32,6 +32,8 @@ namespace EQuipuWCFLibrary
         List<Miembro> ObtenerMiembros();
         [OperationContract]
         void EliminarMiembro(int codigo);
+
+        /* GESTOR EQUIPO */
     }
 
 }

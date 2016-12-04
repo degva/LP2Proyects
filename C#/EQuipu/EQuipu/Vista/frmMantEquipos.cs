@@ -8,20 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using EQuipu.Controlador;
-using EQuipu.Modelo;
+using EQuipu.EQuipuService;
 
 namespace EQuipu.Vista
 {
     public partial class frmMantEquipos : Form
     {
-        private GestorEquipos _gestorEquipo;
-        private GestorMiembros _gestorMiembro;
+        private EQuipuServiceClient _serviceClient;
         public frmMantEquipos()
         {
             InitializeComponent();
-            this._gestorEquipo = new GestorEquipos();
-            this._gestorMiembro = new GestorMiembros();
+            this._serviceClient = new EQuipuServiceClient();
         }
 
         private void cargarGrilla(List<Equipo> listaEquipos)
@@ -41,14 +38,12 @@ namespace EQuipu.Vista
 
         private void frmMantEquipos_Load(object sender, EventArgs e)
         {
-            this._gestorEquipo.Deserializar();
-            this._gestorMiembro.Deserializar();
-            this.cargarGrilla(_gestorEquipo.ListaEquipos);
+            this.cargarGrilla(_serviceClient.ListaEquipos);
         }
 
         private void frmMantEquipos_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this._gestorEquipo.Serializar();
+            this._serviceClient.Close();
         }
 
         private void buscarBtn_Click(object sender, EventArgs e)
@@ -64,7 +59,7 @@ namespace EQuipu.Vista
             }
             List<Equipo> lista = null;
 
-            lista = _gestorEquipo.BuscarEquipos(categoria);
+            lista = _serviceClient.BuscarEquipos(categoria);
             this.cargarGrilla(lista);
         }
 
@@ -72,14 +67,14 @@ namespace EQuipu.Vista
         {
             frmMantEquiEditor editor = new frmMantEquiEditor(this._gestorEquipo, this._gestorMiembro);
             editor.ShowDialog();
-            this.cargarGrilla(this._gestorEquipo.ListaEquipos);
+            this.cargarGrilla(this._serviceClient.ListaEquipos);
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             string nombre = (string) this.dataGridView1.SelectedRows[0].Cells[0].Value;
-            _gestorEquipo.EliminarEquipo(nombre);
-            this.cargarGrilla(this._gestorEquipo.ListaEquipos); 
+            _serviceClient.EliminarEquipo(nombre);
+            this.cargarGrilla(this._serviceClient.ListaEquipos); 
         }
 
         private void editBtn_Click(object sender, EventArgs e)
@@ -87,7 +82,7 @@ namespace EQuipu.Vista
             string nombre = (string) this.dataGridView1.SelectedRows[0].Cells[0].Value;
             frmMantEquiEditor editor = new frmMantEquiEditor(this._gestorEquipo, this._gestorMiembro, nombre);
             editor.ShowDialog();
-            this.cargarGrilla(this._gestorEquipo.ListaEquipos);
+            this.cargarGrilla(this._serviceClient.ListaEquipos);
         }
     }
 }
