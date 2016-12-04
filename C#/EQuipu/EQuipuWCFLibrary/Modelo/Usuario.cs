@@ -11,9 +11,7 @@ namespace EQuipuWCFLibrary.Modelo
     [DataContract]
     public class Usuario
     {
-        [DataMember]
         private string _username;
-        [DataMember]
         private string _password;
 
         public Usuario(string usr, string pass)

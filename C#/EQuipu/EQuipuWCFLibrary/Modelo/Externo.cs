@@ -11,7 +11,6 @@ namespace EQuipuWCFLibrary.Modelo
     [DataContract]
     public class Externo : Miembro
     {
-        [DataMember]
         private string dedicacion;
 
         public Externo(int codigo, string nombre, string fechaNacimiento, string direccion, string email, char sexo, string dedicacion)

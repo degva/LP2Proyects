@@ -9,19 +9,16 @@ using System.Runtime.Serialization;
 namespace EQuipuWCFLibrary.Modelo
 {
     [DataContract]
+    [KnownType(typeof(Alumno))]
+    [KnownType(typeof(Profesor))]
+    [KnownType(typeof(Externo))]
     public class Miembro
     {
-        [DataMember]
         protected int codigo;
-        [DataMember]
         protected string nombre;
-        [DataMember]
         protected string fechaNacimiento;
-        [DataMember]
         protected string direccion;
-        [DataMember]
         protected string email;
-        [DataMember]
         protected char sexo;
 
         public Miembro(int codigo, string nombre, string fechaNacimiento, string direccion, string email, char sexo)

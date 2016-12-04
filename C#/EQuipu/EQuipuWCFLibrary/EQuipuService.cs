@@ -18,29 +18,20 @@ namespace EQuipuWCFLibrary
 
         public EquipuService()
         {
-            /*
             _con = new MySqlConnection();
 
-            String pass = "F6700370";
-            _con.ConnectionString = "Server=192.168.200.13;Database=BDLP2_20114297;User=U20114297;Password=" + pass + ";";
+            // Claudia's server
+            //String pass = "F6700370";
+            //_con.ConnectionString = "Server=192.168.200.13;Database=BDLP2_20114297;User=U20114297;Password=" + pass + ";";
+
+            // Gina's server
+            String pass = "123456";
+            _con.ConnectionString = "Server=192.168.1.46;Database=diegodb;User=diegov;Password=" + pass + ";";
+
+
             _con.Open();
-             */
-
-            /* Para usar la conexion de la base de datos
-            SqlCommand comando = new SqlCommand();
-            comando.Connection = conexion;
-            comando.CommandText = "select * from CICLO_20161_Usuarios";
-            SqlDataReader reader = comando.ExecuteReader();
-            while (reader.Read())
-            {
-                reader['nombredelacolumna']
-            }
-             */
-
 
             _lista_usuarios = new List<Usuario>();
-            Usuario u = new Usuario("degva", "123");
-            _lista_usuarios.Add(u);
         }
 
         public bool ValidarUsuario(string username, string password)
@@ -58,11 +49,27 @@ namespace EQuipuWCFLibrary
 
         public Usuario BuscarUsuario(string username)
         {
-            for (int i = 0; i < _lista_usuarios.Count; i++)
+            /*
+            MySqlCommand comando = new SqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = "select * from CICLO_20161_Usuarios";
+            SqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
             {
-                if (_lista_usuarios[i].Username == username)
-                    return _lista_usuarios[i];
+                reader['nombredelacolumna']
             }
+             */
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = "SELECT * FROM USERS WHERE username = {1}";
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                Usuario u = new Usuario(reader["username"].ToString(), reader["password"].ToString());
+                return u;
+            }
+
             return null;
         }
     }

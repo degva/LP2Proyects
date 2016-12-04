@@ -9,11 +9,9 @@ using System.Runtime.Serialization;
 namespace EQuipuWCFLibrary.Modelo
 {
     [DataContract]
-    public class Alumno : Miembro, Consultable
+    public class Alumno : Miembro
     {
-        [DataMember]
         private long codigoAlumno;
-        [DataMember]
         private double craest;
 
         public Alumno(int codigo, string nombre, string fechaNacimiento, string direccion, string email, char sexo, long codigoAlumno, double craest)
@@ -35,11 +33,6 @@ namespace EQuipuWCFLibrary.Modelo
         {
             get { return craest; }
             set { craest = value; }
-        }
-
-        public String getInformacion()
-        {
-            return this.codigoAlumno.ToString() + "-" + this.nombre + "-" + this.craest.ToString() + "\n";
         }
     }
 }

@@ -34,7 +34,7 @@ namespace EQuipu.Vista
             }
             else
             {
-                MessageBox.Show("huehuehue");
+                MessageBox.Show("No tienes una cuenta aca");
                 this.usrInput.Text = "";
                 this.passInput.Text = "";
             }

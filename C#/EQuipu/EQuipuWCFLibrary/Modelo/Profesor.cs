@@ -9,11 +9,9 @@ using System.Runtime.Serialization;
 namespace EQuipuWCFLibrary.Modelo
 {
     [DataContract]
-    public class Profesor : Miembro, Consultable
+    public class Profesor : Miembro
     {
-        [DataMember]
         private long codigoProfesor;
-        [DataMember]
         private string estado;
 
         public Profesor(int codigo, string nombre, string fechaNacimiento, string direccion, string email, char sexo, long codigoProfesor, string estado)
@@ -37,9 +35,5 @@ namespace EQuipuWCFLibrary.Modelo
             set { codigoProfesor = value; }
         }
 
-        public String getInformacion()
-        {
-            return this.codigoProfesor.ToString() + "-" + this.nombre + "-" + this.estado + "\n";
-        }
     }
 }
