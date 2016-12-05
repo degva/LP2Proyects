@@ -17,10 +17,10 @@ namespace EQuipu.Vista
         private EQuipuServiceClient _serviceClient;
         private List<Miembro> _lista;
         private List<Miembro> _alreadyThere;
-        public frmMantEquiEditorAgregarMiem(List<Miembro> list, EQuipuServiceClient sc, List<Miembro> ll)
+        public frmMantEquiEditorAgregarMiem(List<Miembro> list, List<Miembro> ll)
         {
             InitializeComponent();
-            _serviceClient = sc;
+            _serviceClient = new EQuipuServiceClient();
             _lista = list;
             _alreadyThere = ll;
         }
@@ -83,6 +83,11 @@ namespace EQuipu.Vista
         private void frmMantEquiEditorAgregarMiem_Load(object sender, EventArgs e)
         {
             cargarGrilla(_serviceClient.ObtenerMiembros());
+        }
+
+        private void frmMantEquiEditorAgregarMiem_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _serviceClient.Close();
         }
     }
 }

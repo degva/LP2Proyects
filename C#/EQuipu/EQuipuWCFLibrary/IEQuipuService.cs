@@ -34,6 +34,24 @@ namespace EQuipuWCFLibrary
         void EliminarMiembro(int codigo);
 
         /* GESTOR EQUIPO */
+        [OperationContract]
+        Equipo CrearEquipo(string nombre, string interes, string categoria);
+        [OperationContract]
+        void AgregarEquipo(Equipo objEquipo);
+        [OperationContract]
+        Equipo ObtenerEquipo(string nombre);
+        [OperationContract]
+        int NumeroEquipos();
+        [OperationContract]
+        List<Equipo> BuscarEquipos(string categoria);
+        [OperationContract]
+        List<Equipo> ObtenerEquipos();
+        [OperationContract]
+        List<Equipo> BuscarEquiposPorNombre(string nombre);
+        [OperationContract]
+        void ActualizarEquipo(Equipo objEquipo);
+        [OperationContract]
+        void EliminarEquipo(string nombreEquipo);
     }
 
 }

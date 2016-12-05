@@ -114,6 +114,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmMantEquiEditorAgregarMiem";
             this.Text = "Buscar Miembros";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMantEquiEditorAgregarMiem_FormClosed);
             this.Load += new System.EventHandler(this.frmMantEquiEditorAgregarMiem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.miembroGrilla)).EndInit();
             this.ResumeLayout(false);

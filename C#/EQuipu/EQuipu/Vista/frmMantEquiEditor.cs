@@ -8,34 +8,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using EQuipu.Controlador;
-using EQuipu.Modelo;
+using EQuipu.EQuipuService;
 
 namespace EQuipu.Vista
 {
     public partial class frmMantEquiEditor : Form
     {
-        private GestorEquipos _gestorEqui;
-        private GestorMiembros _gestorMiem;
+        private EQuipuServiceClient _serviceCliente;
         private List<Miembro> _miembros;
         private Equipo _equipo;
 
-        public frmMantEquiEditor(GestorEquipos ge, GestorMiembros gm)
+        public frmMantEquiEditor()
         {
             InitializeComponent();
-            _gestorEqui = ge;
-            _gestorMiem = gm;
+            _serviceCliente = new EQuipuServiceClient();
             _miembros = new List<Miembro>();
             _equipo = null;
         }
 
-        public frmMantEquiEditor(GestorEquipos ge, GestorMiembros gm, string nombre)
+        public frmMantEquiEditor(string nombre)
         {
             InitializeComponent();
-            _gestorEqui = ge;
-            _gestorMiem = gm;
+            _serviceCliente = new EQuipuServiceClient();
             _miembros = new List<Miembro>();
-            _equipo = _gestorEqui.ObtenerEquipo(nombre);
+            _equipo = _serviceCliente.ObtenerEquipo(nombre);
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)
@@ -45,7 +41,7 @@ namespace EQuipu.Vista
 
         private void agregarBtn_Click(object sender, EventArgs e)
         {
-            frmMantEquiEditorAgregarMiem agregarMiembro = new frmMantEquiEditorAgregarMiem(_miembros ,_gestorMiem, _miembros);
+            frmMantEquiEditorAgregarMiem agregarMiembro = new frmMantEquiEditorAgregarMiem(_miembros, _miembros);
             agregarMiembro.ShowDialog();
             cargarGrilla(_miembros);
         }
@@ -73,12 +69,13 @@ namespace EQuipu.Vista
                 string nombre = this.boxNombre.Text;
                 string interes = this.boxInteres.Text;
                 string categoria = this.boxCategoria.SelectedItem.ToString();
-                Equipo equ = new Equipo(nombre, interes, categoria);
+
+                Equipo equ = _serviceCliente.CrearEquipo(nombre, interes, categoria);
                 foreach (Miembro m in _miembros)
                 {
                     equ.AddMiembro(m);
                 }
-                _gestorEqui.AgregarEquipo(equ);
+                _serviceCliente.AgregarEquipo(equ);
             }
             else
             {
@@ -86,7 +83,7 @@ namespace EQuipu.Vista
                 _equipo.Interes = this.boxInteres.Text;
                 _equipo.Categoria = this.boxCategoria.SelectedItem.ToString();
                 _equipo.ListaMiembros = _miembros;
-                _gestorEqui.ActualizarEquipo(_equipo);
+                _serviceCliente.ActualizarEquipo(_equipo);
             }
             this.Close();
         }

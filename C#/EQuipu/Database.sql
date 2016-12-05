@@ -43,7 +43,38 @@ CREATE TABLE EXTERNO (
 		REFERENCES MIEMBRO(codigo)
 );
 
-delete from alumno where codigo = 3;
+CREATE TABLE EQUIPO (
+	id INT NOT NULL auto_increment,
+	nombre varchar(50) NOT NULL,
+    interes varchar(50) NOT NULL,
+    categoria varchar(50) NOT NULL,
+    fondo float default 0,
+    entradas INT default 0,
+    
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE EQUIPO_X_MIEMBRO (
+	equipo_id INT NOT NULL,
+    miembro_id INT NOT NULL,
+    
+    PRIMARY KEY (equipo_id, miembro_id),
+    
+    FOREIGN KEY (equipo_id)
+		REFERENCES EQUIPO(id),
+    FOREIGN KEY (miembro_id)
+		REFERENCES MIEMBRO(codigo)
+);
+
+select
+	m.*
+from
+	miembro m
+	inner join
+		EQUIPO_X_MIEMBRO me
+        on m.codigo = me.miembro_id
+where
+	me.equipo_id = 1;
 
 select m.*, 
 	case when a.codigo_alumno is not NULL then 'alumno'
@@ -62,4 +93,5 @@ from
 	left join
 		profesor p on (m.codigo = p.codigo)
 	left join
-		externo e on (m.codigo = e.codigo)
+		externo e on (m.codigo = e.codigo);
+        

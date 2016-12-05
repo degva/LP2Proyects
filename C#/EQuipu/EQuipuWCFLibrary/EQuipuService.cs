@@ -62,7 +62,7 @@ namespace EQuipuWCFLibrary
         }
 
         /**
-         * Miembros Management
+         * Gestor Miembros
          */
         public void AgregarMiembro(int codigo, string nombre, string fechaNac, string direccion, string email, char sexo,
                     string selected, int codigoPucp, double craest, int codigoProf, string estado, string dedicacion)
@@ -120,7 +120,6 @@ namespace EQuipuWCFLibrary
                 comando.ExecuteNonQuery();
             }
         }
-
 
         public List<Miembro> ObtenerMiembros()
         {
@@ -268,6 +267,7 @@ namespace EQuipuWCFLibrary
             }
             return miem;
         }
+
         public List<Miembro> BuscarMiembro(int codigo, string tipo)
         {
             // tipo puede ser "Alumno", "Profesor" o "Externo"
@@ -360,5 +360,104 @@ namespace EQuipuWCFLibrary
             comando.CommandText = String.Format(query, codigo);
             comando.ExecuteNonQuery();
         }
+
+        /**
+         * Gestor Equipos
+         */
+        public Equipo CrearEquipo(string nombre, string interes, string categoria)
+        {
+            Equipo e = new Equipo(nombre, interes, categoria);
+            return e;
+        }
+
+        public void AgregarEquipo(Equipo objEquipo)
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("INSERT INTO EQUIPO (nombre, interes, categoria) VALUES ('{0}','{1}','{2}')",
+                objEquipo.Nombre, objEquipo.Interes, objEquipo.Categoria);
+            comando.ExecuteNonQuery();
+        }
+
+        public Equipo ObtenerEquipo(string nombre)
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("SELECT * FROM EQUIPO WHERE nombre = '{0}'", nombre);
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                Equipo e = new Equipo(
+                    reader["nombre"].ToString(),
+                    reader["interes"].ToString(),
+                    reader["categoria"].ToString()
+                    );
+                e.Entradas = Int32.Parse(reader["entradas"].ToString());
+                e.Fondo = Double.Parse(reader["fondo"].ToString());
+
+                reader.Close();
+
+                string query = "select me.miembro_id from EQUIPO_X_MIEMBRO me where me.equipo_id = {0}";
+
+                MySqlCommand com2 = new MySqlCommand();
+                com2.Connection = _con;
+                com2.CommandText = String.Format(query, Int32.Parse(reader["nombre"].ToString()));
+                MySqlDataReader read_2 = comando.ExecuteReader();
+
+                while (read_2.Read())
+                {
+                    Miembro m = this.ObtenerMiembro(Int32.Parse(read_2["miembro_id"].ToString()));
+                    e.AddMiembro(m);
+                }
+                read_2.Close();
+
+                return e;
+            }
+
+            return null;
+        }
+
+        public int NumeroEquipos()
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("SELECT count(*) as num FROM EQUIPO");
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                return Int32.Parse(reader["num"].ToString());
+            }
+            return -1;
+        }
+
+        public List<Equipo> BuscarEquipos(string categoria);
+        public List<Equipo> ObtenerEquipos()
+        {
+            List<Equipo> equipos = new List<Equipo>();
+            List<string> lista_equipos = new List<string>();
+
+            string query = "SELECT nombre FROM EQUIPO";
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = query;
+            MySqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                lista_equipos.Add(reader["nombre"].ToString());
+            }
+            reader.Close();
+
+            foreach (string n in lista_equipos)
+            {
+                Equipo e = this.ObtenerEquipo(n);
+                equipos.Add(e);
+            }
+
+            return equipos;
+        }
+        public List<Equipo> BuscarEquiposPorNombre(string nombre);
+        public void ActualizarEquipo(Equipo objEquipo);
+        public void EliminarEquipo(string nombreEquipo);
     }
 }
