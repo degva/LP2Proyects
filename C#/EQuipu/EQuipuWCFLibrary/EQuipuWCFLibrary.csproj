@@ -55,7 +55,10 @@
     <Compile Include="EQuipuService.cs" />
     <Compile Include="Modelo\Alumno.cs" />
     <Compile Include="Modelo\Equipo.cs" />
+    <Compile Include="Modelo\Evento.cs" />
+    <Compile Include="Modelo\Exposicion.cs" />
     <Compile Include="Modelo\Externo.cs" />
+    <Compile Include="Modelo\Feria.cs" />
     <Compile Include="Modelo\Miembro.cs" />
     <Compile Include="Modelo\Profesor.cs" />
     <Compile Include="Modelo\Usuario.cs" />

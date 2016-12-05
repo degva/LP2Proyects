@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EQuipu.Modelo;
-using EQuipu.Controlador;
+
+using EQuipu.EQuipuService;
 
 namespace EQuipu.Vista
 {

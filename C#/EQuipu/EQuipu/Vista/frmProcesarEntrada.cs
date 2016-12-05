@@ -8,31 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using System.IO;
-using EQuipu.Controlador;
-using EQuipu.Modelo;
+using EQuipu.EQuipuService;
 
 namespace EQuipu.Vista
 {
     public partial class frmProcesarEntrada : Form
     {
-        private GestorFeria _gestor;
-        
-        private FileStream archivo;
-        private StreamReader lector;
 
         private Feria _feria;
 
         public frmProcesarEntrada()
         {
             InitializeComponent();
-            _gestor = new GestorFeria();
-            archivo = new FileStream("Entradas.txt", FileMode.Open, FileAccess.Read);
-            lector = new StreamReader(archivo);
         }
 
         private void frmProcesarEntrada_Load(object sender, EventArgs e)
         {
+            /*
             _gestor.Deserializar();
             frmBuscarFeria b = new frmBuscarFeria(_gestor.Ferias);
             b.ShowDialog();
@@ -49,6 +41,7 @@ namespace EQuipu.Vista
             _feria[5].CreateThread(this.entradasListHeh, this.equipo6Label, this.equipo6Box);
             _feria[6].CreateThread(this.entradasListHeh, this.equipo7Label, this.equipo7Box);
             _feria[7].CreateThread(this.entradasListHeh, this.equipo8Label, this.equipo8Box);
+             */
         }
 
         private void beginBtn_Click(object sender, EventArgs e)
@@ -58,6 +51,7 @@ namespace EQuipu.Vista
 
         private void LeerArchivo()
         {
+            /*
             while (true)
             {
                 string linea = lector.ReadLine();
@@ -86,7 +80,7 @@ namespace EQuipu.Vista
             this.equipo6Box.Text = _feria[5].Entradas.ToString();
             this.equipo7Box.Text = _feria[6].Entradas.ToString();
             this.equipo8Box.Text = _feria[7].Entradas.ToString();
-
+            */
         }
     }
 }

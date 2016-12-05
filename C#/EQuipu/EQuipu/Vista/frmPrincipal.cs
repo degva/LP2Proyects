@@ -45,27 +45,6 @@ namespace EQuipu.Vista
             ventanaNuevaFeria.Show();
         }
 
-        private void rendirEncuestaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmRendirEncuesta ventanaRendirEncuesta = new frmRendirEncuesta();
-            ventanaRendirEncuesta.MdiParent = this;
-            ventanaRendirEncuesta.Show();
-        }
-
-        private void encuestaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmMantEncuesta v = new frmMantEncuesta();
-            v.MdiParent = this;
-            v.Show();
-        }
-
-        private void procesarEntradasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmProcesarEntrada v = new frmProcesarEntrada();
-            v.MdiParent = this;
-            v.Show();
-        }
-
         private void frmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();

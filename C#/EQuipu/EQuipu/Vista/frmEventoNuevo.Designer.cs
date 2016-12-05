@@ -33,6 +33,9 @@
             this.agregarExpoBtn = new System.Windows.Forms.Button();
             this.agregarEquipoBtn = new System.Windows.Forms.Button();
             this.equiposEnEventoGrid = new System.Windows.Forms.DataGridView();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fondo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.precioEntBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -42,14 +45,11 @@
             this.nombreBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.cancelBtn = new System.Windows.Forms.Button();
+            this.grabarBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.eliminarExpoBtn = new System.Windows.Forms.Button();
             this.exposicionesGrid = new System.Windows.Forms.DataGridView();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fondo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,7 +64,6 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.eliminarEquipoBtn);
-            this.groupBox2.Controls.Add(this.agregarExpoBtn);
             this.groupBox2.Controls.Add(this.agregarEquipoBtn);
             this.groupBox2.Controls.Add(this.equiposEnEventoGrid);
             this.groupBox2.Location = new System.Drawing.Point(22, 170);
@@ -86,7 +85,7 @@
             // 
             // agregarExpoBtn
             // 
-            this.agregarExpoBtn.Location = new System.Drawing.Point(412, 119);
+            this.agregarExpoBtn.Location = new System.Drawing.Point(169, 215);
             this.agregarExpoBtn.Name = "agregarExpoBtn";
             this.agregarExpoBtn.Size = new System.Drawing.Size(75, 35);
             this.agregarExpoBtn.TabIndex = 1;
@@ -116,6 +115,21 @@
             this.equiposEnEventoGrid.Name = "equiposEnEventoGrid";
             this.equiposEnEventoGrid.Size = new System.Drawing.Size(390, 150);
             this.equiposEnEventoGrid.TabIndex = 0;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Nombre";
+            this.Column2.Name = "Column2";
+            // 
+            // categoria
+            // 
+            this.categoria.HeaderText = "Categoria";
+            this.categoria.Name = "categoria";
+            // 
+            // fondo
+            // 
+            this.fondo.HeaderText = "Fondo";
+            this.fondo.Name = "fondo";
             // 
             // groupBox1
             // 
@@ -207,27 +221,30 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre :";
             // 
-            // button3
+            // cancelBtn
             // 
-            this.button3.Location = new System.Drawing.Point(287, 644);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Cancelar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.cancelBtn.Location = new System.Drawing.Point(287, 644);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(75, 23);
+            this.cancelBtn.TabIndex = 5;
+            this.cancelBtn.Text = "Cancelar";
+            this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
-            // button2
+            // grabarBtn
             // 
-            this.button2.Location = new System.Drawing.Point(191, 644);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Grabar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.grabarBtn.Location = new System.Drawing.Point(191, 644);
+            this.grabarBtn.Name = "grabarBtn";
+            this.grabarBtn.Size = new System.Drawing.Size(75, 23);
+            this.grabarBtn.TabIndex = 4;
+            this.grabarBtn.Text = "Grabar";
+            this.grabarBtn.UseVisualStyleBackColor = true;
+            this.grabarBtn.Click += new System.EventHandler(this.grabarBtn_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.eliminarExpoBtn);
+            this.groupBox3.Controls.Add(this.agregarExpoBtn);
             this.groupBox3.Controls.Add(this.exposicionesGrid);
             this.groupBox3.Location = new System.Drawing.Point(22, 377);
             this.groupBox3.Name = "groupBox3";
@@ -238,7 +255,7 @@
             // 
             // eliminarExpoBtn
             // 
-            this.eliminarExpoBtn.Location = new System.Drawing.Point(217, 215);
+            this.eliminarExpoBtn.Location = new System.Drawing.Point(265, 221);
             this.eliminarExpoBtn.Name = "eliminarExpoBtn";
             this.eliminarExpoBtn.Size = new System.Drawing.Size(75, 23);
             this.eliminarExpoBtn.TabIndex = 7;
@@ -259,21 +276,6 @@
             this.exposicionesGrid.Name = "exposicionesGrid";
             this.exposicionesGrid.Size = new System.Drawing.Size(488, 185);
             this.exposicionesGrid.TabIndex = 0;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Nombre";
-            this.Column2.Name = "Column2";
-            // 
-            // categoria
-            // 
-            this.categoria.HeaderText = "Categoria";
-            this.categoria.Name = "categoria";
-            // 
-            // fondo
-            // 
-            this.fondo.HeaderText = "Fondo";
-            this.fondo.Name = "fondo";
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -301,13 +303,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(548, 686);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.cancelBtn);
+            this.Controls.Add(this.grabarBtn);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmEventoNuevo";
             this.Text = "frmEventoNuevo";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmEventoNuevo_FormClosed);
             this.Load += new System.EventHandler(this.frmEventoNuevo_Load);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.equiposEnEventoGrid)).EndInit();
@@ -330,8 +333,8 @@
         private System.Windows.Forms.TextBox nombreBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button cancelBtn;
+        private System.Windows.Forms.Button grabarBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox cantEntraBox;
         private System.Windows.Forms.TextBox precioEntBox;

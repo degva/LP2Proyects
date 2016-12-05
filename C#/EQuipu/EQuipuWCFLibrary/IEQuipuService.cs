@@ -41,6 +41,8 @@ namespace EQuipuWCFLibrary
         [OperationContract]
         Equipo ObtenerEquipo(string nombre);
         [OperationContract]
+        Equipo ObtenerEquipoConId(int id);
+        [OperationContract]
         int NumeroEquipos();
         [OperationContract]
         List<Equipo> BuscarEquipos(string categoria);
@@ -51,7 +53,48 @@ namespace EQuipuWCFLibrary
         [OperationContract]
         void ActualizarEquipo(Equipo objEquipo);
         [OperationContract]
+        void AgregarMiembroAEquipo(Equipo e, Miembro m);
+        [OperationContract]
         void EliminarEquipo(string nombreEquipo);
+
+        /* GESTOR EVENTOS */
+        [OperationContract]
+        void AgregarEquipoAEvento(Evento e, Equipo q);
+        [OperationContract]
+        void AgregarExposicionAEvento(Evento e, Exposicion ex);
+        [OperationContract]
+        List<Evento> ObtenerEventos();
+        [OperationContract]
+        Evento CrearEvento(string nombre, string categoria, int numEntradas, double precioEntradas);
+        [OperationContract]
+        void AgregarEvento(Evento objEvento);
+        [OperationContract]
+        Evento ObtenerEvento(string nombre);
+        [OperationContract]
+        List<Evento> BuscarEventos(string nombre);
+        [OperationContract]
+        List<Evento> BuscarEventosPorCategoria(string categoria);
+        [OperationContract]
+        void ActualizarEvento(Evento objEvento);
+        [OperationContract]
+        void EliminarEvento(string nombreEvento);
+
+        /* GESTOR FERIA */
+        [OperationContract]
+        List<Feria> ObtenerFerias();
+        [OperationContract]
+        Feria ObtenerFeria(string nombre);
+        [OperationContract]
+        Feria CrearFeria(string nombre, string fecha);
+        [OperationContract]
+        void AgregarFeria(Feria objFeria);
+        [OperationContract]
+        void AgregarEquipoAFeria(Feria f, Equipo e, int i);
+        // [OperationContract]
+        // Feria ObtenerEventoDeFeria(string nombre);
+        [OperationContract]
+        void ActualizarFeria(Feria objFeria);
+
     }
 
 }

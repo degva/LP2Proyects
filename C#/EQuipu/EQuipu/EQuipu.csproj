@@ -46,20 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controlador\GestorEncuesta.cs" />
-    <Compile Include="Controlador\GestorEquipo.cs" />
-    <Compile Include="Controlador\GestorEventos.cs" />
-    <Compile Include="Controlador\GestorFeria.cs" />
-    <Compile Include="Modelo\Alumno.cs" />
-    <Compile Include="Modelo\Encuesta.cs" />
-    <Compile Include="Modelo\Equipo.cs" />
-    <Compile Include="Modelo\Evento.cs" />
-    <Compile Include="Modelo\Exposicion.cs" />
-    <Compile Include="Modelo\Externo.cs" />
-    <Compile Include="Modelo\Feria.cs" />
-    <Compile Include="Modelo\Miembro.cs" />
-    <Compile Include="Modelo\Pregunta.cs" />
-    <Compile Include="Modelo\Profesor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\EQuipuService\Reference.cs">
@@ -73,12 +59,6 @@
     <Compile Include="Vista\frmBuscarFeria.Designer.cs">
       <DependentUpon>frmBuscarFeria.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vista\frmCalificarPregunta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vista\frmCalificarPregunta.Designer.cs">
-      <DependentUpon>frmCalificarPregunta.cs</DependentUpon>
-    </Compile>
     <Compile Include="Vista\frmEventoNuevo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,12 +70,6 @@
     </Compile>
     <Compile Include="Vista\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vista\frmMantEncuesta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vista\frmMantEncuesta.Designer.cs">
-      <DependentUpon>frmMantEncuesta.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\frmMantEquiEditor.cs">
       <SubType>Form</SubType>
@@ -157,12 +131,6 @@
     <Compile Include="Vista\frmProcesarEntrada.Designer.cs">
       <DependentUpon>frmProcesarEntrada.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vista\frmRendirEncuesta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vista\frmRendirEncuesta.Designer.cs">
-      <DependentUpon>frmRendirEncuesta.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -175,17 +143,11 @@
     <EmbeddedResource Include="Vista\frmBuscarFeria.resx">
       <DependentUpon>frmBuscarFeria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vista\frmCalificarPregunta.resx">
-      <DependentUpon>frmCalificarPregunta.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmEventoNuevo.resx">
       <DependentUpon>frmEventoNuevo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vista\frmMantEncuesta.resx">
-      <DependentUpon>frmMantEncuesta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmMantEquiEditor.resx">
       <DependentUpon>frmMantEquiEditor.cs</DependentUpon>
@@ -217,9 +179,6 @@
     <EmbeddedResource Include="Vista\frmProcesarEntrada.resx">
       <DependentUpon>frmProcesarEntrada.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vista\frmRendirEncuesta.resx">
-      <DependentUpon>frmRendirEncuesta.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -229,6 +188,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\EQuipuService\EQuipu.EQuipuService.Equipo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EQuipuService\EQuipu.EQuipuService.Evento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EQuipuService\EQuipu.EQuipuService.Feria.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EQuipuService\EQuipu.EQuipuService.Miembro.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -264,6 +232,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

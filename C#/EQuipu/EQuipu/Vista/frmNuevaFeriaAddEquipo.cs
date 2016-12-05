@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using EQuipu.Controlador;
-using EQuipu.Modelo;
+using EQuipu.EQuipuService;
 
 /*
  * Nombre: Diego Pavel Vargas Flores
@@ -20,13 +19,13 @@ namespace EQuipu.Vista
 {
     public partial class frmNewFairAddTeam : Form
     {
-        private GestorEquipos _gestorEquipo;
+        private EQuipuServiceClient _serviceClient;
         private List<Equipo> _listaEquipos;
         private int _idx;
         public frmNewFairAddTeam(List<Equipo> lista, int idx)
         {
             InitializeComponent();
-            _gestorEquipo = new GestorEquipos();
+            _serviceClient = new EQuipuServiceClient();
             _listaEquipos = lista;
             _idx = idx;
         }
@@ -47,7 +46,7 @@ namespace EQuipu.Vista
         {
             if (this.dataGridView1.SelectedRows.Count != 0) { 
                 string nombreEquipo = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                _listaEquipos.Insert(_idx, _gestorEquipo.ObtenerEquipo(nombreEquipo));
+                _listaEquipos.Insert(_idx, _serviceClient.ObtenerEquipo(nombreEquipo));
                 this.Close();
             }
             else
@@ -73,14 +72,13 @@ namespace EQuipu.Vista
 
         private void frmNewFairAddTeam_Load(object sender, EventArgs e)
         {
-            _gestorEquipo.Deserializar();
-            cargarGrilla(_gestorEquipo.ListaEquipos);
+            cargarGrilla(_serviceClient.ObtenerEquipos());
         }
 
         private void buscarBtn_Click(object sender, EventArgs e)
         {
             string nombre = this.nombreBox.Text;
-            List<Equipo> buscados = _gestorEquipo.BuscarEquiposPorNombre(nombre);
+            List<Equipo> buscados = _serviceClient.BuscarEquiposPorNombre(nombre);
             cargarGrilla(buscados);
         }
 

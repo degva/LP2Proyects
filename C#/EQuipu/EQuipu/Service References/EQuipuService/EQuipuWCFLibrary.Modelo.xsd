@@ -50,4 +50,70 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMiembro" nillable="true" type="tns:ArrayOfMiembro" />
+  <xs:complexType name="Equipo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Categoria" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Entradas" type="xs:int" />
+      <xs:element minOccurs="0" name="Fondo" type="xs:double" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Interes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListaMiembros" nillable="true" type="tns:ArrayOfMiembro" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Equipo" nillable="true" type="tns:Equipo" />
+  <xs:complexType name="ArrayOfEquipo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Equipo" nillable="true" type="tns:Equipo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEquipo" nillable="true" type="tns:ArrayOfEquipo" />
+  <xs:complexType name="Evento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoriaEquipo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Equipos" nillable="true" type="tns:ArrayOfEquipo" />
+      <xs:element minOccurs="0" name="Exposiciones" nillable="true" type="tns:ArrayOfExposicion" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumEntradas" type="xs:int" />
+      <xs:element minOccurs="0" name="PrecioEntrada" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Evento" nillable="true" type="tns:Evento" />
+  <xs:complexType name="ArrayOfExposicion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Exposicion" nillable="true" type="tns:Exposicion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfExposicion" nillable="true" type="tns:ArrayOfExposicion" />
+  <xs:complexType name="Exposicion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CantidadAsistentes" type="xs:int" />
+      <xs:element minOccurs="0" name="EquipoParticipante" nillable="true" type="tns:Equipo" />
+      <xs:element minOccurs="0" name="FechaParticipacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HoraParticipacion" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LugarParticipacion" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Exposicion" nillable="true" type="tns:Exposicion" />
+  <xs:complexType name="ArrayOfEvento">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Evento" nillable="true" type="tns:Evento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEvento" nillable="true" type="tns:ArrayOfEvento" />
+  <xs:complexType name="ArrayOfFeria">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Feria" nillable="true" type="tns:Feria" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFeria" nillable="true" type="tns:ArrayOfFeria" />
+  <xs:complexType name="Feria">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Equipos" nillable="true" type="tns:ArrayOfEquipo" />
+      <xs:element minOccurs="0" name="Fecha" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Feria" nillable="true" type="tns:Feria" />
 </xs:schema>

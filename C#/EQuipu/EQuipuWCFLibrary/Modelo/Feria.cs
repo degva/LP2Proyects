@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-/*
- * Nombre: Diego Pavel Vargas Flores
- * Examen 1
- */
-
-namespace EQuipu.Modelo
+namespace EQuipuWCFLibrary.Modelo
 {
+    [DataContract]
     [Serializable]
     public class Feria
     {
@@ -19,9 +16,9 @@ namespace EQuipu.Modelo
          */
         private List<Equipo> _equipos;
         private string _nombre;
-        private DateTime _fecha;
+        private string _fecha;
 
-        public Feria(string nombre, DateTime fecha)
+        public Feria(string nombre, string fecha)
         {
             _nombre = nombre;
             _fecha = fecha;
@@ -41,21 +38,31 @@ namespace EQuipu.Modelo
             }
         }
 
+        [DataMember]
         public string Nombre
         {
             get { return _nombre; }
             set { _nombre = value; }
         }
 
-        public DateTime Fecha
+        [DataMember]
+        public string Fecha
         {
             get { return _fecha; }
             set { _fecha = value; }
         }
 
+        [DataMember]
+        public List<Equipo> Equipos
+        {
+            get { return _equipos; }
+            set { _equipos = value; }
+        }
+
         public void AddEquipo(Equipo e, int i)
         {
-            _equipos.Insert(i, e);
+            // _equipos.Insert(i, e);
+            _equipos.Add(e);
         }
 
         public Equipo ObtenerEquipo(int idx)

@@ -242,6 +242,474 @@ namespace EQuipu.EQuipuService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Equipo", Namespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Equipo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CategoriaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int EntradasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double FondoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string InteresField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<EQuipu.EQuipuService.Miembro> ListaMiembrosField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Categoria {
+            get {
+                return this.CategoriaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CategoriaField, value) != true)) {
+                    this.CategoriaField = value;
+                    this.RaisePropertyChanged("Categoria");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Entradas {
+            get {
+                return this.EntradasField;
+            }
+            set {
+                if ((this.EntradasField.Equals(value) != true)) {
+                    this.EntradasField = value;
+                    this.RaisePropertyChanged("Entradas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Fondo {
+            get {
+                return this.FondoField;
+            }
+            set {
+                if ((this.FondoField.Equals(value) != true)) {
+                    this.FondoField = value;
+                    this.RaisePropertyChanged("Fondo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Interes {
+            get {
+                return this.InteresField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InteresField, value) != true)) {
+                    this.InteresField = value;
+                    this.RaisePropertyChanged("Interes");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Miembro> ListaMiembros {
+            get {
+                return this.ListaMiembrosField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ListaMiembrosField, value) != true)) {
+                    this.ListaMiembrosField = value;
+                    this.RaisePropertyChanged("ListaMiembros");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nombre {
+            get {
+                return this.NombreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreField, value) != true)) {
+                    this.NombreField = value;
+                    this.RaisePropertyChanged("Nombre");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Evento", Namespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Evento : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CategoriaEquipoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> EquiposField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<EQuipu.EQuipuService.Exposicion> ExposicionesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumEntradasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double PrecioEntradaField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CategoriaEquipo {
+            get {
+                return this.CategoriaEquipoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CategoriaEquipoField, value) != true)) {
+                    this.CategoriaEquipoField = value;
+                    this.RaisePropertyChanged("CategoriaEquipo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> Equipos {
+            get {
+                return this.EquiposField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EquiposField, value) != true)) {
+                    this.EquiposField = value;
+                    this.RaisePropertyChanged("Equipos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Exposicion> Exposiciones {
+            get {
+                return this.ExposicionesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExposicionesField, value) != true)) {
+                    this.ExposicionesField = value;
+                    this.RaisePropertyChanged("Exposiciones");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nombre {
+            get {
+                return this.NombreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreField, value) != true)) {
+                    this.NombreField = value;
+                    this.RaisePropertyChanged("Nombre");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumEntradas {
+            get {
+                return this.NumEntradasField;
+            }
+            set {
+                if ((this.NumEntradasField.Equals(value) != true)) {
+                    this.NumEntradasField = value;
+                    this.RaisePropertyChanged("NumEntradas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double PrecioEntrada {
+            get {
+                return this.PrecioEntradaField;
+            }
+            set {
+                if ((this.PrecioEntradaField.Equals(value) != true)) {
+                    this.PrecioEntradaField = value;
+                    this.RaisePropertyChanged("PrecioEntrada");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Exposicion", Namespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Exposicion : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CantidadAsistentesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private EQuipu.EQuipuService.Equipo EquipoParticipanteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaParticipacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HoraParticipacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LugarParticipacionField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CantidadAsistentes {
+            get {
+                return this.CantidadAsistentesField;
+            }
+            set {
+                if ((this.CantidadAsistentesField.Equals(value) != true)) {
+                    this.CantidadAsistentesField = value;
+                    this.RaisePropertyChanged("CantidadAsistentes");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public EQuipu.EQuipuService.Equipo EquipoParticipante {
+            get {
+                return this.EquipoParticipanteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EquipoParticipanteField, value) != true)) {
+                    this.EquipoParticipanteField = value;
+                    this.RaisePropertyChanged("EquipoParticipante");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FechaParticipacion {
+            get {
+                return this.FechaParticipacionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechaParticipacionField, value) != true)) {
+                    this.FechaParticipacionField = value;
+                    this.RaisePropertyChanged("FechaParticipacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int HoraParticipacion {
+            get {
+                return this.HoraParticipacionField;
+            }
+            set {
+                if ((this.HoraParticipacionField.Equals(value) != true)) {
+                    this.HoraParticipacionField = value;
+                    this.RaisePropertyChanged("HoraParticipacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LugarParticipacion {
+            get {
+                return this.LugarParticipacionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LugarParticipacionField, value) != true)) {
+                    this.LugarParticipacionField = value;
+                    this.RaisePropertyChanged("LugarParticipacion");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Feria", Namespace="http://schemas.datacontract.org/2004/07/EQuipuWCFLibrary.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Feria : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> EquiposField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> Equipos {
+            get {
+                return this.EquiposField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EquiposField, value) != true)) {
+                    this.EquiposField = value;
+                    this.RaisePropertyChanged("Equipos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Fecha {
+            get {
+                return this.FechaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechaField, value) != true)) {
+                    this.FechaField = value;
+                    this.RaisePropertyChanged("Fecha");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nombre {
+            get {
+                return this.NombreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreField, value) != true)) {
+                    this.NombreField = value;
+                    this.RaisePropertyChanged("Nombre");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EQuipuService.IEQuipuService")]
     public interface IEQuipuService {
@@ -287,6 +755,168 @@ namespace EQuipu.EQuipuService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/EliminarMiembro", ReplyAction="http://tempuri.org/IEQuipuService/EliminarMiembroResponse")]
         System.Threading.Tasks.Task EliminarMiembroAsync(int codigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/CrearEquipo", ReplyAction="http://tempuri.org/IEQuipuService/CrearEquipoResponse")]
+        EQuipu.EQuipuService.Equipo CrearEquipo(string nombre, string interes, string categoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/CrearEquipo", ReplyAction="http://tempuri.org/IEQuipuService/CrearEquipoResponse")]
+        System.Threading.Tasks.Task<EQuipu.EQuipuService.Equipo> CrearEquipoAsync(string nombre, string interes, string categoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarEquipo", ReplyAction="http://tempuri.org/IEQuipuService/AgregarEquipoResponse")]
+        void AgregarEquipo(EQuipu.EQuipuService.Equipo objEquipo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarEquipo", ReplyAction="http://tempuri.org/IEQuipuService/AgregarEquipoResponse")]
+        System.Threading.Tasks.Task AgregarEquipoAsync(EQuipu.EQuipuService.Equipo objEquipo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEquipo", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEquipoResponse")]
+        EQuipu.EQuipuService.Equipo ObtenerEquipo(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEquipo", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEquipoResponse")]
+        System.Threading.Tasks.Task<EQuipu.EQuipuService.Equipo> ObtenerEquipoAsync(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEquipoConId", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEquipoConIdResponse")]
+        EQuipu.EQuipuService.Equipo ObtenerEquipoConId(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEquipoConId", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEquipoConIdResponse")]
+        System.Threading.Tasks.Task<EQuipu.EQuipuService.Equipo> ObtenerEquipoConIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/NumeroEquipos", ReplyAction="http://tempuri.org/IEQuipuService/NumeroEquiposResponse")]
+        int NumeroEquipos();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/NumeroEquipos", ReplyAction="http://tempuri.org/IEQuipuService/NumeroEquiposResponse")]
+        System.Threading.Tasks.Task<int> NumeroEquiposAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarEquipos", ReplyAction="http://tempuri.org/IEQuipuService/BuscarEquiposResponse")]
+        System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> BuscarEquipos(string categoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarEquipos", ReplyAction="http://tempuri.org/IEQuipuService/BuscarEquiposResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Equipo>> BuscarEquiposAsync(string categoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEquipos", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEquiposResponse")]
+        System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> ObtenerEquipos();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEquipos", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEquiposResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Equipo>> ObtenerEquiposAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarEquiposPorNombre", ReplyAction="http://tempuri.org/IEQuipuService/BuscarEquiposPorNombreResponse")]
+        System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> BuscarEquiposPorNombre(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarEquiposPorNombre", ReplyAction="http://tempuri.org/IEQuipuService/BuscarEquiposPorNombreResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Equipo>> BuscarEquiposPorNombreAsync(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ActualizarEquipo", ReplyAction="http://tempuri.org/IEQuipuService/ActualizarEquipoResponse")]
+        void ActualizarEquipo(EQuipu.EQuipuService.Equipo objEquipo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ActualizarEquipo", ReplyAction="http://tempuri.org/IEQuipuService/ActualizarEquipoResponse")]
+        System.Threading.Tasks.Task ActualizarEquipoAsync(EQuipu.EQuipuService.Equipo objEquipo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarMiembroAEquipo", ReplyAction="http://tempuri.org/IEQuipuService/AgregarMiembroAEquipoResponse")]
+        void AgregarMiembroAEquipo(EQuipu.EQuipuService.Equipo e, EQuipu.EQuipuService.Miembro m);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarMiembroAEquipo", ReplyAction="http://tempuri.org/IEQuipuService/AgregarMiembroAEquipoResponse")]
+        System.Threading.Tasks.Task AgregarMiembroAEquipoAsync(EQuipu.EQuipuService.Equipo e, EQuipu.EQuipuService.Miembro m);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/EliminarEquipo", ReplyAction="http://tempuri.org/IEQuipuService/EliminarEquipoResponse")]
+        void EliminarEquipo(string nombreEquipo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/EliminarEquipo", ReplyAction="http://tempuri.org/IEQuipuService/EliminarEquipoResponse")]
+        System.Threading.Tasks.Task EliminarEquipoAsync(string nombreEquipo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarEquipoAEvento", ReplyAction="http://tempuri.org/IEQuipuService/AgregarEquipoAEventoResponse")]
+        void AgregarEquipoAEvento(EQuipu.EQuipuService.Evento e, EQuipu.EQuipuService.Equipo q);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarEquipoAEvento", ReplyAction="http://tempuri.org/IEQuipuService/AgregarEquipoAEventoResponse")]
+        System.Threading.Tasks.Task AgregarEquipoAEventoAsync(EQuipu.EQuipuService.Evento e, EQuipu.EQuipuService.Equipo q);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarExposicionAEvento", ReplyAction="http://tempuri.org/IEQuipuService/AgregarExposicionAEventoResponse")]
+        void AgregarExposicionAEvento(EQuipu.EQuipuService.Evento e, EQuipu.EQuipuService.Exposicion ex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarExposicionAEvento", ReplyAction="http://tempuri.org/IEQuipuService/AgregarExposicionAEventoResponse")]
+        System.Threading.Tasks.Task AgregarExposicionAEventoAsync(EQuipu.EQuipuService.Evento e, EQuipu.EQuipuService.Exposicion ex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEventos", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEventosResponse")]
+        System.Collections.Generic.List<EQuipu.EQuipuService.Evento> ObtenerEventos();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEventos", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEventosResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Evento>> ObtenerEventosAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/CrearEvento", ReplyAction="http://tempuri.org/IEQuipuService/CrearEventoResponse")]
+        EQuipu.EQuipuService.Evento CrearEvento(string nombre, string categoria, int numEntradas, double precioEntradas);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/CrearEvento", ReplyAction="http://tempuri.org/IEQuipuService/CrearEventoResponse")]
+        System.Threading.Tasks.Task<EQuipu.EQuipuService.Evento> CrearEventoAsync(string nombre, string categoria, int numEntradas, double precioEntradas);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarEvento", ReplyAction="http://tempuri.org/IEQuipuService/AgregarEventoResponse")]
+        void AgregarEvento(EQuipu.EQuipuService.Evento objEvento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarEvento", ReplyAction="http://tempuri.org/IEQuipuService/AgregarEventoResponse")]
+        System.Threading.Tasks.Task AgregarEventoAsync(EQuipu.EQuipuService.Evento objEvento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEvento", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEventoResponse")]
+        EQuipu.EQuipuService.Evento ObtenerEvento(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerEvento", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerEventoResponse")]
+        System.Threading.Tasks.Task<EQuipu.EQuipuService.Evento> ObtenerEventoAsync(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarEventos", ReplyAction="http://tempuri.org/IEQuipuService/BuscarEventosResponse")]
+        System.Collections.Generic.List<EQuipu.EQuipuService.Evento> BuscarEventos(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarEventos", ReplyAction="http://tempuri.org/IEQuipuService/BuscarEventosResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Evento>> BuscarEventosAsync(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarEventosPorCategoria", ReplyAction="http://tempuri.org/IEQuipuService/BuscarEventosPorCategoriaResponse")]
+        System.Collections.Generic.List<EQuipu.EQuipuService.Evento> BuscarEventosPorCategoria(string categoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/BuscarEventosPorCategoria", ReplyAction="http://tempuri.org/IEQuipuService/BuscarEventosPorCategoriaResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Evento>> BuscarEventosPorCategoriaAsync(string categoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ActualizarEvento", ReplyAction="http://tempuri.org/IEQuipuService/ActualizarEventoResponse")]
+        void ActualizarEvento(EQuipu.EQuipuService.Evento objEvento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ActualizarEvento", ReplyAction="http://tempuri.org/IEQuipuService/ActualizarEventoResponse")]
+        System.Threading.Tasks.Task ActualizarEventoAsync(EQuipu.EQuipuService.Evento objEvento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/EliminarEvento", ReplyAction="http://tempuri.org/IEQuipuService/EliminarEventoResponse")]
+        void EliminarEvento(string nombreEvento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/EliminarEvento", ReplyAction="http://tempuri.org/IEQuipuService/EliminarEventoResponse")]
+        System.Threading.Tasks.Task EliminarEventoAsync(string nombreEvento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerFerias", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerFeriasResponse")]
+        System.Collections.Generic.List<EQuipu.EQuipuService.Feria> ObtenerFerias();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerFerias", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerFeriasResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Feria>> ObtenerFeriasAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerFeria", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerFeriaResponse")]
+        EQuipu.EQuipuService.Feria ObtenerFeria(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ObtenerFeria", ReplyAction="http://tempuri.org/IEQuipuService/ObtenerFeriaResponse")]
+        System.Threading.Tasks.Task<EQuipu.EQuipuService.Feria> ObtenerFeriaAsync(string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/CrearFeria", ReplyAction="http://tempuri.org/IEQuipuService/CrearFeriaResponse")]
+        EQuipu.EQuipuService.Feria CrearFeria(string nombre, string fecha);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/CrearFeria", ReplyAction="http://tempuri.org/IEQuipuService/CrearFeriaResponse")]
+        System.Threading.Tasks.Task<EQuipu.EQuipuService.Feria> CrearFeriaAsync(string nombre, string fecha);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarFeria", ReplyAction="http://tempuri.org/IEQuipuService/AgregarFeriaResponse")]
+        void AgregarFeria(EQuipu.EQuipuService.Feria objFeria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarFeria", ReplyAction="http://tempuri.org/IEQuipuService/AgregarFeriaResponse")]
+        System.Threading.Tasks.Task AgregarFeriaAsync(EQuipu.EQuipuService.Feria objFeria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarEquipoAFeria", ReplyAction="http://tempuri.org/IEQuipuService/AgregarEquipoAFeriaResponse")]
+        void AgregarEquipoAFeria(EQuipu.EQuipuService.Feria f, EQuipu.EQuipuService.Equipo e, int i);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/AgregarEquipoAFeria", ReplyAction="http://tempuri.org/IEQuipuService/AgregarEquipoAFeriaResponse")]
+        System.Threading.Tasks.Task AgregarEquipoAFeriaAsync(EQuipu.EQuipuService.Feria f, EQuipu.EQuipuService.Equipo e, int i);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ActualizarFeria", ReplyAction="http://tempuri.org/IEQuipuService/ActualizarFeriaResponse")]
+        void ActualizarFeria(EQuipu.EQuipuService.Feria objFeria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEQuipuService/ActualizarFeria", ReplyAction="http://tempuri.org/IEQuipuService/ActualizarFeriaResponse")]
+        System.Threading.Tasks.Task ActualizarFeriaAsync(EQuipu.EQuipuService.Feria objFeria);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -370,6 +1000,222 @@ namespace EQuipu.EQuipuService {
         
         public System.Threading.Tasks.Task EliminarMiembroAsync(int codigo) {
             return base.Channel.EliminarMiembroAsync(codigo);
+        }
+        
+        public EQuipu.EQuipuService.Equipo CrearEquipo(string nombre, string interes, string categoria) {
+            return base.Channel.CrearEquipo(nombre, interes, categoria);
+        }
+        
+        public System.Threading.Tasks.Task<EQuipu.EQuipuService.Equipo> CrearEquipoAsync(string nombre, string interes, string categoria) {
+            return base.Channel.CrearEquipoAsync(nombre, interes, categoria);
+        }
+        
+        public void AgregarEquipo(EQuipu.EQuipuService.Equipo objEquipo) {
+            base.Channel.AgregarEquipo(objEquipo);
+        }
+        
+        public System.Threading.Tasks.Task AgregarEquipoAsync(EQuipu.EQuipuService.Equipo objEquipo) {
+            return base.Channel.AgregarEquipoAsync(objEquipo);
+        }
+        
+        public EQuipu.EQuipuService.Equipo ObtenerEquipo(string nombre) {
+            return base.Channel.ObtenerEquipo(nombre);
+        }
+        
+        public System.Threading.Tasks.Task<EQuipu.EQuipuService.Equipo> ObtenerEquipoAsync(string nombre) {
+            return base.Channel.ObtenerEquipoAsync(nombre);
+        }
+        
+        public EQuipu.EQuipuService.Equipo ObtenerEquipoConId(int id) {
+            return base.Channel.ObtenerEquipoConId(id);
+        }
+        
+        public System.Threading.Tasks.Task<EQuipu.EQuipuService.Equipo> ObtenerEquipoConIdAsync(int id) {
+            return base.Channel.ObtenerEquipoConIdAsync(id);
+        }
+        
+        public int NumeroEquipos() {
+            return base.Channel.NumeroEquipos();
+        }
+        
+        public System.Threading.Tasks.Task<int> NumeroEquiposAsync() {
+            return base.Channel.NumeroEquiposAsync();
+        }
+        
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> BuscarEquipos(string categoria) {
+            return base.Channel.BuscarEquipos(categoria);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Equipo>> BuscarEquiposAsync(string categoria) {
+            return base.Channel.BuscarEquiposAsync(categoria);
+        }
+        
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> ObtenerEquipos() {
+            return base.Channel.ObtenerEquipos();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Equipo>> ObtenerEquiposAsync() {
+            return base.Channel.ObtenerEquiposAsync();
+        }
+        
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Equipo> BuscarEquiposPorNombre(string nombre) {
+            return base.Channel.BuscarEquiposPorNombre(nombre);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Equipo>> BuscarEquiposPorNombreAsync(string nombre) {
+            return base.Channel.BuscarEquiposPorNombreAsync(nombre);
+        }
+        
+        public void ActualizarEquipo(EQuipu.EQuipuService.Equipo objEquipo) {
+            base.Channel.ActualizarEquipo(objEquipo);
+        }
+        
+        public System.Threading.Tasks.Task ActualizarEquipoAsync(EQuipu.EQuipuService.Equipo objEquipo) {
+            return base.Channel.ActualizarEquipoAsync(objEquipo);
+        }
+        
+        public void AgregarMiembroAEquipo(EQuipu.EQuipuService.Equipo e, EQuipu.EQuipuService.Miembro m) {
+            base.Channel.AgregarMiembroAEquipo(e, m);
+        }
+        
+        public System.Threading.Tasks.Task AgregarMiembroAEquipoAsync(EQuipu.EQuipuService.Equipo e, EQuipu.EQuipuService.Miembro m) {
+            return base.Channel.AgregarMiembroAEquipoAsync(e, m);
+        }
+        
+        public void EliminarEquipo(string nombreEquipo) {
+            base.Channel.EliminarEquipo(nombreEquipo);
+        }
+        
+        public System.Threading.Tasks.Task EliminarEquipoAsync(string nombreEquipo) {
+            return base.Channel.EliminarEquipoAsync(nombreEquipo);
+        }
+        
+        public void AgregarEquipoAEvento(EQuipu.EQuipuService.Evento e, EQuipu.EQuipuService.Equipo q) {
+            base.Channel.AgregarEquipoAEvento(e, q);
+        }
+        
+        public System.Threading.Tasks.Task AgregarEquipoAEventoAsync(EQuipu.EQuipuService.Evento e, EQuipu.EQuipuService.Equipo q) {
+            return base.Channel.AgregarEquipoAEventoAsync(e, q);
+        }
+        
+        public void AgregarExposicionAEvento(EQuipu.EQuipuService.Evento e, EQuipu.EQuipuService.Exposicion ex) {
+            base.Channel.AgregarExposicionAEvento(e, ex);
+        }
+        
+        public System.Threading.Tasks.Task AgregarExposicionAEventoAsync(EQuipu.EQuipuService.Evento e, EQuipu.EQuipuService.Exposicion ex) {
+            return base.Channel.AgregarExposicionAEventoAsync(e, ex);
+        }
+        
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Evento> ObtenerEventos() {
+            return base.Channel.ObtenerEventos();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Evento>> ObtenerEventosAsync() {
+            return base.Channel.ObtenerEventosAsync();
+        }
+        
+        public EQuipu.EQuipuService.Evento CrearEvento(string nombre, string categoria, int numEntradas, double precioEntradas) {
+            return base.Channel.CrearEvento(nombre, categoria, numEntradas, precioEntradas);
+        }
+        
+        public System.Threading.Tasks.Task<EQuipu.EQuipuService.Evento> CrearEventoAsync(string nombre, string categoria, int numEntradas, double precioEntradas) {
+            return base.Channel.CrearEventoAsync(nombre, categoria, numEntradas, precioEntradas);
+        }
+        
+        public void AgregarEvento(EQuipu.EQuipuService.Evento objEvento) {
+            base.Channel.AgregarEvento(objEvento);
+        }
+        
+        public System.Threading.Tasks.Task AgregarEventoAsync(EQuipu.EQuipuService.Evento objEvento) {
+            return base.Channel.AgregarEventoAsync(objEvento);
+        }
+        
+        public EQuipu.EQuipuService.Evento ObtenerEvento(string nombre) {
+            return base.Channel.ObtenerEvento(nombre);
+        }
+        
+        public System.Threading.Tasks.Task<EQuipu.EQuipuService.Evento> ObtenerEventoAsync(string nombre) {
+            return base.Channel.ObtenerEventoAsync(nombre);
+        }
+        
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Evento> BuscarEventos(string nombre) {
+            return base.Channel.BuscarEventos(nombre);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Evento>> BuscarEventosAsync(string nombre) {
+            return base.Channel.BuscarEventosAsync(nombre);
+        }
+        
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Evento> BuscarEventosPorCategoria(string categoria) {
+            return base.Channel.BuscarEventosPorCategoria(categoria);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Evento>> BuscarEventosPorCategoriaAsync(string categoria) {
+            return base.Channel.BuscarEventosPorCategoriaAsync(categoria);
+        }
+        
+        public void ActualizarEvento(EQuipu.EQuipuService.Evento objEvento) {
+            base.Channel.ActualizarEvento(objEvento);
+        }
+        
+        public System.Threading.Tasks.Task ActualizarEventoAsync(EQuipu.EQuipuService.Evento objEvento) {
+            return base.Channel.ActualizarEventoAsync(objEvento);
+        }
+        
+        public void EliminarEvento(string nombreEvento) {
+            base.Channel.EliminarEvento(nombreEvento);
+        }
+        
+        public System.Threading.Tasks.Task EliminarEventoAsync(string nombreEvento) {
+            return base.Channel.EliminarEventoAsync(nombreEvento);
+        }
+        
+        public System.Collections.Generic.List<EQuipu.EQuipuService.Feria> ObtenerFerias() {
+            return base.Channel.ObtenerFerias();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<EQuipu.EQuipuService.Feria>> ObtenerFeriasAsync() {
+            return base.Channel.ObtenerFeriasAsync();
+        }
+        
+        public EQuipu.EQuipuService.Feria ObtenerFeria(string nombre) {
+            return base.Channel.ObtenerFeria(nombre);
+        }
+        
+        public System.Threading.Tasks.Task<EQuipu.EQuipuService.Feria> ObtenerFeriaAsync(string nombre) {
+            return base.Channel.ObtenerFeriaAsync(nombre);
+        }
+        
+        public EQuipu.EQuipuService.Feria CrearFeria(string nombre, string fecha) {
+            return base.Channel.CrearFeria(nombre, fecha);
+        }
+        
+        public System.Threading.Tasks.Task<EQuipu.EQuipuService.Feria> CrearFeriaAsync(string nombre, string fecha) {
+            return base.Channel.CrearFeriaAsync(nombre, fecha);
+        }
+        
+        public void AgregarFeria(EQuipu.EQuipuService.Feria objFeria) {
+            base.Channel.AgregarFeria(objFeria);
+        }
+        
+        public System.Threading.Tasks.Task AgregarFeriaAsync(EQuipu.EQuipuService.Feria objFeria) {
+            return base.Channel.AgregarFeriaAsync(objFeria);
+        }
+        
+        public void AgregarEquipoAFeria(EQuipu.EQuipuService.Feria f, EQuipu.EQuipuService.Equipo e, int i) {
+            base.Channel.AgregarEquipoAFeria(f, e, i);
+        }
+        
+        public System.Threading.Tasks.Task AgregarEquipoAFeriaAsync(EQuipu.EQuipuService.Feria f, EQuipu.EQuipuService.Equipo e, int i) {
+            return base.Channel.AgregarEquipoAFeriaAsync(f, e, i);
+        }
+        
+        public void ActualizarFeria(EQuipu.EQuipuService.Feria objFeria) {
+            base.Channel.ActualizarFeria(objFeria);
+        }
+        
+        public System.Threading.Tasks.Task ActualizarFeriaAsync(EQuipu.EQuipuService.Feria objFeria) {
+            return base.Channel.ActualizarFeriaAsync(objFeria);
         }
     }
 }

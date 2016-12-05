@@ -46,8 +46,10 @@ namespace EQuipu.Vista
             {
                 codigo = -1;
             }
+            /* La actual implementacion de buscar miembro no contempla cuando se envia null como tipo
             List<Miembro> lista = _serviceClient.BuscarMiembro(codigo, null);
             cargarGrilla(lista);
+             */
         }
 
         private bool findMiembro(List<Miembro> listaMiembros, int codigo)

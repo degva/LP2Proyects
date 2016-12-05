@@ -49,6 +49,168 @@
   <wsdl:message name="IEQuipuService_EliminarMiembro_OutputMessage">
     <wsdl:part name="parameters" element="tns:EliminarMiembroResponse" />
   </wsdl:message>
+  <wsdl:message name="IEQuipuService_CrearEquipo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearEquipo" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_CrearEquipo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearEquipoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarEquipo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarEquipo" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarEquipo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarEquipoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEquipo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEquipo" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEquipo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEquipoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEquipoConId_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEquipoConId" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEquipoConId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEquipoConIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_NumeroEquipos_InputMessage">
+    <wsdl:part name="parameters" element="tns:NumeroEquipos" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_NumeroEquipos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NumeroEquiposResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarEquipos_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEquipos" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarEquipos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEquiposResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEquipos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEquipos" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEquipos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEquiposResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarEquiposPorNombre_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEquiposPorNombre" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarEquiposPorNombre_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEquiposPorNombreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ActualizarEquipo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarEquipo" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ActualizarEquipo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarEquipoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarMiembroAEquipo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarMiembroAEquipo" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarMiembroAEquipo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarMiembroAEquipoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_EliminarEquipo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarEquipo" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_EliminarEquipo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarEquipoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarEquipoAEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarEquipoAEvento" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarEquipoAEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarEquipoAEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarExposicionAEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarExposicionAEvento" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarExposicionAEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarExposicionAEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEventos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEventos" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEventos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEventosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_CrearEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearEvento" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_CrearEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarEvento" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEvento" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarEventos_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEventos" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarEventos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEventosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarEventosPorCategoria_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEventosPorCategoria" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_BuscarEventosPorCategoria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEventosPorCategoriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ActualizarEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarEvento" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ActualizarEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_EliminarEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarEvento" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_EliminarEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerFerias_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerFerias" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerFerias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerFeriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerFeria_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerFeria" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ObtenerFeria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerFeriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_CrearFeria_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearFeria" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_CrearFeria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearFeriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarFeria_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarFeria" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarFeria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarFeriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarEquipoAFeria_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarEquipoAFeria" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_AgregarEquipoAFeria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarEquipoAFeriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ActualizarFeria_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarFeria" />
+  </wsdl:message>
+  <wsdl:message name="IEQuipuService_ActualizarFeria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarFeriaResponse" />
+  </wsdl:message>
   <wsdl:portType name="IEQuipuService">
     <wsdl:operation name="ValidarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ValidarUsuario" message="tns:IEQuipuService_ValidarUsuario_InputMessage" />
@@ -77,6 +239,114 @@
     <wsdl:operation name="EliminarMiembro">
       <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/EliminarMiembro" message="tns:IEQuipuService_EliminarMiembro_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/EliminarMiembroResponse" message="tns:IEQuipuService_EliminarMiembro_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearEquipo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/CrearEquipo" message="tns:IEQuipuService_CrearEquipo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/CrearEquipoResponse" message="tns:IEQuipuService_CrearEquipo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEquipo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/AgregarEquipo" message="tns:IEQuipuService_AgregarEquipo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/AgregarEquipoResponse" message="tns:IEQuipuService_AgregarEquipo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEquipo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEquipo" message="tns:IEQuipuService_ObtenerEquipo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEquipoResponse" message="tns:IEQuipuService_ObtenerEquipo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEquipoConId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEquipoConId" message="tns:IEQuipuService_ObtenerEquipoConId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEquipoConIdResponse" message="tns:IEQuipuService_ObtenerEquipoConId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NumeroEquipos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/NumeroEquipos" message="tns:IEQuipuService_NumeroEquipos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/NumeroEquiposResponse" message="tns:IEQuipuService_NumeroEquipos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEquipos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/BuscarEquipos" message="tns:IEQuipuService_BuscarEquipos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/BuscarEquiposResponse" message="tns:IEQuipuService_BuscarEquipos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEquipos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEquipos" message="tns:IEQuipuService_ObtenerEquipos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEquiposResponse" message="tns:IEQuipuService_ObtenerEquipos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEquiposPorNombre">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/BuscarEquiposPorNombre" message="tns:IEQuipuService_BuscarEquiposPorNombre_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/BuscarEquiposPorNombreResponse" message="tns:IEQuipuService_BuscarEquiposPorNombre_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEquipo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ActualizarEquipo" message="tns:IEQuipuService_ActualizarEquipo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ActualizarEquipoResponse" message="tns:IEQuipuService_ActualizarEquipo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarMiembroAEquipo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/AgregarMiembroAEquipo" message="tns:IEQuipuService_AgregarMiembroAEquipo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/AgregarMiembroAEquipoResponse" message="tns:IEQuipuService_AgregarMiembroAEquipo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEquipo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/EliminarEquipo" message="tns:IEQuipuService_EliminarEquipo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/EliminarEquipoResponse" message="tns:IEQuipuService_EliminarEquipo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEquipoAEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/AgregarEquipoAEvento" message="tns:IEQuipuService_AgregarEquipoAEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/AgregarEquipoAEventoResponse" message="tns:IEQuipuService_AgregarEquipoAEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarExposicionAEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/AgregarExposicionAEvento" message="tns:IEQuipuService_AgregarExposicionAEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/AgregarExposicionAEventoResponse" message="tns:IEQuipuService_AgregarExposicionAEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEventos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEventos" message="tns:IEQuipuService_ObtenerEventos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEventosResponse" message="tns:IEQuipuService_ObtenerEventos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/CrearEvento" message="tns:IEQuipuService_CrearEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/CrearEventoResponse" message="tns:IEQuipuService_CrearEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/AgregarEvento" message="tns:IEQuipuService_AgregarEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/AgregarEventoResponse" message="tns:IEQuipuService_AgregarEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEvento" message="tns:IEQuipuService_ObtenerEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerEventoResponse" message="tns:IEQuipuService_ObtenerEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEventos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/BuscarEventos" message="tns:IEQuipuService_BuscarEventos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/BuscarEventosResponse" message="tns:IEQuipuService_BuscarEventos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEventosPorCategoria">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/BuscarEventosPorCategoria" message="tns:IEQuipuService_BuscarEventosPorCategoria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/BuscarEventosPorCategoriaResponse" message="tns:IEQuipuService_BuscarEventosPorCategoria_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ActualizarEvento" message="tns:IEQuipuService_ActualizarEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ActualizarEventoResponse" message="tns:IEQuipuService_ActualizarEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/EliminarEvento" message="tns:IEQuipuService_EliminarEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/EliminarEventoResponse" message="tns:IEQuipuService_EliminarEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFerias">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerFerias" message="tns:IEQuipuService_ObtenerFerias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerFeriasResponse" message="tns:IEQuipuService_ObtenerFerias_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFeria">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerFeria" message="tns:IEQuipuService_ObtenerFeria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ObtenerFeriaResponse" message="tns:IEQuipuService_ObtenerFeria_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearFeria">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/CrearFeria" message="tns:IEQuipuService_CrearFeria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/CrearFeriaResponse" message="tns:IEQuipuService_CrearFeria_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarFeria">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/AgregarFeria" message="tns:IEQuipuService_AgregarFeria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/AgregarFeriaResponse" message="tns:IEQuipuService_AgregarFeria_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEquipoAFeria">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/AgregarEquipoAFeria" message="tns:IEQuipuService_AgregarEquipoAFeria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/AgregarEquipoAFeriaResponse" message="tns:IEQuipuService_AgregarEquipoAFeria_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarFeria">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEQuipuService/ActualizarFeria" message="tns:IEQuipuService_ActualizarFeria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEQuipuService/ActualizarFeriaResponse" message="tns:IEQuipuService_ActualizarFeria_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IEQuipuService" type="tns:IEQuipuService">
@@ -137,6 +407,249 @@
     </wsdl:operation>
     <wsdl:operation name="EliminarMiembro">
       <soap:operation soapAction="http://tempuri.org/IEQuipuService/EliminarMiembro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearEquipo">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/CrearEquipo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEquipo">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/AgregarEquipo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEquipo">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ObtenerEquipo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEquipoConId">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ObtenerEquipoConId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NumeroEquipos">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/NumeroEquipos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEquipos">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/BuscarEquipos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEquipos">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ObtenerEquipos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEquiposPorNombre">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/BuscarEquiposPorNombre" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEquipo">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ActualizarEquipo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarMiembroAEquipo">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/AgregarMiembroAEquipo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEquipo">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/EliminarEquipo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEquipoAEvento">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/AgregarEquipoAEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarExposicionAEvento">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/AgregarExposicionAEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEventos">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ObtenerEventos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearEvento">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/CrearEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEvento">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/AgregarEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEvento">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ObtenerEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEventos">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/BuscarEventos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEventosPorCategoria">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/BuscarEventosPorCategoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEvento">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ActualizarEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEvento">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/EliminarEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFerias">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ObtenerFerias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFeria">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ObtenerFeria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearFeria">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/CrearFeria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarFeria">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/AgregarFeria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEquipoAFeria">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/AgregarEquipoAFeria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarFeria">
+      <soap:operation soapAction="http://tempuri.org/IEQuipuService/ActualizarFeria" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

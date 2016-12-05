@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using EQuipu.Controlador;
-using EQuipu.Modelo;
+using EQuipu.EQuipuService;
 
 /*
  * Nombre: Diego Pavel Vargas Flores
@@ -20,13 +19,13 @@ namespace EQuipu.Vista
 {
     public partial class frmNuevaFeria : Form
     {
-        private GestorFeria _gestorFeria;
+        private EQuipuServiceClient _serviceClient;
         private List<Equipo> _equipos;
 
         public frmNuevaFeria()
         {
             InitializeComponent();
-            _gestorFeria = new GestorFeria();
+            _serviceClient = new EQuipuServiceClient();
             _equipos = new List<Equipo>();
             ColocarNombres();
         }
@@ -40,16 +39,15 @@ namespace EQuipu.Vista
             else
             {
                 string nombre = this.nombreBox.Text;
-                DateTime fecha = this.timeBoxPicker.Value;
-                Feria feria = new Feria(nombre, fecha);
+                string fecha = this.timeBoxPicker.Value.ToString();
+                Feria feria = _serviceClient.CrearFeria(nombre, fecha);
 
                 for (int i = 0; i < _equipos.Count; i++ )
                 {
-                    feria.AddEquipo(_equipos[i], i);
+                    _serviceClient.AgregarEquipoAFeria(feria, _equipos[i], i);
                 }
 
-                _gestorFeria.AgregarFeria(feria);
-                this._gestorFeria.Serializar();
+                _serviceClient.AgregarFeria(feria);
                 MessageBox.Show("Agregado!");
                 this.Close();
             }

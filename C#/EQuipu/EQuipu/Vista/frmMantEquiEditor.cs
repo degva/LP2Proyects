@@ -73,7 +73,7 @@ namespace EQuipu.Vista
                 Equipo equ = _serviceCliente.CrearEquipo(nombre, interes, categoria);
                 foreach (Miembro m in _miembros)
                 {
-                    equ.AddMiembro(m);
+                    _serviceCliente.AgregarMiembroAEquipo(equ, m);
                 }
                 _serviceCliente.AgregarEquipo(equ);
             }

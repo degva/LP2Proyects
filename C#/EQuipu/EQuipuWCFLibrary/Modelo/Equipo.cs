@@ -13,6 +13,7 @@ namespace EQuipuWCFLibrary.Modelo
     {
 
         private List<Miembro> listaMiembros;
+        private int id;
         private string nombre;
         private string interes;
         private string categoria;
@@ -20,8 +21,20 @@ namespace EQuipuWCFLibrary.Modelo
 
         private int entradas;
 
+        public Equipo(int id, string nombre, string interes, string categoria)
+        {
+            this.id = id;
+            this.nombre = nombre;
+            this.interes = interes;
+            this.categoria = categoria;
+            this.listaMiembros = new List<Miembro>();
+
+            this.entradas = 0;
+        }
+
         public Equipo(string nombre, string interes, string categoria)
         {
+            this.id = -1;
             this.nombre = nombre;
             this.interes = interes;
             this.categoria = categoria;
@@ -46,6 +59,13 @@ namespace EQuipuWCFLibrary.Modelo
                 }
             }
             return objMiembro;
+        }
+
+        [DataMember]
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
         }
 
         [DataMember]

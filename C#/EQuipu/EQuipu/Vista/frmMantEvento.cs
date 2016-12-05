@@ -8,21 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using EQuipu.Controlador;
-using EQuipu.Modelo;
+using EQuipu.EQuipuService;
 
 namespace EQuipu.Vista
 {
     public partial class frmMantEvento : Form
     {
-        private GestorEventos _gestorEventos;
-        private GestorEquipos _gestorEquipos;
+        private EQuipuServiceClient _serviceClient;
 
         public frmMantEvento()
         {
             InitializeComponent();
-            this._gestorEquipos = new GestorEquipos();
-            this._gestorEventos = new GestorEventos();
+            this._serviceClient = new EQuipuServiceClient();
         }
 
         private void buscarBtn_Click(object sender, EventArgs e)
@@ -35,12 +32,12 @@ namespace EQuipu.Vista
             {
                 //Se debe hacer una busqueda por categoria, entre los eventos
                 string categoria = this.categoriaBox.Text;
-                List<Evento> listaEventos = this._gestorEventos.BuscarEventosPorCategoria(categoria);
+                List<Evento> listaEventos = this._serviceClient.BuscarEventosPorCategoria(categoria);
                 if (listaEventos.Count == 0)
                 {
                     MessageBox.Show("No se encontraron eventos de la categoria selecionada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.categoriaBox.Text = " ";
-                    this.CargarGrilla(this._gestorEventos.ListaEventos);
+                    this.CargarGrilla(this._serviceClient.ObtenerEventos());
                 }
                 else
                     this.CargarGrilla(listaEventos);
@@ -49,17 +46,17 @@ namespace EQuipu.Vista
 
         private void newBtn_Click(object sender, EventArgs e)
         {
-            frmEventoNuevo ventanaEventoNuevo = new frmEventoNuevo(_gestorEventos, _gestorEquipos);
+            frmEventoNuevo ventanaEventoNuevo = new frmEventoNuevo();
             ventanaEventoNuevo.ShowDialog();
-            this.CargarGrilla(this._gestorEventos.ListaEventos);
+            this.CargarGrilla(this._serviceClient.ObtenerEventos());
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
             string nombre = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-            frmEventoNuevo ventanaEventoNuevo = new frmEventoNuevo(_gestorEventos, _gestorEquipos, nombre);
+            frmEventoNuevo ventanaEventoNuevo = new frmEventoNuevo(nombre);
             ventanaEventoNuevo.ShowDialog();
-            this.CargarGrilla(this._gestorEventos.ListaEventos);
+            this.CargarGrilla(this._serviceClient.ObtenerEventos());
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
@@ -71,10 +68,10 @@ namespace EQuipu.Vista
                     //1. Obtenemos el nombre del evento que se quiere Editar
                     int filaSelecionada = this.dataGridView1.SelectedRows[0].Index;
                     string nombreEvento = this.dataGridView1.Rows[filaSelecionada].Cells[0].Value.ToString();
-                    this._gestorEventos.EliminarEvento(nombreEvento);
+                    this._serviceClient.EliminarEvento(nombreEvento);
                 }
                 // this._gestorEventos.Serializar();
-                this.CargarGrilla(this._gestorEventos.ListaEventos);
+                this.CargarGrilla(this._serviceClient.ObtenerEventos());
             }
             else //si no hay ninguna fila selecionada
             {
@@ -84,15 +81,12 @@ namespace EQuipu.Vista
 
         private void CerrarVentana(object sender, FormClosedEventArgs e)
         {
-            // this._gestorEquipos.Serializar();
-            this._gestorEventos.Serializar();
+            this._serviceClient.Close();
         }
 
         private void LoadMantEventVentana(object sender, EventArgs e)
         {
-            this._gestorEventos.Deserializar();
-            this._gestorEquipos.Deserializar();
-            CargarGrilla(_gestorEventos.ListaEventos);
+            CargarGrilla(this._serviceClient.ObtenerEventos());
         }
 
         private void CargarGrilla(List<Evento> listaDeEventos)

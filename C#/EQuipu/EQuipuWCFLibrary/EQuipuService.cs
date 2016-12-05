@@ -25,7 +25,7 @@ namespace EQuipuWCFLibrary
 
             // Gina's server
             String pass = "123456";
-            _con.ConnectionString = "Server=192.168.1.46;Database=diegodb;User=diegov;Password=" + pass + ";";
+            _con.ConnectionString = "Server=localhost;Database=degvadb;User=degva;Password=" + pass + ";";
 
             _con.Open();
         }
@@ -57,6 +57,7 @@ namespace EQuipuWCFLibrary
                 Usuario u = new Usuario(reader["username"].ToString(), reader["password"].ToString());
                 return u;
             }
+            reader.Close();
 
             return null;
         }
@@ -191,6 +192,7 @@ namespace EQuipuWCFLibrary
                 }
                 miembros.Add(u);
             }
+            reader.Close();
             return miembros;
         }
 
@@ -265,6 +267,7 @@ namespace EQuipuWCFLibrary
                     );
                 }
             }
+            reader.Close();
             return miem;
         }
 
@@ -335,6 +338,7 @@ namespace EQuipuWCFLibrary
                 }
                 miembros.Add(miem);
             }
+            reader.Close();
             return miembros;
         }
 
@@ -377,6 +381,19 @@ namespace EQuipuWCFLibrary
             comando.CommandText = String.Format("INSERT INTO EQUIPO (nombre, interes, categoria) VALUES ('{0}','{1}','{2}')",
                 objEquipo.Nombre, objEquipo.Interes, objEquipo.Categoria);
             comando.ExecuteNonQuery();
+
+            comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("SELECT id FROM EQUIPO WHERE nombre = '{0}'", objEquipo.Nombre);
+
+            MySqlDataReader reader = comando.ExecuteReader();
+            List<Miembro> miembros = new List<Miembro>();
+
+            if (reader.Read())
+            {
+                objEquipo.Id = Int32.Parse(reader["id"].ToString());
+            }
+            reader.Close();
         }
 
         public Equipo ObtenerEquipo(string nombre)
@@ -388,6 +405,7 @@ namespace EQuipuWCFLibrary
             if (reader.Read())
             {
                 Equipo e = new Equipo(
+                    Int32.Parse(reader["id"].ToString()),
                     reader["nombre"].ToString(),
                     reader["interes"].ToString(),
                     reader["categoria"].ToString()
@@ -395,23 +413,86 @@ namespace EQuipuWCFLibrary
                 e.Entradas = Int32.Parse(reader["entradas"].ToString());
                 e.Fondo = Double.Parse(reader["fondo"].ToString());
 
+                int equipo_id = Int32.Parse(reader["id"].ToString());
                 reader.Close();
 
-                string query = "select me.miembro_id from EQUIPO_X_MIEMBRO me where me.equipo_id = {0}";
+                string query = "select miembro_id from EQUIPO_X_MIEMBRO where equipo_id = {0}";
 
                 MySqlCommand com2 = new MySqlCommand();
                 com2.Connection = _con;
-                com2.CommandText = String.Format(query, Int32.Parse(reader["nombre"].ToString()));
-                MySqlDataReader read_2 = comando.ExecuteReader();
+                com2.CommandText = String.Format(query, equipo_id);
+                MySqlDataReader read_2 = com2.ExecuteReader();
+
+                List<int> lista_miembros = new List<int>();
 
                 while (read_2.Read())
                 {
-                    Miembro m = this.ObtenerMiembro(Int32.Parse(read_2["miembro_id"].ToString()));
-                    e.AddMiembro(m);
+                    lista_miembros.Add(Int32.Parse(read_2["miembro_id"].ToString()));
                 }
                 read_2.Close();
 
+                foreach (int id in lista_miembros)
+                {
+                    Miembro m = this.ObtenerMiembro(id);
+                    e.AddMiembro(m);
+                }
+
                 return e;
+            }
+            else
+            {
+                reader.Close();
+            }
+
+            return null;
+        }
+
+        public Equipo ObtenerEquipoConId(int id)
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("SELECT * FROM EQUIPO WHERE id = {0}", id);
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                Equipo e = new Equipo(
+                    Int32.Parse(reader["id"].ToString()),
+                    reader["nombre"].ToString(),
+                    reader["interes"].ToString(),
+                    reader["categoria"].ToString()
+                    );
+                e.Entradas = Int32.Parse(reader["entradas"].ToString());
+                e.Fondo = Double.Parse(reader["fondo"].ToString());
+
+                int equipo_id = Int32.Parse(reader["id"].ToString());
+                reader.Close();
+
+                string query = "select miembro_id from EQUIPO_X_MIEMBRO where equipo_id = {0}";
+
+                MySqlCommand com2 = new MySqlCommand();
+                com2.Connection = _con;
+                com2.CommandText = String.Format(query, equipo_id);
+                MySqlDataReader read_2 = com2.ExecuteReader();
+
+                List<int> lista_miembros = new List<int>();
+
+                while (read_2.Read())
+                {
+                    lista_miembros.Add(Int32.Parse(read_2["miembro_id"].ToString()));
+                }
+                read_2.Close();
+
+                foreach (int rcv in lista_miembros)
+                {
+                    Miembro m = this.ObtenerMiembro(rcv);
+                    e.AddMiembro(m);
+                }
+
+                return e;
+            }
+            else
+            {
+                reader.Close();
             }
 
             return null;
@@ -427,10 +508,36 @@ namespace EQuipuWCFLibrary
             {
                 return Int32.Parse(reader["num"].ToString());
             }
+            reader.Close();
             return -1;
         }
 
-        public List<Equipo> BuscarEquipos(string categoria);
+        public List<Equipo> BuscarEquipos(string categoria)
+        {
+            List<Equipo> equipos = new List<Equipo>();
+            List<string> lista_equipos = new List<string>();
+
+            string query = "SELECT nombre FROM EQUIPO WHERE categoria = '{0}'";
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, categoria);
+            MySqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                lista_equipos.Add(reader["nombre"].ToString());
+            }
+            reader.Close();
+
+            foreach (string n in lista_equipos)
+            {
+                Equipo e = this.ObtenerEquipo(n);
+                equipos.Add(e);
+            }
+            
+            return equipos;
+        }
+
         public List<Equipo> ObtenerEquipos()
         {
             List<Equipo> equipos = new List<Equipo>();
@@ -456,8 +563,432 @@ namespace EQuipuWCFLibrary
 
             return equipos;
         }
-        public List<Equipo> BuscarEquiposPorNombre(string nombre);
-        public void ActualizarEquipo(Equipo objEquipo);
-        public void EliminarEquipo(string nombreEquipo);
+
+        public List<Equipo> BuscarEquiposPorNombre(string nombre)
+        {
+            List<Equipo> equipos = new List<Equipo>();
+            List<string> lista_equipos = new List<string>();
+
+            string query = "SELECT nombre FROM EQUIPO WHERE nombre LIKE '%{0}%'";
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, nombre);
+            MySqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                lista_equipos.Add(reader["nombre"].ToString());
+            }
+            reader.Close();
+
+            foreach (string n in lista_equipos)
+            {
+                Equipo e = this.ObtenerEquipo(n);
+                equipos.Add(e);
+            }
+
+            return equipos;
+        }
+
+        public void ActualizarEquipo(Equipo objEquipo)
+        {
+            string query = "UPDATE EQUIPO SET nombre = '{0}', interes = '{1}', categoria = '{2}', fondo = {3}, entradas = {4} WHERE id = {5}";
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, objEquipo.Nombre, objEquipo.Interes, objEquipo.Categoria, objEquipo.Fondo, objEquipo.Entradas, objEquipo.Id);
+            comando.BeginExecuteNonQuery();
+
+            query = "DELETE FROM EQUIPO_X_MIEMBRO WHERE equipo_id = {0}";
+            comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, objEquipo.Id);
+            comando.BeginExecuteNonQuery();
+
+            foreach (Miembro m in objEquipo.ListaMiembros)
+            {
+                query = "INSERT INTO EQUIPO_X_MIEMBRO (equipo_id, miembro_id) VALUES ({0}, {1})";
+                comando = new MySqlCommand();
+                comando.Connection = _con;
+                comando.CommandText = String.Format(query, objEquipo.Id, m.Codigo);
+                comando.BeginExecuteNonQuery();
+            }
+        }
+
+        public void EliminarEquipo(string nombreEquipo)
+        {
+            string query = "DELETE FROM EQUIPO_X_MIEMBRO WHERE equipo_id = (SELECT id FROM EQUIPO WHERE nombre = '{0}')";
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, nombreEquipo);
+            comando.BeginExecuteNonQuery();
+
+            query = "DELETE FROM EQUIPO WHERE nombre = '{0}'";
+            comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, nombreEquipo);
+            comando.BeginExecuteNonQuery();
+        }
+
+        public void AgregarMiembroAEquipo(Equipo e, Miembro m)
+        {
+            e.AddMiembro(m);
+        }
+
+        /**
+         * GESTOR EVENTOS
+         */
+        
+        public void AgregarEquipoAEvento(Evento e, Equipo q)
+        {
+            e.AgregarEquipo(q);
+        }
+        
+        public void AgregarExposicionAEvento(Evento e, Exposicion ex)
+        {
+            e.AgregarExposicion(ex);
+        }
+
+        public List<Evento> ObtenerEventos()
+        {
+            List<Evento> eventos = new List<Evento>();
+            List<string> lista_equipos = new List<string>();
+
+            string query = "SELECT nombre FROM EVENTO";
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = query;
+            MySqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                lista_equipos.Add(reader["nombre"].ToString());
+            }
+            reader.Close();
+
+            foreach (string n in lista_equipos)
+            {
+                Evento e = this.ObtenerEvento(n);
+                eventos.Add(e);
+            }
+
+            return eventos;
+        }
+
+        public Evento CrearEvento(string nombre, string categoria, int numEntradas, double precioEntradas)
+        {
+            Evento e = new Evento(nombre, categoria, numEntradas, precioEntradas);
+            return e;
+        }
+
+        public void AgregarEvento(Evento e)
+        {
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("INSERT INTO EVENTO (nombre, categoria, num_entradas, precio_entrada) VALUES ('{0}','{1}',{2},{3})",
+                e.Nombre, e.CategoriaEquipo, e.NumEntradas, e.PrecioEntrada);
+            comando.ExecuteNonQuery();
+
+            /*
+             * Aca deberia haber codigo para agregar a los equipos en ese evento asi tambien como
+             * a las exposiciones de ese evento
+             */
+        }
+
+        public Evento ObtenerEvento(string nombre)
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("SELECT * FROM EVENTO WHERE nombre = '{0}'", nombre);
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                Evento e = new Evento(
+                    reader["nombre"].ToString(),
+                    reader["categoria"].ToString(),
+                    Int32.Parse(reader["num_entradas"].ToString()),
+                    Double.Parse(reader["precio_entrada"].ToString())
+                    );
+
+                string nom = reader["nombre"].ToString();
+                reader.Close();
+
+                string query = "select equipo_id from equipo_x_evento where evento_nombre = '{0}'";
+
+                MySqlCommand com2 = new MySqlCommand();
+                com2.Connection = _con;
+                com2.CommandText = String.Format(query, nom);
+                MySqlDataReader read_2 = com2.ExecuteReader();
+
+                List<int> lista_equipos = new List<int>();
+
+                while (read_2.Read())
+                {
+                    lista_equipos.Add(Int32.Parse(read_2["equipo_id"].ToString()));
+                }
+                read_2.Close();
+
+                foreach (int id in lista_equipos)
+                {
+                    Equipo eq = this.ObtenerEquipoConId(id);
+                    this.AgregarEquipoAEvento(e, eq);
+                }
+
+                return e;
+            }
+            else
+            {
+                reader.Close();
+            }
+
+            return null;
+        }
+
+        public List<Evento> BuscarEventos(string nombre)
+        {
+            List<Evento> eventos = new List<Evento>();
+            List<string> lista_eventos = new List<string>();
+
+            string query = "SELECT nombre FROM EVENTO WHERE nombre LIKE '%{0}%'";
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, nombre);
+            MySqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                lista_eventos.Add(reader["nombre"].ToString());
+            }
+            reader.Close();
+
+            foreach (string n in lista_eventos)
+            {
+                Evento e = this.ObtenerEvento(n);
+                eventos.Add(e);
+            }
+
+            return eventos;
+        }
+
+        public List<Evento> BuscarEventosPorCategoria(string categoria)
+        {
+            List<Evento> eventos = new List<Evento>();
+            List<string> lista_eventos = new List<string>();
+
+            string query = "SELECT nombre FROM EVENTO WHERE categoria = '{0}'";
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, categoria);
+            MySqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                lista_eventos.Add(reader["nombre"].ToString());
+            }
+            reader.Close();
+
+            foreach (string n in lista_eventos)
+            {
+                Evento e = this.ObtenerEvento(n);
+                eventos.Add(e);
+            }
+
+            return eventos;
+        }
+
+        public void ActualizarEvento(Evento ev)
+        {
+            string query = "UPDATE EVENTO SET categoria = '{0}', num_entradas = '{1}', precio_entrada = {2} WHERE nombre = {3}";
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, ev.CategoriaEquipo, ev.NumEntradas, ev.PrecioEntrada, ev.Nombre);
+            comando.BeginExecuteNonQuery();
+
+            query = "DELETE FROM equipo_x_evento WHERE evento_nombre = {0}";
+            comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, ev.Nombre);
+            comando.BeginExecuteNonQuery();
+
+            foreach (Equipo eq in ev.Equipos)
+            {
+                query = "INSERT INTO equipo_x_evento (evento_nombre, equipo_id) VALUES ({0}, {1})";
+                comando = new MySqlCommand();
+                comando.Connection = _con;
+                comando.CommandText = String.Format(query, ev.Nombre, eq.Id);
+                comando.BeginExecuteNonQuery();
+            }
+
+            query = "DELETE FROM exposicion_x_evento WHERE evento_nombre = {0}";
+            comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, ev.Nombre);
+            comando.BeginExecuteNonQuery();
+
+            foreach (Exposicion ex in ev.Exposiciones)
+            {
+                query = "INSERT INTO exposicion_x_evento (evento_nombre, exposicion_id) VALUES ({0}, {1})";
+                comando = new MySqlCommand();
+                comando.Connection = _con;
+                comando.CommandText = String.Format(query, ev.Nombre, ex.Id);
+                comando.BeginExecuteNonQuery();
+            }
+        }
+
+        public void EliminarEvento(string nombreEvento)
+        {
+            string query = "DELETE FROM exposicion_x_evento WHERE evento_nombre = '{0}'";
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, nombreEvento);
+            comando.BeginExecuteNonQuery();
+
+            query = "DELETE FROM EQUIPO_X_MIEMBRO WHERE evento_nombre = '{0}'";
+            comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, nombreEvento);
+            comando.BeginExecuteNonQuery();
+
+            query = "DELETE FROM EVENTO WHERE nombre = '{0}'";
+            comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, nombreEvento);
+            comando.BeginExecuteNonQuery();
+        }
+
+        /**
+         * GESTOR FERIA
+         */
+        public List<Feria> ObtenerFerias()
+        {
+            List<Feria> ferias = new List<Feria>();
+            List<string> lista_equipos = new List<string>();
+
+            string query = "SELECT nombre FROM FERIAS";
+
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = query;
+            MySqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                lista_equipos.Add(reader["nombre"].ToString());
+            }
+            reader.Close();
+
+            foreach (string n in lista_equipos)
+            {
+                Feria e = this.ObtenerFeria(n);
+                ferias.Add(e);
+            }
+
+            return ferias;
+        }
+
+        public Feria ObtenerFeria(string nombre) {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("SELECT * FROM FERIA WHERE nombre = '{0}'", nombre);
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                Feria f = new Feria(
+                    reader["nombre"].ToString(),
+                    reader["fecha"].ToString()
+                    );
+
+                string nom = reader["nombre"].ToString();
+                reader.Close();
+
+                string query = "select equipo_id from feria_x_equipos where nombre_feria = {0}";
+
+                MySqlCommand com2 = new MySqlCommand();
+                com2.Connection = _con;
+                com2.CommandText = String.Format(query, nom);
+                MySqlDataReader read_2 = com2.ExecuteReader();
+
+                List<int> lista_equipos = new List<int>();
+
+                while (read_2.Read())
+                {
+                    lista_equipos.Add(Int32.Parse(read_2["equipo_id"].ToString()));
+                }
+                read_2.Close();
+
+                foreach (int id in lista_equipos)
+                {
+                    Equipo eq = this.ObtenerEquipoConId(id);
+                    f.Equipos.Add(eq);
+                }
+
+                return f;
+            }
+            else
+            {
+                reader.Close();
+            }
+
+            return null;
+        }
+
+        public Feria CrearFeria(string nombre, string fecha)
+        {
+            Feria f = new Feria(nombre, fecha);
+            return f;
+        }
+
+        public void AgregarFeria(Feria objFeria)
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format("INSERT INTO FERIA (nombre, fecha) VALUES ('{0}','{1}')",
+                objFeria.Nombre, objFeria.Fecha);
+            comando.ExecuteNonQuery();
+        }
+
+        /*
+        public Feria ObtenerEventoDeFeria(string nombre)
+        {
+            Feria objFeria = null;
+            for (int i = 0; i < this._ferias.Count; i++)
+            {
+                if (this._ferias[i].Nombre == nombre)
+                {
+                    objFeria = this._ferias[i];
+                    break;
+                }
+            }
+            return objFeria;
+        }
+         */
+
+        public void AgregarEquipoAFeria(Feria f, Equipo e, int i)
+        {
+            f.AddEquipo(e,i);
+        }
+
+        public void ActualizarFeria(Feria ev)
+        {
+            string query = "UPDATE FERIA SET fecha = '{0}' WHERE nombre = {1}";
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, ev.Fecha, ev.Nombre);
+            comando.BeginExecuteNonQuery();
+
+            query = "DELETE FROM feria_x_equipos WHERE evento_nombre = {0}";
+            comando = new MySqlCommand();
+            comando.Connection = _con;
+            comando.CommandText = String.Format(query, ev.Nombre);
+            comando.BeginExecuteNonQuery();
+
+            foreach (Equipo eq in ev.Equipos)
+            {
+                query = "INSERT INTO feria_x_equipos (nombre_feria, equipo_id) VALUES ({0}, {1})";
+                comando = new MySqlCommand();
+                comando.Connection = _con;
+                comando.CommandText = String.Format(query, ev.Nombre, eq.Id);
+                comando.BeginExecuteNonQuery();
+            }
+        }
     }
 }
